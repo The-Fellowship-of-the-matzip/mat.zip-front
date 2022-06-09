@@ -27,7 +27,11 @@ const Button = styled.button`
   border-bottom-left-radius: 0;
 `;
 
-function SearchBar() {
+type SearchBarProps = {
+  onClick: React.MouseEventHandler;
+};
+
+function SearchBar({ onClick }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
 
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
@@ -44,7 +48,7 @@ function SearchBar() {
         value={keyword}
         onChange={handleSearchInput}
       />
-      <Button>🔍</Button>
+      <Button onClick={onClick}>🔍</Button>
     </Container>
   );
 }
