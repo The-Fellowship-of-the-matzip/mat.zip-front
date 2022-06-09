@@ -1,8 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useReducer } from "react";
+import styled, { css } from "styled-components";
 import SearchBar from "./SearchBar";
 
-const Container = styled.header`
+const Container = styled.header<{ isSearchOpen: boolean }>`
+  height: 60px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +12,13 @@ const Container = styled.header`
   padding: 1em 2em;
 
   background-color: ${({ theme }) => theme.primary};
+
+  ${({ isSearchOpen }) =>
+    isSearchOpen &&
+    css`
+      justify-content: flex-end;
+      gap: 0.5em;
+    `};
 `;
 
 const PageName = styled.h1`
@@ -28,14 +37,41 @@ const Profile = styled.div`
   height: 40px;
 `;
 
+const SearchToggleButton = styled.button`
+  background-color: transparent;
+  border: none;
+
+  font-size: 20px;
+`;
+
 function Header() {
+  const [isSearchOpen, setSearchOpen] = useReducer(
+    (isOpen: boolean) => !isOpen,
+    false
+  );
+
+  const handleSearchOpen = () => {
+    setSearchOpen();
+  };
+
   return (
-    <Container>
-      <PageName>mat.zip</PageName>
-      <RightWrapper>
-        <SearchBar onClick={() => {}} />
-        <Profile />
-      </RightWrapper>
+    <Container isSearchOpen={isSearchOpen}>
+      {isSearchOpen ? (
+        <>
+          <SearchBar onClick={() => {}} />
+          <SearchToggleButton onClick={handleSearchOpen}>❌</SearchToggleButton>
+        </>
+      ) : (
+        <>
+          <PageName>mat.zip</PageName>
+          <RightWrapper>
+            <SearchToggleButton onClick={handleSearchOpen}>
+              🔍
+            </SearchToggleButton>
+            <Profile />
+          </RightWrapper>
+        </>
+      )}
     </Container>
   );
 }
