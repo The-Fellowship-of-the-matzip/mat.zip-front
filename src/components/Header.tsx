@@ -42,6 +42,8 @@ const SearchToggleButton = styled.button`
   border: none;
 
   font-size: 20px;
+
+  cursor: pointer;
 `;
 
 function Header() {
