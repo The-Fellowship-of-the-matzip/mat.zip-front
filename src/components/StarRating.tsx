@@ -13,12 +13,13 @@ export const StarButton = styled.button`
   color: #e6d706;
 `;
 
+const DEFAULT_RATING = 1;
 const MAX_RATING = 5;
 const EMPTY_STAR_ICON = "\u2606";
 const FILLED_STAR_ICON = "\u2605";
 
 function StarRating() {
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(DEFAULT_RATING);
   const [hoverRating, setHoverRating] = useState<null | number>(null);
 
   const handleStarClick = (index: number) => () => {
