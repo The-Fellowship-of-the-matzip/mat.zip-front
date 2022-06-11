@@ -46,6 +46,13 @@ const ListItemDistance = styled.p`
   color: ${({ theme }) => theme.secondary};
 `;
 
+const ListItemStars = styled.div`
+  font-size: 1.5rem;
+  color: #e6d706;
+`;
+
+const FILLED_STAR_ICON = "\u2605";
+
 function StoreListItem({
   thumbnailUrl,
   name,
@@ -69,7 +76,7 @@ function StoreListItem({
             {campus} 캠퍼스 기준 {distance}km
           </ListItemDistance>
         </div>
-        <div>{"⭐ ".repeat(starCount)}</div>
+        <ListItemStars>{FILLED_STAR_ICON.repeat(starCount)}</ListItemStars>
       </div>
     </ListItemContainer>
   );
