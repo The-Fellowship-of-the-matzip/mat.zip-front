@@ -4,10 +4,6 @@ interface CategoryItemButtonProps {
   width: string;
 }
 
-interface CategoryItemTitleProps {
-  width: string;
-}
-
 interface CategoryItemProps {
   buttonText: string;
   children: React.ReactNode;
@@ -52,9 +48,8 @@ const CategoryItemButton = styled.button<CategoryItemButtonProps>`
   }
 `;
 
-const CategoryItemTitle = styled.p<CategoryItemTitleProps>`
-  ${({ theme, width }) => `
-    width: ${width};
+const CategoryItemDesc = styled.p`
+  ${({ theme }) => `
     color: ${theme.black};
   `}
   padding: 0.2em;
@@ -71,7 +66,7 @@ function CategoryItem({
   return (
     <CategoryItemContainer onClick={onClick} {...rest}>
       <CategoryItemButton width={width}>{buttonText}</CategoryItemButton>
-      <CategoryItemTitle width={width}>{children}</CategoryItemTitle>
+      <CategoryItemDesc>{children}</CategoryItemDesc>
     </CategoryItemContainer>
   );
 }
