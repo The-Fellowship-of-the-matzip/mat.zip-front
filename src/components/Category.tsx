@@ -11,7 +11,7 @@ interface CategoryProps {
   ];
 }
 
-const CategoryContainer = styled.nav`
+const CategoryContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.2em;
