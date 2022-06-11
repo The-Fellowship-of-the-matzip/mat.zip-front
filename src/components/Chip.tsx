@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface ChipProps {
   children: string;
   isSelected?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const ChipContainer = styled.button<Partial<ChipProps>>`
@@ -20,7 +21,7 @@ const ChipContainer = styled.button<Partial<ChipProps>>`
   }
 `;
 
-function Chip({ children, isSelected }: ChipProps) {
+function Chip({ children, isSelected, onClick }: ChipProps) {
   return <ChipContainer isSelected={isSelected}>{children}</ChipContainer>;
 }
 
