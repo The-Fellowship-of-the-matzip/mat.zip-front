@@ -17,6 +17,7 @@ const LeadingButton = styled.button`
   border: none;
   background-color: transparent;
   font-size: 1.25rem;
+  font-weight: 700;
 
   color: ${({ theme }) => theme.secondary};
 `;
