@@ -38,7 +38,6 @@ const CategoryItemButton = styled.button<CategoryItemButtonProps>`
   text-align: center;
   border-radius: 0.5em;
   border: none;
-  cursor: pointer;
 
   &:hover {
     opacity: 0.8;

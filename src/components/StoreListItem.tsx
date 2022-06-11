@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface StoreListItemProps {
+export interface StoreListItemProps {
   thumbnailUrl: string;
   name: string;
   campus: "잠실" | "선릉";
