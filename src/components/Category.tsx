@@ -3,12 +3,10 @@ import styled from "styled-components";
 import CategoryItem from "./CategoryItem";
 
 interface CategoryProps {
-  categories: [
-    {
-      categoryId: number;
-      desc: string;
-    }
-  ];
+  categories: {
+    categoryId: number;
+    desc: string;
+  }[];
 }
 
 const CategoryContainer = styled.ul`
