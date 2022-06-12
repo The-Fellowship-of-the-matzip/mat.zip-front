@@ -22,7 +22,11 @@ const ChipContainer = styled.button<Partial<ChipProps>>`
 `;
 
 function Chip({ children, isSelected, onClick }: ChipProps) {
-  return <ChipContainer isSelected={isSelected}>{children}</ChipContainer>;
+  return (
+    <ChipContainer isSelected={isSelected} onClick={onClick}>
+      {children}
+    </ChipContainer>
+  );
 }
 
 export default Chip;
