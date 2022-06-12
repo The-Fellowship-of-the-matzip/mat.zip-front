@@ -13,7 +13,7 @@ const CategoryPageConatainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1em;
+  gap: 1.5em;
 `;
 
 const categories = [
@@ -60,10 +60,14 @@ const stores: StoreListProps["stores"] = [
 function CategoryPage() {
   return (
     <CategoryPageConatainer>
-      <SectionHeader>카테고리</SectionHeader>
-      <Category categories={categories} />
-      <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
-      <StoreList stores={stores} />
+      <section>
+        <SectionHeader>카테고리</SectionHeader>
+        <Category categories={categories} />
+      </section>
+      <section>
+        <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
+        <StoreList stores={stores} />
+      </section>
     </CategoryPageConatainer>
   );
 }
