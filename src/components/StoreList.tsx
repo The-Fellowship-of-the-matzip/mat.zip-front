@@ -4,7 +4,7 @@ import type { StoreListItemProps } from "./StoreListItem";
 
 import StoreListItem from "./StoreListItem";
 
-interface StoreListProps {
+export interface StoreListProps {
   stores: (StoreListItemProps & { storeId: number })[];
 }
 
