@@ -1,8 +1,4 @@
 import styled from "styled-components";
-
-import { number, string } from "prop-types";
-import { Interface } from "readline";
-
 interface StoreDetailTitleProps {
   storeInfo: {
     name: string;
@@ -14,10 +10,12 @@ interface StoreDetailTitleProps {
 const TitleContainer = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
 `;
 
 const TitleRatingWrapper = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -33,7 +31,7 @@ const StarWrapper = styled.span`
 const FILLED_STAR_ICON = "\u2605";
 
 const DescriptionWrapper = styled.div`
-  width: 70%;
+  width: 100%;
   overflow: hidden;
   word-break: break-all;
   margin-top: 30px;
@@ -43,16 +41,14 @@ function StoreDetailTitle({ storeInfo }: StoreDetailTitleProps) {
   const { name, rating, desc } = storeInfo;
   return (
     <TitleContainer>
-      <div>
-        <TitleRatingWrapper>
-          <h2>{name}</h2>
-          <div>
-            <StarWrapper>{FILLED_STAR_ICON}</StarWrapper>
-            <span>{rating}</span>
-          </div>
-        </TitleRatingWrapper>
-        <DescriptionWrapper>{desc}</DescriptionWrapper>
-      </div>
+      <TitleRatingWrapper>
+        <h2>{name}</h2>
+        <div>
+          <StarWrapper>{FILLED_STAR_ICON}</StarWrapper>
+          <span>{rating}</span>
+        </div>
+      </TitleRatingWrapper>
+      <DescriptionWrapper>{desc}</DescriptionWrapper>
     </TitleContainer>
   );
 }
