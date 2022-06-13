@@ -4,6 +4,7 @@ const COLORS = {
   GRAY: "#8D8D8D",
   BLACK: "#121212",
   WHITE: "#F8F8FA",
+  YELLOW: "#E6D706",
 };
 
 export const theme = {
@@ -12,4 +13,5 @@ export const theme = {
   secondary: COLORS.GRAY,
   black: COLORS.BLACK,
   white: COLORS.WHITE,
+  yellow: COLORS.YELLOW,
 };
