@@ -4,7 +4,6 @@ import StoreReviewItem from "./StoreReviewItem";
 
 const StoreDetailPageContainer = styled.section`
   position: relative;
-  width: 375px;
   height: fit-content;
 
   display: flex;

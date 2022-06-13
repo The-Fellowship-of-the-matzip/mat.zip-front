@@ -7,13 +7,13 @@ import type { StoreListProps } from "./StoreList";
 import Chip from "./Chip";
 import SectionHeader from "./SectionHeader";
 import StoreList from "./StoreList";
+import { useNavigate } from "react-router-dom";
 
 interface CategoryDetailPageProps {
   categoryName: string;
 }
 
 const CategoryDetailPageContainer = styled.section`
-  width: 375px; // TODO: 각 페이지 컴포넌트마다 width를 설정하는 게 아니라,  main tag를 App.tsx에 넣고 width를 지정해야 할 듯!
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -63,6 +63,8 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
     abcOrder: false,
   });
 
+  const navigate = useNavigate();
+
   // TODO: 클릭한 값에 따라 stores prop 바꾸기
   const handleClickStarOrderChip = () => {
     setIsSelected((prev) => ({
@@ -81,7 +83,9 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
     <CategoryDetailPageContainer>
       <SectionHeader
         leadingIcon={<MdArrowBackIos />}
-        onClick={() => console.log("TODO: 뒤로 가기 구현")}
+        onClick={() => {
+          navigate(-1);
+        }}
       >
         {categoryName}
       </SectionHeader>

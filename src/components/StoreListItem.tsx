@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Star from "./Star";
 
@@ -58,8 +59,14 @@ function StoreListItem({
   distance,
   starCount,
 }: StoreListItemProps) {
+  const navigate = useNavigate();
+
   return (
-    <ListItemContainer>
+    <ListItemContainer
+      onClick={() => {
+        navigate("/store-detail");
+      }}
+    >
       <ListItemThumbnail src={thumbnailUrl} alt={name} />
       <div>
         <div
