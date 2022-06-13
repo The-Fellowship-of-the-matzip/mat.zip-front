@@ -12,7 +12,7 @@ interface CategoryDetailPageProps {
   categoryName: string;
 }
 
-const CategoryDetailPageConatainer = styled.section`
+const CategoryDetailPageContainer = styled.section`
   width: 375px; // TODO: 각 페이지 컴포넌트마다 width를 설정하는 게 아니라,  main tag를 App.tsx에 넣고 width를 지정해야 할 듯!
   padding: 1em;
   display: flex;
@@ -58,27 +58,27 @@ const stores: StoreListProps["stores"] = [
 ];
 
 function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
-  const [isSelected, setisSelected] = useState({
+  const [isSelected, setIsSelected] = useState({
     starOrder: false,
     abcOrder: false,
   });
 
   // TODO: 클릭한 값에 따라 stores prop 바꾸기
   const handleClickStarOrderChip = () => {
-    setisSelected((prev) => ({
+    setIsSelected((prev) => ({
       starOrder: !prev.starOrder,
       abcOrder: false,
     }));
   };
   const handleClickAbcOrderChip = () => {
-    setisSelected((prev) => ({
+    setIsSelected((prev) => ({
       starOrder: false,
       abcOrder: !prev.abcOrder,
     }));
   };
 
   return (
-    <CategoryDetailPageConatainer>
+    <CategoryDetailPageContainer>
       <SectionHeader
         leadingIcon={<MdArrowBackIos />}
         onClick={() => console.log("TODO: 뒤로 가기 구현")}
@@ -100,7 +100,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
         </Chip>
       </ChipContainer>
       <StoreList stores={stores} />
-    </CategoryDetailPageConatainer>
+    </CategoryDetailPageContainer>
   );
 }
 
