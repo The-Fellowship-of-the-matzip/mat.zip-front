@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { BsSearch } from "react-icons/bs";
 
 const Container = styled.div`
   display: flex;
@@ -48,7 +49,9 @@ function SearchBar({ onClick }: SearchBarProps) {
         value={keyword}
         onChange={handleSearchInput}
       />
-      <Button onClick={onClick}>🔍</Button>
+      <Button onClick={onClick}>
+        <BsSearch />
+      </Button>
     </Container>
   );
 }

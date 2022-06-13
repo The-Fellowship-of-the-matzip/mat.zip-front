@@ -1,11 +1,12 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { MdArrowBackIos } from "react-icons/md";
 
 import type { StoreListProps } from "./StoreList";
 
 import Chip from "./Chip";
 import SectionHeader from "./SectionHeader";
 import StoreList from "./StoreList";
-import { useState } from "react";
 
 interface CategoryDetailPageProps {
   categoryName: string;
@@ -79,7 +80,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   return (
     <CategoryDetailPageConatainer>
       <SectionHeader
-        leadingIcon="<"
+        leadingIcon={<MdArrowBackIos />}
         onClick={() => console.log("TODO: 뒤로 가기 구현")}
       >
         {categoryName}
