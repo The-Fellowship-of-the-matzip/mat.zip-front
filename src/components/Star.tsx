@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-const StarContainer = styled.div`
-  background-color: transparent;
-  border: none;
-
+const StarContainer = styled.span`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.yellow};
 `;
