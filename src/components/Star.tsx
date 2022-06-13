@@ -8,7 +8,7 @@ const StarContainer = styled.span`
 const EMPTY_STAR_ICON = "\u2606";
 const FILLED_STAR_ICON = "\u2605";
 
-function Star({ isFilled = true }) {
+function Star({ isFilled = false }) {
   return (
     <StarContainer>
       {isFilled ? FILLED_STAR_ICON : EMPTY_STAR_ICON}
