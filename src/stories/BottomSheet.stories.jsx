@@ -23,16 +23,14 @@ const SampleTextArea = styled.textarea`
   min-height: 150px;
 `;
 
-const SampleOpenButton = styled.button``;
-
 function SampleBottomSheet(args) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <SampleOpenButton onClick={() => setIsOpen(true)}>
+      <SampleButton onClick={() => setIsOpen(true)}>
         열기(아래에 열림)
-      </SampleOpenButton>
+      </SampleButton>
       {isOpen && (
         <BottomSheet {...args} closeSheet={() => setIsOpen(false)}>
           <SampleContainer>
