@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import StarRating from "../components/StarRating";
 
 export default {
@@ -5,6 +7,9 @@ export default {
   component: StarRating,
 };
 
-const Template = (args) => <StarRating />;
+const Template = () => {
+  const [rating, setRating] = useState(4);
+  return <StarRating rating={rating} setRating={setRating} />;
+};
 
 export const Default = Template.bind({});
