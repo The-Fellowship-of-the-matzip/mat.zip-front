@@ -1,4 +1,6 @@
 import React, { useReducer } from "react";
+import { BsSearch } from "react-icons/bs";
+import { MdCancel } from "react-icons/md";
 import styled, { css } from "styled-components";
 import SearchBar from "./SearchBar";
 
@@ -61,14 +63,16 @@ function Header() {
       {isSearchOpen ? (
         <>
           <SearchBar onClick={() => {}} />
-          <SearchToggleButton onClick={handleSearchOpen}>❌</SearchToggleButton>
+          <SearchToggleButton onClick={handleSearchOpen}>
+            <MdCancel />
+          </SearchToggleButton>
         </>
       ) : (
         <>
           <PageName>mat.zip</PageName>
           <RightWrapper>
             <SearchToggleButton onClick={handleSearchOpen}>
-              🔍
+              <BsSearch />
             </SearchToggleButton>
             <Profile />
           </RightWrapper>
