@@ -7,6 +7,10 @@ import SectionHeader from "./SectionHeader";
 import StoreList from "./StoreList";
 import { useState } from "react";
 
+interface CategoryDetailPageProps {
+  categoryName: string;
+}
+
 const CategoryDetailPageConatainer = styled.section`
   width: 375px; // TODO: 각 페이지 컴포넌트마다 width를 설정하는 게 아니라,  main tag를 App.tsx에 넣고 width를 지정해야 할 듯!
   padding: 1em;
@@ -52,7 +56,7 @@ const stores: StoreListProps["stores"] = [
   },
 ];
 
-function CategoryDetailPage() {
+function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   const [isSelected, setisSelected] = useState({
     starOrder: false,
     abcOrder: false,
@@ -78,7 +82,7 @@ function CategoryDetailPage() {
         leadingIcon="<"
         onClick={() => console.log("TODO: 뒤로 가기 구현")}
       >
-        양식
+        {categoryName}
       </SectionHeader>
       <ChipContainer>
         <Chip
