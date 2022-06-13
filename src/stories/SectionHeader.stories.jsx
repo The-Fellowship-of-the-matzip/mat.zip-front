@@ -1,3 +1,5 @@
+import { MdArrowBackIos } from "react-icons/md";
+
 import SectionHeader from "../components/SectionHeader";
 
 export default {
@@ -14,7 +16,10 @@ const Template = (args) => <SectionHeader {...args} />;
 export const WithLeadingButton = Template.bind({});
 WithLeadingButton.args = {
   children: "한식",
-  leadingIcon: "<",
+  leadingIcon: <MdArrowBackIos />,
+};
+WithLeadingButton.parameters = {
+  controls: { exclude: ["leadingIcon"] },
 };
 
 export const WithoutLeadingButton = Template.bind({});

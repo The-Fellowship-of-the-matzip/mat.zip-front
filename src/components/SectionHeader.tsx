@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface SectionHeaderProps {
   children: string;
-  leadingIcon?: string;
+  leadingIcon?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -14,11 +14,11 @@ const MiniHeader = styled.h2`
 
 const LeadingButton = styled.button`
   margin-right: 0.5em;
+
   border: none;
   background-color: transparent;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
-
   color: ${({ theme }) => theme.secondary};
 `;
 

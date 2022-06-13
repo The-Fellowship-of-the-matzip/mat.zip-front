@@ -1,11 +1,12 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { MdArrowBackIos } from "react-icons/md";
 
 import type { StoreListProps } from "./StoreList";
 
 import Chip from "./Chip";
 import SectionHeader from "./SectionHeader";
 import StoreList from "./StoreList";
-import { useState } from "react";
 
 const CategoryDetailPageConatainer = styled.section`
   width: 375px; // TODO: 각 페이지 컴포넌트마다 width를 설정하는 게 아니라,  main tag를 App.tsx에 넣고 width를 지정해야 할 듯!
@@ -75,7 +76,7 @@ function CategoryDetailPage() {
   return (
     <CategoryDetailPageConatainer>
       <SectionHeader
-        leadingIcon="<"
+        leadingIcon={<MdArrowBackIos />}
         onClick={() => console.log("TODO: 뒤로 가기 구현")}
       >
         양식
