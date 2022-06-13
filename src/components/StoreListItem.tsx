@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Star from "./Star";
 
 export interface StoreListItemProps {
   thumbnailUrl: string;
@@ -48,10 +49,7 @@ const ListItemDistance = styled.p`
 
 const ListItemStars = styled.div`
   font-size: 1.5rem;
-  color: #e6d706;
 `;
-
-const FILLED_STAR_ICON = "\u2605";
 
 function StoreListItem({
   thumbnailUrl,
@@ -76,7 +74,11 @@ function StoreListItem({
             {campus} 캠퍼스 기준 {distance}km
           </ListItemDistance>
         </div>
-        <ListItemStars>{FILLED_STAR_ICON.repeat(starCount)}</ListItemStars>
+        <ListItemStars>
+          {Array.from({ length: starCount }).map(() => (
+            <Star isFilled />
+          ))}
+        </ListItemStars>
       </div>
     </ListItemContainer>
   );

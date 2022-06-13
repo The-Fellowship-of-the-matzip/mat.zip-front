@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Star from "./Star";
 
 interface StoreReviewItemProps {
   reviewInfo: {
@@ -37,8 +38,6 @@ const ReviewContentWrapper = styled.div`
   width: 80%;
 `;
 
-const FILLED_STAR_ICON = "\u2605";
-
 const Header = styled.header`
   display: flex;
   flex-direction: row;
@@ -47,10 +46,6 @@ const Header = styled.header`
 
 const HeaderLeftWrapper = styled.div`
   margin-top: 0.4rem;
-`;
-
-const StarWrapper = styled.span`
-  color: #e6d706;
 `;
 
 const MenuWrapper = styled.div`
@@ -75,7 +70,7 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
       <ReviewContentWrapper>
         <Header>
           <HeaderLeftWrapper>
-            <StarWrapper>{FILLED_STAR_ICON}</StarWrapper>
+            <Star isFilled />
             <span>X {rating}</span>
           </HeaderLeftWrapper>
           <MenuWrapper>{menuName}</MenuWrapper>

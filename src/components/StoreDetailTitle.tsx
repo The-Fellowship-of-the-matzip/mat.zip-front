@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Star from "./Star";
 interface StoreDetailTitleProps {
   storeInfo: {
     name: string;
@@ -20,16 +21,6 @@ const TitleRatingWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const StarWrapper = styled.span`
-  justify-content: center;
-  text-align: center;
-  font-size: 1.5rem;
-  //TODO:  별 색깔 const로 빼기
-  color: #e6d706;
-`;
-
-const FILLED_STAR_ICON = "\u2605";
-
 const DescriptionWrapper = styled.div`
   width: 100%;
   overflow: hidden;
@@ -44,7 +35,7 @@ function StoreDetailTitle({ storeInfo }: StoreDetailTitleProps) {
       <TitleRatingWrapper>
         <h2>{name}</h2>
         <div>
-          <StarWrapper>{FILLED_STAR_ICON}</StarWrapper>
+          <Star isFilled />
           <span>{rating}</span>
         </div>
       </TitleRatingWrapper>

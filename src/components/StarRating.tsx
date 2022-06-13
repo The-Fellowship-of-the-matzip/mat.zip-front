@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Star from "./Star";
 
 export const Container = styled.div`
   display: flex;
@@ -19,8 +20,6 @@ type Props = {
 };
 
 const MAX_RATING = 5;
-const EMPTY_STAR_ICON = "\u2606";
-const FILLED_STAR_ICON = "\u2605";
 
 function StarRating({ rating = 0, setRating }: Props) {
   const [hoverRating, setHoverRating] = useState<null | number>(null);
@@ -47,9 +46,7 @@ function StarRating({ rating = 0, setRating }: Props) {
             onMouseEnter={handleStarHover(index)}
             onMouseLeave={resetStarHover}
           >
-            {index > (hoverRating ?? rating)
-              ? EMPTY_STAR_ICON
-              : FILLED_STAR_ICON}
+            {index > (hoverRating ?? rating) ? <Star /> : <Star isFilled />}
           </StarButton>
         );
       })}
