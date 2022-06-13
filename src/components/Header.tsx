@@ -5,7 +5,9 @@ import styled, { css } from "styled-components";
 import SearchBar from "./SearchBar";
 
 const Container = styled.header<{ isSearchOpen: boolean }>`
+  width: 375px;
   height: 60px;
+  margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
@@ -29,14 +31,16 @@ const PageName = styled.h1`
 
 const RightWrapper = styled.div`
   display: flex;
+  align-items: flex-end;
+
   gap: 1em;
 `;
 
 const Profile = styled.div`
   background-color: ${({ theme }) => theme.white};
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 `;
 
 const SearchToggleButton = styled.button`
