@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import styled, { css } from "styled-components";
+import useLogin from "../hooks/useLogin";
 import SearchBar from "./SearchBar";
 
 const Container = styled.header<{ isSearchOpen: boolean }>`
@@ -43,6 +44,14 @@ const Profile = styled.div`
   height: 30px;
 `;
 
+const LoginLink = styled.a`
+  text-decoration: none;
+  padding-bottom: 0.2rem;
+  &:hover {
+    color: ${({ theme }) => theme.white};
+  }
+`;
+
 const SearchToggleButton = styled.button`
   background-color: transparent;
   border: none;
@@ -57,6 +66,7 @@ function Header() {
     (isOpen: boolean) => !isOpen,
     false
   );
+  const [isLogin] = useLogin();
 
   const handleSearchOpen = () => {
     setSearchOpen();
@@ -78,7 +88,7 @@ function Header() {
             <SearchToggleButton onClick={handleSearchOpen}>
               <BsSearch />
             </SearchToggleButton>
-            <Profile />
+            {isLogin ? <Profile /> : <LoginLink>로그인</LoginLink>}
           </RightWrapper>
         </>
       )}
