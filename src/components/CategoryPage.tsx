@@ -6,8 +6,7 @@ import Category from "./Category";
 import SectionHeader from "./SectionHeader";
 import StoreList from "./StoreList";
 
-const CategoryPageConatainer = styled.div`
-  width: 375px; // TODO: 각 페이지 컴포넌트마다 width를 설정하는 게 아니라,  main tag를 App.tsx에 넣고 width를 지정해야 할 듯!
+const CategoryPageContainer = styled.div`
   padding: 1em;
 
   display: flex;
@@ -59,7 +58,7 @@ const stores: StoreListProps["stores"] = [
 
 function CategoryPage() {
   return (
-    <CategoryPageConatainer>
+    <CategoryPageContainer>
       <section>
         <SectionHeader>카테고리</SectionHeader>
         <Category categories={categories} />
@@ -68,7 +67,7 @@ function CategoryPage() {
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
         <StoreList stores={stores} />
       </section>
-    </CategoryPageConatainer>
+    </CategoryPageContainer>
   );
 }
 

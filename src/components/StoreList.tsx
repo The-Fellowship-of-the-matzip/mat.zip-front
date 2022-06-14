@@ -8,13 +8,13 @@ export interface StoreListProps {
   stores: (StoreListItemProps & { storeId: number })[];
 }
 
-const StoreListConatiner = styled.ul`
+const StoreListContainer = styled.ul`
   width: 100%;
 `;
 
 function StoreList({ stores }: StoreListProps) {
   return (
-    <StoreListConatiner>
+    <StoreListContainer>
       {stores.map((store) => (
         <StoreListItem
           key={store.storeId}
@@ -25,7 +25,7 @@ function StoreList({ stores }: StoreListProps) {
           starCount={store.starCount}
         />
       ))}
-    </StoreListConatiner>
+    </StoreListContainer>
   );
 }
 

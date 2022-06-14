@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import CategoryItem from "./CategoryItem";
@@ -18,7 +19,11 @@ const CategoryContainer = styled.ul`
 `;
 
 function Category({ categories }: CategoryProps) {
-  const handleClickCategoryItem = () => {};
+  const navigate = useNavigate();
+
+  const handleClickCategoryItem = () => {
+    navigate("/category");
+  };
 
   return (
     <CategoryContainer>

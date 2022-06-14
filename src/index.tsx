@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./style/Theme";
+import { BrowserRouter } from "react-router-dom";
+import GlobalStyle from "./style/GlobalStyle";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,7 +13,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <GlobalStyle />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
 );
