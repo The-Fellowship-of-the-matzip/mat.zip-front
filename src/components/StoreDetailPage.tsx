@@ -17,9 +17,16 @@ const StoreDetailPageContainer = styled.section`
 `;
 
 const StoreThumbnailWrapper = styled.div`
+  position: relative;
   width: 100%;
-  height: 10rem;
-  background-color: blue;
+  height: 20rem;
+  overflow: hidden;
+
+  & > img {
+    width: 100%;
+    height: fit-content;
+    object-fit: contain;
+  }
 `;
 
 const StoreReviewContentWrapper = styled.article`
@@ -62,7 +69,8 @@ function StoreDetailPage() {
     desc: "잠실 캠퍼스 기준 0.5km",
   };
   const tempReviewInfo = {
-    userThumbnail: "sdfsdfsfsfsd",
+    userThumbnail:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     rating: 4,
     desc: "skdjflskjdfalkjsdfajaklsfd",
     menuName: "후라이드 치킨",
@@ -70,7 +78,7 @@ function StoreDetailPage() {
   return (
     <StoreDetailPageContainer>
       <StoreThumbnailWrapper>
-        <img alt="가게 이미지" />
+        <img alt="가게 이미지" src={tempReviewInfo.userThumbnail} />
       </StoreThumbnailWrapper>
       <StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={tempStoreInfo} />
