@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
+import ReviewInputBottomSheet from "./ReviewInputBottomSheet";
 import StoreDetailTitle from "./StoreDetailTitle";
 import StoreReviewItem from "./StoreReviewItem";
 
@@ -51,6 +53,9 @@ const ReviewPlusButton = styled.button`
 `;
 
 function StoreDetailPage() {
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+
+  const onSubmitReview = () => {};
   const tempStoreInfo = {
     name: "치킨집",
     rating: 4.2,
@@ -79,7 +84,15 @@ function StoreDetailPage() {
           <StoreReviewItem reviewInfo={tempReviewInfo} />
         </ReviewListWrapper>
       </StoreReviewContentWrapper>
-      <ReviewPlusButton>+</ReviewPlusButton>
+      <ReviewPlusButton onClick={() => setIsReviewOpen(true)}>
+        +
+      </ReviewPlusButton>
+      {isReviewOpen && (
+        <ReviewInputBottomSheet
+          closeSheet={() => setIsReviewOpen(false)}
+          onSubmit={onSubmitReview}
+        />
+      )}
     </StoreDetailPageContainer>
   );
 }
