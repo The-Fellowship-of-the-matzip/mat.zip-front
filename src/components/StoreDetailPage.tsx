@@ -4,12 +4,13 @@ import StoreReviewItem from "./StoreReviewItem";
 
 const StoreDetailPageContainer = styled.section`
   position: relative;
+  width: 100%;
   height: fit-content;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
   background-color: ${({ theme }) => theme.white};
 `;
 
@@ -32,15 +33,21 @@ const ReviewListWrapper = styled.div`
 `;
 
 const ReviewPlusButton = styled.button`
-  position: absolute;
-  font-size: 20px;
-  bottom: 10px;
-  right: 1rem;
+  position: fixed;
+  font-size: 2rem;
+  right: 10%;
+  bottom: 2rem;
+
   width: 3rem;
   height: 3rem;
-  border: 1px solid ${({ theme }) => theme.secondary};
-  background-color: transparent;
+  color: ${({ theme }) => theme.white};
+  border: none;
+  background-color: ${({ theme }) => theme.primary};
   border-radius: 50%;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.yellow};
+  }
 `;
 
 function StoreDetailPage() {

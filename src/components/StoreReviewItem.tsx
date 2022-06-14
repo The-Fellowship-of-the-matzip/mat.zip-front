@@ -13,11 +13,9 @@ interface StoreReviewItemProps {
 const StoreReviewContainer = styled.section`
   display: flex;
   position: relative;
-  // width 값 , figma로 따라감
-  width: 330px;
+  width: 100%;
   height: fit-content;
   padding: 1rem;
-  // justify-content: space-around;
   justify-content: flex-end;
   border: 1px solid ${({ theme }) => theme.secondary};
   border-radius: 4px;
@@ -29,7 +27,6 @@ const UserProfileWrapper = styled.div`
   width: 3rem;
   height: 3rem;
   position: absolute;
-  // img 없어서 임시로 배경색으로 대체
   background-color: #187dd6cb;
   border-radius: 50%;
 `;
