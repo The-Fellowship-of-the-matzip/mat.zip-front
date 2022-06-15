@@ -8,7 +8,7 @@ export default {
     name: { controls: "text" },
     campus: { controls: "text" },
     distance: { controls: "number" },
-    starCount: { controls: "number" },
+    rating: { controls: "number" },
   },
 };
 
@@ -21,5 +21,5 @@ Default.args = {
   name: "냠냠 치킨",
   campus: "잠실",
   distance: 0.5,
-  starCount: 3,
+  rating: 3,
 };

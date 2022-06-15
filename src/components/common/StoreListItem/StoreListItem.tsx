@@ -8,7 +8,7 @@ export interface StoreListItemProps {
   name: string;
   campus: "잠실" | "선릉";
   distance: number;
-  starCount: number;
+  rating: number;
 }
 
 function StoreListItem({
@@ -16,7 +16,7 @@ function StoreListItem({
   name,
   campus,
   distance,
-  starCount,
+  rating,
 }: StoreListItemProps) {
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ function StoreListItem({
           </S.ListItemDistance>
         </div>
         <S.ListItemStars>
-          {Array.from({ length: starCount }).map(() => (
+          {Array.from({ length: rating }).map(() => (
             <Star isFilled />
           ))}
         </S.ListItemStars>

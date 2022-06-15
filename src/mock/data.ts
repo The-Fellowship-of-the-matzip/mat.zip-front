@@ -1,4 +1,4 @@
-import { StoreListProps } from "components/common/StoreList";
+import type { StoreListProps } from "components/common/StoreList/StoreList";
 
 export const stores: StoreListProps["stores"] = [
   {
@@ -8,7 +8,7 @@ export const stores: StoreListProps["stores"] = [
     name: "냠냠 치킨",
     campus: "잠실",
     distance: 0.5,
-    starCount: 3,
+    rating: 3,
   },
   {
     storeId: 2,
@@ -17,7 +17,7 @@ export const stores: StoreListProps["stores"] = [
     name: "욤욤 치킨",
     campus: "잠실",
     distance: 0.2,
-    starCount: 4,
+    rating: 4,
   },
   {
     storeId: 3,
@@ -26,7 +26,7 @@ export const stores: StoreListProps["stores"] = [
     name: "념념 치킨",
     campus: "잠실",
     distance: 1,
-    starCount: 1,
+    rating: 1,
   },
   {
     storeId: 4,
@@ -35,7 +35,7 @@ export const stores: StoreListProps["stores"] = [
     name: "냠냠 치킨",
     campus: "잠실",
     distance: 0.5,
-    starCount: 3,
+    rating: 3,
   },
   {
     storeId: 5,
@@ -44,7 +44,7 @@ export const stores: StoreListProps["stores"] = [
     name: "욤욤 치킨",
     campus: "잠실",
     distance: 0.2,
-    starCount: 4,
+    rating: 4,
   },
   {
     storeId: 6,
@@ -53,6 +53,6 @@ export const stores: StoreListProps["stores"] = [
     name: "념념 치킨",
     campus: "잠실",
     distance: 1,
-    starCount: 1,
+    rating: 1,
   },
 ];

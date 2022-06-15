@@ -16,7 +16,7 @@ function StoreList({ stores }: StoreListProps) {
           name={store.name}
           campus={store.campus}
           distance={store.distance}
-          starCount={store.starCount}
+          rating={store.rating}
         />
       ))}
     </S.StoreListContainer>
