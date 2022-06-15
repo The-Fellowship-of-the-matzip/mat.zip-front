@@ -7,19 +7,18 @@ import StoreReviewItem from "./StoreReviewItem";
 const StoreDetailPageContainer = styled.section`
   position: relative;
   width: 100%;
-  height: fit-content;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 6rem;
+  padding-bottom: 3.5rem;
   background-color: ${({ theme }) => theme.white};
 `;
 
 const StoreThumbnailWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 20rem;
+  height: 10rem;
   overflow: hidden;
 
   & > img {
@@ -31,7 +30,7 @@ const StoreThumbnailWrapper = styled.div`
 
 const StoreReviewContentWrapper = styled.article`
   width: 85%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 const ReviewListWrapper = styled.div`
@@ -45,7 +44,7 @@ const ReviewPlusButton = styled.button`
   position: fixed;
   font-size: 2rem;
   right: 10%;
-  bottom: 2rem;
+  bottom: 10vh;
 
   width: 3rem;
   height: 3rem;
@@ -55,7 +54,10 @@ const ReviewPlusButton = styled.button`
   border-radius: 50%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.yellow};
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.9;
   }
 `;
 
@@ -75,6 +77,7 @@ function StoreDetailPage() {
     desc: "skdjflskjdfalkjsdfajaklsfd",
     menuName: "후라이드 치킨",
   };
+  console.log(tempReviewInfo.userThumbnail);
   return (
     <StoreDetailPageContainer>
       <StoreThumbnailWrapper>
@@ -84,6 +87,10 @@ function StoreDetailPage() {
         <StoreDetailTitle storeInfo={tempStoreInfo} />
         <ReviewListWrapper>
           <h2>리뷰</h2>
+          <StoreReviewItem reviewInfo={tempReviewInfo} />
+          <StoreReviewItem reviewInfo={tempReviewInfo} />
+          <StoreReviewItem reviewInfo={tempReviewInfo} />
+          <StoreReviewItem reviewInfo={tempReviewInfo} />
           <StoreReviewItem reviewInfo={tempReviewInfo} />
           <StoreReviewItem reviewInfo={tempReviewInfo} />
           <StoreReviewItem reviewInfo={tempReviewInfo} />

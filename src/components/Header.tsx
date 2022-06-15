@@ -50,6 +50,9 @@ const LoginLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.white};
   }
+  &:active {
+    color: ${({ theme }) => theme.white};
+  }
 `;
 
 const SearchToggleButton = styled.button`

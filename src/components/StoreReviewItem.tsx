@@ -29,6 +29,13 @@ const UserProfileWrapper = styled.div`
   position: absolute;
   background-color: #187dd6cb;
   border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
 `;
 
 const ReviewContentWrapper = styled.div`
@@ -42,13 +49,7 @@ const Header = styled.header`
 `;
 
 const HeaderLeftWrapper = styled.div`
-  margin-top: 0.4rem;
-`;
-
-const MenuWrapper = styled.div`
-  border: 1px solid ${({ theme }) => theme.secondary};
-  border-radius: 22px;
-  padding: 0.3rem;
+  margin-top: -2%;
 `;
 
 const ContentWrapper = styled.div`
@@ -62,15 +63,16 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
   return (
     <StoreReviewContainer>
       <UserProfileWrapper>
-        {/* <img src={userThumbnail} alt="유저의 프로필이 보여지는 곳" /> */}
+        <img src={userThumbnail} alt="유저의 프로필이 보여지는 곳" />
       </UserProfileWrapper>
       <ReviewContentWrapper>
         <Header>
           <HeaderLeftWrapper>
-            <Star isFilled />
-            <span>X {rating}</span>
+            {Array.from({ length: rating }).map((item, index) => (
+              <Star key={index} isFilled />
+            ))}
           </HeaderLeftWrapper>
-          <MenuWrapper>{menuName}</MenuWrapper>
+          <div>{menuName}</div>
         </Header>
         <ContentWrapper>{desc}</ContentWrapper>
       </ReviewContentWrapper>
