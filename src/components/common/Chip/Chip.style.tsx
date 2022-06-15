@@ -1,3 +1,5 @@
+import type { ChipProps } from "components/common/Chip/Chip";
+
 import styled from "styled-components";
 
 export const ChipContainer = styled.button<Partial<ChipProps>>`

@@ -1,6 +1,6 @@
 import * as S from "components/common/Chip/Chip.style";
 
-interface ChipProps {
+export interface ChipProps {
   children: string;
   isSelected?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
