@@ -23,7 +23,7 @@ function Category({ categories }: CategoryProps) {
         <CategoryItem
           key={categoryId}
           buttonText={desc[0]}
-          width="2.5em"
+          width="2.5rem"
           onClick={handleClickCategoryItem}
         >
           {desc}
