@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { BsSearch } from "react-icons/bs";
+
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;

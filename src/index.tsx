@@ -1,11 +1,12 @@
+import App from "./App";
+import "./index.css";
+import GlobalStyle from "./style/GlobalStyle";
+import { theme } from "./style/Theme";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./style/Theme";
 import { BrowserRouter } from "react-router-dom";
-import GlobalStyle from "./style/GlobalStyle";
+
+import { ThemeProvider } from "styled-components";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

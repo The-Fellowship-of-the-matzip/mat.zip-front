@@ -1,4 +1,4 @@
-import { StoreListProps } from "../components/common/StoreList";
+import { StoreListProps } from "components/common/StoreList";
 
 export const stores: StoreListProps["stores"] = [
   {

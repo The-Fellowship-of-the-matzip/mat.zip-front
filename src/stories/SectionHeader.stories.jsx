@@ -1,9 +1,9 @@
 import { MdArrowBackIos } from "react-icons/md";
 
-import SectionHeader from "../components/common/SectionHeader";
+import SectionHeader from "components/common/SectionHeader";
 
 export default {
-  title: "Component/SectionHeader",
+  title: "Components/common/SectionHeader",
   component: SectionHeader,
   argTypes: {
     children: { controls: "text" },

@@ -1,7 +1,7 @@
-import StoreList from "../components/common/StoreList";
+import StoreList from "components/common/StoreList";
 
 export default {
-  title: "Component/StoreList",
+  title: "Components/common/StoreList",
   component: StoreList,
   argTypes: {
     stores: { controls: "object" },

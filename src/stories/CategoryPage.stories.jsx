@@ -1,7 +1,7 @@
-import CategoryPage from "../components/pages/CategoryPage";
+import CategoryPage from "components/pages/CategoryPage";
 
 export default {
-  title: "Component/CategoryPage",
+  title: "Components/pages/CategoryPage/index",
   component: CategoryPage,
 };
 

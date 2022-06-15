@@ -1,5 +1,7 @@
+import Star from "components/common/Star";
+
 import styled from "styled-components";
-import Star from "../../common/Star";
+
 interface StoreDetailTitleProps {
   storeInfo: {
     name: string;

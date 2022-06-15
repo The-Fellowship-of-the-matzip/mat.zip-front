@@ -1,8 +1,7 @@
+import StoreListItem from "components/common/StoreListItem";
+import type { StoreListItemProps } from "components/common/StoreListItem";
+
 import styled from "styled-components";
-
-import type { StoreListItemProps } from "./StoreListItem";
-
-import StoreListItem from "./StoreListItem";
 
 export interface StoreListProps {
   stores: (StoreListItemProps & { storeId: number })[];

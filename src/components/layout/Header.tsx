@@ -1,9 +1,12 @@
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
+
+import useLogin from "hooks/useLogin";
+
+import SearchBar from "components/common/SearchBar";
+
 import styled, { css } from "styled-components";
-import useLogin from "../../hooks/useLogin";
-import SearchBar from "../common/SearchBar";
 
 const Container = styled.header<{ isSearchOpen: boolean }>`
   width: 375px;

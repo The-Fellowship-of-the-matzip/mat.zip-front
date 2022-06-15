@@ -1,7 +1,7 @@
-import StoreDetailTitle from "../components/pages/StoreDetailPage/StoreDetailTitle";
+import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle";
 
 export default {
-  title: "Component/StoreDetailTitle",
+  title: "Components/pages/StoreDetailPage/StoreDetailTitle",
   component: StoreDetailTitle,
   argTypes: {
     storeInfo: { controls: "object" },

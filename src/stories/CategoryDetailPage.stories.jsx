@@ -1,7 +1,7 @@
-import CategoryDetailPage from "../components/pages/CategoryDetailPage";
+import CategoryDetailPage from "components/pages/CategoryDetailPage";
 
 export default {
-  title: "Component/CategoryDetailPage",
+  title: "Components/pages/CategoryDetailPage/index",
   component: CategoryDetailPage,
   argTypes: {
     categoryName: { controls: "text" },

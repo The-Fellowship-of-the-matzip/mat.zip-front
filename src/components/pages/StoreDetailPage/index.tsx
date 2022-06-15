@@ -1,8 +1,10 @@
 import { useState } from "react";
+
+import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet";
+import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle";
+import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem";
+
 import styled from "styled-components";
-import ReviewInputBottomSheet from "./ReviewInputBottomSheet";
-import StoreDetailTitle from "./StoreDetailTitle";
-import StoreReviewItem from "./StoreReviewItem";
 
 const StoreDetailPageContainer = styled.section`
   position: relative;

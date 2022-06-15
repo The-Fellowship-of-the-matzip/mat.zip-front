@@ -1,7 +1,7 @@
-import StoreListItem from "../components/common/StoreListItem";
+import StoreListItem from "components/common/StoreListItem";
 
 export default {
-  title: "Component/StoreListItem",
+  title: "Components/common/StoreListItem",
   component: StoreListItem,
   argTypes: {
     thumbnailUrl: { controls: "text" },

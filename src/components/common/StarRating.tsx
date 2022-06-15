@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
+import Star from "components/common/Star";
+
 import styled from "styled-components";
-import Star from "./Star";
 
 export const Container = styled.div`
   display: flex;

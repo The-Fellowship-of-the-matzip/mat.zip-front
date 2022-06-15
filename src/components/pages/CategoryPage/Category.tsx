@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
-import CategoryItem from "./CategoryItem";
+import CategoryItem from "components/pages/CategoryPage/CategoryItem";
+
+import styled from "styled-components";
 
 interface CategoryProps {
   categories: {

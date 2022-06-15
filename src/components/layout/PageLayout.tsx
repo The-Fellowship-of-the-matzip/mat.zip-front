@@ -1,7 +1,8 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
+
+import Header from "components/layout/Header";
+
 import styled from "styled-components";
-import Header from "./Header";
 
 const MainContainer = styled.main`
   width: 375px;

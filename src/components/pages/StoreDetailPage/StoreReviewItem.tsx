@@ -1,5 +1,6 @@
+import Star from "components/common/Star";
+
 import styled from "styled-components";
-import Star from "../../common/Star";
 
 interface StoreReviewItemProps {
   reviewInfo: {

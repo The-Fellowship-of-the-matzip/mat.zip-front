@@ -1,11 +1,14 @@
+import { useState } from "react";
+
+import InfiniteScroll from "components/common/InfiniteScroll";
+import SectionHeader from "components/common/SectionHeader";
+import StoreList from "components/common/StoreList";
+
+import Category from "components/pages/CategoryPage/Category";
+
 import styled from "styled-components";
 
-import Category from "./Category";
-import SectionHeader from "../../common/SectionHeader";
-import StoreList from "../../common/StoreList";
-import { stores } from "../../../mock/data";
-import InfiniteScroll from "../../common/InfiniteScroll";
-import { useState } from "react";
+import { stores } from "mock/data";
 
 const CategoryPageContainer = styled.div`
   padding: 1em;

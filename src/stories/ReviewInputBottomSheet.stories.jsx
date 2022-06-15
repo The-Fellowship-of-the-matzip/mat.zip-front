@@ -1,9 +1,11 @@
 import { useState } from "react";
+
+import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet";
+
 import styled from "styled-components";
-import ReviewInputBottomSheet from "../components/pages/StoreDetailPage/ReviewInputBottomSheet";
 
 export default {
-  title: "Component/ReviewInputBottomSheet",
+  title: "Components/pages/StoreDetailPage/ReviewInputBottomSheet",
   component: ReviewInputBottomSheet,
 };
 

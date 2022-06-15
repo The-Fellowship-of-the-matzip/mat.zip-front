@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import StarRating from "../components/common/StarRating";
+import StarRating from "components/common/StarRating";
 
 export default {
-  title: "Component/StarRating",
+  title: "Components/common/StarRating",
   component: StarRating,
 };
 

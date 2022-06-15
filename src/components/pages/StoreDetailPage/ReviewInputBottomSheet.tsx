@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import BottomSheet from "components/common/BottomSheet";
+import StarRating from "components/common/StarRating";
+
 import styled from "styled-components";
-import BottomSheet from "../../common/BottomSheet";
-import StarRating from "../../common/StarRating";
 
 const Form = styled.form`
   width: 100%;

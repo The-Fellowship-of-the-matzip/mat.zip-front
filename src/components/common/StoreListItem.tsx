@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+
+import Star from "components/common/Star";
+
 import styled from "styled-components";
-import Star from "./Star";
 
 export interface StoreListItemProps {
   thumbnailUrl: string;
