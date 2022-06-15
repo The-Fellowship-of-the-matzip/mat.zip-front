@@ -4,14 +4,7 @@ interface CategoryItemButtonProps {
   width: string;
 }
 
-interface CategoryItemProps {
-  buttonText: string;
-  children: React.ReactNode;
-  onClick: React.MouseEventHandler<HTMLElement>;
-  width?: string;
-}
-
-const CategoryItemContainer = styled.li`
+export const CategoryItemContainer = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +15,7 @@ const CategoryItemContainer = styled.li`
   cursor: pointer;
 `;
 
-const CategoryItemButton = styled.button<CategoryItemButtonProps>`
+export const CategoryItemButton = styled.button<CategoryItemButtonProps>`
   ${({ theme, width }) => `
     width: ${width};
     height: ${width};
@@ -47,27 +40,10 @@ const CategoryItemButton = styled.button<CategoryItemButtonProps>`
   }
 `;
 
-const CategoryItemDesc = styled.p`
+export const CategoryItemDesc = styled.p`
   ${({ theme }) => `
     color: ${theme.black};
   `}
   padding: 0.2em;
   text-align: center;
 `;
-
-function CategoryItem({
-  buttonText,
-  children,
-  width = "fit-content",
-  onClick,
-  ...rest
-}: CategoryItemProps) {
-  return (
-    <CategoryItemContainer onClick={onClick} {...rest}>
-      <CategoryItemButton width={width}>{buttonText}</CategoryItemButton>
-      <CategoryItemDesc>{children}</CategoryItemDesc>
-    </CategoryItemContainer>
-  );
-}
-
-export default CategoryItem;

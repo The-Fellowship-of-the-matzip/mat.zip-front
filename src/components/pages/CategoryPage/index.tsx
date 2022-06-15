@@ -1,23 +1,13 @@
 import { useState } from "react";
 
-import InfiniteScroll from "components/common/InfiniteScroll";
-import SectionHeader from "components/common/SectionHeader";
-import StoreList from "components/common/StoreList";
+import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
+import StoreList from "components/common/StoreList/StoreList";
 
-import Category from "components/pages/CategoryPage/Category";
-
-import styled from "styled-components";
+import Category from "components/pages/CategoryPage/Category/Category";
+import * as S from "components/pages/CategoryPage/index.style";
 
 import { stores } from "mock/data";
-
-const CategoryPageContainer = styled.div`
-  padding: 1em;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.5em;
-`;
 
 const categories = [
   { categoryId: 1, desc: "한식" },
@@ -38,7 +28,7 @@ function CategoryPage() {
   };
 
   return (
-    <CategoryPageContainer>
+    <S.CategoryPageContainer>
       <section>
         <SectionHeader>카테고리</SectionHeader>
         <Category categories={categories} />
@@ -49,7 +39,7 @@ function CategoryPage() {
           <StoreList stores={data} />
         </InfiniteScroll>
       </section>
-    </CategoryPageContainer>
+    </S.CategoryPageContainer>
   );
 }
 

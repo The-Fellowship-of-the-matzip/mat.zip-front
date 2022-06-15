@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-import CategoryItem from "components/pages/CategoryPage/CategoryItem";
-
-import styled from "styled-components";
+import * as S from "components/pages/CategoryPage/Category/Category.style";
+import CategoryItem from "components/pages/CategoryPage/CategoryItem/CategoryItem";
 
 interface CategoryProps {
   categories: {
@@ -10,14 +9,6 @@ interface CategoryProps {
     desc: string;
   }[];
 }
-
-const CategoryContainer = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.2em;
-  justify-items: center;
-  align-items: center;
-`;
 
 function Category({ categories }: CategoryProps) {
   const navigate = useNavigate();
@@ -27,7 +18,7 @@ function Category({ categories }: CategoryProps) {
   };
 
   return (
-    <CategoryContainer>
+    <S.CategoryContainer>
       {categories.map(({ categoryId, desc }) => (
         <CategoryItem
           key={categoryId}
@@ -38,7 +29,7 @@ function Category({ categories }: CategoryProps) {
           {desc}
         </CategoryItem>
       ))}
-    </CategoryContainer>
+    </S.CategoryContainer>
   );
 }
 

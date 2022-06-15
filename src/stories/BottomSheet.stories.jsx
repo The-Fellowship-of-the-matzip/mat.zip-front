@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import BottomSheet from "components/common/BottomSheet";
+import BottomSheet from "components/common/BottomSheet/BottomSheet";
 
 import styled from "styled-components";
 

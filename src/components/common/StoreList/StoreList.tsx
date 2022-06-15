@@ -1,19 +1,14 @@
-import StoreListItem from "components/common/StoreListItem";
-import type { StoreListItemProps } from "components/common/StoreListItem";
-
-import styled from "styled-components";
+import * as S from "components/common/StoreList/StoreList.style";
+import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import type { StoreListItemProps } from "components/common/StoreListItem/StoreListItem";
 
 export interface StoreListProps {
   stores: (StoreListItemProps & { storeId: number })[];
 }
 
-const StoreListContainer = styled.ul`
-  width: 100%;
-`;
-
 function StoreList({ stores }: StoreListProps) {
   return (
-    <StoreListContainer>
+    <S.StoreListContainer>
       {stores.map((store) => (
         <StoreListItem
           key={store.storeId}
@@ -24,7 +19,7 @@ function StoreList({ stores }: StoreListProps) {
           starCount={store.starCount}
         />
       ))}
-    </StoreListContainer>
+    </S.StoreListContainer>
   );
 }
 

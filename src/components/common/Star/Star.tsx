@@ -1,18 +1,13 @@
-import styled from "styled-components";
-
-const StarContainer = styled.span`
-  font-size: 1.5rem;
-  color: ${({ theme }) => theme.yellow};
-`;
+import * as S from "components/common/Star/Star.style";
 
 const EMPTY_STAR_ICON = "\u2606";
 const FILLED_STAR_ICON = "\u2605";
 
 function Star({ isFilled = false }) {
   return (
-    <StarContainer>
+    <S.StarContainer>
       {isFilled ? FILLED_STAR_ICON : EMPTY_STAR_ICON}
-    </StarContainer>
+    </S.StarContainer>
   );
 }
 

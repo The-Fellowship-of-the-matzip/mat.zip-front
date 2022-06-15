@@ -1,4 +1,4 @@
-import PageLayout from "./components/layout/PageLayout";
+import PageLayout from "./components/layout/PageLayout/PageLayout";
 import CategoryDetailPage from "./components/pages/CategoryDetailPage";
 import CategoryPage from "./components/pages/CategoryPage";
 import StoreDetailPage from "./components/pages/StoreDetailPage";

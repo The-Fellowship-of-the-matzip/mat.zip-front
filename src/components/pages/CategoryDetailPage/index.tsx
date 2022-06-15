@@ -2,32 +2,18 @@ import { useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import Chip from "components/common/Chip";
-import InfiniteScroll from "components/common/InfiniteScroll";
-import SectionHeader from "components/common/SectionHeader";
-import StoreList from "components/common/StoreList";
+import Chip from "components/common/Chip/Chip";
+import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
+import StoreList from "components/common/StoreList/StoreList";
 
-import styled from "styled-components";
+import * as S from "components/pages/CategoryDetailPage/index.style";
 
 import { stores } from "mock/data";
 
 interface CategoryDetailPageProps {
   categoryName: string;
 }
-
-const CategoryDetailPageContainer = styled.section`
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1em;
-`;
-
-const ChipContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 1em;
-`;
 
 function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   const [isSelected, setIsSelected] = useState({
@@ -57,7 +43,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   };
 
   return (
-    <CategoryDetailPageContainer>
+    <S.CategoryDetailPageContainer>
       <SectionHeader
         leadingIcon={<MdArrowBackIos />}
         onClick={() => {
@@ -66,7 +52,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
       >
         {categoryName}
       </SectionHeader>
-      <ChipContainer>
+      <S.ChipContainer>
         <Chip
           isSelected={isSelected.starOrder}
           onClick={handleClickStarOrderChip}
@@ -79,11 +65,11 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
         >
           가나다 순
         </Chip>
-      </ChipContainer>
+      </S.ChipContainer>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         <StoreList stores={data} />
       </InfiniteScroll>
-    </CategoryDetailPageContainer>
+    </S.CategoryDetailPageContainer>
   );
 }
 

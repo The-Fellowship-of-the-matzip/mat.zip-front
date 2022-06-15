@@ -1,20 +1,7 @@
 import React, { useState } from "react";
 
-import Star from "components/common/Star";
-
-import styled from "styled-components";
-
-export const Container = styled.div`
-  display: flex;
-`;
-
-export const StarButton = styled.button`
-  background-color: transparent;
-  border: none;
-
-  font-size: 1.5rem;
-  color: #e6d706;
-`;
+import Star from "components/common/Star/Star";
+import * as S from "components/common/StarRating/StarRating.style";
 
 type Props = {
   rating: number;
@@ -39,20 +26,20 @@ function StarRating({ rating = 0, setRating }: Props) {
   };
 
   return (
-    <Container>
+    <S.Container>
       {Array.from({ length: MAX_RATING }).map((_, index) => {
         return (
-          <StarButton
+          <S.StarButton
             key={index}
             onMouseUp={handleStarClick(index)}
             onMouseEnter={handleStarHover(index)}
             onMouseLeave={resetStarHover}
           >
             {index > (hoverRating ?? rating) ? <Star /> : <Star isFilled />}
-          </StarButton>
+          </S.StarButton>
         );
       })}
-    </Container>
+    </S.Container>
   );
 }
 
