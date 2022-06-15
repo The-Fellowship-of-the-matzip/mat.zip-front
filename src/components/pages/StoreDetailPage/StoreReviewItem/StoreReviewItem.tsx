@@ -1,3 +1,5 @@
+import repeatComponent from "util/repeatComponent";
+
 import Star from "components/common/Star/Star";
 
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
@@ -21,9 +23,7 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
       <S.ReviewContentWrapper>
         <S.Header>
           <S.HeaderLeftWrapper>
-            {Array.from({ length: rating }).map((item, index) => (
-              <Star key={index} isFilled />
-            ))}
+            {repeatComponent(<Star isFilled />, rating)}
           </S.HeaderLeftWrapper>
           <S.MenuWrapper>{menuName}</S.MenuWrapper>
         </S.Header>
