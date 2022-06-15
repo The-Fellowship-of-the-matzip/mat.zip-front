@@ -1,5 +1,4 @@
 import App from "./App";
-import "./index.css";
 import GlobalStyle from "./style/GlobalStyle";
 import { theme } from "./style/Theme";
 import React from "react";
