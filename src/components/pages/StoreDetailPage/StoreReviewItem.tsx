@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Star from "./Star";
+import Star from "../../common/Star";
 
 interface StoreReviewItemProps {
   reviewInfo: {

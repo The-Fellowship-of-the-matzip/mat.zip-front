@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import ReviewInputBottomSheet from "../components/ReviewInputBottomSheet";
+import ReviewInputBottomSheet from "../components/pages/StoreDetailPage/ReviewInputBottomSheet";
 
 export default {
   title: "Component/ReviewInputBottomSheet",

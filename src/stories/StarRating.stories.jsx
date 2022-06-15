@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import StarRating from "../components/StarRating";
+import StarRating from "../components/common/StarRating";
 
 export default {
   title: "Component/StarRating",

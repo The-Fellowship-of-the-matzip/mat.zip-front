@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 import Category from "./Category";
-import SectionHeader from "./SectionHeader";
-import StoreList from "./StoreList";
-import { stores } from "../mock/data";
-import InfiniteScroll from "./InfiniteScroll";
+import SectionHeader from "../../common/SectionHeader";
+import StoreList from "../../common/StoreList";
+import { stores } from "../../../mock/data";
+import InfiniteScroll from "../../common/InfiniteScroll";
 import { useState } from "react";
 
 const CategoryPageContainer = styled.div`

@@ -1,4 +1,4 @@
-import StoreDetailPage from "../components/StoreDetailPage";
+import StoreDetailPage from "../components/pages/StoreDetailPage";
 
 export default {
   title: "Component/StoreDetailPage",

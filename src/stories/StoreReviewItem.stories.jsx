@@ -1,4 +1,4 @@
-import StoreReviewItem from "../components/StoreReviewItem";
+import StoreReviewItem from "../components/pages/StoreDetailPage/StoreReviewItem";
 
 export default {
   title: "Component/StoreReviewItem",

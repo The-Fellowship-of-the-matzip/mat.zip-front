@@ -2,12 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import { MdArrowBackIos } from "react-icons/md";
 
-import Chip from "./Chip";
-import SectionHeader from "./SectionHeader";
-import StoreList from "./StoreList";
+import Chip from "../../common/Chip";
+import SectionHeader from "../../common/SectionHeader";
+import StoreList from "../../common/StoreList";
 import { useNavigate } from "react-router-dom";
-import InfiniteScroll from "./InfiniteScroll";
-import { stores } from "../mock/data";
+import InfiniteScroll from "../../common/InfiniteScroll";
+import { stores } from "../../../mock/data";
 
 interface CategoryDetailPageProps {
   categoryName: string;
