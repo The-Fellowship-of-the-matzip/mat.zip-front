@@ -19,3 +19,9 @@ export const DescriptionWrapper = styled.div`
   word-break: break-all;
   margin-top: 30px;
 `;
+
+export const RatingWrapper = styled.span`
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-left: 0.4rem;
+`;

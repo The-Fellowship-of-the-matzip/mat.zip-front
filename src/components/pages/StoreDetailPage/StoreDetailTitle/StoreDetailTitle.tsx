@@ -18,7 +18,7 @@ function StoreDetailTitle({ storeInfo }: StoreDetailTitleProps) {
         <h2>{name}</h2>
         <div>
           <Star isFilled />
-          <span>{rating}</span>
+          <S.RatingWrapper>{rating}</S.RatingWrapper>
         </div>
       </S.TitleRatingWrapper>
       <S.DescriptionWrapper>{desc}</S.DescriptionWrapper>

@@ -17,8 +17,14 @@ export const UserProfileWrapper = styled.div`
   width: 3rem;
   height: 3rem;
   position: absolute;
-  background-color: #187dd6cb;
   border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
 `;
 
 export const ReviewContentWrapper = styled.div`
@@ -32,14 +38,10 @@ export const Header = styled.header`
 `;
 
 export const HeaderLeftWrapper = styled.div`
-  margin-top: 0.4rem;
+  margin-top: -0.4rem;
 `;
 
-export const MenuWrapper = styled.div`
-  border: 1px solid ${({ theme }) => theme.secondary};
-  border-radius: 22px;
-  padding: 0.3rem;
-`;
+export const MenuWrapper = styled.div``;
 
 export const ContentWrapper = styled.div`
   margin-top: 1.5rem;

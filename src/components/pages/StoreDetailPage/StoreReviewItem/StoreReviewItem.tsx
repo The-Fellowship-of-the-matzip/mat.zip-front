@@ -16,13 +16,14 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
   return (
     <S.StoreReviewContainer>
       <S.UserProfileWrapper>
-        {/* <img src={userThumbnail} alt="유저의 프로필이 보여지는 곳" /> */}
+        <img src={userThumbnail} alt="유저의 프로필이 보여지는 곳" />
       </S.UserProfileWrapper>
       <S.ReviewContentWrapper>
         <S.Header>
           <S.HeaderLeftWrapper>
-            <Star isFilled />
-            <span>X {rating}</span>
+            {Array.from({ length: rating }).map((item, index) => (
+              <Star key={index} isFilled />
+            ))}
           </S.HeaderLeftWrapper>
           <S.MenuWrapper>{menuName}</S.MenuWrapper>
         </S.Header>

@@ -8,14 +8,14 @@ export const StoreDetailPageContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 6rem;
+  padding-bottom: 3rem;
   background-color: ${({ theme }) => theme.white};
 `;
 
 export const StoreThumbnailWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 20rem;
+  height: 15rem;
   overflow: hidden;
 
   & > img {
@@ -51,6 +51,9 @@ export const ReviewPlusButton = styled.button`
   border-radius: 50%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.yellow};
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.9;
   }
 `;

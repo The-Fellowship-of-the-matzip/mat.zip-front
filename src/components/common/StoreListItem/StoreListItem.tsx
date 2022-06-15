@@ -28,18 +28,10 @@ function StoreListItem({
     >
       <S.ListItemThumbnail src={thumbnailUrl} alt={name} />
       <div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1em",
-          }}
-        >
-          <S.ListItemName>{name}</S.ListItemName>
-          <S.ListItemDistance>
-            {campus} 캠퍼스 기준 {distance}km
-          </S.ListItemDistance>
-        </div>
+        <S.ListItemName>{name}</S.ListItemName>
+        <S.ListItemDistance>
+          {campus} 캠퍼스 기준 {distance}km
+        </S.ListItemDistance>
         <S.ListItemStars>
           {Array.from({ length: rating }).map(() => (
             <Star isFilled />
