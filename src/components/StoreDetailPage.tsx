@@ -54,7 +54,10 @@ const ReviewPlusButton = styled.button`
   border-radius: 50%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.yellow};
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.9;
   }
 `;
 
