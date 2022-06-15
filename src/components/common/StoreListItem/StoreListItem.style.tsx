@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const ListItemContainer = styled.li`
   display: flex;
   align-items: center;
-  gap: 2em;
+  gap: 2rem;
 
   width: 100%;
-  padding: 2em;
+  padding: 2rem;
 
-  border-top: 1px solid ${({ theme }) => theme.black};
+  border-top: 0.065rem solid ${({ theme }) => theme.black};
   background-color: ${({ theme }) => theme.white};
   cursor: pointer;
 
@@ -21,8 +21,8 @@ export const ListItemContainer = styled.li`
 `;
 
 export const ListItemThumbnail = styled.img`
-  width: 4em;
-  height: 4em;
+  width: 4rem;
+  height: 4rem;
 
   border-radius: 50%;
   object-fit: cover;

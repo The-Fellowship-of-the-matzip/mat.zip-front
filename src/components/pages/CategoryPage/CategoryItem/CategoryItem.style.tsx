@@ -20,16 +20,16 @@ export const CategoryItemButton = styled.button<CategoryItemButtonProps>`
     width: ${width};
     height: ${width};
 
-    box-shadow: 1px 1px 1px ${theme.secondary};
+    box-shadow: 0.065rem 0.065rem 0.065rem ${theme.secondary};
     background-color: ${theme.white};
     color: ${theme.black};
   `}
-  padding: 0.5em;
+  padding: 0.5rem;
 
   font-size: 1.25rem;
   font-weight: 700;
   text-align: center;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   border: none;
 
   &:hover {
@@ -44,6 +44,6 @@ export const CategoryItemDesc = styled.p`
   ${({ theme }) => `
     color: ${theme.black};
   `}
-  padding: 0.2em;
+  padding: 0.2rem;
   text-align: center;
 `;

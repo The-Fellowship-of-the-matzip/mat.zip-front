@@ -7,8 +7,8 @@ export const StoreReviewContainer = styled.section`
   height: fit-content;
   padding: 1rem;
   justify-content: flex-end;
-  border: 1px solid ${({ theme }) => theme.secondary};
-  border-radius: 4px;
+  border: 0.065rem solid ${({ theme }) => theme.secondary};
+  border-radius: 0.25rem;
 `;
 
 export const UserProfileWrapper = styled.div`

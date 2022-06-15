@@ -5,7 +5,7 @@ export const Form = styled.form`
 
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 0.95rem;
 `;
 
 export const Label = styled.label`
@@ -17,18 +17,18 @@ export const Label = styled.label`
 export const MenuInput = styled.input`
   width: 100%;
 
-  padding: 0.8em 1em;
+  padding: 0.8rem 1rem;
 
-  border: 1px solid ${({ theme }) => theme.secondary};
+  border: 0.065rem solid ${({ theme }) => theme.secondary};
 `;
 
 export const ReviewTextArea = styled.textarea`
   width: 100%;
-  min-height: 150px;
+  min-height: 9.5rem;
 
-  padding: 0.8em 1em;
+  padding: 0.8rem 1rem;
 
-  border: 1px solid ${({ theme }) => theme.secondary};
+  border: 0.065rem solid ${({ theme }) => theme.secondary};
 
   resize: none;
 `;
@@ -41,12 +41,12 @@ export const BottomWrapper = styled.div`
 `;
 
 export const SubmitButton = styled.button`
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
 
   background-color: ${({ theme }) => theme.primary};
 
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0.065rem 0.065rem 0.2rem rgba(0, 0, 0, 0.4);
 `;

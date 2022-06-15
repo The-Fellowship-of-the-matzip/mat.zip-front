@@ -7,7 +7,4 @@ export const Container = styled.div`
 export const StarButton = styled.button`
   background-color: transparent;
   border: none;
-
-  font-size: 1.5rem;
-  color: #e6d706;
 `;

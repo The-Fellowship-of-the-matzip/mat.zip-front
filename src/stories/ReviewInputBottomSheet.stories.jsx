@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet";
-
 import styled from "styled-components";
+
+import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet";
 
 export default {
   title: "Components/pages/StoreDetailPage/ReviewInputBottomSheet",
@@ -12,7 +12,7 @@ export default {
 const SampleButton = styled.button`
   width: max-content;
   align-self: flex-end;
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
 `;
 
 function SampleReviewInput(args) {

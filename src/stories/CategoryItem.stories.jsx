@@ -17,14 +17,14 @@ const Template = (args) => <CategoryItem {...args} onClick={() => {}} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  width: "2.5em",
+  width: "2.5rem",
   children: "한식",
   buttonText: "한",
 };
 
 export const HoverButton = Template.bind({});
 HoverButton.args = {
-  width: "2.5em",
+  width: "2.5rem",
   children: "한식",
   buttonText: "한",
 };
@@ -35,7 +35,7 @@ HoverButton.play = ({ canvasElement }) => {
 
 export const ActiveButton = Template.bind({});
 ActiveButton.args = {
-  width: "2.5em",
+  width: "2.5rem",
   children: "한식",
   buttonText: "한",
 };

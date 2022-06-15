@@ -17,7 +17,7 @@ export const DescriptionWrapper = styled.div`
   width: 100%;
   overflow: hidden;
   word-break: break-all;
-  margin-top: 30px;
+  margin-top: 1.875rem;
 `;
 
 export const RatingWrapper = styled.span`
