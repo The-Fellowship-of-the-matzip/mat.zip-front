@@ -1,5 +1,7 @@
 {
   "importOrder": [
+    "^(@|styled-components)(.*|$)",
+    "^(@|App)(.*|$)",
     "^(@|constants)(.*|$)",
     "^(@|asset)(.*|$)",
     "^(@|hooks)(.*|$)",
