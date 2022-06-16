@@ -112,3 +112,17 @@ export const reviews: Review[] = [
     menu: "무 닭볶음탕 (중)",
   },
 ];
+
+// 실제 서버 category와는 다름 - 실제 서버는 id 속성이 없고, 카페/디저트까지만 존재
+// 실제 서버에서 가져오지 말고 static으로 해도 될 듯
+// TODO: 백엔드와 카테고리 종류 및 id 정하기
+export const categories = [
+  { id: 1, name: "한식" },
+  { id: 2, name: "중식" },
+  { id: 3, name: "일식" },
+  { id: 4, name: "양식" },
+  { id: 5, name: "카페/디저트" },
+  // { id: 6, name: "야식" },
+  // { id: 7, name: "패스트푸드" },
+  // { id: 8, name: "기타" },
+];
