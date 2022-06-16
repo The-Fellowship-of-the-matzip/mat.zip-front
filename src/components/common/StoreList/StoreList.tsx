@@ -1,9 +1,10 @@
 import * as S from "components/common/StoreList/StoreList.style";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
-import type { StoreListItemProps } from "components/common/StoreListItem/StoreListItem";
 
-export interface StoreListProps {
-  stores: (StoreListItemProps & { storeId: number })[];
+import type { Store } from "mock/data";
+
+interface StoreListProps {
+  stores: Store[];
 }
 
 function StoreList({ stores }: StoreListProps) {
@@ -11,10 +12,9 @@ function StoreList({ stores }: StoreListProps) {
     <S.StoreListContainer>
       {stores.map((store) => (
         <StoreListItem
-          key={store.storeId}
-          thumbnailUrl={store.thumbnailUrl}
+          key={store.id}
+          thumbnailUrl={store.imageUrl}
           name={store.name}
-          campus={store.campus}
           distance={store.distance}
           rating={store.rating}
         />
