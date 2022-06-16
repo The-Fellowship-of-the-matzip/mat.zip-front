@@ -8,6 +8,17 @@ export interface Store {
   rating: number;
 }
 
+export interface Review {
+  id: number;
+  reviewAuthor: {
+    username: string;
+    profileImage: string;
+  };
+  content: string;
+  rating: number;
+  menu: string;
+}
+
 export const stores: Store[] = [
   {
     id: 1,
@@ -74,5 +85,30 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+  },
+];
+
+export const reviews: Review[] = [
+  {
+    id: 1,
+    reviewAuthor: {
+      username: "huni",
+      profileImage:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    },
+    content: "걍 그럼",
+    rating: 3,
+    menu: "무 닭볶음탕 (중)",
+  },
+  {
+    id: 2,
+    reviewAuthor: {
+      username: "ori",
+      profileImage:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    },
+    content: "정말 맛있어요!!",
+    rating: 5,
+    menu: "무 닭볶음탕 (중)",
   },
 ];
