@@ -19,8 +19,12 @@ export const reviewHandler = [
       return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
     }
 
+    const sizeNo = Number(size); // 1, ...
+    const pageNo = Number(page); // 0, ...
+    const startIndex = pageNo * sizeNo;
+    const endIndex = startIndex + sizeNo;
     // 식당 리뷰 조회 - mocking은 restaurantId 상관없이 항상 같은 데이터 return
-    return res(ctx.status(200), ctx.json(reviews));
+    return res(ctx.status(200), ctx.json(reviews.slice(startIndex, endIndex)));
   }),
   rest.post<PostReviewReqBody>(
     "/api/restaurants/:restaurantId/reviews",
@@ -28,7 +32,7 @@ export const reviewHandler = [
       const token = req.headers.get("Authorization");
       const { content, rating, menu } = req.body;
 
-      if (!token?.split("Bearer").length) {
+      if (!token?.split("Bearer ").length) {
         return res(
           ctx.status(400),
           ctx.json({ message: "유효하지 않은 토큰입니다." })
@@ -53,6 +57,7 @@ export const reviewHandler = [
         rating,
         menu,
       });
+      console.log(reviews, "hihi");
       return res(ctx.status(201));
     }
   ),
