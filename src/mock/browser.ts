@@ -1,4 +1,15 @@
-import { handlers } from "./handlers";
 import { setupWorker } from "msw";
 
-export const worker = setupWorker(...handlers);
+import {
+  userHandler,
+  categoryHandler,
+  restaurantHandler,
+  reviewHandler,
+} from "mock/handlers";
+
+export const worker = setupWorker(
+  ...userHandler,
+  ...categoryHandler,
+  ...restaurantHandler,
+  ...reviewHandler
+);
