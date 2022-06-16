@@ -14,18 +14,19 @@ export const restaurantHandler = [
       return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
     }
 
+    const sizeNo = Number(size);
     if (!categoryId) {
       // 전체 카테고리 조회 - mocking은 campusId, page 상관없이 항상 같은 데이터 return, size만 반영
-      if (stores.length < Number(size)) {
+      if (stores.length < sizeNo) {
         return res(ctx.status(200), ctx.json(stores));
       }
-      return res(ctx.status(200), ctx.json(stores.slice(Number(size) - 1)));
+      return res(ctx.status(200), ctx.json(stores.slice(sizeNo - 1)));
     }
 
     // 카테고리별 조회 - mocking은 campusId, categoryId, page 상관없이 항상 같은 데이터 return, size만 반영
-    if (stores.length < Number(size)) {
+    if (stores.length < sizeNo) {
       return res(ctx.status(200), ctx.json(stores));
     }
-    return res(ctx.status(200), ctx.json(stores.slice(Number(size) - 1)));
+    return res(ctx.status(200), ctx.json(stores.slice(sizeNo - 1)));
   }),
 ];
