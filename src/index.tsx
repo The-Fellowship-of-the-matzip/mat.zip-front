@@ -9,6 +9,11 @@ import App from "App";
 import GlobalStyle from "style/GlobalStyle";
 import { theme } from "style/Theme";
 
+if (process.env.NODE_ENV === "development") {
+  const { worker } = require("./mock/browser");
+  worker.start();
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

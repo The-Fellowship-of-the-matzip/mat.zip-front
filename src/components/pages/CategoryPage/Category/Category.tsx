@@ -5,8 +5,8 @@ import CategoryItem from "components/pages/CategoryPage/CategoryItem/CategoryIte
 
 interface CategoryProps {
   categories: {
-    categoryId: number;
-    desc: string;
+    id: number;
+    name: string;
   }[];
 }
 
@@ -19,14 +19,14 @@ function Category({ categories }: CategoryProps) {
 
   return (
     <S.CategoryContainer>
-      {categories.map(({ categoryId, desc }) => (
+      {categories.map(({ id, name }) => (
         <CategoryItem
-          key={categoryId}
-          buttonText={desc[0]}
+          key={id}
+          buttonText={name[0]}
           width="2.5rem"
           onClick={handleClickCategoryItem}
         >
-          {desc}
+          {name}
         </CategoryItem>
       ))}
     </S.CategoryContainer>

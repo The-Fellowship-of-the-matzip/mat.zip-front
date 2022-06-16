@@ -4,10 +4,9 @@ import repeatComponent from "util/repeatComponent";
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
 
-export interface StoreListItemProps {
+interface StoreListItemProps {
   thumbnailUrl: string;
   name: string;
-  campus: "잠실" | "선릉";
   distance: number;
   rating: number;
 }
@@ -15,11 +14,11 @@ export interface StoreListItemProps {
 function StoreListItem({
   thumbnailUrl,
   name,
-  campus,
   distance,
   rating,
 }: StoreListItemProps) {
   const navigate = useNavigate();
+  const campus: "잠실" | "선릉" = "잠실"; // TODO: 전역 상태로 저장
 
   return (
     <S.ListItemContainer
