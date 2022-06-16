@@ -22,7 +22,7 @@ export const restaurantHandler = [
       return res(ctx.status(200), ctx.json(stores.slice(Number(size) - 1)));
     }
 
-    // 카테고리별 조회 - mocking은 campusId, category, page 상관없이 항상 같은 데이터 return, size만 반영
+    // 카테고리별 조회 - mocking은 campusId, categoryId, page 상관없이 항상 같은 데이터 return, size만 반영
     if (stores.length < Number(size)) {
       return res(ctx.status(200), ctx.json(stores));
     }
