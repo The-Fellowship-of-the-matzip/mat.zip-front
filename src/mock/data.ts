@@ -1,58 +1,78 @@
-import type { StoreListProps } from "components/common/StoreList/StoreList";
+export interface Store {
+  id: number;
+  name: string;
+  address: string;
+  distance: number;
+  kakaoMapUrl: string;
+  imageUrl: string;
+  rating: number;
+}
 
-export const stores: StoreListProps["stores"] = [
+export const stores: Store[] = [
   {
-    storeId: 1,
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    id: 1,
     name: "냠냠 치킨",
-    campus: "잠실",
+    address: "서울 강남구 선릉로86길 5-4 1층",
+    imageUrl:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+
     distance: 0.5,
+    kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
   },
   {
-    storeId: 2,
-    thumbnailUrl:
+    id: 2,
+    name: "얌얌 치킨",
+    address: "서울 강남구 역삼로65길 31",
+    imageUrl:
       "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    name: "욤욤 치킨",
-    campus: "잠실",
-    distance: 0.2,
-    rating: 4,
-  },
-  {
-    storeId: 3,
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    name: "념념 치킨",
-    campus: "잠실",
-    distance: 1,
-    rating: 1,
-  },
-  {
-    storeId: 4,
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    name: "냠냠 치킨",
-    campus: "잠실",
+
     distance: 0.5,
+    kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
   },
   {
-    storeId: 5,
-    thumbnailUrl:
+    id: 3,
+    name: "념념 치킨",
+    address: "서울 강남구 선릉로86길 30 1층",
+    imageUrl:
       "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    name: "욤욤 치킨",
-    campus: "잠실",
-    distance: 0.2,
-    rating: 4,
+
+    distance: 0.5,
+    kakaoMapUrl: "https://place.map.kakao.com/18283045",
+    rating: 3,
   },
   {
-    storeId: 6,
-    thumbnailUrl:
+    id: 4,
+    name: "욤욤 치킨",
+    address: "서울 강남구 선릉로86길 5-4 1층",
+    imageUrl:
       "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    name: "념념 치킨",
-    campus: "잠실",
-    distance: 1,
-    rating: 1,
+
+    distance: 0.5,
+    kakaoMapUrl: "https://place.map.kakao.com/18283045",
+    rating: 3,
+  },
+  {
+    id: 5,
+    name: "뇸뇸 치킨",
+    address: "서울 강남구 선릉로86길 5-4 1층",
+    imageUrl:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+
+    distance: 0.5,
+    kakaoMapUrl: "https://place.map.kakao.com/18283045",
+    rating: 3,
+  },
+  {
+    id: 6,
+    name: "대박 치킨",
+    address: "서울 강남구 선릉로86길 5-4 1층",
+    imageUrl:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+
+    distance: 0.5,
+    kakaoMapUrl: "https://place.map.kakao.com/18283045",
+    rating: 3,
   },
 ];
