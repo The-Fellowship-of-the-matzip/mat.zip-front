@@ -1,6 +1,8 @@
 import { rest } from "msw";
 
-interface PostLoginReqBody {
+import { reviews } from "mock/data";
+
+interface PostReviewReqBody {
   content: string;
   rating: number;
   menu: string;
@@ -8,43 +10,30 @@ interface PostLoginReqBody {
 
 export const reviewHandler = [
   rest.get("/api/restaurants/:restaurantId/reviews", (req, res, ctx) => {
+    // const {restaurantId} = req.params // 안 씀
     const page = req.url.searchParams.get("page");
     const size = req.url.searchParams.get("size");
 
     if (!page || !size) {
+      // 이거 메세지는 맘대로 넣음
       return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
     }
 
-    return res(
-      ctx.status(200),
-      ctx.json([
-        {
-          id: 2,
-          reviewAuthor: {
-            username: "huni",
-            profileImage: "huni.com",
-          },
-          content: "걍 그럼",
-          rating: 4,
-          menu: "무 닭볶음탕 (중)",
-        },
-        {
-          id: 1,
-          reviewAuthor: {
-            username: "ori",
-            profileImage: "ori.com",
-          },
-          content: "정말 맛있어요!!",
-          rating: 5,
-          menu: "무 닭볶음탕 (중)",
-        },
-      ])
-    );
+    // 식당 리뷰 조회 - mocking은 restaurantId 상관없이 항상 같은 데이터 return
+    return res(ctx.status(200), ctx.json(reviews));
   }),
-  rest.post<PostLoginReqBody>(
+  rest.post<PostReviewReqBody>(
     "/api/restaurants/:restaurantId/reviews",
     (req, res, ctx) => {
+      const token = req.headers.get("Authorization");
       const { content, rating, menu } = req.body;
+
+      if (!token?.split("Bearer").length) {
+        return res(
+          ctx.status(400),
+          ctx.json({ message: "유효하지 않은 토큰입니다." })
+        );
+      }
 
       if (!content || !rating || !menu) {
         return res(
@@ -53,6 +42,17 @@ export const reviewHandler = [
         );
       }
 
+      reviews.push({
+        id: Math.floor(Math.random() * 10000 + 1),
+        reviewAuthor: {
+          username: "김맛집",
+          profileImage:
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+        },
+        content,
+        rating,
+        menu,
+      });
       return res(ctx.status(201));
     }
   ),
