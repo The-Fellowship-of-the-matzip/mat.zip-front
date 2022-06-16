@@ -1,14 +1,14 @@
-import StoreListItem from "../components/StoreListItem";
+import StoreListItem from "components/common/StoreListItem";
 
 export default {
-  title: "Component/StoreListItem",
+  title: "Components/common/StoreListItem",
   component: StoreListItem,
   argTypes: {
     thumbnailUrl: { controls: "text" },
     name: { controls: "text" },
     campus: { controls: "text" },
     distance: { controls: "number" },
-    starCount: { controls: "number" },
+    rating: { controls: "number" },
   },
 };
 
@@ -21,5 +21,5 @@ Default.args = {
   name: "냠냠 치킨",
   campus: "잠실",
   distance: 0.5,
-  starCount: 3,
+  rating: 3,
 };

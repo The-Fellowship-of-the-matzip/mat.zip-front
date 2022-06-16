@@ -1,0 +1,17 @@
+{
+  "importOrder": [
+    "^(@|styled-components)(.*|$)",
+    "^(@|App)(.*|$)",
+    "^(@|constants)(.*|$)",
+    "^(@|asset)(.*|$)",
+    "^(@|hooks)(.*|$)",
+    "^(@|api)(.*|$)",
+    "^(@|components/common)(.*|$)",
+    "^(@|components/layout)(.*|$)",
+    "^(@|components/pages)(.*|$)",
+    "^(@|components)(.*|$)",
+    "^(@|style)(.*|$)",
+    "^(@|mock)(.*|$)"
+  ],
+  "importOrderSeparation": true
+}

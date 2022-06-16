@@ -1,7 +1,7 @@
-import StoreReviewItem from "../components/StoreReviewItem";
+import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem";
 
 export default {
-  title: "Component/StoreReviewItem",
+  title: "Components/pages/StoreDetailPage/StoreReviewItem",
   component: StoreReviewItem,
   argTypes: {
     reviewInfo: { controls: "object" },

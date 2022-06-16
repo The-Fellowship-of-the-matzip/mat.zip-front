@@ -1,7 +1,7 @@
-import Chip from "../components/Chip";
+import Chip from "components/common/Chip";
 
 export default {
-  title: "Component/Chip",
+  title: "Components/common/Chip",
   component: Chip,
   argTypes: {
     children: { controls: "text" },

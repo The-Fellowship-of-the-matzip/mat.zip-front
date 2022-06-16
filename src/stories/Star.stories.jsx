@@ -1,7 +1,7 @@
-import Star from "../components/Star";
+import Star from "components/common/Star";
 
 export default {
-  title: "Component/Star",
+  title: "Components/common/Star",
   component: Star,
   argTypes: {
     isFilled: { controls: "boolean" },

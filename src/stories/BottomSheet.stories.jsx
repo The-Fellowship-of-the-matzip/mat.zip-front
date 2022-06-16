@@ -1,26 +1,28 @@
 import { useState } from "react";
+
 import styled from "styled-components";
-import BottomSheet from "../components/BottomSheet";
+
+import BottomSheet from "components/common/BottomSheet/BottomSheet";
 
 export default {
-  title: "Component/BottomSheet",
+  title: "Components/common/BottomSheet",
   component: BottomSheet,
 };
 
 const SampleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 `;
 
 const SampleButton = styled.button`
   width: max-content;
   align-self: flex-end;
-  padding: 0.5em 1em;
+  padding: 0.5rem 1rem;
 `;
 
 const SampleTextArea = styled.textarea`
-  min-height: 150px;
+  min-height: 9.375rem;
 `;
 
 function SampleBottomSheet(args) {

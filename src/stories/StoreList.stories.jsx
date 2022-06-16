@@ -1,7 +1,7 @@
-import StoreList from "../components/StoreList";
+import StoreList from "components/common/StoreList";
 
 export default {
-  title: "Component/StoreList",
+  title: "Components/common/StoreList",
   component: StoreList,
   argTypes: {
     stores: { controls: "object" },
@@ -20,7 +20,7 @@ Default.args = {
       name: "냠냠 치킨",
       campus: "잠실",
       distance: 0.5,
-      starCount: 3,
+      rating: 3,
     },
     {
       storeId: 2,
@@ -29,7 +29,7 @@ Default.args = {
       name: "욤욤 치킨",
       campus: "잠실",
       distance: 0.2,
-      starCount: 4,
+      rating: 4,
     },
     {
       storeId: 3,
@@ -38,7 +38,7 @@ Default.args = {
       name: "념념 치킨",
       campus: "잠실",
       distance: 1,
-      starCount: 1,
+      rating: 1,
     },
   ],
 };

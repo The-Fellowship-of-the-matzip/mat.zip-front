@@ -1,8 +1,8 @@
+import PageLayout from "./components/layout/PageLayout/PageLayout";
+import CategoryDetailPage from "./components/pages/CategoryDetailPage";
+import CategoryPage from "./components/pages/CategoryPage";
+import StoreDetailPage from "./components/pages/StoreDetailPage";
 import { Route, Routes } from "react-router-dom";
-import CategoryDetailPage from "./components/CategoryDetailPage";
-import CategoryPage from "./components/CategoryPage";
-import PageLayout from "./components/PageLayout";
-import StoreDetailPage from "./components/StoreDetailPage";
 
 function App() {
   return (

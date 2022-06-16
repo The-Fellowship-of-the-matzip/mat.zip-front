@@ -1,9 +1,10 @@
 import { within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import CategoryItem from "../components/CategoryItem";
+
+import CategoryItem from "components/pages/CategoryPage/CategoryItem";
 
 export default {
-  title: "Component/CategoryItem",
+  title: "Components/pages/CategoryPage/CategoryItem",
   component: CategoryItem,
   argTypes: {
     width: { controls: "text" },
@@ -16,14 +17,14 @@ const Template = (args) => <CategoryItem {...args} onClick={() => {}} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  width: "2.5em",
+  width: "2.5rem",
   children: "한식",
   buttonText: "한",
 };
 
 export const HoverButton = Template.bind({});
 HoverButton.args = {
-  width: "2.5em",
+  width: "2.5rem",
   children: "한식",
   buttonText: "한",
 };
@@ -34,7 +35,7 @@ HoverButton.play = ({ canvasElement }) => {
 
 export const ActiveButton = Template.bind({});
 ActiveButton.args = {
-  width: "2.5em",
+  width: "2.5rem",
   children: "한식",
   buttonText: "한",
 };
