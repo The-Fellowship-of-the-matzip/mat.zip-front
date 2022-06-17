@@ -1,4 +1,5 @@
-import { useReducer } from "react";
+import { campusContext } from "context/CampusContextProvider";
+import { useContext, useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 
@@ -15,6 +16,8 @@ function Header() {
   );
   const [isLogin] = useLogin();
 
+  const campus = useContext(campusContext);
+
   const handleSearchOpen = () => {
     setSearchOpen();
   };
@@ -30,7 +33,9 @@ function Header() {
         </>
       ) : (
         <>
-          <S.PageName>mat.zip</S.PageName>
+          <S.PageName>
+            MAT.ZIP{campus && <S.Campus> :{campus}</S.Campus>}
+          </S.PageName>
           <S.RightWrapper>
             <S.SearchToggleButton onClick={handleSearchOpen}>
               <BsSearch />

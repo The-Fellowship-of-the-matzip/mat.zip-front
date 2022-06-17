@@ -25,6 +25,11 @@ export const PageName = styled.h1`
   font-size: 1.25rem;
 `;
 
+export const Campus = styled.span`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.black};
+`;
+
 export const RightWrapper = styled.div`
   display: flex;
   align-items: flex-end;
