@@ -1,0 +1,25 @@
+import { Campus, setCampusContext } from "context/CampusContextProvider";
+import { useContext } from "react";
+
+import * as S from "components/pages/CampusSelectPage/CampusSelectPage.style";
+
+function CampusSelectPage() {
+  const setCampus = useContext(setCampusContext);
+
+  const handleCampusSelect: (campus: Campus) => React.MouseEventHandler =
+    (campus: Campus) => () => {
+      setCampus(campus);
+    };
+
+  return (
+    <S.MainContainer>
+      <S.Title>캠퍼스를 선택해주세요</S.Title>
+      <S.ButtonWrapper>
+        <S.Button onClick={handleCampusSelect("잠실")}>잠실</S.Button>
+        <S.Button onClick={handleCampusSelect("선릉")}>선릉</S.Button>
+      </S.ButtonWrapper>
+    </S.MainContainer>
+  );
+}
+
+export default CampusSelectPage;

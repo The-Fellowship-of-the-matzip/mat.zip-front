@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
-type Campus = "잠실" | "선릉";
+export type Campus = "잠실" | "선릉";
 type CampusContext = Campus | null;
 
-type SetCampusContext = React.Dispatch<React.SetStateAction<CampusContext>>;
+type SetCampusContext = React.Dispatch<
+  React.SetStateAction<CampusContext | null>
+>;
 
 export const campusContext = React.createContext<null | CampusContext>(null);
-export const setCampusContext =
-  React.createContext<null | SetCampusContext>(null);
+export const setCampusContext = React.createContext<SetCampusContext>(() => {});
 
 function CampusContextProvider({ children }: React.PropsWithChildren<{}>) {
   const [campus, setCampus] = useState<CampusContext>(null);
