@@ -1,6 +1,8 @@
+import MenuDrawer from "../MenuDrawer/MenuDrawer";
 import { campusContext } from "context/CampusContextProvider";
 import { useContext, useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { MdCancel } from "react-icons/md";
 
 import useLogin from "hooks/useLogin";
@@ -14,12 +16,21 @@ function Header() {
     (isOpen: boolean) => !isOpen,
     false
   );
+  const [isMenuOpen, setMenuOpen] = useReducer(
+    (isOpen: boolean) => !isOpen,
+    false
+  );
+
   const [isLogin] = useLogin();
 
   const campus = useContext(campusContext);
 
   const handleSearchOpen = () => {
     setSearchOpen();
+  };
+
+  const handleMenuToggle = () => {
+    setMenuOpen();
   };
 
   return (
@@ -40,7 +51,13 @@ function Header() {
             <S.SearchToggleButton onClick={handleSearchOpen}>
               <BsSearch />
             </S.SearchToggleButton>
-            {isLogin ? <S.Profile /> : <S.LoginLink>로그인</S.LoginLink>}
+            <S.MenuButton onClick={handleMenuToggle}>
+              <GiHamburgerMenu />
+            </S.MenuButton>
+            {isMenuOpen && (
+              <MenuDrawer closeMenu={handleMenuToggle} isLogin={isLogin} />
+            )}
+            {/* {isLogin ? <S.Profile /> : <S.LoginLink>로그인</S.LoginLink>} */}
           </S.RightWrapper>
         </>
       )}
