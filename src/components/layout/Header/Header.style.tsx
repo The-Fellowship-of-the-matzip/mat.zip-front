@@ -7,7 +7,7 @@ export const Container = styled.header<{ isSearchOpen: boolean }>`
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 
   padding: 1rem 2rem;
 
@@ -58,8 +58,18 @@ export const LoginLink = styled.a`
 export const SearchToggleButton = styled.button`
   background-color: transparent;
   border: none;
+  height: 1.5rem;
 
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 
   cursor: pointer;
+`;
+
+export const MenuButton = styled.button`
+  background-color: transparent;
+  border: none;
+  height: 1.5rem;
+
+  /* color: ${({ theme }) => theme.white}; */
+  font-size: 1.5rem;
 `;

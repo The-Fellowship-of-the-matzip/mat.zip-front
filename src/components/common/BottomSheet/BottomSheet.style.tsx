@@ -3,27 +3,27 @@ import styled from "styled-components";
 export const Container = styled.section``;
 
 export const Backdrop = styled.div`
-  width: 100vw;
+  width: 23.45rem;
   height: 100vh;
 
   background-color: ${({ theme }) => theme.black};
   opacity: 0.5;
 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 `;
 
 export const Content = styled.div`
+  width: 23.45rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: calc(50% - (23.45rem / 2));
 
-  width: 100%;
   min-height: 6.25rem;
   padding: 1.5rem;
 
