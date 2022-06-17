@@ -1,14 +1,17 @@
 import { Campus, setCampusContext } from "context/CampusContextProvider";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import * as S from "components/pages/CampusSelectPage/CampusSelectPage.style";
 
 function CampusSelectPage() {
   const setCampus = useContext(setCampusContext);
+  const navigate = useNavigate();
 
   const handleCampusSelect: (campus: Campus) => React.MouseEventHandler =
     (campus: Campus) => () => {
       setCampus(campus);
+      navigate("/");
     };
 
   return (
