@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
 import { theme } from "./Theme";
+
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -28,6 +29,15 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  #app  {
+    width: 23.45rem;
+    margin: 0 auto;
+
+    position: relative;
+
+    box-shadow: 0 0 0.315rem rgba(0, 0, 0, 0.25);
   }
 `;
 

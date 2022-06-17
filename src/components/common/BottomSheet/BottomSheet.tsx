@@ -18,7 +18,7 @@ function BottomSheet({ title, closeSheet, children }: Props) {
         <S.InputWrapper>{children}</S.InputWrapper>
       </S.Content>
     </S.Container>,
-    document.querySelector("#root") as HTMLElement
+    document.querySelector("#app") as HTMLElement
   );
 }
 
