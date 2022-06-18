@@ -17,14 +17,14 @@ export const parameters = {
 export const decorators = [
   (Story, context) => {
     return (
-      <>
+      <div id="app">
         <ThemeProvider theme={theme}>
-          <GlobalStyle />
+          <GlobalStyle env={"storybook"} />
           <BrowserRouter>
             <Story {...context} />
           </BrowserRouter>
         </ThemeProvider>
-      </>
+      </div>
     );
   },
 ];
