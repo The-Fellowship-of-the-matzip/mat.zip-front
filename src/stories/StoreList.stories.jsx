@@ -1,4 +1,4 @@
-import StoreList from "components/common/StoreList";
+import StoreList from "components/common/StoreList/StoreList";
 
 export default {
   title: "Components/common/StoreList",

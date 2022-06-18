@@ -1,7 +1,7 @@
 import { within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import CategoryItem from "components/pages/CategoryPage/CategoryItem";
+import CategoryItem from "components/pages/CategoryPage/CategoryItem/CategoryItem";
 
 export default {
   title: "Components/pages/CategoryPage/CategoryItem",

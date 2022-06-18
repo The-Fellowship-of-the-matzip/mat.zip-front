@@ -1,4 +1,4 @@
-import Star from "components/common/Star";
+import Star from "components/common/Star/Star";
 
 export default {
   title: "Components/common/Star",
