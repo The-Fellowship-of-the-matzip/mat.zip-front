@@ -9,14 +9,14 @@ export default {
 };
 
 const categories = [
-  { categoryId: 1, desc: "한식" },
-  { categoryId: 2, desc: "중식" },
-  { categoryId: 3, desc: "일식" },
-  { categoryId: 4, desc: "양식" },
-  { categoryId: 5, desc: "디저트" },
-  { categoryId: 6, desc: "야식" },
-  { categoryId: 7, desc: "패스트푸드" },
-  { categoryId: 8, desc: "기타" },
+  { id: 1, name: "한식" },
+  { id: 2, name: "중식" },
+  { id: 3, name: "일식" },
+  { id: 4, name: "양식" },
+  { id: 5, name: "디저트" },
+  { id: 6, name: "야식" },
+  { id: 7, name: "패스트푸드" },
+  { id: 8, name: "기타" },
 ];
 
 const Template = (args) => <Category {...args} />;
