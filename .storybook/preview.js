@@ -1,7 +1,8 @@
-import { ThemeProvider } from "styled-components";
-
-import { theme } from "../src/style/Theme";
 import GlobalStyle from "../src/style/GlobalStyle";
+import { theme } from "../src/style/Theme";
+import { BrowserRouter } from "react-router-dom";
+
+import { ThemeProvider } from "styled-components";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -19,7 +20,9 @@ export const decorators = [
       <>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <Story {...context} />
+          <BrowserRouter>
+            <Story {...context} />
+          </BrowserRouter>
         </ThemeProvider>
       </>
     );
