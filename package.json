@@ -2,6 +2,7 @@
   "name": "mat.zip-front",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://uk960214.github.io/mat.zip-front",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -11,6 +12,7 @@
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
     "axios": "^0.27.2",
+    "gh-pages": "^4.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
@@ -27,7 +29,9 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\""
+    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
