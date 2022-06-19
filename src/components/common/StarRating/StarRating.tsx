@@ -13,9 +13,10 @@ const MAX_RATING = 5;
 function StarRating({ rating = 0, setRating }: Props) {
   const [hoverRating, setHoverRating] = useState<null | number>(null);
 
-  const handleStarClick = (index: number) => () => {
-    setRating(index);
-  };
+  const handleStarClick: (index: number) => React.MouseEventHandler =
+    (index) => () => {
+      setRating(index);
+    };
 
   const handleStarHover = (index: number) => () => {
     setHoverRating(index);
@@ -31,6 +32,7 @@ function StarRating({ rating = 0, setRating }: Props) {
         return (
           <S.StarButton
             key={index}
+            type={"button"}
             onMouseUp={handleStarClick(index)}
             onMouseEnter={handleStarHover(index)}
             onMouseLeave={resetStarHover}

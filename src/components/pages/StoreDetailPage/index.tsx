@@ -30,6 +30,8 @@ type ReviewResponseShape = {
 function StoreDetailPage({ restaurantId = 0 }) {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
 
+  const accessToken = window.sessionStorage.getItem("accessToken");
+
   const fetchStoreDetailInfo = async () => {
     const { data } = await axios.get<Store & { address: string }>(`
     /api/restaurants/${restaurantId}
@@ -67,6 +69,14 @@ function StoreDetailPage({ restaurantId = 0 }) {
     if (hasNextPage) {
       fetchNextPage();
     }
+  };
+
+  const onReviewOpenClick = () => {
+    if (accessToken) {
+      setIsReviewOpen(true);
+      return;
+    }
+    alert("로그인 후 사용해주세요");
   };
 
   const onSubmitReview = () => {};
@@ -112,13 +122,12 @@ function StoreDetailPage({ restaurantId = 0 }) {
           </InfiniteScroll>
         </S.ReviewListWrapper>
       </S.StoreReviewContentWrapper>
-      <S.ReviewPlusButton onClick={() => setIsReviewOpen(true)}>
-        +
-      </S.ReviewPlusButton>
+      <S.ReviewPlusButton onClick={onReviewOpenClick}>+</S.ReviewPlusButton>
       {isReviewOpen && (
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}
           onSubmit={onSubmitReview}
+          restaurantId={restaurantId}
         />
       )}
     </S.StoreDetailPageContainer>

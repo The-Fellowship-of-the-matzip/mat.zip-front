@@ -10,29 +10,38 @@ import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/Revi
 type Props = {
   closeSheet: () => void;
   onSubmit: () => void;
+  restaurantId: number;
+};
+
+type ReviewInputShape = {
+  content: string;
+  rating: number;
+  menu: string;
 };
 
 const DEFAULT_RATING = 4;
 
-function ReviewInputBottomSheet({ closeSheet, onSubmit }: Props) {
-  // TODO: 레스토랑 아이디를 받아와야 함
-  // TODO: onSubmit 함수의 위치
-  const restaurantId = 0;
-  const mutation = useMutation((newReview) => {
-    const accessToken = localStorage.getItem("accessToken");
-    return axios.post(`/api/restaurants/${restaurantId}/reviews`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-  });
+function ReviewInputBottomSheet({ closeSheet, onSubmit, restaurantId }: Props) {
+  const mutation = useMutation<unknown, unknown, ReviewInputShape>(
+    (newReview) => {
+      const accessToken = JSON.parse(
+        localStorage.getItem("accessToken") as string
+      );
+      return axios.post(`/api/restaurants/${restaurantId}/reviews`, newReview, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+    }
+  );
 
   const [rating, setRating] = useState(DEFAULT_RATING);
   const [reviewContent, setReviewContent] = useState("");
   const [menuInput, setMenuInput] = useState("");
 
-  const handleSubmitRequest = () => {
-    mutation.mutate({ content: reviewContent, score: rating, menu: menuInput });
+  const handleSubmitRequest: React.FormEventHandler = (e) => {
+    e.preventDefault();
+    mutation.mutate({ content: reviewContent, rating, menu: menuInput });
   };
 
   return (
