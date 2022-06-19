@@ -1,8 +1,8 @@
 import { theme } from "./Theme";
 
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ env?: string }>`
   *, *::before, *::after {
     box-sizing: border-box;
     padding: 0;
@@ -36,8 +36,14 @@ const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
 
     position: relative;
-
+    
     box-shadow: 0 0 0.315rem rgba(0, 0, 0, 0.25);
+
+    ${({ env }) =>
+      env === "storybook" &&
+      css`
+        min-height: 100vh;
+      `}
   }
 `;
 

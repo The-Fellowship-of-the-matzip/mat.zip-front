@@ -1,6 +1,6 @@
 import { MdArrowBackIos } from "react-icons/md";
 
-import SectionHeader from "components/common/SectionHeader";
+import SectionHeader from "components/common/SectionHeader/SectionHeader";
 
 export default {
   title: "Components/common/SectionHeader",
