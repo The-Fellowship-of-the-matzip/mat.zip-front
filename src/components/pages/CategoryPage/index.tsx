@@ -1,4 +1,7 @@
-import { useState } from "react";
+import axios from "axios";
+import { campusContext } from "context/CampusContextProvider";
+import { useContext, useState } from "react";
+import { useQuery } from "react-query";
 
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
@@ -10,11 +13,23 @@ import * as S from "components/pages/CategoryPage/index.style";
 import { categories, stores } from "mock/data";
 
 function CategoryPage() {
-  const [data, setData] = useState([...stores]);
+  const campus = useContext(campusContext);
+  //TODO : 랜덤으로 레스토랑 가져오는 api 구현시, 기능 구현 예정
 
-  const loadMoreStores = () => {
-    setData((prevData) => [...prevData, ...stores]);
+  const fetchRandomStore = async (campus: number) => {
+    const result = await axios.get("something ");
+    return result;
   };
+
+  const { data, isLoading, isError, error } = useQuery("randomStore", () =>
+    fetchRandomStore(campus)
+  );
+
+  // const [data, setData] = useState([...stores]);
+
+  // const loadMoreStores = () => {
+  //   setData((prevData) => [...prevData, ...stores]);
+  // };
 
   return (
     <S.CategoryPageContainer>
@@ -24,9 +39,12 @@ function CategoryPage() {
       </section>
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
-        <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
-          <StoreList stores={data} />
-        </InfiniteScroll>
+        {isLoading && <div>로딩중</div>}
+        {isError && <div>에러발생!</div>}
+        <StoreList stores={data} />
+        {/* <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
+          
+        </InfiniteScroll> */}
       </section>
     </S.CategoryPageContainer>
   );
