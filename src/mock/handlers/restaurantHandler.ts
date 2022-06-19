@@ -32,6 +32,15 @@ export const restaurantHandler = [
       })
     );
   }),
+  rest.get("/api/restaurants/:restaurantId", (req, res, ctx) => {
+    const { restaurantId } = req.params; // 안 씀
+
+    if (!restaurantId) {
+      return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
+    }
+
+    return res(ctx.status(200), ctx.json(stores[Number(restaurantId)]));
+  }),
   rest.get("/api/campuses/:campusId/restaurants/random", (req, res, ctx) => {
     const size = Number(req.url.searchParams.get("size"));
     if (!size) {

@@ -6,28 +6,29 @@ import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReview
 
 interface StoreReviewItemProps {
   reviewInfo: {
-    userThumbnail: string;
+    id: number;
+    profileImage: string;
     rating: number;
-    desc: string;
-    menuName: string;
+    content: string;
+    menu: string;
   };
 }
 
 function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
-  const { userThumbnail, rating, desc, menuName } = reviewInfo;
+  const { profileImage, rating, content, menu } = reviewInfo;
   return (
     <S.StoreReviewContainer>
       <S.UserProfileWrapper>
-        <img src={userThumbnail} alt="유저의 프로필이 보여지는 곳" />
+        <img src={profileImage} alt="유저의 프로필이 보여지는 곳" />
       </S.UserProfileWrapper>
       <S.ReviewContentWrapper>
         <S.Header>
           <S.HeaderLeftWrapper>
             {repeatComponent(<Star isFilled />, rating)}
           </S.HeaderLeftWrapper>
-          <S.MenuWrapper>{menuName}</S.MenuWrapper>
+          <S.MenuWrapper>{menu}</S.MenuWrapper>
         </S.Header>
-        <S.ContentWrapper>{desc}</S.ContentWrapper>
+        <S.ContentWrapper>{content}</S.ContentWrapper>
       </S.ReviewContentWrapper>
     </S.StoreReviewContainer>
   );
