@@ -24,13 +24,20 @@ export const reviewHandler = [
     const startIndex = pageNo * sizeNo;
     const endIndex = startIndex + sizeNo;
     // 식당 리뷰 조회 - mocking은 restaurantId 상관없이 항상 같은 데이터 return
-    return res(ctx.status(200), ctx.json(reviews.slice(startIndex, endIndex)));
+    return res(
+      ctx.status(200),
+      ctx.json({
+        hasNext: endIndex < reviews.length,
+        reviews: reviews.slice(startIndex, endIndex),
+      })
+    );
   }),
   rest.post<PostReviewReqBody>(
     "/api/restaurants/:restaurantId/reviews",
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       const { content, rating, menu } = req.body;
+      console.log(req);
 
       if (!token?.split("Bearer ").length) {
         return res(
@@ -48,7 +55,7 @@ export const reviewHandler = [
 
       reviews.push({
         id: Math.floor(Math.random() * 10000 + 1),
-        reviewAuthor: {
+        author: {
           username: "김맛집",
           profileImage:
             "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",

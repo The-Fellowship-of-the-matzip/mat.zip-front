@@ -24,6 +24,29 @@ export const restaurantHandler = [
     }
 
     // 카테고리별 조회 - mocking은 campusId, categoryId 상관없이 항상 같은 데이터 return, size만 반영
-    return res(ctx.status(200), ctx.json(stores.slice(startIndex, endIndex)));
+    return res(
+      ctx.status(200),
+      ctx.json({
+        hasNext: endIndex < stores.length,
+        restaurants: stores.slice(startIndex, endIndex),
+      })
+    );
+  }),
+  rest.get("/api/restaurants/:restaurantId", (req, res, ctx) => {
+    const { restaurantId } = req.params; // 안 씀
+
+    if (!restaurantId) {
+      return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
+    }
+
+    return res(ctx.status(200), ctx.json(stores[Number(restaurantId)]));
+  }),
+  rest.get("/api/campuses/:campusId/restaurants/random", (req, res, ctx) => {
+    const size = Number(req.url.searchParams.get("size"));
+    if (!size) {
+      return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
+    }
+
+    return res(ctx.status(200), ctx.json(stores.slice(0, size)));
   }),
 ];
