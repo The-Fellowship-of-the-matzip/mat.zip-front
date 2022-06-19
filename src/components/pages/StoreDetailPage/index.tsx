@@ -30,7 +30,6 @@ type ReviewResponseShape = {
 
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
-  console.log(restaurantId);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   const accessToken = window.sessionStorage.getItem("accessToken");
