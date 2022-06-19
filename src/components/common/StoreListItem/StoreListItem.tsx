@@ -5,6 +5,7 @@ import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
 
 interface StoreListItemProps {
+  id: number;
   thumbnailUrl: string;
   name: string;
   distance: number;
@@ -12,6 +13,7 @@ interface StoreListItemProps {
 }
 
 function StoreListItem({
+  id,
   thumbnailUrl,
   name,
   distance,
@@ -23,14 +25,14 @@ function StoreListItem({
   return (
     <S.ListItemContainer
       onClick={() => {
-        navigate("/store-detail");
+        navigate(`/store-detail/${id}`);
       }}
     >
       <S.ListItemThumbnail src={thumbnailUrl} alt={name} />
       <div>
         <S.ListItemName>{name}</S.ListItemName>
         <S.ListItemDistance>
-          {campus} 캠퍼스 기준 {distance}km
+          {campus} 캠퍼스 기준 도보 {distance}분
         </S.ListItemDistance>
         <S.ListItemStars>
           {repeatComponent(<Star isFilled />, rating)}

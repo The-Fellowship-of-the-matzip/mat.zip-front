@@ -22,7 +22,7 @@ function App() {
             path="/category"
             element={<CategoryDetailPage categoryName="임시" />}
           />
-          <Route path="/store-detail" element={<StoreDetailPage />} />
+          <Route path="/store-detail/:storeId" element={<StoreDetailPage />} />
         </Route>
       )}
     </Routes>

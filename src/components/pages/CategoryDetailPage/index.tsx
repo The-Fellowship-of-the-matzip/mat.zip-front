@@ -39,7 +39,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   const fetchCategoryStoreList = async ({ pageParam = 0 }) => {
     const filterName = isSelected.abcOrder ? "spell" : "rating";
     const { data } = await axios.get<CategoryStoreListResponse>(`
-    /api/campuses/${campusId}/restaurants?categoryId=${categoryId}&page=${pageParam}&size=${10}&filter=${filterName}
+    https://matzip.link/api/campuses/${campusId}/restaurants?categoryId=${categoryId}&page=${pageParam}&size=${10}&filter=${filterName}
     `);
 
     return { ...data, nextPageParam: pageParam + 1 };

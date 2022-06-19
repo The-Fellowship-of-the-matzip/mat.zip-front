@@ -15,9 +15,9 @@ function CategoryPage() {
   const campus = useContext(campusContext);
 
   const fetchRandomStore = async () => {
-    const campusId = campus === "잠실" ? 0 : 1;
+    const campusId = campus === "잠실" ? 1 : 2;
     const { data } = await axios.get<Store[]>(
-      `/api/campuses/${campusId}/restaurants/random?size=5`
+      `https://matzip.link/api/campuses/${campusId}/restaurants/random?size=5`
     );
     return data;
   };

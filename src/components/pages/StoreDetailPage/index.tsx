@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 
@@ -27,21 +28,23 @@ type ReviewResponseShape = {
   reviews: ReviewShape[];
 };
 
-function StoreDetailPage({ restaurantId = 0 }) {
+function StoreDetailPage() {
+  const { storeId: restaurantId } = useParams();
+  console.log(restaurantId);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   const accessToken = window.sessionStorage.getItem("accessToken");
 
   const fetchStoreDetailInfo = async () => {
     const { data } = await axios.get<Store & { address: string }>(`
-    /api/restaurants/${restaurantId}
+    https://matzip.link/api/restaurants/${restaurantId}
     `);
     return data;
   };
 
   const fetchStoreDetailList = async ({ pageParam = 0 }) => {
     const { data } =
-      await axios.get<ReviewResponseShape>(`/api/restaurants/${restaurantId}/reviews?page=${pageParam}&size=${5}
+      await axios.get<ReviewResponseShape>(`https://matzip.link/api/restaurants/${restaurantId}/reviews?page=${pageParam}&size=${5}
     `);
     return { ...data, nextPageParam: pageParam + 1 };
   };
@@ -127,7 +130,7 @@ function StoreDetailPage({ restaurantId = 0 }) {
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}
           onSubmit={onSubmitReview}
-          restaurantId={restaurantId}
+          restaurantId={Number(restaurantId)}
         />
       )}
     </S.StoreDetailPageContainer>

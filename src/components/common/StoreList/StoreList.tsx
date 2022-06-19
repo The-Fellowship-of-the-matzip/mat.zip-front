@@ -12,6 +12,7 @@ function StoreList({ stores }: StoreListProps) {
     <S.StoreListContainer>
       {stores?.map((store) => (
         <StoreListItem
+          id={store.id}
           key={store.id}
           thumbnailUrl={store.imageUrl}
           name={store.name}
