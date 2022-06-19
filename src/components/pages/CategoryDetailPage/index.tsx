@@ -13,19 +13,22 @@ import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/CategoryDetailPage/index.style";
 
-import { stores } from "mock/data";
+import { Store } from "mock/data";
 
 interface CategoryDetailPageProps {
   categoryName: string;
 }
+
+type CategoryStoreListResponse = {
+  hasNext: boolean;
+  restaurants: Store[];
+};
 
 function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
   const campusId = campusName === "잠실" ? 1 : 2;
   const categoryId = 1;
-
-  const [pageParam, setPageParam] = useState(0);
 
   const [isSelected, setIsSelected] = useState({
     starOrder: false,
@@ -34,14 +37,12 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
 
   // 기본을 score 순서로 처음 조회
   const fetchCategoryStoreList = async ({ pageParam = 0 }) => {
-    let filterName = "score";
-    if (isSelected.abcOrder) {
-      filterName = "spell";
-    }
-    const data = await axios.get(`
-    /api/campuses/${campusId}/restaurants?categoryId=${categoryId}&filter=${filterName}page=${pageParam}&size=${10}
+    const filterName = isSelected.abcOrder ? "spell" : "rating";
+    const { data } = await axios.get<CategoryStoreListResponse>(`
+    /api/campuses/${campusId}/restaurants?categoryId=${categoryId}&page=${pageParam}&size=${10}&filter=${filterName}
     `);
-    return data;
+
+    return { ...data, nextPageParam: pageParam + 1 };
   };
 
   const {
@@ -55,15 +56,11 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   } = useInfiniteQuery("categoryStore", fetchCategoryStoreList, {
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNext) {
-        setPageParam(pageParam + 1);
-        return pageParam + 1;
+        return lastPage.nextPageParam;
       }
-      setPageParam(0);
-      return 0;
+      return;
     },
   });
-
-  // const [data, setData] = useState([...stores]);
 
   // isSelected 선택 된 값이 달라질때마다 refetch 해서 데이터 업데이트
   useEffect(() => {
@@ -71,10 +68,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
   }, [isSelected, refetch]);
 
   const loadMoreStores = () => {
-    if (data.hasNext) {
-      fetchNextPage();
-    }
-    return;
+    fetchNextPage();
   };
 
   // TODO: 클릭한 값에 따라 stores prop 바꾸기
@@ -117,9 +111,17 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
       </S.ChipContainer>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         {isLoading && <div>로딩중...</div>}
-        {isError && <div>{error}</div>}
+        {isError && <div>{error instanceof Error && error.message}</div>}
         {isFetching && <div>다음 페이지 로딩 중</div>}
-        <StoreList stores={data} />
+        <StoreList
+          stores={
+            data &&
+            data.pages.reduce<Store[]>(
+              (stores, page) => [...stores, ...page.restaurants],
+              []
+            )
+          }
+        />
       </InfiniteScroll>
     </S.CategoryDetailPageContainer>
   );
