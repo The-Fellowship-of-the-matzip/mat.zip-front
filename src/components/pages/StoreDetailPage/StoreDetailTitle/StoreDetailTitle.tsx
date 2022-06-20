@@ -33,13 +33,11 @@ function StoreDetailTitle({
         </div>
       </S.TitleRatingWrapper>
       <S.DescriptionWrapper>
-        <div>{address}</div>
-        <div>
+        <p>{address}</p>
+        <p>
           {campus} 캠퍼스 기준 도보 {distance}분
-        </div>
-        <div>
-          <a href={kakaoMapUrl}>카카오 맵으로 열기</a>
-        </div>
+        </p>
+        <S.KakaoLink href={kakaoMapUrl}>카카오 맵으로 열기</S.KakaoLink>
       </S.DescriptionWrapper>
     </S.TitleContainer>
   );

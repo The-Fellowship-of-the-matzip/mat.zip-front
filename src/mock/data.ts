@@ -228,7 +228,7 @@ export const reviews: Review[] = [
 // TODO: 백엔드와 카테고리 종류 및 id 정하기
 export const categories = [
   { id: 1, name: "한식" },
-  { id: 2, name: "중식" },
+  { id: 2, name: "중식/아시안" },
   { id: 3, name: "일식" },
   { id: 4, name: "양식" },
   { id: 5, name: "샌드위치/샐러드" },
