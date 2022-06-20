@@ -2,6 +2,7 @@ import CampusContextProvider from "context/CampusContextProvider";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
@@ -32,6 +33,7 @@ root.render(
             <App />
           </BrowserRouter>
         </CampusContextProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>

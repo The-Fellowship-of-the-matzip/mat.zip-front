@@ -19,8 +19,8 @@ function App() {
         <Route element={<PageLayout />}>
           <Route path="/" element={<CategoryPage />} />
           <Route
-            path="/category"
-            element={<CategoryDetailPage categoryName="임시" />}
+            path="/category/:categoryId"
+            element={<CategoryDetailPage />}
           />
           <Route path="/store-detail/:storeId" element={<StoreDetailPage />} />
         </Route>
