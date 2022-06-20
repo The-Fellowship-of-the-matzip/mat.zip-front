@@ -4,6 +4,9 @@ import { useContext, useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
+
+import logoImg from "asset/logo.svg";
 
 import useLogin from "hooks/useLogin";
 
@@ -44,9 +47,12 @@ function Header() {
         </>
       ) : (
         <>
-          <S.PageName>
-            MAT.ZIP{campus && <S.Campus> :{campus}</S.Campus>}
-          </S.PageName>
+          <Link to="/">
+            <S.PageName>
+              <S.LogoImage src={logoImg} alt="mat-zip logo" width="50%" />
+              {campus && <S.Campus> :{campus}</S.Campus>}
+            </S.PageName>
+          </Link>
           <S.RightWrapper>
             <S.SearchToggleButton onClick={handleSearchOpen}>
               <BsSearch />

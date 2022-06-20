@@ -31,6 +31,10 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
     cursor: pointer;
   }
 
+  a {
+    text-decoration:none;
+  }
+
   #app  {
     width: 23.45rem;
     margin: 0 auto;
