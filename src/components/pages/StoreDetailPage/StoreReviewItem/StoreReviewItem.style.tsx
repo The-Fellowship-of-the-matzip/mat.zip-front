@@ -18,6 +18,7 @@ export const UserProfileWrapper = styled.div`
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
+  box-shadow: 0 0 0.2rem ${({ theme }) => theme.primary};
   overflow: hidden;
 
   img {
