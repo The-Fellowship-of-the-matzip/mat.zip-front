@@ -63,7 +63,6 @@ function Header() {
             {isMenuOpen && (
               <MenuDrawer closeMenu={handleMenuToggle} isLogin={isLogin} />
             )}
-            {/* {isLogin ? <S.Profile /> : <S.LoginLink>로그인</S.LoginLink>} */}
           </S.RightWrapper>
         </>
       )}

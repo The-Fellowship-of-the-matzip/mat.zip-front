@@ -1,7 +1,8 @@
 import axios from "axios";
-import { campusContext } from "context/CampusContextProvider";
 import { useContext } from "react";
 import { useQuery } from "react-query";
+
+import { campusContext } from "context/CampusContextProvider";
 
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import StoreList from "components/common/StoreList/StoreList";

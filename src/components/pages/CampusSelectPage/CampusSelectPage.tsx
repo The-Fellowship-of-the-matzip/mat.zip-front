@@ -1,6 +1,7 @@
-import { Campus, setCampusContext } from "context/CampusContextProvider";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { Campus, setCampusContext } from "context/CampusContextProvider";
 
 import * as S from "components/pages/CampusSelectPage/CampusSelectPage.style";
 

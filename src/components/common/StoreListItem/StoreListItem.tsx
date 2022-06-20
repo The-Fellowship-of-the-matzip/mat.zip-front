@@ -1,7 +1,8 @@
-import { campusContext } from "context/CampusContextProvider";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import repeatComponent from "util/repeatComponent";
+
+import { campusContext } from "context/CampusContextProvider";
 
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
@@ -23,7 +24,7 @@ function StoreListItem({
 }: StoreListItemProps) {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
-  console.log(rating);
+
   return (
     <S.ListItemContainer
       onClick={() => {

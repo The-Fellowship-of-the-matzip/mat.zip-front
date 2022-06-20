@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import { campusContext } from "context/CampusContextProvider";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { campusContext } from "context/CampusContextProvider";
 
 import Chip from "components/common/Chip/Chip";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
@@ -37,7 +38,7 @@ function CategoryDetailPage() {
   });
 
   const fetchCategoryStoreList = async ({ pageParam = 0 }) => {
-    const filterName = isSelected.abcOrder ? "spell" : "rating";
+    const filterName = isSelected.abcOrder ? "Spell" : "Rating";
     const { data } = await axios.get<CategoryStoreListResponse>(`
     https://matzip.link/api/campuses/${campusId}/restaurants?categoryId=${categoryId}&page=${pageParam}&size=${10}&filter=${filterName}
     `);

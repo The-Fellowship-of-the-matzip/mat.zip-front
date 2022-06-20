@@ -1,5 +1,6 @@
-import { campusContext } from "context/CampusContextProvider";
 import { useContext } from "react";
+
+import { campusContext } from "context/CampusContextProvider";
 
 import Star from "components/common/Star/Star";
 
@@ -17,9 +18,11 @@ interface StoreDetailTitleProps {
   };
 }
 
-function StoreDetailTitle({ storeInfo }: StoreDetailTitleProps) {
+function StoreDetailTitle({
+  storeInfo: { name, rating, address, distance, kakaoMapUrl },
+}: StoreDetailTitleProps) {
   const campus = useContext(campusContext);
-  const { name, rating, address, distance, kakaoMapUrl } = storeInfo;
+
   return (
     <S.TitleContainer>
       <S.TitleRatingWrapper>
