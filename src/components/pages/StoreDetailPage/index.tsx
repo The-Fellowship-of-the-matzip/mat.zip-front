@@ -58,14 +58,18 @@ function StoreDetailPage() {
     refetch,
     fetchNextPage,
     isFetching,
-  } = useInfiniteQuery("reviewDetailStore", fetchStoreDetailList, {
-    getNextPageParam: (lastPage) => {
-      if (lastPage.hasNext) {
-        return lastPage.nextPageParam;
-      }
-      return;
-    },
-  });
+  } = useInfiniteQuery(
+    ["reviewDetailStore", restaurantId],
+    fetchStoreDetailList,
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.hasNext) {
+          return lastPage.nextPageParam;
+        }
+        return;
+      },
+    }
+  );
 
   const loadMoreReviews = () => {
     fetchNextPage();
