@@ -41,3 +41,8 @@ export const ListItemDistance = styled.p`
 export const ListItemStars = styled.div`
   font-size: 1.5rem;
 `;
+
+export const RatingPlaceholder = styled.div`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.secondary};
+`;

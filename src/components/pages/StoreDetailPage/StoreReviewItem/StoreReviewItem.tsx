@@ -16,6 +16,7 @@ interface StoreReviewItemProps {
 
 function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
   const { profileImage, rating, content, menu } = reviewInfo;
+
   return (
     <S.StoreReviewContainer>
       <S.UserProfileWrapper>
@@ -25,6 +26,9 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
         <S.Header>
           <S.HeaderLeftWrapper>
             {repeatComponent(<Star isFilled />, rating)}
+            <S.RatingPlaceholder>
+              {rating === 0 && <p>준비 중..</p>}
+            </S.RatingPlaceholder>
           </S.HeaderLeftWrapper>
           <S.MenuWrapper>{menu}</S.MenuWrapper>
         </S.Header>

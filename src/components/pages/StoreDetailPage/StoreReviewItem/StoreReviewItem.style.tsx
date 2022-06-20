@@ -48,3 +48,8 @@ export const ContentWrapper = styled.div`
   overflow: hidden;
   word-break: break-all;
 `;
+
+export const RatingPlaceholder = styled.div`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.secondary};
+`;

@@ -21,7 +21,7 @@ function StoreListItem({
 }: StoreListItemProps) {
   const navigate = useNavigate();
   const campus: "잠실" | "선릉" = "잠실"; // TODO: 전역 상태로 저장
-
+  console.log(rating);
   return (
     <S.ListItemContainer
       onClick={() => {
@@ -36,6 +36,9 @@ function StoreListItem({
         </S.ListItemDistance>
         <S.ListItemStars>
           {repeatComponent(<Star isFilled />, rating)}
+          <S.RatingPlaceholder>
+            {rating === 0 && "별점 준비 중"}
+          </S.RatingPlaceholder>
         </S.ListItemStars>
       </div>
     </S.ListItemContainer>
