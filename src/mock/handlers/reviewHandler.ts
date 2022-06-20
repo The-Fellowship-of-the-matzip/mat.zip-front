@@ -37,7 +37,6 @@ export const reviewHandler = [
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       const { content, rating, menu } = req.body;
-      console.log(req);
 
       if (!token?.split("Bearer ").length) {
         return res(
@@ -64,7 +63,6 @@ export const reviewHandler = [
         rating,
         menu,
       });
-      console.log(reviews, "hihi");
       return res(ctx.status(201));
     }
   ),

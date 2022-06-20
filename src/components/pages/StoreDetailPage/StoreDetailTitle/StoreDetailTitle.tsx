@@ -32,7 +32,7 @@ function StoreDetailTitle({ storeInfo }: StoreDetailTitleProps) {
       <S.DescriptionWrapper>
         <div>{address}</div>
         <div>
-          {campus} 캠퍼스 기준 {distance}km
+          {campus} 캠퍼스 기준 도보 {distance}분
         </div>
         <div>
           <a href={kakaoMapUrl}>카카오 맵으로 열기</a>

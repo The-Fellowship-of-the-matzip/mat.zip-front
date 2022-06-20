@@ -28,7 +28,7 @@ root.render(
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <CampusContextProvider>
-          <BrowserRouter>
+          <BrowserRouter basename="/mat.zip-front">
             <App />
           </BrowserRouter>
         </CampusContextProvider>
