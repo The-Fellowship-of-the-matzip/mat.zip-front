@@ -1,4 +1,3 @@
-import CampusContextProvider from "context/CampusContextProvider";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -8,6 +7,9 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import App from "App";
+
+import CampusContextProvider from "context/CampusContextProvider";
+import LoginContextProvider from "context/LoginContextProvider";
 
 import GlobalStyle from "style/GlobalStyle";
 import { theme } from "style/Theme";
@@ -28,11 +30,13 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <CampusContextProvider>
-          <BrowserRouter basename="/mat.zip-front">
-            <App />
-          </BrowserRouter>
-        </CampusContextProvider>
+        <LoginContextProvider>
+          <CampusContextProvider>
+            <BrowserRouter basename="/mat.zip-front">
+              <App />
+            </BrowserRouter>
+          </CampusContextProvider>
+        </LoginContextProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>

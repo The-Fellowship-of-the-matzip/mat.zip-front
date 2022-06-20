@@ -1,5 +1,4 @@
 import MenuDrawer from "../MenuDrawer/MenuDrawer";
-import { campusContext } from "context/CampusContextProvider";
 import { useContext, useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,7 +7,8 @@ import { Link } from "react-router-dom";
 
 import logoImg from "asset/logo.svg";
 
-import useLogin from "hooks/useLogin";
+import { campusContext } from "context/CampusContextProvider";
+import { loginContext } from "context/LoginContextProvider";
 
 import SearchBar from "components/common/SearchBar/SearchBar";
 
@@ -24,7 +24,7 @@ function Header() {
     false
   );
 
-  const [isLogin] = useLogin();
+  const isLogin = useContext(loginContext);
 
   const campus = useContext(campusContext);
 
