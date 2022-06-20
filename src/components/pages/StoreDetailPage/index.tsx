@@ -55,7 +55,7 @@ function StoreDetailPage() {
     error: reviewError,
     isLoading: IsReviewLoading,
     isError: isReviewError,
-    hasNextPage,
+    refetch,
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery("reviewDetailStore", fetchStoreDetailList, {
@@ -68,9 +68,7 @@ function StoreDetailPage() {
   });
 
   const loadMoreReviews = () => {
-    if (hasNextPage) {
-      fetchNextPage();
-    }
+    fetchNextPage();
   };
 
   const onReviewOpenClick = () => {
@@ -130,6 +128,9 @@ function StoreDetailPage() {
           closeSheet={() => setIsReviewOpen(false)}
           onSubmit={onSubmitReview}
           restaurantId={Number(restaurantId)}
+          onSuccess={() => {
+            refetch();
+          }}
         />
       )}
     </S.StoreDetailPageContainer>

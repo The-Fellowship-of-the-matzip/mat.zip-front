@@ -11,6 +11,7 @@ type Props = {
   closeSheet: () => void;
   onSubmit: () => void;
   restaurantId: number;
+  onSuccess: () => void;
 };
 
 type ReviewInputShape = {
@@ -21,18 +22,26 @@ type ReviewInputShape = {
 
 const DEFAULT_RATING = 4;
 
-function ReviewInputBottomSheet({ closeSheet, onSubmit, restaurantId }: Props) {
+function ReviewInputBottomSheet({
+  closeSheet,
+  onSubmit,
+  restaurantId,
+  onSuccess,
+}: Props) {
   const mutation = useMutation<unknown, unknown, ReviewInputShape>(
     (newReview) => {
-      const accessToken = JSON.parse(
-        localStorage.getItem("accessToken") as string
+      const accessToken = sessionStorage.getItem("accessToken") as string;
+      return axios.post(
+        `https://matzip.link/api/restaurants/${restaurantId}/reviews`,
+        newReview,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
       );
-      return axios.post(`/api/restaurants/${restaurantId}/reviews`, newReview, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-    }
+    },
+    { onSuccess }
   );
 
   const [rating, setRating] = useState(DEFAULT_RATING);
@@ -41,7 +50,12 @@ function ReviewInputBottomSheet({ closeSheet, onSubmit, restaurantId }: Props) {
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();
-    mutation.mutate({ content: reviewContent, rating, menu: menuInput });
+    mutation.mutate({
+      content: reviewContent,
+      rating: rating + 1,
+      menu: menuInput,
+    });
+    closeSheet();
   };
 
   return (
