@@ -31,10 +31,10 @@ function InfiniteScroll({ handleContentLoad, hasMore, children }: Props) {
   }, [hasMore, endRef.current]);
 
   return (
-    <div>
+    <>
       {children}
       <div ref={endRef} />
-    </div>
+    </>
   );
 }
 

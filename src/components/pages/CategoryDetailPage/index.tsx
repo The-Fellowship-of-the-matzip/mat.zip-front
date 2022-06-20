@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import { campusContext } from "context/CampusContextProvider";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { campusContext } from "context/CampusContextProvider";
 
 import Chip from "components/common/Chip/Chip";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
@@ -13,35 +15,33 @@ import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/CategoryDetailPage/index.style";
 
-import { Store } from "mock/data";
-
-interface CategoryDetailPageProps {
-  categoryName: string;
-}
+import type { Store } from "mock/data";
+import { categories } from "mock/data";
 
 type CategoryStoreListResponse = {
   hasNext: boolean;
   restaurants: Store[];
 };
 
-function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
+function CategoryDetailPage() {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
   const campusId = campusName === "잠실" ? 1 : 2;
-  const categoryId = 1;
+  const { categoryId } = useParams();
+  const categoryName =
+    categories.find((category) => category.id === Number(categoryId))?.name ||
+    "카테고리 이름을 불러오지 못했음";
 
   const [isSelected, setIsSelected] = useState({
     starOrder: false,
     abcOrder: false,
   });
 
-  // 기본을 score 순서로 처음 조회
   const fetchCategoryStoreList = async ({ pageParam = 0 }) => {
-    const filterName = isSelected.abcOrder ? "spell" : "rating";
+    const filterName = isSelected.abcOrder ? "Spell" : "Rating";
     const { data } = await axios.get<CategoryStoreListResponse>(`
     https://matzip.link/api/campuses/${campusId}/restaurants?categoryId=${categoryId}&page=${pageParam}&size=${10}&filter=${filterName}
     `);
-
     return { ...data, nextPageParam: pageParam + 1 };
   };
 
@@ -53,19 +53,23 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
     fetchNextPage,
     isFetching,
     refetch,
-  } = useInfiniteQuery("categoryStore", fetchCategoryStoreList, {
-    getNextPageParam: (lastPage) => {
-      if (lastPage.hasNext) {
-        return lastPage.nextPageParam;
-      }
-      return;
-    },
-  });
+  } = useInfiniteQuery(
+    ["categoryStore", { categoryId, campusId }],
+    fetchCategoryStoreList,
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.hasNext) {
+          return lastPage.nextPageParam;
+        }
+        return;
+      },
+    }
+  );
 
   // isSelected 선택 된 값이 달라질때마다 refetch 해서 데이터 업데이트
   useEffect(() => {
     refetch();
-  }, [isSelected, refetch]);
+  }, [isSelected]);
 
   const loadMoreStores = () => {
     fetchNextPage();
@@ -93,7 +97,7 @@ function CategoryDetailPage({ categoryName }: CategoryDetailPageProps) {
           navigate(-1);
         }}
       >
-        {categoryName}
+        {categoryName || ""}
       </SectionHeader>
       <S.ChipContainer>
         <Chip

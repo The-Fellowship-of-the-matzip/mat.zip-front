@@ -55,22 +55,24 @@ function StoreDetailPage() {
     error: reviewError,
     isLoading: IsReviewLoading,
     isError: isReviewError,
-    hasNextPage,
+    refetch,
     fetchNextPage,
     isFetching,
-  } = useInfiniteQuery("reviewDetailStore", fetchStoreDetailList, {
-    getNextPageParam: (lastPage) => {
-      if (lastPage.hasNext) {
-        return lastPage.nextPageParam;
-      }
-      return;
-    },
-  });
+  } = useInfiniteQuery(
+    ["reviewDetailStore", restaurantId],
+    fetchStoreDetailList,
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.hasNext) {
+          return lastPage.nextPageParam;
+        }
+        return;
+      },
+    }
+  );
 
   const loadMoreReviews = () => {
-    if (hasNextPage) {
-      fetchNextPage();
-    }
+    fetchNextPage();
   };
 
   const onReviewOpenClick = () => {
@@ -107,17 +109,11 @@ function StoreDetailPage() {
                 []
               )
               .map((reviewData) => {
-                const {
-                  id,
-                  author: { profileImage },
-                  rating,
-                  content,
-                  menu,
-                } = reviewData;
+                const { id, author, rating, content, menu } = reviewData;
                 return (
                   <StoreReviewItem
                     key={id}
-                    reviewInfo={{ id, profileImage, rating, content, menu }}
+                    reviewInfo={{ id, author, rating, content, menu }}
                   />
                 );
               })}
@@ -130,6 +126,9 @@ function StoreDetailPage() {
           closeSheet={() => setIsReviewOpen(false)}
           onSubmit={onSubmitReview}
           restaurantId={Number(restaurantId)}
+          onSuccess={() => {
+            refetch();
+          }}
         />
       )}
     </S.StoreDetailPageContainer>

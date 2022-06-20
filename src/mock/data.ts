@@ -234,7 +234,7 @@ export const categories = [
   { id: 5, name: "샌드위치/샐러드" },
   { id: 6, name: "고기" },
   { id: 8, name: "술/안주" },
-  { id: 9, name: "카페/디저트" },
+  { id: 7, name: "카페/디저트" },
   // { id: 6, name: "야식" },
   // { id: 7, name: "패스트푸드" },
   // { id: 8, name: "기타" },

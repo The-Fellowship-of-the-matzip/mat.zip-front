@@ -1,11 +1,14 @@
 import MenuDrawer from "../MenuDrawer/MenuDrawer";
-import { campusContext } from "context/CampusContextProvider";
 import { useContext, useReducer } from "react";
 import { BsSearch } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-import useLogin from "hooks/useLogin";
+import logoImg from "asset/logo.svg";
+
+import { campusContext } from "context/CampusContextProvider";
+import { loginContext } from "context/LoginContextProvider";
 
 import SearchBar from "components/common/SearchBar/SearchBar";
 
@@ -21,7 +24,7 @@ function Header() {
     false
   );
 
-  const [isLogin] = useLogin();
+  const isLogin = useContext(loginContext);
 
   const campus = useContext(campusContext);
 
@@ -44,9 +47,12 @@ function Header() {
         </>
       ) : (
         <>
-          <S.PageName>
-            MAT.ZIP{campus && <S.Campus> :{campus}</S.Campus>}
-          </S.PageName>
+          <Link to="/">
+            <S.PageName>
+              <S.LogoImage src={logoImg} alt="mat-zip logo" width="50%" />
+              {campus && <S.Campus> in {campus}</S.Campus>}
+            </S.PageName>
+          </Link>
           <S.RightWrapper>
             <S.SearchToggleButton onClick={handleSearchOpen}>
               <BsSearch />
@@ -57,7 +63,6 @@ function Header() {
             {isMenuOpen && (
               <MenuDrawer closeMenu={handleMenuToggle} isLogin={isLogin} />
             )}
-            {/* {isLogin ? <S.Profile /> : <S.LoginLink>로그인</S.LoginLink>} */}
           </S.RightWrapper>
         </>
       )}

@@ -1,5 +1,6 @@
-import { campusContext } from "context/CampusContextProvider";
 import { useContext } from "react";
+
+import { campusContext } from "context/CampusContextProvider";
 
 import Star from "components/common/Star/Star";
 
@@ -17,16 +18,18 @@ interface StoreDetailTitleProps {
   };
 }
 
-function StoreDetailTitle({ storeInfo }: StoreDetailTitleProps) {
+function StoreDetailTitle({
+  storeInfo: { name, rating, address, distance, kakaoMapUrl },
+}: StoreDetailTitleProps) {
   const campus = useContext(campusContext);
-  const { name, rating, address, distance, kakaoMapUrl } = storeInfo;
+
   return (
     <S.TitleContainer>
       <S.TitleRatingWrapper>
         <h2>{name}</h2>
         <div>
           <Star isFilled />
-          <S.RatingWrapper>{rating}</S.RatingWrapper>
+          <S.RatingWrapper>{rating?.toString() ?? "0.0"}</S.RatingWrapper>
         </div>
       </S.TitleRatingWrapper>
       <S.DescriptionWrapper>

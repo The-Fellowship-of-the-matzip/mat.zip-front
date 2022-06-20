@@ -1,15 +1,15 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.header<{ isSearchOpen: boolean }>`
-  width: 23.45rem;
-  height: 3.75rem;
+  min-width: 23.45rem;
+  height: fit-content;
   margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 
-  padding: 1rem 2rem;
+  padding: 1rem;
 
   background-color: ${({ theme }) => theme.primary};
 
@@ -22,7 +22,17 @@ export const Container = styled.header<{ isSearchOpen: boolean }>`
 `;
 
 export const PageName = styled.h1`
+  width: fit-content;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+
   font-size: 1.25rem;
+`;
+
+export const LogoImage = styled.img`
+  width: 7.5rem;
 `;
 
 export const Campus = styled.span`
@@ -32,7 +42,7 @@ export const Campus = styled.span`
 
 export const RightWrapper = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
   gap: 1rem;
 `;
@@ -60,9 +70,13 @@ export const SearchToggleButton = styled.button`
   border: none;
   height: 1.5rem;
 
+  color: ${({ theme }) => theme.black};
+
   font-size: 1.5rem;
 
-  cursor: pointer;
+  &:focus {
+    color: ${({ theme }) => theme.black};
+  }
 `;
 
 export const MenuButton = styled.button`
@@ -70,6 +84,11 @@ export const MenuButton = styled.button`
   border: none;
   height: 1.5rem;
 
-  /* color: ${({ theme }) => theme.white}; */
+  color: ${({ theme }) => theme.black};
+
   font-size: 1.5rem;
+
+  &:focus {
+    color: ${({ theme }) => theme.black};
+  }
 `;

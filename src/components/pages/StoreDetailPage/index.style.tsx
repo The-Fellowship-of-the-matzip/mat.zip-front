@@ -33,7 +33,7 @@ export const StoreReviewContentWrapper = styled.article`
 export const ReviewListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-top: 1.5rem;
 `;
 

@@ -6,7 +6,7 @@ export const ListItemContainer = styled.li`
   gap: 2rem;
 
   width: 100%;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
 
   border-top: 0.065rem solid ${({ theme }) => theme.black};
   background-color: ${({ theme }) => theme.white};
@@ -27,6 +27,12 @@ export const ListItemThumbnail = styled.img`
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+`;
+
+export const ListItemTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 `;
 
 export const ListItemName = styled.span`
