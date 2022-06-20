@@ -12,17 +12,11 @@ export const StoreDetailPageContainer = styled.section`
   background-color: ${({ theme }) => theme.white};
 `;
 
-export const StoreThumbnailWrapper = styled.div`
-  position: relative;
+export const StorePreviewImage = styled.img`
   width: 100%;
   height: 15rem;
-  overflow: hidden;
-
-  & > img {
-    width: 100%;
-    height: fit-content;
-    object-fit: contain;
-  }
+  object-fit: cover;
+  object-position: center;
 `;
 
 export const StoreReviewContentWrapper = styled.article`

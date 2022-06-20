@@ -87,9 +87,7 @@ function StoreDetailPage() {
 
   return storeData ? (
     <S.StoreDetailPageContainer>
-      <S.StoreThumbnailWrapper>
-        <img alt="가게 이미지" src={storeData?.imageUrl} />
-      </S.StoreThumbnailWrapper>
+      <S.StorePreviewImage alt="가게 이미지" src={storeData?.imageUrl} />
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
         <S.ReviewListWrapper>
