@@ -109,17 +109,11 @@ function StoreDetailPage() {
                 []
               )
               .map((reviewData) => {
-                const {
-                  id,
-                  author: { profileImage },
-                  rating,
-                  content,
-                  menu,
-                } = reviewData;
+                const { id, author, rating, content, menu } = reviewData;
                 return (
                   <StoreReviewItem
                     key={id}
-                    reviewInfo={{ id, profileImage, rating, content, menu }}
+                    reviewInfo={{ id, author, rating, content, menu }}
                   />
                 );
               })}

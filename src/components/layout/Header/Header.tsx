@@ -50,7 +50,7 @@ function Header() {
           <Link to="/">
             <S.PageName>
               <S.LogoImage src={logoImg} alt="mat-zip logo" width="50%" />
-              {campus && <S.Campus> :{campus}</S.Campus>}
+              {campus && <S.Campus> in {campus}</S.Campus>}
             </S.PageName>
           </Link>
           <S.RightWrapper>

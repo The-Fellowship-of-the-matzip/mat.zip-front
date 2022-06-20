@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.header<{ isSearchOpen: boolean }>`
-  width: 23.45rem;
+  min-width: 23.45rem;
   height: fit-content;
   margin: 0 auto;
 
@@ -70,9 +70,13 @@ export const SearchToggleButton = styled.button`
   border: none;
   height: 1.5rem;
 
+  color: ${({ theme }) => theme.black};
+
   font-size: 1.5rem;
 
-  cursor: pointer;
+  &:focus {
+    color: ${({ theme }) => theme.black};
+  }
 `;
 
 export const MenuButton = styled.button`
@@ -80,6 +84,11 @@ export const MenuButton = styled.button`
   border: none;
   height: 1.5rem;
 
-  /* color: ${({ theme }) => theme.white}; */
+  color: ${({ theme }) => theme.black};
+
   font-size: 1.5rem;
+
+  &:focus {
+    color: ${({ theme }) => theme.black};
+  }
 `;

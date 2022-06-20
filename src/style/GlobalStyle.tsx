@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
   }
 
   #app  {
-    width: 23.45rem;
+    min-width: 23.45rem;
     margin: 0 auto;
 
     position: relative;

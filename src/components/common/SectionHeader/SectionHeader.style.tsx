@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MiniHeader = styled.h2`
-  padding: 0.2rem;
+  padding: 1rem 0.2rem;
 
   font-size: 1.25rem;
 `;

@@ -29,7 +29,7 @@ function StoreDetailTitle({
         <h2>{name}</h2>
         <div>
           <Star isFilled />
-          <S.RatingWrapper>{rating}</S.RatingWrapper>
+          <S.RatingWrapper>{rating?.toString() ?? "0.0"}</S.RatingWrapper>
         </div>
       </S.TitleRatingWrapper>
       <S.DescriptionWrapper>

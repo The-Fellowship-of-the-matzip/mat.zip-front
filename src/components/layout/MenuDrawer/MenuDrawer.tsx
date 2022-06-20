@@ -54,9 +54,9 @@ function MenuDrawer({ closeMenu, isLogin }: Props) {
             <S.Button onClick={handleCampusChangeRequest}>
               캠퍼스 변경하기
             </S.Button>
-            <a href="https://github.com/login/oauth/authorize?client_id=a51717e6e0bb9e34da8e">
+            <S.LoginLink href="https://github.com/login/oauth/authorize?client_id=a51717e6e0bb9e34da8e">
               로그인
-            </a>
+            </S.LoginLink>
           </>
         )}
       </S.Content>

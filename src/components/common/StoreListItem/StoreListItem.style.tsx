@@ -6,7 +6,7 @@ export const ListItemContainer = styled.li`
   gap: 2rem;
 
   width: 100%;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
 
   border-top: 0.065rem solid ${({ theme }) => theme.black};
   background-color: ${({ theme }) => theme.white};
@@ -29,6 +29,12 @@ export const ListItemThumbnail = styled.img`
   object-position: center;
 `;
 
+export const ListItemTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+`;
+
 export const ListItemName = styled.span`
   font-size: 1.25rem;
   font-weight: 700;
@@ -40,9 +46,4 @@ export const ListItemDistance = styled.p`
 
 export const ListItemStars = styled.div`
   font-size: 1.5rem;
-`;
-
-export const RatingPlaceholder = styled.div`
-  font-size: 1rem;
-  color: ${({ theme }) => theme.secondary};
 `;

@@ -9,6 +9,7 @@ export const CategoryItemContainer = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.25rem;
 
   width: fit-content;
 
@@ -20,9 +21,9 @@ export const CategoryItemButton = styled.button<CategoryItemButtonProps>`
     width: ${width};
     height: ${width};
 
-    box-shadow: 0.065rem 0.065rem 0.065rem ${theme.secondary};
-    background-color: ${theme.white};
-    color: ${theme.black};
+    box-shadow: 0.065rem 0.065rem 0.065rem ${theme.primary};
+    background-color: ${theme.primary};
+    color: ${theme.white};
   `}
   padding: 0.5rem;
 

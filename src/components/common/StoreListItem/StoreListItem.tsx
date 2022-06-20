@@ -32,18 +32,15 @@ function StoreListItem({
       }}
     >
       <S.ListItemThumbnail src={thumbnailUrl} alt={name} />
-      <div>
+      <S.ListItemTextContainer>
         <S.ListItemName>{name}</S.ListItemName>
         <S.ListItemDistance>
           {campusName} 캠퍼스 기준 도보 {distance}분
         </S.ListItemDistance>
         <S.ListItemStars>
           {repeatComponent(<Star isFilled />, rating)}
-          <S.RatingPlaceholder>
-            {rating === 0 && "별점 준비 중"}
-          </S.RatingPlaceholder>
         </S.ListItemStars>
-      </div>
+      </S.ListItemTextContainer>
     </S.ListItemContainer>
   );
 }

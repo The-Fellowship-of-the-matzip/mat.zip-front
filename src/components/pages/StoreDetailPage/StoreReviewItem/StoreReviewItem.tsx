@@ -7,7 +7,7 @@ import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReview
 interface StoreReviewItemProps {
   reviewInfo: {
     id: number;
-    profileImage: string;
+    author: { username: string; profileImage: string };
     rating: number;
     content: string;
     menu: string;
@@ -15,24 +15,25 @@ interface StoreReviewItemProps {
 }
 
 function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
-  const { profileImage, rating, content, menu } = reviewInfo;
+  const { author, rating, content, menu } = reviewInfo;
 
   return (
     <S.StoreReviewContainer>
       <S.UserProfileWrapper>
-        <img src={profileImage} alt="유저의 프로필이 보여지는 곳" />
+        <img
+          src={author.profileImage}
+          alt={`${author.username} 유저의 프로필 이미지`}
+        />
       </S.UserProfileWrapper>
       <S.ReviewContentWrapper>
         <S.Header>
-          <S.HeaderLeftWrapper>
-            {repeatComponent(<Star isFilled />, rating)}
-            <S.RatingPlaceholder>
-              {rating === 0 && <p>준비 중..</p>}
-            </S.RatingPlaceholder>
-          </S.HeaderLeftWrapper>
-          <S.MenuWrapper>{menu}</S.MenuWrapper>
+          <div>{author.username}</div>
+          <div>{repeatComponent(<Star isFilled />, rating)}</div>
         </S.Header>
-        <S.ContentWrapper>{content}</S.ContentWrapper>
+        <S.ReviewBottom>
+          <S.ContentWrapper>{content}</S.ContentWrapper>
+          <S.MenuWrapper>{menu}</S.MenuWrapper>
+        </S.ReviewBottom>
       </S.ReviewContentWrapper>
     </S.StoreReviewContainer>
   );

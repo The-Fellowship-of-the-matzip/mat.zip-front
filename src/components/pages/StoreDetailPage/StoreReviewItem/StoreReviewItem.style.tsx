@@ -2,21 +2,21 @@ import styled from "styled-components";
 
 export const StoreReviewContainer = styled.section`
   display: flex;
-  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+
   width: 100%;
   height: fit-content;
-  padding: 1rem;
-  justify-content: flex-end;
+  padding: 1rem 1.25rem;
+
   border: 0.065rem solid ${({ theme }) => theme.secondary};
   border-radius: 0.25rem;
 `;
 
 export const UserProfileWrapper = styled.div`
-  top: 1.1rem;
-  left: 5%;
   width: 3rem;
   height: 3rem;
-  position: absolute;
   border-radius: 50%;
   overflow: hidden;
 
@@ -29,22 +29,38 @@ export const UserProfileWrapper = styled.div`
 
 export const ReviewContentWrapper = styled.div`
   width: 80%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.25rem;
 `;
 
 export const Header = styled.header`
+  width: 100%;
+  padding-bottom: 0.25rem;
+
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 0.065rem solid ${({ theme }) => theme.secondary};
+`;
+
+export const ReviewBottom = styled.div`
+  min-height: 5rem;
+
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
-export const HeaderLeftWrapper = styled.div`
-  margin-top: -0.4rem;
+export const MenuWrapper = styled.div`
+  color: ${({ theme }) => theme.secondary};
+  align-self: flex-end;
 `;
 
-export const MenuWrapper = styled.div``;
-
 export const ContentWrapper = styled.div`
-  margin-top: 1.5rem;
   overflow: hidden;
   word-break: break-all;
 `;

@@ -5,13 +5,13 @@ export const Container = styled.div`
   top: 0;
   left: 0;
 
-  width: 23.45rem;
+  width: 100%;
   height: 100vh;
   margin: 0 auto;
 `;
 
 export const Backdrop = styled.div`
-  width: 23.45rem;
+  width: 100%;
   height: 100%;
 
   background-color: ${({ theme }) => theme.black};
@@ -53,6 +53,21 @@ export const Button = styled.button`
 
   font-size: 1rem;
   font-weight: 600;
+
+  &:hover {
+    color: ${({ theme }) => theme.secondary};
+  }
+`;
+
+export const LoginLink = styled.a`
+  font-size: 1rem;
+  font-weight: 600;
+
+  color: ${({ theme }) => theme.black};
+
+  &:visited {
+    color: ${({ theme }) => theme.black};
+  }
 
   &:hover {
     color: ${({ theme }) => theme.secondary};
