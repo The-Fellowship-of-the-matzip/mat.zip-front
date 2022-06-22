@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axios from "axios";
 import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
@@ -10,6 +9,9 @@ import { getCampusId } from "constants/campus";
 
 import { campusContext } from "context/CampusContextProvider";
 
+import fetchStoreList from "api/fetchStoreList";
+import getNextPageParam from "api/getNextPageParam";
+
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import StoreList from "components/common/StoreList/StoreList";
@@ -17,11 +19,6 @@ import StoreList from "components/common/StoreList/StoreList";
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 import type { Store } from "mock/data";
-
-type SearchResultListResponse = {
-  hasNext: boolean;
-  restaurants: Store[];
-};
 
 function SearchResultPage() {
   const navigate = useNavigate();
@@ -31,26 +28,12 @@ function SearchResultPage() {
   const [searchParam] = useSearchParams();
   const name = searchParam.get("name");
 
-  const fetchSearchResultList = async ({ pageParam = 0 }) => {
-    const { data } = await axios.get<SearchResultListResponse>(`
-    https://matzip.link/api/campuses/${campusId}/restaurants/search?name=${name}&page=${pageParam}&size=${2}
-    `);
-    return { ...data, nextPageParam: pageParam + 1 };
-  };
+  const fetchParams = { size: 10, campusId, name, type: "/search" };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(
-      ["categoryStore", { name, campusId }],
-      fetchSearchResultList,
-      {
-        getNextPageParam: (lastPage) => {
-          if (lastPage.hasNext) {
-            return lastPage.nextPageParam;
-          }
-          return;
-        },
-      }
-    );
+    useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+      getNextPageParam,
+    });
 
   const loadMoreStores = () => {
     fetchNextPage();

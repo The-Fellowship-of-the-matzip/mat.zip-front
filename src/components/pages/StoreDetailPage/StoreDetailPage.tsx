@@ -1,9 +1,13 @@
-import axios from "axios";
 import { useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import MESSAGES from "constants/messages";
+
+import type { ReviewShape } from "api/fetchReviewList";
+import fetchReviewList from "api/fetchReviewList";
+import fetchStoreDetail from "api/fetchStoreDetail";
+import getNextPageParam from "api/getNextPageParam";
 
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 
@@ -12,45 +16,15 @@ import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
 import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle";
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
 
-import { Store } from "mock/data";
-
-type ReviewShape = {
-  id: number;
-  author: {
-    username: string;
-    profileImage: string;
-  };
-  content: string;
-  rating: number;
-  menu: string;
-};
-
-type ReviewResponseShape = {
-  hasNext: boolean;
-  reviews: ReviewShape[];
-};
-
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
   const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   const accessToken = window.sessionStorage.getItem("accessToken");
 
-  const fetchStoreDetailInfo = async () => {
-    const { data } = await axios.get<Store & { address: string }>(`
-    https://matzip.link/api/restaurants/${restaurantId}
-    `);
-    return data;
-  };
-
-  const fetchStoreDetailList = async ({ pageParam = 0 }) => {
-    const { data } =
-      await axios.get<ReviewResponseShape>(`https://matzip.link/api/restaurants/${restaurantId}/reviews?page=${pageParam}&size=${5}
-    `);
-    return { ...data, nextPageParam: pageParam + 1 };
-  };
-
-  const { data: storeData } = useQuery("storeDetailInfo", fetchStoreDetailInfo);
+  const { data: storeData } = useQuery("storeDetailInfo", () =>
+    fetchStoreDetail(restaurantId as string)
+  );
 
   const {
     data: reviewData,
@@ -61,16 +35,9 @@ function StoreDetailPage() {
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery(
-    ["reviewDetailStore", restaurantId],
-    fetchStoreDetailList,
-    {
-      getNextPageParam: (lastPage) => {
-        if (lastPage.hasNext) {
-          return lastPage.nextPageParam;
-        }
-        return;
-      },
-    }
+    ["reviewDetailStore", { restaurantId, size: 5 }],
+    fetchReviewList,
+    { getNextPageParam }
   );
 
   const loadMoreReviews = () => {
@@ -87,7 +54,7 @@ function StoreDetailPage() {
 
   const onSubmitReview = () => {};
 
-  return storeData ? (
+  return restaurantId && storeData ? (
     <S.StoreDetailPageContainer>
       <S.StorePreviewImage alt="가게 이미지" src={storeData?.imageUrl} />
       <S.StoreReviewContentWrapper>
@@ -125,7 +92,7 @@ function StoreDetailPage() {
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}
           onSubmit={onSubmitReview}
-          restaurantId={Number(restaurantId)}
+          restaurantId={restaurantId}
           onSuccess={() => {
             refetch();
           }}

@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axios from "axios";
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import MESSAGES from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import useLogin from "hooks/useLogin";
+
+import sendLoginRequest from "api/sendLoginRequest";
 
 import * as S from "components/pages/Login/Login.style";
 
@@ -19,22 +19,15 @@ function Login() {
 
   const { login } = useLogin();
 
-  const sendLoginRequest = async () => {
-    const response = await axios.get(`https://matzip.link/api/login`, {
-      params: { code },
-    });
-
-    if (response.status !== 200) {
-      alert(MESSAGES.LOGIN_FAIL);
+  const handleLogin = async () => {
+    try {
+      const accessToken = await sendLoginRequest(code as string);
+      login(accessToken);
+    } catch ({ message }) {
+      alert(message);
+    } finally {
       navigate(PATHNAME.HOME);
-      return;
     }
-
-    const {
-      data: { accessToken },
-    } = response;
-    login(accessToken);
-    navigate(PATHNAME.HOME);
   };
 
   useEffect(() => {
@@ -42,7 +35,8 @@ function Login() {
       isInitial.current = false;
       return;
     }
-    sendLoginRequest();
+
+    handleLogin();
   }, []);
 
   return <S.MainContainer>로그인 진행 중</S.MainContainer>;
