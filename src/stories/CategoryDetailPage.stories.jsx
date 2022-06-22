@@ -1,4 +1,4 @@
-import CategoryDetailPage from "components/pages/CategoryDetailPage";
+import CategoryDetailPage from "components/pages/CategoryDetailPage/CategoryDetailPage";
 
 export default {
   title: "Components/pages/CategoryDetailPage/index",

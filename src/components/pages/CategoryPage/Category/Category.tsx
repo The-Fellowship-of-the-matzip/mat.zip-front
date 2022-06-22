@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+import { PATHNAME } from "constants/routes";
+
 import * as S from "components/pages/CategoryPage/Category/Category.style";
 import CategoryItem from "components/pages/CategoryPage/CategoryItem/CategoryItem";
 
@@ -14,7 +16,7 @@ function Category({ categories }: CategoryProps) {
   const navigate = useNavigate();
 
   const handleClickCategoryItem = (id: number) => () => {
-    navigate(`/category/${id}`);
+    navigate(`${PATHNAME.CATEGORY_DETAIL}/${id}`);
   };
 
   return (

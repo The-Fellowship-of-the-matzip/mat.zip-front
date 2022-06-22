@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import ReactDOM from "react-dom";
 
+import MESSAGES from "constants/messages";
+
 import { campusContext, setCampusContext } from "context/CampusContextProvider";
 
 import useLogin from "hooks/useLogin";
@@ -16,24 +18,20 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   const { logout } = useLogin();
 
   const handleCampusChangeRequest = () => {
-    if (
-      !window.confirm(
-        `현재 선택된 캠퍼스는 ${campus}입니다 캠퍼스를 변경하시겠습니까?`
-      )
-    ) {
+    if (!window.confirm(MESSAGES.CAMPUS_CHANGE_CONFIRM(campus as string))) {
       return;
     }
     setCampus(null);
   };
 
   const handleLogout = () => {
-    if (!window.confirm("로그아웃 하시겠습니까?")) {
+    if (!window.confirm(MESSAGES.LOGOUT_CONFIRM)) {
       return;
     }
 
     logout();
     closeMenu();
-    window.alert("로그아웃이 되었습니다");
+    window.alert(MESSAGES.LOGOUT_COMPLETE);
   };
 
   return ReactDOM.createPortal(

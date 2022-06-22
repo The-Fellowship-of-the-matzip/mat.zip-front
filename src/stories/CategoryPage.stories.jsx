@@ -1,4 +1,4 @@
-import CategoryPage from "components/pages/CategoryPage";
+import CategoryPage from "components/pages/CategoryPage/CategoryPage";
 
 export default {
   title: "Components/pages/CategoryPage/index",

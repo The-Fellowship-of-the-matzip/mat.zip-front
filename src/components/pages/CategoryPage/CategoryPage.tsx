@@ -2,21 +2,24 @@ import axios from "axios";
 import { useContext } from "react";
 import { useQuery } from "react-query";
 
+import type { Campus } from "constants/campus";
+import { getCampusId } from "constants/campus";
+
 import { campusContext } from "context/CampusContextProvider";
 
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import StoreList from "components/common/StoreList/StoreList";
 
 import Category from "components/pages/CategoryPage/Category/Category";
-import * as S from "components/pages/CategoryPage/index.style";
+import * as S from "components/pages/CategoryPage/CategoryPage.style";
 
 import { categories, Store } from "mock/data";
 
 function CategoryPage() {
-  const campus = useContext(campusContext);
+  const campusName = useContext(campusContext);
 
   const fetchRandomStore = async () => {
-    const campusId = campus === "잠실" ? 1 : 2;
+    const campusId = getCampusId(campusName as Campus);
     const { data } = await axios.get<Store[]>(
       `https://matzip.link/api/campuses/${campusId}/restaurants/random?size=5`
     );

@@ -2,6 +2,9 @@ import axios from "axios";
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import MESSAGES from "constants/messages";
+import { PATHNAME } from "constants/routes";
+
 import useLogin from "hooks/useLogin";
 
 import * as S from "components/pages/Login/Login.style";
@@ -21,8 +24,8 @@ function Login() {
     });
 
     if (response.status !== 200) {
-      alert("로그인에 실패했습니다. 다시 시도해주세요");
-      navigate("/");
+      alert(MESSAGES.LOGIN_FAIL);
+      navigate(PATHNAME.HOME);
       return;
     }
 
@@ -30,7 +33,7 @@ function Login() {
       data: { accessToken },
     } = response;
     login(accessToken);
-    navigate("/");
+    navigate(PATHNAME.HOME);
   };
 
   useEffect(() => {

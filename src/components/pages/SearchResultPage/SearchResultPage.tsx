@@ -5,13 +5,16 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import type { Campus } from "constants/campus";
+import { getCampusId } from "constants/campus";
+
 import { campusContext } from "context/CampusContextProvider";
 
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import StoreList from "components/common/StoreList/StoreList";
 
-import * as S from "components/pages/CategoryDetailPage/index.style";
+import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 import type { Store } from "mock/data";
 
@@ -23,7 +26,7 @@ type SearchResultListResponse = {
 function SearchResultPage() {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
-  const campusId = campusName === "잠실" ? 1 : 2;
+  const campusId = getCampusId(campusName as Campus);
 
   const [searchParam] = useSearchParams();
   const name = searchParam.get("name");

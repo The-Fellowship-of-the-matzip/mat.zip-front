@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import repeatComponent from "util/repeatComponent";
 
+import { PATHNAME } from "constants/routes";
+
 import { campusContext } from "context/CampusContextProvider";
 
 import Star from "components/common/Star/Star";
@@ -28,7 +30,7 @@ function StoreListItem({
   return (
     <S.ListItemContainer
       onClick={() => {
-        navigate(`/store-detail/${id}`);
+        navigate(`${PATHNAME.STORE_DETAIL}/${id}`);
       }}
     >
       <S.ListItemThumbnail src={thumbnailUrl} alt={name} />

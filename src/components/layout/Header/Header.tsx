@@ -5,6 +5,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+import { PATHNAME } from "constants/routes";
+
 import logoImg from "asset/logo.svg";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -47,7 +49,7 @@ function Header() {
         </>
       ) : (
         <>
-          <Link to="/">
+          <Link to={PATHNAME.HOME}>
             <S.PageName>
               <S.LogoImage src={logoImg} alt="mat-zip logo" width="50%" />
               {campus && <S.Campus> in {campus}</S.Campus>}

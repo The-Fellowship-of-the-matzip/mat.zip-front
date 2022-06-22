@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
+import MESSAGES from "constants/messages";
+
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 
 import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet";
+import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
 import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle";
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
-import * as S from "components/pages/StoreDetailPage/index.style";
 
 import { Store } from "mock/data";
 
@@ -80,7 +82,7 @@ function StoreDetailPage() {
       setIsReviewOpen(true);
       return;
     }
-    alert("로그인 후 사용해주세요");
+    alert(MESSAGES.LOGIN_REQUIRED);
   };
 
   const onSubmitReview = () => {};
