@@ -10,8 +10,8 @@ import {
 export const PATHNAME = {
   HOME: "/",
   LOGIN: "/login",
-  CATEGORY_DETAIL: "/category/:categoryId",
-  STORE_DETAIL: "/store-detail/:storeId",
+  CATEGORY_DETAIL: "/category",
+  STORE_DETAIL: "/store-detail",
   SEARCH: "/search",
   WILD_CARD: "*",
 };
@@ -19,11 +19,11 @@ export const PATHNAME = {
 const MAIN_ROUTES = {
   HOME: { path: PATHNAME.HOME, element: <CategoryPage /> },
   CATEGORY_DETAIL: {
-    path: PATHNAME.CATEGORY_DETAIL,
+    path: `${PATHNAME.CATEGORY_DETAIL}/:categoryId`,
     element: <CategoryDetailPage />,
   },
   STORE_DETAIL: {
-    path: PATHNAME.STORE_DETAIL,
+    path: `${PATHNAME.STORE_DETAIL}/:storeId`,
     element: <StoreDetailPage />,
   },
   SEARCH: { path: PATHNAME.SEARCH, element: <SearchResultPage /> },
