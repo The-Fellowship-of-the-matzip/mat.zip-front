@@ -9,6 +9,7 @@ import { campusContext } from "context/CampusContextProvider";
 
 import CampusSelectPage from "components/pages/CampusSelectPage/CampusSelectPage";
 import Login from "components/pages/Login/Login";
+import SearchResultPage from "components/pages/SearchResultPage/SearchResultPage";
 
 function App() {
   const campus = useContext(campusContext);
@@ -30,6 +31,7 @@ function App() {
               path="/store-detail/:storeId"
               element={<StoreDetailPage />}
             />
+            <Route path="/search" element={<SearchResultPage />} />
           </Route>
         </>
       )}

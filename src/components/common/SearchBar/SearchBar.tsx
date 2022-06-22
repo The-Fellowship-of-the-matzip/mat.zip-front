@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
-type SearchBarProps = {
-  onClick: React.MouseEventHandler;
-};
+interface SearchBarProp {
+  closeSearchBar: () => void;
+}
 
-function SearchBar({ onClick }: SearchBarProps) {
+function SearchBar({ closeSearchBar }: SearchBarProp) {
   const [keyword, setKeyword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
@@ -16,15 +19,23 @@ function SearchBar({ onClick }: SearchBarProps) {
     setKeyword(value);
   };
 
+  const handleSearchButtonClick: React.FormEventHandler<HTMLFormElement> = (
+    e
+  ) => {
+    e.preventDefault();
+    navigate(`/search?name=${keyword}`);
+    closeSearchBar();
+  };
+
   return (
-    <S.Container>
+    <S.Container onSubmit={handleSearchButtonClick}>
       <S.SearchInput
         type="text"
         placeholder="검색"
         value={keyword}
         onChange={handleSearchInput}
       />
-      <S.Button onClick={onClick}>
+      <S.Button type="submit">
         <BsSearch />
       </S.Button>
     </S.Container>

@@ -40,7 +40,7 @@ function Header() {
     <S.Container isSearchOpen={isSearchOpen}>
       {isSearchOpen ? (
         <>
-          <SearchBar onClick={() => {}} />
+          <SearchBar closeSearchBar={setSearchOpen} />
           <S.SearchToggleButton onClick={handleSearchOpen}>
             <MdCancel />
           </S.SearchToggleButton>
