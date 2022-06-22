@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import logoImg from "asset/logo.svg";
 
 import { campusContext } from "context/CampusContextProvider";
-import { loginContext } from "context/LoginContextProvider";
+import { LoginContext } from "context/LoginContextProvider";
 
 import SearchBar from "components/common/SearchBar/SearchBar";
 
@@ -24,7 +24,7 @@ function Header() {
     false
   );
 
-  const isLogin = useContext(loginContext);
+  const isLoggedIn = useContext(LoginContext);
 
   const campus = useContext(campusContext);
 
@@ -61,7 +61,10 @@ function Header() {
               <GiHamburgerMenu />
             </S.MenuButton>
             {isMenuOpen && (
-              <MenuDrawer closeMenu={handleMenuToggle} isLogin={isLogin} />
+              <MenuDrawer
+                closeMenu={handleMenuToggle}
+                isLoggedIn={isLoggedIn}
+              />
             )}
           </S.RightWrapper>
         </>

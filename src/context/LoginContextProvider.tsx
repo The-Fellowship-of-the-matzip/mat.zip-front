@@ -2,20 +2,20 @@ import React, { useState } from "react";
 
 const hasAccessToken = !!window.sessionStorage.getItem("accessToken");
 
-export const loginContext = React.createContext<boolean>(false);
-export const setLoginContext = React.createContext<
+export const LoginContext = React.createContext<boolean>(false);
+export const SetLoginContext = React.createContext<
   React.Dispatch<React.SetStateAction<boolean>>
 >(() => {});
 
 function LoginContextProvider({ children }: React.PropsWithChildren<{}>) {
-  const [isLogin, setIsLogin] = useState(hasAccessToken);
+  const [isLoggedIn, setIsLoggedIn] = useState(hasAccessToken);
 
   return (
-    <loginContext.Provider value={isLogin}>
-      <setLoginContext.Provider value={setIsLogin}>
+    <LoginContext.Provider value={isLoggedIn}>
+      <SetLoginContext.Provider value={setIsLoggedIn}>
         {children}
-      </setLoginContext.Provider>
-    </loginContext.Provider>
+      </SetLoginContext.Provider>
+    </LoginContext.Provider>
   );
 }
 

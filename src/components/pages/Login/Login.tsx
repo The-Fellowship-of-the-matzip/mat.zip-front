@@ -1,20 +1,19 @@
 import axios from "axios";
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { setLoginContext } from "context/LoginContextProvider";
+import useLogin from "hooks/useLogin";
 
 import * as S from "components/pages/Login/Login.style";
 
 function Login() {
+  const isInitial = useRef(true);
+  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
 
-  const isInitial = useRef(true);
-
-  const setIsLogin = useContext(setLoginContext);
-
-  const navigate = useNavigate();
+  const { login } = useLogin();
 
   const sendLoginRequest = async () => {
     const response = await axios.get(`https://matzip.link/api/login`, {
@@ -30,8 +29,7 @@ function Login() {
     const {
       data: { accessToken },
     } = response;
-    window.sessionStorage.setItem("accessToken", accessToken);
-    setIsLogin(true);
+    login(accessToken);
     navigate("/");
   };
 
