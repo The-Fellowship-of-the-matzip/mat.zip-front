@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import Image from "components/common/Image/Image";
+
 export const StoreReviewContainer = styled.section`
   display: flex;
   justify-content: space-around;
@@ -14,18 +16,13 @@ export const StoreReviewContainer = styled.section`
   border-radius: 0.25rem;
 `;
 
-export const UserProfileWrapper = styled.div`
+export const UserProfileImage = styled(Image)`
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
   box-shadow: 0 0 0.2rem ${({ theme }) => theme.primary};
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-  }
 `;
 
 export const ReviewContentWrapper = styled.div`

@@ -19,12 +19,10 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
 
   return (
     <S.StoreReviewContainer>
-      <S.UserProfileWrapper>
-        <img
-          src={author.profileImage}
-          alt={`${author.username} 유저의 프로필 이미지`}
-        />
-      </S.UserProfileWrapper>
+      <S.UserProfileImage
+        src={author.profileImage}
+        alt={`${author.username} 유저의 프로필 이미지`}
+      />
       <S.ReviewContentWrapper>
         <S.Header>
           <div>{author.username}</div>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import Image from "components/common/Image/Image";
+
 export const ListItemContainer = styled.li`
   display: flex;
   align-items: center;
@@ -20,13 +22,14 @@ export const ListItemContainer = styled.li`
   }
 `;
 
-export const ListItemThumbnail = styled.img`
+export const ListItemThumbnail = styled(Image)`
   width: 4rem;
   height: 4rem;
 
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+  box-shadow: 0 0 0.2rem ${({ theme }) => theme.primary};
 `;
 
 export const ListItemTextContainer = styled.div`

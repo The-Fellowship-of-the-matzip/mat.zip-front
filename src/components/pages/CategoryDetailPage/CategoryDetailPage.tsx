@@ -5,6 +5,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
+import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 import { PATHNAME } from "constants/routes";
@@ -15,8 +16,10 @@ import fetchStoreList from "api/fetchStoreList";
 import getNextPageParam from "api/getNextPageParam";
 
 import Chip from "components/common/Chip/Chip";
+import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
+import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
@@ -37,7 +40,7 @@ function CategoryDetailPage() {
     categories.find((category) => category.id === Number(categoryId))?.name ||
     "카테고리 이름을 불러오지 못했음";
 
-  const fetchParams = { size: 10, filter, campusId, categoryId };
+  const fetchParams = { size: SIZE.LIST_ITEM, filter, campusId, categoryId };
 
   const {
     data,
@@ -49,6 +52,7 @@ function CategoryDetailPage() {
     refetch,
   } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
     getNextPageParam,
+    retry: NETWORK.RETRY_COUNT,
   });
 
   useEffect(() => {
@@ -59,11 +63,11 @@ function CategoryDetailPage() {
     fetchNextPage();
   };
 
-  const handleClickStarOrderChip = () => {
-    setFilter("rating");
+  const handleClickRatingOrderChip = () => {
+    setFilter((prev) => (prev === "rating" ? "" : "rating"));
   };
-  const handleClickAbcOrderChip = () => {
-    setFilter("spell");
+  const handleClickSpellOrderChip = () => {
+    setFilter((prev) => (prev === "spell" ? "" : "spell"));
   };
 
   if (categoryId === undefined) {
@@ -84,18 +88,22 @@ function CategoryDetailPage() {
       <S.ChipContainer>
         <Chip
           isSelected={filter === "rating"}
-          onClick={handleClickStarOrderChip}
+          onClick={handleClickRatingOrderChip}
         >
           별점 순
         </Chip>
-        <Chip isSelected={filter === "spell"} onClick={handleClickAbcOrderChip}>
+        <Chip
+          isSelected={filter === "spell"}
+          onClick={handleClickSpellOrderChip}
+        >
           가나다 순
         </Chip>
       </S.ChipContainer>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
-        {isLoading && <div>로딩중...</div>}
-        {isError && <div>{error instanceof Error && error.message}</div>}
-        {isFetching && <div>다음 페이지 로딩 중</div>}
+        {(isLoading || isFetching) && <Spinner />}
+        {isError && error instanceof Error && (
+          <ErrorImage errorMessage={error.message} />
+        )}
         <StoreList
           stores={
             data &&

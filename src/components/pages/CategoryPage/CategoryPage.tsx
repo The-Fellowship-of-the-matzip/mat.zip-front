@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useQuery } from "react-query";
 
+import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 
@@ -8,7 +9,9 @@ import { campusContext } from "context/CampusContextProvider";
 
 import fetchRandomStoreList from "api/fetchRandomStoreList";
 
+import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
+import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import Category from "components/pages/CategoryPage/Category/Category";
@@ -20,8 +23,12 @@ function CategoryPage() {
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
 
-  const { data, isLoading, isError, error } = useQuery("randomStore", () =>
-    fetchRandomStoreList(campusId, 5)
+  const { data, isLoading, isError, error } = useQuery(
+    "randomStore",
+    () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
+    {
+      retry: NETWORK.RETRY_COUNT,
+    }
   );
 
   return (
@@ -32,8 +39,10 @@ function CategoryPage() {
       </section>
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
-        {isLoading && <div>로딩중</div>}
-        {isError && <div>{error instanceof Error && error.message} </div>}
+        {isLoading && <Spinner />}
+        {isError && error instanceof Error && (
+          <ErrorImage errorMessage={error.message} />
+        )}
         <StoreList stores={data} />
       </section>
     </S.CategoryPageContainer>

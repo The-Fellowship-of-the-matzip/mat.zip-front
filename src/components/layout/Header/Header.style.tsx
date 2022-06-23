@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+import Image from "components/common/Image/Image";
+
 export const Container = styled.header<{ isSearchOpen: boolean }>`
   min-width: 23.45rem;
   height: fit-content;
@@ -31,7 +33,7 @@ export const PageName = styled.h1`
   font-size: 1.25rem;
 `;
 
-export const LogoImage = styled.img`
+export const LogoImage = styled(Image)`
   width: 7.5rem;
 `;
 

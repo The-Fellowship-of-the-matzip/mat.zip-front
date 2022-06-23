@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
 
+import { NETWORK } from "constants/api";
+
 import sendReviewPostRequest from "api/sendReviewPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
@@ -10,7 +12,6 @@ import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/Revi
 
 type Props = {
   closeSheet: () => void;
-  onSubmit: () => void;
   restaurantId: string;
   onSuccess: () => void;
 };
@@ -30,7 +31,7 @@ function ReviewInputBottomSheet({
 }: Props) {
   const mutation = useMutation<unknown, unknown, ReviewInputShape>(
     sendReviewPostRequest(restaurantId),
-    { onSuccess }
+    { onSuccess, retry: NETWORK.RETRY_COUNT }
   );
 
   const [rating, setRating] = useState(DEFAULT_RATING);
