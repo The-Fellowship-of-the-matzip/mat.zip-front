@@ -10,7 +10,6 @@ import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/Revi
 
 type Props = {
   closeSheet: () => void;
-  onSubmit: () => void;
   restaurantId: string;
   onSuccess: () => void;
 };
