@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useQuery } from "react-query";
 
+import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 
@@ -21,8 +22,12 @@ function CategoryPage() {
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
 
-  const { data, isLoading, isError, error } = useQuery("randomStore", () =>
-    fetchRandomStoreList(campusId, 5)
+  const { data, isLoading, isError, error } = useQuery(
+    "randomStore",
+    () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
+    {
+      retry: NETWORK.RETRY_COUNT,
+    }
   );
 
   return (

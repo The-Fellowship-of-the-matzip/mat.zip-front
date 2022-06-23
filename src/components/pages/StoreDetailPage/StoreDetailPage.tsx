@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
+import { NETWORK, SIZE } from "constants/api";
 import MESSAGES from "constants/messages";
 
 import type { ReviewShape } from "api/fetchReviewList";
@@ -23,8 +24,12 @@ function StoreDetailPage() {
 
   const accessToken = window.sessionStorage.getItem("accessToken");
 
-  const { data: storeData } = useQuery("storeDetailInfo", () =>
-    fetchStoreDetail(restaurantId as string)
+  const { data: storeData } = useQuery(
+    "storeDetailInfo",
+    () => fetchStoreDetail(restaurantId as string),
+    {
+      retry: NETWORK.RETRY_COUNT,
+    }
   );
 
   const {
@@ -36,7 +41,7 @@ function StoreDetailPage() {
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery(
-    ["reviewDetailStore", { restaurantId, size: 5 }],
+    ["reviewDetailStore", { restaurantId, size: SIZE.REVIEW }],
     fetchReviewList,
     { getNextPageParam }
   );

@@ -4,6 +4,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 
@@ -29,11 +30,17 @@ function SearchResultPage() {
   const [searchParam] = useSearchParams();
   const name = searchParam.get("name");
 
-  const fetchParams = { size: 10, campusId, name, type: "/search" };
+  const fetchParams = {
+    size: SIZE.LIST_ITEM,
+    campusId,
+    name,
+    type: "/search",
+  };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
     useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
       getNextPageParam,
+      retry: NETWORK.RETRY_COUNT,
     });
 
   const loadMoreStores = () => {

@@ -11,3 +11,13 @@ export const ENDPOINTS = {
   STORE_LIST: (campusId: CampusId, type?: string) =>
     `/campuses/${campusId}/restaurants${type !== undefined ? type : ""}`,
 };
+
+export const NETWORK = {
+  RETRY_COUNT: 3,
+};
+
+export const SIZE = {
+  REVIEW: 5,
+  LIST_ITEM: 10,
+  RANDOM_ITEM: 5,
+};

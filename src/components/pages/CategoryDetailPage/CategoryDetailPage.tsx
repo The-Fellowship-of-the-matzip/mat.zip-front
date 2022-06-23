@@ -5,6 +5,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
+import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 import { PATHNAME } from "constants/routes";
@@ -38,7 +39,7 @@ function CategoryDetailPage() {
     categories.find((category) => category.id === Number(categoryId))?.name ||
     "카테고리 이름을 불러오지 못했음";
 
-  const fetchParams = { size: 10, filter, campusId, categoryId };
+  const fetchParams = { size: SIZE.LIST_ITEM, filter, campusId, categoryId };
 
   const {
     data,
@@ -50,6 +51,7 @@ function CategoryDetailPage() {
     refetch,
   } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
     getNextPageParam,
+    retry: NETWORK.RETRY_COUNT,
   });
 
   useEffect(() => {
