@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
@@ -11,7 +11,6 @@ import sendLoginRequest from "api/sendLoginRequest";
 import * as S from "components/pages/Login/Login.style";
 
 function Login() {
-  const isInitial = useRef(true);
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -31,11 +30,10 @@ function Login() {
   };
 
   useEffect(() => {
-    if (isInitial.current) {
-      isInitial.current = false;
-      return;
+    const accessToken = window.sessionStorage.getItem("accessToken");
+    if (accessToken !== "") {
+      navigate(PATHNAME.HOME);
     }
-
     handleLogin();
   }, []);
 

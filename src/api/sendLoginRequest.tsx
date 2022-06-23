@@ -12,7 +12,7 @@ const sendLoginRequest = async (code: string) => {
     throw new Error(MESSAGES.LOGIN_FAIL);
   }
 
-  return data.accessCode;
+  return data.accessToken;
 };
 
 export default sendLoginRequest;
