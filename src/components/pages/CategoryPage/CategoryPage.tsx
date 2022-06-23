@@ -9,6 +9,7 @@ import { campusContext } from "context/CampusContextProvider";
 
 import fetchRandomStoreList from "api/fetchRandomStoreList";
 
+import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
@@ -39,7 +40,9 @@ function CategoryPage() {
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
         {isLoading && <Spinner />}
-        {isError && <div>{error instanceof Error && error.message} </div>}
+        {isError && error instanceof Error && (
+          <ErrorImage errorMessage={error.message} />
+        )}
         <StoreList stores={data} />
       </section>
     </S.CategoryPageContainer>

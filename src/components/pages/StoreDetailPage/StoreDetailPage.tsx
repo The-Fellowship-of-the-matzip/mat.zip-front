@@ -10,6 +10,7 @@ import fetchReviewList from "api/fetchReviewList";
 import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";
 
+import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 
@@ -33,8 +34,8 @@ function StoreDetailPage() {
   );
 
   const {
-    data: reviewData,
-    error: reviewError,
+    data,
+    error,
     isLoading,
     isError,
     refetch,
@@ -67,10 +68,10 @@ function StoreDetailPage() {
           <h2>리뷰</h2>
           <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
             {(isLoading || isFetching) && <Spinner />}
-            {isError && (
-              <div>{reviewError instanceof Error && reviewError.message}</div>
+            {isError && error instanceof Error && (
+              <ErrorImage errorMessage={error.message} />
             )}
-            {reviewData?.pages
+            {data?.pages
               .reduce<ReviewShape[]>(
                 (prevReviews, { reviews: currentReviews }) => [
                   ...prevReviews,

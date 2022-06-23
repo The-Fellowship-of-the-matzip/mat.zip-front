@@ -11,7 +11,7 @@ export const ErrorImageContainer = styled.div`
 `;
 
 export const ErrorImageSrc = styled.img`
-  width: 20rem;
+  min-width: 20rem;
   height: 15rem;
   object-fit: cover;
   object-position: center;
