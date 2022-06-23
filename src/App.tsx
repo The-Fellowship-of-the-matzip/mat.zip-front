@@ -14,7 +14,7 @@ function App() {
 
   return (
     <Routes>
-      {campus === null ? (
+      {campus !== "잠실" && campus !== "선릉" ? (
         <Route
           path={SPECIAL_ROUTES.CAMPUS_SELECT.path}
           element={SPECIAL_ROUTES.CAMPUS_SELECT.element}
