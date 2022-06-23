@@ -1,9 +1,11 @@
+import ReactDOM from "react-dom";
+
 import * as S from "components/common/Spinner/Spinner.style";
 
 function Spinner() {
   return (
     <S.SpinnerContainer>
-      <div />
+      <S.SpinDiv />
     </S.SpinnerContainer>
   );
 }

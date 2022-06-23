@@ -1,11 +1,28 @@
 import styled from "styled-components";
 
 export const SpinnerContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: ${({ theme }) => theme.black}33;
+`;
+
+export const SpinDiv = styled.div`
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 50%;
+  border: 0.5rem solid ${({ theme }) => theme.primary};
+  border-right-color: transparent;
+  border-left-color: transparent;
+  animation: spin 1s ease infinite;
 
   @keyframes spin {
     0% {
@@ -14,20 +31,5 @@ export const SpinnerContainer = styled.div`
     100% {
       transform: rotate(360deg);
     }
-  }
-
-  div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4rem;
-    height: 4rem;
-    margin-top: -2rem;
-    margin-left: -2rem;
-    border-radius: 50%;
-    border: 0.5rem solid transparent;
-    border-top-color: ${({ theme }) => theme.primary};
-    border-bottom-color: ${({ theme }) => theme.primary};
-    animation: spin 1s ease infinite;
   }
 `;
