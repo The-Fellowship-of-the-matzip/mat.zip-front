@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import Image from "components/common/Image/Image";
+
 export const StoreDetailPageContainer = styled.section`
   position: relative;
   width: 100%;
@@ -12,7 +14,7 @@ export const StoreDetailPageContainer = styled.section`
   background-color: ${({ theme }) => theme.white};
 `;
 
-export const StorePreviewImage = styled.img`
+export const StorePreviewImage = styled(Image)`
   width: 100%;
   height: 15rem;
   object-fit: cover;
