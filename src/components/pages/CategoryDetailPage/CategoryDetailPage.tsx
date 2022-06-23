@@ -60,11 +60,11 @@ function CategoryDetailPage() {
     fetchNextPage();
   };
 
-  const handleClickStarOrderChip = () => {
-    setFilter("rating");
+  const handleClickRatingOrderChip = () => {
+    setFilter((prev) => (prev === "rating" ? "" : "rating"));
   };
-  const handleClickAbcOrderChip = () => {
-    setFilter("spell");
+  const handleClickSpellOrderChip = () => {
+    setFilter((prev) => (prev === "spell" ? "" : "spell"));
   };
 
   if (categoryId === undefined) {
@@ -85,11 +85,14 @@ function CategoryDetailPage() {
       <S.ChipContainer>
         <Chip
           isSelected={filter === "rating"}
-          onClick={handleClickStarOrderChip}
+          onClick={handleClickRatingOrderChip}
         >
           별점 순
         </Chip>
-        <Chip isSelected={filter === "spell"} onClick={handleClickAbcOrderChip}>
+        <Chip
+          isSelected={filter === "spell"}
+          onClick={handleClickSpellOrderChip}
+        >
           가나다 순
         </Chip>
       </S.ChipContainer>
