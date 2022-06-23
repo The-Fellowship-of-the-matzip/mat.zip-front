@@ -32,7 +32,7 @@ root.render(
       <QueryClientProvider client={queryClient}>
         <LoginContextProvider>
           <CampusContextProvider>
-            <BrowserRouter basename="/mat.zip-front">
+            <BrowserRouter>
               <App />
             </BrowserRouter>
           </CampusContextProvider>

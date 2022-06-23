@@ -1,6 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
 import { useMutation } from "react-query";
+
+import sendReviewPostRequest from "api/sendReviewPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 import StarRating from "components/common/StarRating/StarRating";
@@ -10,7 +11,7 @@ import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/Revi
 type Props = {
   closeSheet: () => void;
   onSubmit: () => void;
-  restaurantId: number;
+  restaurantId: string;
   onSuccess: () => void;
 };
 
@@ -24,23 +25,11 @@ const DEFAULT_RATING = 4;
 
 function ReviewInputBottomSheet({
   closeSheet,
-  onSubmit,
   restaurantId,
   onSuccess,
 }: Props) {
   const mutation = useMutation<unknown, unknown, ReviewInputShape>(
-    (newReview) => {
-      const accessToken = sessionStorage.getItem("accessToken") as string;
-      return axios.post(
-        `https://matzip.link/api/restaurants/${restaurantId}/reviews`,
-        newReview,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-    },
+    sendReviewPostRequest(restaurantId),
     { onSuccess }
   );
 

@@ -1,49 +1,43 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+
+import type { Campus } from "constants/campus";
+import { getCampusId } from "constants/campus";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
+
+import fetchStoreList from "api/fetchStoreList";
+import getNextPageParam from "api/getNextPageParam";
 
 import Chip from "components/common/Chip/Chip";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import StoreList from "components/common/StoreList/StoreList";
 
-import * as S from "components/pages/CategoryDetailPage/index.style";
+import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 import type { Store } from "mock/data";
 import { categories } from "mock/data";
 
-type CategoryStoreListResponse = {
-  hasNext: boolean;
-  restaurants: Store[];
-};
-
 function CategoryDetailPage() {
   const navigate = useNavigate();
+
   const campusName = useContext(campusContext);
-  const campusId = campusName === "잠실" ? 1 : 2;
+  const campusId = getCampusId(campusName as Campus);
   const { categoryId } = useParams();
+
+  const [filter, setFilter] = useState<string | null>(null);
+
   const categoryName =
     categories.find((category) => category.id === Number(categoryId))?.name ||
     "카테고리 이름을 불러오지 못했음";
 
-  const [isSelected, setIsSelected] = useState({
-    starOrder: false,
-    abcOrder: false,
-  });
-
-  const fetchCategoryStoreList = async ({ pageParam = 0 }) => {
-    const filterName = isSelected.abcOrder ? "Spell" : "Rating";
-    const { data } = await axios.get<CategoryStoreListResponse>(`
-    https://matzip.link/api/campuses/${campusId}/restaurants?categoryId=${categoryId}&page=${pageParam}&size=${10}&filter=${filterName}
-    `);
-    return { ...data, nextPageParam: pageParam + 1 };
-  };
+  const fetchParams = { size: 10, filter, campusId, categoryId };
 
   const {
     data,
@@ -53,41 +47,29 @@ function CategoryDetailPage() {
     fetchNextPage,
     isFetching,
     refetch,
-  } = useInfiniteQuery(
-    ["categoryStore", { categoryId, campusId }],
-    fetchCategoryStoreList,
-    {
-      getNextPageParam: (lastPage) => {
-        if (lastPage.hasNext) {
-          return lastPage.nextPageParam;
-        }
-        return;
-      },
-    }
-  );
+  } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+    getNextPageParam,
+  });
 
-  // isSelected 선택 된 값이 달라질때마다 refetch 해서 데이터 업데이트
   useEffect(() => {
     refetch();
-  }, [isSelected]);
+  }, [filter]);
 
   const loadMoreStores = () => {
     fetchNextPage();
   };
 
-  // TODO: 클릭한 값에 따라 stores prop 바꾸기
   const handleClickStarOrderChip = () => {
-    setIsSelected((prev) => ({
-      starOrder: !prev.starOrder,
-      abcOrder: false,
-    }));
+    setFilter("rating");
   };
   const handleClickAbcOrderChip = () => {
-    setIsSelected((prev) => ({
-      starOrder: false,
-      abcOrder: !prev.abcOrder,
-    }));
+    setFilter("spell");
   };
+
+  if (categoryId === undefined) {
+    window.alert("잘못된 접근입니다.");
+    return <Navigate to={PATHNAME.HOME} />;
+  }
 
   return (
     <S.CategoryDetailPageContainer>
@@ -101,15 +83,12 @@ function CategoryDetailPage() {
       </SectionHeader>
       <S.ChipContainer>
         <Chip
-          isSelected={isSelected.starOrder}
+          isSelected={filter === "rating"}
           onClick={handleClickStarOrderChip}
         >
           별점 순
         </Chip>
-        <Chip
-          isSelected={isSelected.abcOrder}
-          onClick={handleClickAbcOrderChip}
-        >
+        <Chip isSelected={filter === "spell"} onClick={handleClickAbcOrderChip}>
           가나다 순
         </Chip>
       </S.ChipContainer>

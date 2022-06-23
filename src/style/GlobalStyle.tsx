@@ -16,6 +16,8 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${theme.white};
+
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   }
 
   code {
@@ -49,6 +51,8 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
         min-height: 100vh;
       `}
   }
+
+  
 `;
 
 export default GlobalStyle;

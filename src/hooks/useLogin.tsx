@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+
+import { SetLoginContext } from "context/LoginContextProvider";
 
 const useLogin = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const setIsLoggedIn = useContext(SetLoginContext);
 
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem("accessToken");
-    if (accessToken) {
-      setIsLogin(true);
-    }
-    setIsLogin(false);
-  }, []);
+  const login = (accessToken: string) => {
+    window.sessionStorage.setItem("accessToken", accessToken);
+    setIsLoggedIn(true);
+  };
 
-  return [isLogin];
+  const logout = () => {
+    window.sessionStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
+  };
+
+  return { login, logout };
 };
 
 export default useLogin;

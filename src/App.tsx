@@ -1,37 +1,34 @@
-import PageLayout from "./components/layout/PageLayout/PageLayout";
-import CategoryDetailPage from "./components/pages/CategoryDetailPage";
-import CategoryPage from "./components/pages/CategoryPage";
-import StoreDetailPage from "./components/pages/StoreDetailPage";
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import ROUTES from "constants/routes";
+
 import { campusContext } from "context/CampusContextProvider";
 
-import CampusSelectPage from "components/pages/CampusSelectPage/CampusSelectPage";
-import Login from "components/pages/Login/Login";
-import SearchResultPage from "components/pages/SearchResultPage/SearchResultPage";
+import PageLayout from "components/layout/PageLayout/PageLayout";
 
 function App() {
   const campus = useContext(campusContext);
 
+  const { MAIN_ROUTES, SPECIAL_ROUTES } = ROUTES;
+
   return (
     <Routes>
       {campus === null ? (
-        <Route path="*" element={<CampusSelectPage />} />
+        <Route
+          path={SPECIAL_ROUTES.CAMPUS_SELECT.path}
+          element={SPECIAL_ROUTES.CAMPUS_SELECT.element}
+        />
       ) : (
         <>
-          <Route path="login" element={<Login />} />
+          <Route
+            path={SPECIAL_ROUTES.LOGIN.path}
+            element={SPECIAL_ROUTES.LOGIN.element}
+          />
           <Route element={<PageLayout />}>
-            <Route path="/" element={<CategoryPage />} />
-            <Route
-              path="/category/:categoryId"
-              element={<CategoryDetailPage />}
-            />
-            <Route
-              path="/store-detail/:storeId"
-              element={<StoreDetailPage />}
-            />
-            <Route path="/search" element={<SearchResultPage />} />
+            {Object.values(MAIN_ROUTES).map(({ path, element }) => (
+              <Route path={path} element={element} />
+            ))}
           </Route>
         </>
       )}

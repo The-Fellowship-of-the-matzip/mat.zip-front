@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
+import { PATHNAME } from "constants/routes";
+
 import * as S from "components/common/SearchBar/SearchBar.style";
 
 interface SearchBarProp {
@@ -23,7 +25,7 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
     e
   ) => {
     e.preventDefault();
-    navigate(`/search?name=${keyword}`);
+    navigate(`${PATHNAME.SEARCH}?name=${keyword}`);
     closeSearchBar();
   };
 

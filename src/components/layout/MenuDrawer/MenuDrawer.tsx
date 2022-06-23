@@ -1,51 +1,50 @@
 import { useContext } from "react";
 import ReactDOM from "react-dom";
 
+import MESSAGES from "constants/messages";
+
 import { campusContext, setCampusContext } from "context/CampusContextProvider";
-import { setLoginContext } from "context/LoginContextProvider";
+
+import useLogin from "hooks/useLogin";
 
 import * as S from "components/layout/MenuDrawer/MenuDrawer.style";
 
-type Props = { closeMenu: () => void; isLogin: boolean };
+type Props = { closeMenu: () => void; isLoggedIn: boolean };
 
-function MenuDrawer({ closeMenu, isLogin }: Props) {
+function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   const campus = useContext(campusContext);
   const setCampus = useContext(setCampusContext);
-  const setIsLogin = useContext(setLoginContext);
+
+  const { logout } = useLogin();
 
   const handleCampusChangeRequest = () => {
-    if (
-      !window.confirm(
-        `현재 선택된 캠퍼스는 ${campus}입니다 캠퍼스를 변경하시겠습니까?`
-      )
-    ) {
+    if (!window.confirm(MESSAGES.CAMPUS_CHANGE_CONFIRM(campus as string))) {
       return;
     }
     setCampus(null);
   };
 
-  const logout = () => {
-    if (!window.confirm("로그아웃 하시겠습니까?")) {
+  const handleLogout = () => {
+    if (!window.confirm(MESSAGES.LOGOUT_CONFIRM)) {
       return;
     }
 
-    window.sessionStorage.removeItem("accessToken");
-    setIsLogin(false);
+    logout();
     closeMenu();
-    window.alert("로그아웃이 되었습니다");
+    window.alert(MESSAGES.LOGOUT_COMPLETE);
   };
 
   return ReactDOM.createPortal(
     <S.Container>
       <S.Backdrop onClick={closeMenu} />
       <S.Content>
-        {isLogin ? (
+        {isLoggedIn ? (
           <>
             <S.Title>어서오세요</S.Title>
             <S.Button onClick={handleCampusChangeRequest}>
               캠퍼스 변경하기
             </S.Button>
-            <S.Button onClick={logout}>로그아웃</S.Button>
+            <S.Button onClick={handleLogout}>로그아웃</S.Button>
           </>
         ) : (
           <>

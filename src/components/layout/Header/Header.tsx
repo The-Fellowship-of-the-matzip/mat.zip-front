@@ -5,10 +5,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+import { PATHNAME } from "constants/routes";
+
 import logoImg from "asset/logo.svg";
 
 import { campusContext } from "context/CampusContextProvider";
-import { loginContext } from "context/LoginContextProvider";
+import { LoginContext } from "context/LoginContextProvider";
 
 import SearchBar from "components/common/SearchBar/SearchBar";
 
@@ -24,7 +26,7 @@ function Header() {
     false
   );
 
-  const isLogin = useContext(loginContext);
+  const isLoggedIn = useContext(LoginContext);
 
   const campus = useContext(campusContext);
 
@@ -47,7 +49,7 @@ function Header() {
         </>
       ) : (
         <>
-          <Link to="/">
+          <Link to={PATHNAME.HOME}>
             <S.PageName>
               <S.LogoImage src={logoImg} alt="mat-zip logo" width="50%" />
               {campus && <S.Campus> in {campus}</S.Campus>}
@@ -61,7 +63,10 @@ function Header() {
               <GiHamburgerMenu />
             </S.MenuButton>
             {isMenuOpen && (
-              <MenuDrawer closeMenu={handleMenuToggle} isLogin={isLogin} />
+              <MenuDrawer
+                closeMenu={handleMenuToggle}
+                isLoggedIn={isLoggedIn}
+              />
             )}
           </S.RightWrapper>
         </>

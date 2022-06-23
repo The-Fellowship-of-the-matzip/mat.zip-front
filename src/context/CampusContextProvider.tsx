@@ -1,8 +1,9 @@
 import React from "react";
 
+import { Campus } from "constants/campus";
+
 import useStoredState from "hooks/useStoredState";
 
-export type Campus = "잠실" | "선릉";
 type CampusContext = Campus | null;
 
 type SetCampusContext = (value: CampusContext) => void;
