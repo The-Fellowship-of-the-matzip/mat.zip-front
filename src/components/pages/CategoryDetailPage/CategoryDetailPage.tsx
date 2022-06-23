@@ -17,6 +17,7 @@ import getNextPageParam from "api/getNextPageParam";
 import Chip from "components/common/Chip/Chip";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
+import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
@@ -93,9 +94,8 @@ function CategoryDetailPage() {
         </Chip>
       </S.ChipContainer>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
-        {isLoading && <div>로딩중...</div>}
+        {(isLoading || isFetching) && <Spinner />}
         {isError && <div>{error instanceof Error && error.message}</div>}
-        {isFetching && <div>다음 페이지 로딩 중</div>}
         <StoreList
           stores={
             data &&

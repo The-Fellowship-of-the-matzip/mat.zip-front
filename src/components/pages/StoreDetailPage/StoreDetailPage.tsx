@@ -10,6 +10,7 @@ import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";
 
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
+import Spinner from "components/common/Spinner/Spinner";
 
 import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
@@ -29,8 +30,8 @@ function StoreDetailPage() {
   const {
     data: reviewData,
     error: reviewError,
-    isLoading: IsReviewLoading,
-    isError: isReviewError,
+    isLoading,
+    isError,
     refetch,
     fetchNextPage,
     isFetching,
@@ -52,8 +53,6 @@ function StoreDetailPage() {
     alert(MESSAGES.LOGIN_REQUIRED);
   };
 
-  const onSubmitReview = () => {};
-
   return restaurantId && storeData ? (
     <S.StoreDetailPageContainer>
       <S.StorePreviewImage alt="가게 이미지" src={storeData?.imageUrl} />
@@ -62,11 +61,10 @@ function StoreDetailPage() {
         <S.ReviewListWrapper>
           <h2>리뷰</h2>
           <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
-            {IsReviewLoading && <div>로딩중...</div>}
-            {isReviewError && (
+            {(isLoading || isFetching) && <Spinner />}
+            {isError && (
               <div>{reviewError instanceof Error && reviewError.message}</div>
             )}
-            {isFetching && <div>다음 페이지</div>}
             {reviewData?.pages
               .reduce<ReviewShape[]>(
                 (prevReviews, { reviews: currentReviews }) => [
@@ -91,7 +89,6 @@ function StoreDetailPage() {
       {isReviewOpen && (
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}
-          onSubmit={onSubmitReview}
           restaurantId={restaurantId}
           onSuccess={() => {
             refetch();
