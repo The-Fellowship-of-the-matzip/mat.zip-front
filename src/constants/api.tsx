@@ -21,3 +21,8 @@ export const SIZE = {
   LIST_ITEM: 10,
   RANDOM_ITEM: 5,
 };
+
+export const FILTERS = [
+  { order: "rating", text: "별점 순" },
+  { order: "spell", text: "가나다 순" },
+];

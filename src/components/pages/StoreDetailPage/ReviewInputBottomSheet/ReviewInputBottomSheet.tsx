@@ -49,7 +49,7 @@ function ReviewInputBottomSheet({
   };
 
   return (
-    <BottomSheet title={"리뷰 남기기"} closeSheet={closeSheet}>
+    <BottomSheet title="리뷰 남기기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmitRequest}>
         <S.Label htmlFor="menu-input">메뉴 입력</S.Label>
         <S.MenuInput

@@ -5,9 +5,10 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
-import { NETWORK, SIZE } from "constants/api";
+import { NETWORK, SIZE, FILTERS } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
+import MESSAGES from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -38,7 +39,7 @@ function CategoryDetailPage() {
 
   const categoryName =
     categories.find((category) => category.id === Number(categoryId))?.name ||
-    "카테고리 이름을 불러오지 못했음";
+    MESSAGES.CATEGORY_FIND_FAILED;
 
   const fetchParams = { size: SIZE.LIST_ITEM, filter, campusId, categoryId };
 
@@ -55,23 +56,22 @@ function CategoryDetailPage() {
     retry: NETWORK.RETRY_COUNT,
   });
 
-  useEffect(() => {
-    refetch();
-  }, [filter]);
-
   const loadMoreStores = () => {
     fetchNextPage();
   };
 
-  const handleClickRatingOrderChip = () => {
-    setFilter((prev) => (prev === "rating" ? "" : "rating"));
-  };
-  const handleClickSpellOrderChip = () => {
-    setFilter((prev) => (prev === "spell" ? "" : "spell"));
+  const handleClickFilterChip = (index: number) => () => {
+    setFilter((prev) =>
+      prev === FILTERS[index].order ? "" : FILTERS[index].order
+    );
   };
 
-  if (categoryId === undefined) {
-    window.alert("잘못된 접근입니다.");
+  useEffect(() => {
+    refetch();
+  }, [filter]);
+
+  if (!categoryId || !Number(categoryId)) {
+    window.alert(MESSAGES.WRONG_PATH);
     return <Navigate to={PATHNAME.HOME} />;
   }
 
@@ -86,18 +86,15 @@ function CategoryDetailPage() {
         {categoryName || ""}
       </SectionHeader>
       <S.ChipContainer>
-        <Chip
-          isSelected={filter === "rating"}
-          onClick={handleClickRatingOrderChip}
-        >
-          별점 순
-        </Chip>
-        <Chip
-          isSelected={filter === "spell"}
-          onClick={handleClickSpellOrderChip}
-        >
-          가나다 순
-        </Chip>
+        {FILTERS.map((chip, index) => (
+          <Chip
+            key={chip.order}
+            isSelected={filter === chip.order}
+            onClick={handleClickFilterChip(index)}
+          >
+            {chip.text}
+          </Chip>
+        ))}
       </S.ChipContainer>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}

@@ -7,6 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -35,7 +36,7 @@ function SearchResultPage() {
     size: SIZE.LIST_ITEM,
     campusId,
     name,
-    type: "/search",
+    type: PATHNAME.SEARCH,
   };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =

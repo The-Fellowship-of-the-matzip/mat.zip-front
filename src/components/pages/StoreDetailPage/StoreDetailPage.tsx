@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { NETWORK, SIZE } from "constants/api";
 import MESSAGES from "constants/messages";
+
+import { LoginContext } from "context/LoginContextProvider";
 
 import type { ReviewShape } from "api/fetchReviewList";
 import fetchReviewList from "api/fetchReviewList";
@@ -22,8 +24,7 @@ import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/St
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-
-  const accessToken = window.sessionStorage.getItem("accessToken");
+  const isLoggedIn = useContext(LoginContext);
 
   const { data: storeData } = useQuery(
     "storeDetailInfo",
@@ -52,16 +53,20 @@ function StoreDetailPage() {
   };
 
   const onReviewOpenClick = () => {
-    if (accessToken) {
+    if (isLoggedIn) {
       setIsReviewOpen(true);
       return;
     }
     alert(MESSAGES.LOGIN_REQUIRED);
   };
 
-  return restaurantId && storeData ? (
+  if (!restaurantId || !storeData) return null;
+  return (
     <S.StoreDetailPageContainer>
-      <S.StorePreviewImage alt="가게 이미지" src={storeData?.imageUrl} />
+      <S.StorePreviewImage
+        alt={`${storeData.name} 가게 이미지`}
+        src={storeData?.imageUrl}
+      />
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
         <S.ReviewListWrapper>
@@ -79,15 +84,12 @@ function StoreDetailPage() {
                 ],
                 []
               )
-              .map((reviewData) => {
-                const { id, author, rating, content, menu } = reviewData;
-                return (
-                  <StoreReviewItem
-                    key={id}
-                    reviewInfo={{ id, author, rating, content, menu }}
-                  />
-                );
-              })}
+              .map(({ id, author, rating, content, menu }) => (
+                <StoreReviewItem
+                  key={id}
+                  reviewInfo={{ id, author, rating, content, menu }}
+                />
+              ))}
           </InfiniteScroll>
         </S.ReviewListWrapper>
       </S.StoreReviewContentWrapper>
@@ -102,7 +104,7 @@ function StoreDetailPage() {
         />
       )}
     </S.StoreDetailPageContainer>
-  ) : null;
+  );
 }
 
 export default StoreDetailPage;
