@@ -10,8 +10,6 @@ export const SpinnerContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-
-  background-color: ${({ theme }) => theme.black}33;
 `;
 
 export const SpinDiv = styled.div`
