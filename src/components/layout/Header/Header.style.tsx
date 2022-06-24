@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import Image from "components/common/Image/Image";
 
-export const Container = styled.header<{ isSearchOpen: boolean }>`
+export const Container = styled.header`
   min-width: 23.45rem;
   height: fit-content;
   margin: 0 auto;
@@ -14,13 +14,6 @@ export const Container = styled.header<{ isSearchOpen: boolean }>`
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.primary};
-
-  ${({ isSearchOpen }) =>
-    isSearchOpen &&
-    css`
-      justify-content: flex-end;
-      gap: 0.5rem;
-    `};
 `;
 
 export const PageName = styled.h1`
