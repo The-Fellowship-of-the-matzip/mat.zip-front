@@ -83,7 +83,7 @@ function CategoryDetailPage() {
           navigate(-1);
         }}
       >
-        {categoryName || ""}
+        {categoryName || "%ERROR%"}
       </SectionHeader>
       <S.ChipContainer>
         {FILTERS.map((chip, index) => (
