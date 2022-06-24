@@ -15,6 +15,7 @@ import fetchStoreList from "api/fetchStoreList";
 import getNextPageParam from "api/getNextPageParam";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
+import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
@@ -73,7 +74,7 @@ function SearchResultPage() {
         {searchResults.length ? (
           <StoreList stores={searchResults} />
         ) : (
-          <S.NoSearchResultText>검색 결과가 없습니다.</S.NoSearchResultText>
+          <ErrorText>검색 결과가 없습니다.</ErrorText>
         )}
       </InfiniteScroll>
     </S.SearchResultPageContainer>

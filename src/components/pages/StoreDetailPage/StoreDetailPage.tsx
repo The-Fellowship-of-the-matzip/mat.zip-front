@@ -13,6 +13,7 @@ import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
+import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 
@@ -93,7 +94,7 @@ function StoreDetailPage() {
                 />
               ))
             ) : (
-              <S.NoReviewText>작성된 리뷰가 없습니다.</S.NoReviewText>
+              <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
             )}
           </InfiniteScroll>
         </S.ReviewListWrapper>

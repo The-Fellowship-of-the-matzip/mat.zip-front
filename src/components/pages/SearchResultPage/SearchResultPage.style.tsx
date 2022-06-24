@@ -13,5 +13,3 @@ export const ChipContainer = styled.div`
   justify-content: flex-end;
   gap: 1rem;
 `;
-
-export const NoSearchResultText = styled.p``;

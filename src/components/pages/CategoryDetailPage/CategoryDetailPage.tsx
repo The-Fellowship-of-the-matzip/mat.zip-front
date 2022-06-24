@@ -18,6 +18,7 @@ import getNextPageParam from "api/getNextPageParam";
 
 import Chip from "components/common/Chip/Chip";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
+import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
@@ -66,6 +67,12 @@ function CategoryDetailPage() {
     );
   };
 
+  const categoryStores =
+    data?.pages.reduce<Store[]>(
+      (stores, page) => [...stores, ...page.restaurants],
+      []
+    ) || [];
+
   useEffect(() => {
     refetch();
   }, [filter]);
@@ -74,7 +81,6 @@ function CategoryDetailPage() {
     window.alert(MESSAGES.WRONG_PATH);
     return <Navigate to={PATHNAME.HOME} />;
   }
-
   return (
     <S.CategoryDetailPageContainer>
       <SectionHeader
@@ -101,15 +107,11 @@ function CategoryDetailPage() {
         {isError && error instanceof Error && (
           <ErrorImage errorMessage={error.message} />
         )}
-        <StoreList
-          stores={
-            data &&
-            data.pages.reduce<Store[]>(
-              (stores, page) => [...stores, ...page.restaurants],
-              []
-            )
-          }
-        />
+        {categoryStores.length ? (
+          <StoreList stores={categoryStores} />
+        ) : (
+          <ErrorText>가게 정보가 없습니다.</ErrorText>
+        )}
       </InfiniteScroll>
     </S.CategoryDetailPageContainer>
   );
