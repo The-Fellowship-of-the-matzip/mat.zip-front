@@ -25,6 +25,8 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
     e
   ) => {
     e.preventDefault();
+
+    if (!keyword) return;
     navigate(`${PATHNAME.SEARCH}?name=${keyword}`);
     closeSearchBar();
   };
@@ -36,6 +38,8 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
         placeholder="검색"
         value={keyword}
         onChange={handleSearchInput}
+        min={1}
+        max={30}
       />
       <S.Button type="submit">
         <BsSearch />
