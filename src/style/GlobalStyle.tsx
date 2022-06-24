@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
   }
 
   #app  {
+    max-width: 37.5rem;
     min-width: 23.45rem;
     margin: 0 auto;
 
