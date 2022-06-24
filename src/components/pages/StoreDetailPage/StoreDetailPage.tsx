@@ -60,6 +60,15 @@ function StoreDetailPage() {
     alert(MESSAGES.LOGIN_REQUIRED);
   };
 
+  const reviews =
+    data?.pages.reduce<ReviewShape[]>(
+      (prevReviews, { reviews: currentReviews }) => [
+        ...prevReviews,
+        ...currentReviews,
+      ],
+      []
+    ) || [];
+
   if (!restaurantId || !storeData) return null;
   return (
     <S.StoreDetailPageContainer>
@@ -76,20 +85,16 @@ function StoreDetailPage() {
             {isError && error instanceof Error && (
               <ErrorImage errorMessage={error.message} />
             )}
-            {data?.pages
-              .reduce<ReviewShape[]>(
-                (prevReviews, { reviews: currentReviews }) => [
-                  ...prevReviews,
-                  ...currentReviews,
-                ],
-                []
-              )
-              .map(({ id, author, rating, content, menu }) => (
+            {reviews.length ? (
+              reviews.map(({ id, author, rating, content, menu }) => (
                 <StoreReviewItem
                   key={id}
                   reviewInfo={{ id, author, rating, content, menu }}
                 />
-              ))}
+              ))
+            ) : (
+              <S.NoReviewText>작성된 리뷰가 없습니다.</S.NoReviewText>
+            )}
           </InfiniteScroll>
         </S.ReviewListWrapper>
       </S.StoreReviewContentWrapper>

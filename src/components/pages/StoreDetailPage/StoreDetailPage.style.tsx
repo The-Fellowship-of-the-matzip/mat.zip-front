@@ -35,6 +35,10 @@ export const ReviewListWrapper = styled.div`
   margin-top: 1.5rem;
 `;
 
+export const NoReviewText = styled.p`
+  color: ${({ theme }) => theme.black};
+`;
+
 export const ReviewPlusButton = styled.button`
   position: fixed;
   font-size: 2rem;
