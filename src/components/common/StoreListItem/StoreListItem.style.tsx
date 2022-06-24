@@ -10,7 +10,7 @@ export const ListItemContainer = styled.li`
   width: 100%;
   padding: 1.5rem 2rem;
 
-  border-top: 0.065rem solid ${({ theme }) => theme.black};
+  border-top: 0.065rem solid ${({ theme }) => theme.secondary};
   background-color: ${({ theme }) => theme.white};
   cursor: pointer;
 

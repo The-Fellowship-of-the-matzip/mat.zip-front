@@ -33,5 +33,5 @@ export const Button = styled.button`
   border-radius: 1.25rem;
 
   background-color: ${({ theme }) => theme.primary};
-  box-shadow: 0.065rem 0.065rem 0.065rem ${({ theme }) => theme.secondary};
+  box-shadow: 0.065rem 0.065rem 0.2rem ${({ theme }) => theme.primary};
 `;
