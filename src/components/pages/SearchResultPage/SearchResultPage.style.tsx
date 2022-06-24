@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CategoryDetailPageContainer = styled.section`
+export const SearchResultPageContainer = styled.section`
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -12,4 +12,8 @@ export const ChipContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+`;
+
+export const NoSearchResultText = styled.p`
+  color: ${({ theme }) => theme.black};
 `;

@@ -20,7 +20,7 @@ import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
-import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
+import * as S from "components/pages/SearchResultPage/SearchResultPage.style";
 
 import type { Store } from "mock/data";
 
@@ -49,8 +49,14 @@ function SearchResultPage() {
     fetchNextPage();
   };
 
+  const searchResults =
+    data?.pages.reduce<Store[]>(
+      (stores, page) => [...stores, ...page.restaurants],
+      []
+    ) || [];
+
   return (
-    <S.CategoryDetailPageContainer>
+    <S.SearchResultPageContainer>
       <SectionHeader
         leadingIcon={<MdArrowBackIos />}
         onClick={() => {
@@ -64,17 +70,13 @@ function SearchResultPage() {
         {isError && error instanceof Error && (
           <ErrorImage errorMessage={error.message} />
         )}
-        <StoreList
-          stores={
-            data &&
-            data.pages.reduce<Store[]>(
-              (stores, page) => [...stores, ...page.restaurants],
-              []
-            )
-          }
-        />
+        {searchResults.length ? (
+          <StoreList stores={searchResults} />
+        ) : (
+          <S.NoSearchResultText>검색 결과가 없습니다.</S.NoSearchResultText>
+        )}
       </InfiniteScroll>
-    </S.CategoryDetailPageContainer>
+    </S.SearchResultPageContainer>
   );
 }
 
