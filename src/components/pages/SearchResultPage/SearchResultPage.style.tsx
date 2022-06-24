@@ -14,6 +14,4 @@ export const ChipContainer = styled.div`
   gap: 1rem;
 `;
 
-export const NoSearchResultText = styled.p`
-  color: ${({ theme }) => theme.black};
-`;
+export const NoSearchResultText = styled.p``;

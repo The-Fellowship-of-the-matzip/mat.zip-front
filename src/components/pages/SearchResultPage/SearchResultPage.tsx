@@ -63,7 +63,7 @@ function SearchResultPage() {
           navigate(-1);
         }}
       >
-        {`${name} 검색결과 입니다.`}
+        {`' ${name} ' 검색결과입니다.`}
       </SectionHeader>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}

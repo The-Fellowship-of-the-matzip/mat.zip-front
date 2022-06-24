@@ -40,6 +40,18 @@ export const Content = styled.aside`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+
+  transform-origin: right;
+  animation: slidein 0.2s ease;
+
+  @keyframes slidein {
+    0% {
+      transform: scale(0, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
 `;
 
 export const Title = styled.h1`
@@ -62,8 +74,6 @@ export const Button = styled.button`
 export const LoginLink = styled.a`
   font-size: 1rem;
   font-weight: 600;
-
-  color: ${({ theme }) => theme.black};
 
   &:visited {
     color: ${({ theme }) => theme.black};

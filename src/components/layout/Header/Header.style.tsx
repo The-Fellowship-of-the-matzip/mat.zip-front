@@ -32,7 +32,6 @@ export const LogoImage = styled(Image)`
 
 export const Campus = styled.span`
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.black};
 `;
 
 export const RightWrapper = styled.div`
@@ -65,8 +64,6 @@ export const SearchToggleButton = styled.button`
   border: none;
   height: 1.5rem;
 
-  color: ${({ theme }) => theme.black};
-
   font-size: 1.5rem;
 
   &:focus {
@@ -78,8 +75,6 @@ export const MenuButton = styled.button`
   background-color: transparent;
   border: none;
   height: 1.5rem;
-
-  color: ${({ theme }) => theme.black};
 
   font-size: 1.5rem;
 

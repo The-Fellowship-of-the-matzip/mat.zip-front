@@ -64,7 +64,10 @@ function ReviewInputBottomSheet({
           onChange={(e) => setReviewContent(e.target.value)}
         />
         <S.BottomWrapper>
-          <StarRating rating={rating} setRating={setRating} />
+          <S.StarRatingWrapper>
+            <S.Label>별점</S.Label>
+            <StarRating rating={rating} setRating={setRating} />
+          </S.StarRatingWrapper>
           <S.SubmitButton>제출</S.SubmitButton>
         </S.BottomWrapper>
       </S.Form>
