@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 
 import { NETWORK } from "constants/api";
+import MESSAGES from "constants/messages";
+import { INPUT_MAX_LENGTH } from "constants/rules";
 
 import sendReviewPostRequest from "api/sendReviewPostRequest";
 
@@ -48,6 +50,36 @@ function ReviewInputBottomSheet({
     closeSheet();
   };
 
+  const handleMenuInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const {
+      target: { value },
+    } = e;
+
+    if (value.length > INPUT_MAX_LENGTH.MENU) {
+      e.preventDefault();
+      alert(MESSAGES.EXCEED_MENU_MAX_LENGTH);
+      return;
+    }
+
+    setMenuInput(value);
+  };
+
+  const handleContentInput: React.ChangeEventHandler<HTMLTextAreaElement> = (
+    e
+  ) => {
+    const {
+      target: { value },
+    } = e;
+
+    if (value.length > INPUT_MAX_LENGTH.REVIEW_CONTENT) {
+      e.preventDefault();
+      alert(MESSAGES.EXCEED_REVIEW_CONTENT_MAX_LENGTH);
+      return;
+    }
+
+    setReviewContent(value);
+  };
+
   return (
     <BottomSheet title="리뷰 남기기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmitRequest}>
@@ -55,13 +87,15 @@ function ReviewInputBottomSheet({
         <S.MenuInput
           id="menu-input"
           value={menuInput}
-          onChange={(e) => setMenuInput(e.target.value)}
+          onChange={handleMenuInput}
+          maxLength={20}
         />
         <S.Label htmlFor="review">총평</S.Label>
         <S.ReviewTextArea
           id="review"
           value={reviewContent}
-          onChange={(e) => setReviewContent(e.target.value)}
+          onChange={handleContentInput}
+          maxLength={255}
         />
         <S.BottomWrapper>
           <S.StarRatingWrapper>
