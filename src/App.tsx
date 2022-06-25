@@ -27,7 +27,7 @@ function App() {
           />
           <Route element={<PageLayout />}>
             {Object.values(MAIN_ROUTES).map(({ path, element }) => (
-              <Route path={path} element={element} />
+              <Route key={path} path={path} element={element} />
             ))}
           </Route>
         </>
