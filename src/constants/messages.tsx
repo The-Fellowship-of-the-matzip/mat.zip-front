@@ -1,3 +1,5 @@
+import { INPUT_MAX_LENGTH } from "./rules";
+
 const MESSAGES = {
   LOGIN_REQUIRED: "로그인 후 사용해주세요",
   LOGIN_FAIL: "로그인에 실패했습니다. 다시 시도해주세요.",
@@ -7,7 +9,12 @@ const MESSAGES = {
 
   CAMPUS_CHANGE_CONFIRM: (currentCampus: string) =>
     `현재 선택된 캠퍼스는 ${currentCampus}입니다 캠퍼스를 변경하시겠습니까?`,
-  CATEGORY_FIND_FAILED: "카테고리 이름을 불러오지 못했음",
+  CATEGORY_FIND_FAILED: "카테고리 이름을 불러오지 못했습니다.",
+
+  EXCEED_MENU_MAX_LENGTH: `메뉴 이름은 ${INPUT_MAX_LENGTH.MENU}자 이내로 입력해주세요.`,
+  EXCEED_REVIEW_CONTENT_MAX_LENGTH: `리뷰는 ${INPUT_MAX_LENGTH.REVIEW_CONTENT}자 이내로 입력해주세요.`,
+
+  TOKEN_EXPIRED: "유효하지 않은 토큰입니다",
 
   WRONG_PATH: "잘못된 접근입니다.",
 };

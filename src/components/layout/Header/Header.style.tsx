@@ -32,6 +32,7 @@ export const LogoImage = styled(Image)`
 
 export const Campus = styled.span`
   font-size: 0.8rem;
+  color: ${({ theme }) => theme.black};
 `;
 
 export const RightWrapper = styled.div`
