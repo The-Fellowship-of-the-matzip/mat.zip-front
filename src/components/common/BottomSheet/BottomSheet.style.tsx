@@ -15,22 +15,20 @@ export const Backdrop = styled.div`
 `;
 
 export const Content = styled.div`
+  position: fixed;
+  bottom: 0;
+  max-width: 37.5rem;
   width: 100%;
+  min-height: 6.25rem;
+  padding: 1.5rem;
+
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  min-height: 6.25rem;
-  padding: 1.5rem;
-
   border-radius: 0.625rem 0.625rem 0 0;
-
   background-color: ${({ theme }) => theme.white};
-  box-shadow: 0 -0.125rem 0.815rem 0.065rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -0.2rem 0.4rem 0 ${({ theme }) => theme.secondary};
 `;
 
 export const Title = styled.h1``;

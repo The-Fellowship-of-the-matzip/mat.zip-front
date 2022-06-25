@@ -1,5 +1,3 @@
-import ReactDOM from "react-dom";
-
 import * as S from "components/common/Spinner/Spinner.style";
 
 function Spinner() {

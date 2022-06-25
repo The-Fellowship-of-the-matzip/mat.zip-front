@@ -49,7 +49,7 @@ function ReviewInputBottomSheet({
   };
 
   return (
-    <BottomSheet title={"리뷰 남기기"} closeSheet={closeSheet}>
+    <BottomSheet title="리뷰 남기기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmitRequest}>
         <S.Label htmlFor="menu-input">메뉴 입력</S.Label>
         <S.MenuInput
@@ -64,7 +64,10 @@ function ReviewInputBottomSheet({
           onChange={(e) => setReviewContent(e.target.value)}
         />
         <S.BottomWrapper>
-          <StarRating rating={rating} setRating={setRating} />
+          <S.StarRatingWrapper>
+            <S.Label>별점</S.Label>
+            <StarRating rating={rating} setRating={setRating} />
+          </S.StarRatingWrapper>
           <S.SubmitButton>제출</S.SubmitButton>
         </S.BottomWrapper>
       </S.Form>

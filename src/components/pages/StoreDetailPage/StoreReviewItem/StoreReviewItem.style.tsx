@@ -12,7 +12,8 @@ export const StoreReviewContainer = styled.section`
   height: fit-content;
   padding: 1rem 1.25rem;
 
-  border: 0.065rem solid ${({ theme }) => theme.secondary};
+  box-shadow: 0 0 0.15rem ${({ theme }) => theme.black};
+  border: none;
   border-radius: 0.25rem;
 `;
 

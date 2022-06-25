@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-interface CategoryItemButtonProps {
-  width: string;
-}
-
 export const CategoryItemContainer = styled.li`
   display: flex;
   flex-direction: column;
@@ -16,11 +12,11 @@ export const CategoryItemContainer = styled.li`
   cursor: pointer;
 `;
 
-export const CategoryItemButton = styled.button<CategoryItemButtonProps>`
-  ${({ theme, width }) => `
-    width: ${width};
-    height: ${width};
+export const CategoryItemButton = styled.button`
+  width: 3rem;
+  height: 3rem;
 
+  ${({ theme }) => `
     box-shadow: 0.065rem 0.065rem 0.065rem ${theme.primary};
     background-color: ${theme.primary};
     color: ${theme.white};

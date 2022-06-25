@@ -8,7 +8,7 @@ type CampusContext = Campus | null;
 
 type SetCampusContext = (value: CampusContext) => void;
 
-export const campusContext = React.createContext<null | CampusContext>(null);
+export const campusContext = React.createContext<CampusContext>(null);
 export const setCampusContext = React.createContext<SetCampusContext>(() => {});
 
 function CampusContextProvider({ children }: React.PropsWithChildren<{}>) {

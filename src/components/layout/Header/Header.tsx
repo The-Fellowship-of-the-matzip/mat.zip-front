@@ -17,6 +17,9 @@ import SearchBar from "components/common/SearchBar/SearchBar";
 import * as S from "components/layout/Header/Header.style";
 
 function Header() {
+  const isLoggedIn = useContext(LoginContext);
+  const campus = useContext(campusContext);
+
   const [isSearchOpen, setSearchOpen] = useReducer(
     (isOpen: boolean) => !isOpen,
     false
@@ -25,10 +28,6 @@ function Header() {
     (isOpen: boolean) => !isOpen,
     false
   );
-
-  const isLoggedIn = useContext(LoginContext);
-
-  const campus = useContext(campusContext);
 
   const handleSearchOpen = () => {
     setSearchOpen();
@@ -39,38 +38,35 @@ function Header() {
   };
 
   return (
-    <S.Container isSearchOpen={isSearchOpen}>
-      {isSearchOpen ? (
-        <>
-          <SearchBar closeSearchBar={setSearchOpen} />
-          <S.SearchToggleButton onClick={handleSearchOpen}>
-            <MdCancel />
-          </S.SearchToggleButton>
-        </>
-      ) : (
-        <>
-          <Link to={PATHNAME.HOME}>
-            <S.PageName>
-              <S.LogoImage src={logoImg} alt="mat-zip logo" />
-              {campus && <S.Campus> in {campus}</S.Campus>}
-            </S.PageName>
-          </Link>
-          <S.RightWrapper>
+    <S.Container>
+      <Link to={PATHNAME.HOME}>
+        <S.PageName>
+          <S.LogoImage src={logoImg} alt="MAT.ZIP logo" />
+          {campus && <S.Campus> in {campus}</S.Campus>}
+        </S.PageName>
+      </Link>
+      <S.RightWrapper>
+        {isSearchOpen ? (
+          <>
+            <SearchBar closeSearchBar={setSearchOpen} />
+            <S.SearchToggleButton onClick={handleSearchOpen}>
+              <MdCancel />
+            </S.SearchToggleButton>
+          </>
+        ) : (
+          <>
             <S.SearchToggleButton onClick={handleSearchOpen}>
               <BsSearch />
             </S.SearchToggleButton>
             <S.MenuButton onClick={handleMenuToggle}>
               <GiHamburgerMenu />
             </S.MenuButton>
-            {isMenuOpen && (
-              <MenuDrawer
-                closeMenu={handleMenuToggle}
-                isLoggedIn={isLoggedIn}
-              />
-            )}
-          </S.RightWrapper>
-        </>
-      )}
+          </>
+        )}
+        {isMenuOpen && (
+          <MenuDrawer closeMenu={handleMenuToggle} isLoggedIn={isLoggedIn} />
+        )}
+      </S.RightWrapper>
     </S.Container>
   );
 }

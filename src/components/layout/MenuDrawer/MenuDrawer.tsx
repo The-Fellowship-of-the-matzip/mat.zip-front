@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import ReactDOM from "react-dom";
 
+import { AUTH_LINK } from "constants/api";
 import MESSAGES from "constants/messages";
 
 import { campusContext, setCampusContext } from "context/CampusContextProvider";
@@ -49,13 +50,10 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
         ) : (
           <>
             <S.Title>로그인을 해주세요</S.Title>
-
             <S.Button onClick={handleCampusChangeRequest}>
               캠퍼스 변경하기
             </S.Button>
-            <S.LoginLink href="https://github.com/login/oauth/authorize?client_id=a51717e6e0bb9e34da8e">
-              로그인
-            </S.LoginLink>
+            <S.LoginLink href={AUTH_LINK}>로그인</S.LoginLink>
           </>
         )}
       </S.Content>

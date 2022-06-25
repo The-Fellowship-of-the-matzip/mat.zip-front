@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { NETWORK, SIZE } from "constants/api";
 import MESSAGES from "constants/messages";
+
+import { LoginContext } from "context/LoginContextProvider";
 
 import type { ReviewShape } from "api/fetchReviewList";
 import fetchReviewList from "api/fetchReviewList";
@@ -11,6 +13,7 @@ import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
+import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 
@@ -22,8 +25,7 @@ import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/St
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-
-  const accessToken = window.sessionStorage.getItem("accessToken");
+  const isLoggedIn = useContext(LoginContext);
 
   const { data: storeData } = useQuery(
     "storeDetailInfo",
@@ -52,16 +54,29 @@ function StoreDetailPage() {
   };
 
   const onReviewOpenClick = () => {
-    if (accessToken) {
+    if (isLoggedIn) {
       setIsReviewOpen(true);
       return;
     }
     alert(MESSAGES.LOGIN_REQUIRED);
   };
 
-  return restaurantId && storeData ? (
+  const reviews =
+    data?.pages.reduce<ReviewShape[]>(
+      (prevReviews, { reviews: currentReviews }) => [
+        ...prevReviews,
+        ...currentReviews,
+      ],
+      []
+    ) || [];
+
+  if (!restaurantId || !storeData) return null;
+  return (
     <S.StoreDetailPageContainer>
-      <S.StorePreviewImage alt="가게 이미지" src={storeData?.imageUrl} />
+      <S.StorePreviewImage
+        alt={`${storeData.name} 가게 이미지`}
+        src={storeData?.imageUrl}
+      />
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
         <S.ReviewListWrapper>
@@ -71,23 +86,16 @@ function StoreDetailPage() {
             {isError && error instanceof Error && (
               <ErrorImage errorMessage={error.message} />
             )}
-            {data?.pages
-              .reduce<ReviewShape[]>(
-                (prevReviews, { reviews: currentReviews }) => [
-                  ...prevReviews,
-                  ...currentReviews,
-                ],
-                []
-              )
-              .map((reviewData) => {
-                const { id, author, rating, content, menu } = reviewData;
-                return (
-                  <StoreReviewItem
-                    key={id}
-                    reviewInfo={{ id, author, rating, content, menu }}
-                  />
-                );
-              })}
+            {reviews.length ? (
+              reviews.map(({ id, author, rating, content, menu }) => (
+                <StoreReviewItem
+                  key={id}
+                  reviewInfo={{ id, author, rating, content, menu }}
+                />
+              ))
+            ) : (
+              <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
+            )}
           </InfiniteScroll>
         </S.ReviewListWrapper>
       </S.StoreReviewContentWrapper>
@@ -102,7 +110,7 @@ function StoreDetailPage() {
         />
       )}
     </S.StoreDetailPageContainer>
-  ) : null;
+  );
 }
 
 export default StoreDetailPage;

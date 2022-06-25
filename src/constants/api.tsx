@@ -21,3 +21,11 @@ export const SIZE = {
   LIST_ITEM: 10,
   RANDOM_ITEM: 5,
 };
+
+export const FILTERS = [
+  { order: "rating", text: "별점 순" },
+  { order: "spell", text: "가나다 순" },
+];
+
+export const AUTH_LINK =
+  "https://github.com/login/oauth/authorize?client_id=a51717e6e0bb9e34da8e";

@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
+
+import { LoginContext } from "context/LoginContextProvider";
 
 import useLogin from "hooks/useLogin";
 
@@ -12,6 +14,7 @@ import * as S from "components/pages/Login/Login.style";
 
 function Login() {
   const navigate = useNavigate();
+  const isLoggedIn = useContext(LoginContext);
 
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
@@ -30,9 +33,9 @@ function Login() {
   };
 
   useEffect(() => {
-    const accessToken = window.sessionStorage.getItem("accessToken");
-    if (accessToken !== "") {
+    if (isLoggedIn) {
       navigate(PATHNAME.HOME);
+      return;
     }
     handleLogin();
   }, []);

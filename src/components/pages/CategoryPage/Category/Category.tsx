@@ -25,7 +25,6 @@ function Category({ categories }: CategoryProps) {
         <CategoryItem
           key={id}
           buttonText={name[0]}
-          width="3rem"
           onClick={handleClickCategoryItem(id)}
         >
           {name}

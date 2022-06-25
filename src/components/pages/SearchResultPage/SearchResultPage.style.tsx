@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CategoryDetailPageContainer = styled.section`
+export const SearchResultPageContainer = styled.section`
   padding: 1rem;
   display: flex;
   flex-direction: column;

@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import Image from "components/common/Image/Image";
 
-export const Container = styled.header<{ isSearchOpen: boolean }>`
+export const Container = styled.header`
   min-width: 23.45rem;
   height: fit-content;
   margin: 0 auto;
@@ -14,13 +14,6 @@ export const Container = styled.header<{ isSearchOpen: boolean }>`
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.primary};
-
-  ${({ isSearchOpen }) =>
-    isSearchOpen &&
-    css`
-      justify-content: flex-end;
-      gap: 0.5rem;
-    `};
 `;
 
 export const PageName = styled.h1`
@@ -39,7 +32,6 @@ export const LogoImage = styled(Image)`
 
 export const Campus = styled.span`
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.black};
 `;
 
 export const RightWrapper = styled.div`
@@ -72,8 +64,6 @@ export const SearchToggleButton = styled.button`
   border: none;
   height: 1.5rem;
 
-  color: ${({ theme }) => theme.black};
-
   font-size: 1.5rem;
 
   &:focus {
@@ -85,8 +75,6 @@ export const MenuButton = styled.button`
   background-color: transparent;
   border: none;
   height: 1.5rem;
-
-  color: ${({ theme }) => theme.black};
 
   font-size: 1.5rem;
 

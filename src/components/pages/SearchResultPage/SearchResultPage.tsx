@@ -7,6 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { NETWORK, SIZE } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -14,12 +15,13 @@ import fetchStoreList from "api/fetchStoreList";
 import getNextPageParam from "api/getNextPageParam";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
+import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
-import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
+import * as S from "components/pages/SearchResultPage/SearchResultPage.style";
 
 import type { Store } from "mock/data";
 
@@ -35,7 +37,7 @@ function SearchResultPage() {
     size: SIZE.LIST_ITEM,
     campusId,
     name,
-    type: "/search",
+    type: PATHNAME.SEARCH,
   };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
@@ -48,32 +50,34 @@ function SearchResultPage() {
     fetchNextPage();
   };
 
+  const searchResults =
+    data?.pages.reduce<Store[]>(
+      (stores, page) => [...stores, ...page.restaurants],
+      []
+    ) || [];
+
   return (
-    <S.CategoryDetailPageContainer>
+    <S.SearchResultPageContainer>
       <SectionHeader
         leadingIcon={<MdArrowBackIos />}
         onClick={() => {
           navigate(-1);
         }}
       >
-        {`${name} 검색결과 입니다.`}
+        {`' ${name} ' 검색결과입니다.`}
       </SectionHeader>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}
         {isError && error instanceof Error && (
           <ErrorImage errorMessage={error.message} />
         )}
-        <StoreList
-          stores={
-            data &&
-            data.pages.reduce<Store[]>(
-              (stores, page) => [...stores, ...page.restaurants],
-              []
-            )
-          }
-        />
+        {searchResults.length ? (
+          <StoreList stores={searchResults} />
+        ) : (
+          <ErrorText>검색 결과가 없습니다.</ErrorText>
+        )}
       </InfiniteScroll>
-    </S.CategoryDetailPageContainer>
+    </S.SearchResultPageContainer>
   );
 }
 
