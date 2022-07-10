@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { PATHNAME } from "constants/routes";
+import ROUTES, { PATHNAME } from "constants/routes";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
@@ -13,6 +13,7 @@ interface SearchBarProp {
 function SearchBar({ closeSearchBar }: SearchBarProp) {
   const [keyword, setKeyword] = useState("");
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
@@ -32,6 +33,12 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
       closeSearchBar();
     }
   };
+
+  useEffect(() => {
+    if (location.pathname !== ROUTES.MAIN_ROUTES.SEARCH.path) {
+      setKeyword("");
+    }
+  }, [location]);
 
   return (
     <S.Container onSubmit={handleSearchButtonClick}>
