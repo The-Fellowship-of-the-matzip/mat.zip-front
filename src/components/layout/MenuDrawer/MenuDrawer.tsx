@@ -2,6 +2,8 @@ import { useContext } from "react";
 import ReactDOM from "react-dom";
 
 import { AUTH_LINK } from "constants/api";
+import { getOtherCampus } from "constants/campus";
+import type { Campus } from "constants/campus";
 import MESSAGES from "constants/messages";
 
 import { campusContext, setCampusContext } from "context/CampusContextProvider";
@@ -14,15 +16,21 @@ type Props = { closeMenu: () => void; isLoggedIn: boolean };
 
 function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   const campus = useContext(campusContext);
+  const otherCampus = getOtherCampus(campus as Campus);
   const setCampus = useContext(setCampusContext);
 
   const { logout } = useLogin();
 
   const handleCampusChangeRequest = () => {
-    if (!window.confirm(MESSAGES.CAMPUS_CHANGE_CONFIRM(campus as string))) {
+    if (
+      !window.confirm(
+        MESSAGES.CAMPUS_CHANGE_CONFIRM(campus as Campus, otherCampus)
+      )
+    ) {
       return;
     }
-    setCampus(null);
+    setCampus(otherCampus);
+    closeMenu();
   };
 
   const handleLogout = () => {
