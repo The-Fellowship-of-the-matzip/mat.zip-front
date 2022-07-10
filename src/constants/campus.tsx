@@ -8,4 +8,8 @@ const CAMPUS = {
 export const getCampusId = (campusName: Campus) =>
   campusName === CAMPUS.JAMSIL.name ? CAMPUS.JAMSIL.id : CAMPUS.SEOULLEUNG.id;
 
+export const getOtherCampus = (currentCampus: Campus) =>
+  currentCampus === CAMPUS.JAMSIL.name
+    ? CAMPUS.SEOULLEUNG.name
+    : CAMPUS.JAMSIL.name;
 export default CAMPUS;
