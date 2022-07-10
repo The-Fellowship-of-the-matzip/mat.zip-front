@@ -3,20 +3,11 @@ import styled from "styled-components";
 export const Container = styled.form`
   display: flex;
 
-  transform-origin: right;
-  animation: slidein 0.2s ease;
-
-  @keyframes slidein {
-    0% {
-      transform: scale(0, 1);
-    }
-    100% {
-      transform: scale(1, 1);
-    }
-  }
+  width: 100%;
 `;
 
 export const SearchInput = styled.input`
+  width: 100%;
   padding: 0.5rem 1rem;
 
   background-color: ${({ theme }) => theme.white};

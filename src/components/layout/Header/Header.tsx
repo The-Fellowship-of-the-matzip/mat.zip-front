@@ -1,8 +1,6 @@
 import MenuDrawer from "../MenuDrawer/MenuDrawer";
 import { useContext, useReducer } from "react";
-import { BsSearch } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
@@ -20,18 +18,10 @@ function Header() {
   const isLoggedIn = useContext(LoginContext);
   const campus = useContext(campusContext);
 
-  const [isSearchOpen, setSearchOpen] = useReducer(
-    (isOpen: boolean) => !isOpen,
-    false
-  );
   const [isMenuOpen, setMenuOpen] = useReducer(
     (isOpen: boolean) => !isOpen,
     false
   );
-
-  const handleSearchOpen = () => {
-    setSearchOpen();
-  };
 
   const handleMenuToggle = () => {
     setMenuOpen();
@@ -39,34 +29,23 @@ function Header() {
 
   return (
     <S.Container>
-      <Link to={PATHNAME.HOME}>
-        <S.PageName>
-          <S.LogoImage src={logoImg} alt="MAT.ZIP logo" />
-          {campus && <S.Campus> in {campus}</S.Campus>}
-        </S.PageName>
-      </Link>
-      <S.RightWrapper>
-        {isSearchOpen ? (
-          <>
-            <SearchBar closeSearchBar={setSearchOpen} />
-            <S.SearchToggleButton onClick={handleSearchOpen}>
-              <MdCancel />
-            </S.SearchToggleButton>
-          </>
-        ) : (
-          <>
-            <S.SearchToggleButton onClick={handleSearchOpen}>
-              <BsSearch />
-            </S.SearchToggleButton>
-            <S.MenuButton onClick={handleMenuToggle}>
-              <GiHamburgerMenu />
-            </S.MenuButton>
-          </>
-        )}
-        {isMenuOpen && (
-          <MenuDrawer closeMenu={handleMenuToggle} isLoggedIn={isLoggedIn} />
-        )}
-      </S.RightWrapper>
+      <S.TopWrapper>
+        <Link to={PATHNAME.HOME}>
+          <S.PageName>
+            <S.LogoImage src={logoImg} alt="MAT.ZIP logo" />
+            {campus && <S.Campus> in {campus}</S.Campus>}
+          </S.PageName>
+        </Link>
+        <S.RightWrapper>
+          <S.MenuButton onClick={handleMenuToggle}>
+            <GiHamburgerMenu />
+          </S.MenuButton>
+          {isMenuOpen && (
+            <MenuDrawer closeMenu={handleMenuToggle} isLoggedIn={isLoggedIn} />
+          )}
+        </S.RightWrapper>
+      </S.TopWrapper>
+      <SearchBar />
     </S.Container>
   );
 }

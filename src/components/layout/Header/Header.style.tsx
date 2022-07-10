@@ -8,12 +8,19 @@ export const Container = styled.header`
   margin: 0 auto;
 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
 
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.primary};
+`;
+
+export const TopWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const PageName = styled.h1`
