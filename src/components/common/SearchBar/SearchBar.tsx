@@ -7,7 +7,7 @@ import { PATHNAME } from "constants/routes";
 import * as S from "components/common/SearchBar/SearchBar.style";
 
 interface SearchBarProp {
-  closeSearchBar: () => void;
+  closeSearchBar?: () => void;
 }
 
 function SearchBar({ closeSearchBar }: SearchBarProp) {
@@ -28,7 +28,9 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
 
     if (!keyword) return;
     navigate(`${PATHNAME.SEARCH}?name=${keyword}`);
-    closeSearchBar();
+    if (closeSearchBar !== undefined) {
+      closeSearchBar();
+    }
   };
 
   return (
