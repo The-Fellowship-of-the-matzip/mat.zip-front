@@ -1,7 +1,9 @@
 import { rest } from "msw";
 
+import { API_BASE_URL } from "constants/api";
+
 export const userHandler = [
-  rest.get("/api/login", (req, res, ctx) => {
+  rest.get(`${API_BASE_URL}/login`, (req, res, ctx) => {
     const code = req.url.searchParams.get("code");
     if (!code) {
       return res(

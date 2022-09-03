@@ -1,5 +1,7 @@
 import { rest } from "msw";
 
+import { API_BASE_URL } from "constants/api";
+
 import { reviews } from "mock/data";
 
 interface PostReviewReqBody {
@@ -9,31 +11,37 @@ interface PostReviewReqBody {
 }
 
 export const reviewHandler = [
-  rest.get("/api/restaurants/:restaurantId/reviews", (req, res, ctx) => {
-    // const {restaurantId} = req.params // 안 씀
-    const page = req.url.searchParams.get("page");
-    const size = req.url.searchParams.get("size");
+  rest.get(
+    `${API_BASE_URL}/restaurants/:restaurantId/reviews`,
+    (req, res, ctx) => {
+      // const {restaurantId} = req.params // 안 씀
+      const page = req.url.searchParams.get("page");
+      const size = req.url.searchParams.get("size");
 
-    if (!page || !size) {
-      // 이거 메세지는 맘대로 넣음
-      return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
+      if (!page || !size) {
+        // 이거 메세지는 맘대로 넣음
+        return res(
+          ctx.status(400),
+          ctx.json({ message: "잘못된 요청입니다." })
+        );
+      }
+
+      const sizeNo = Number(size); // 1, ...
+      const pageNo = Number(page); // 0, ...
+      const startIndex = pageNo * sizeNo;
+      const endIndex = startIndex + sizeNo;
+      // 식당 리뷰 조회 - mocking은 restaurantId 상관없이 항상 같은 데이터 return
+      return res(
+        ctx.status(200),
+        ctx.json({
+          hasNext: endIndex < reviews.length,
+          reviews: reviews.slice(startIndex, endIndex),
+        })
+      );
     }
-
-    const sizeNo = Number(size); // 1, ...
-    const pageNo = Number(page); // 0, ...
-    const startIndex = pageNo * sizeNo;
-    const endIndex = startIndex + sizeNo;
-    // 식당 리뷰 조회 - mocking은 restaurantId 상관없이 항상 같은 데이터 return
-    return res(
-      ctx.status(200),
-      ctx.json({
-        hasNext: endIndex < reviews.length,
-        reviews: reviews.slice(startIndex, endIndex),
-      })
-    );
-  }),
+  ),
   rest.post<PostReviewReqBody>(
-    "/api/restaurants/:restaurantId/reviews",
+    `${API_BASE_URL}/restaurants/:restaurantId/reviews`,
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       const { content, rating, menu } = req.body;
