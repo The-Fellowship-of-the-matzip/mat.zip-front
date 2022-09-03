@@ -22,7 +22,7 @@ const categories = {
 function StoreRequestList({ storeRequests }: Props) {
   const RequestListItems = storeRequests.map(
     ({ categoryId, name, isRegistered }) => (
-      <S.ListItem>
+      <S.ListItem key={name}>
         <S.CategoryRow>{categories[categoryId]}</S.CategoryRow>
         <S.StoreNameRow>{name}</S.StoreNameRow>
         <S.RegisteredRow>
