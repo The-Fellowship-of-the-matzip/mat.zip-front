@@ -4,6 +4,9 @@ export const Container = styled.ul``;
 
 export const ListItem = styled.li`
   display: flex;
+  align-items: center;
+
+  height: 3rem;
   width: 90%;
   margin: 0 auto;
   padding: 0.5rem;

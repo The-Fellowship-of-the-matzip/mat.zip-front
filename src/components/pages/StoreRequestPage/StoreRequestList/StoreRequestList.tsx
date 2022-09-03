@@ -1,4 +1,8 @@
+import { BsCheckCircleFill } from "react-icons/bs";
+
 import * as S from "components/pages/StoreRequestPage/StoreRequestList/StoreRequestList.style";
+
+import { theme } from "style/Theme";
 
 interface Props {
   storeRequests: StoreRequest[];
@@ -21,7 +25,11 @@ function StoreRequestList({ storeRequests }: Props) {
       <S.ListItem>
         <S.CategoryRow>{categories[categoryId]}</S.CategoryRow>
         <S.StoreNameRow>{name}</S.StoreNameRow>
-        <S.RegisteredRow>{isRegistered && "등록됨"}</S.RegisteredRow>
+        <S.RegisteredRow>
+          {isRegistered && (
+            <BsCheckCircleFill color={theme.primary} size="1.5rem" />
+          )}
+        </S.RegisteredRow>
       </S.ListItem>
     )
   );
