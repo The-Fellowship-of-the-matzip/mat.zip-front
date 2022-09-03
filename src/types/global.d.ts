@@ -1,4 +1,4 @@
-const categories = {
+declare const categories = {
   1: "한식",
   2: "중식/아시안",
   3: "일식",
@@ -9,7 +9,7 @@ const categories = {
   7: "카페/디저트",
 } as const;
 
-type StoreRequest = {
+declare type StoreRequest = {
   categoryId: keyof typeof categories;
   name: string;
   isRegistered: boolean;
