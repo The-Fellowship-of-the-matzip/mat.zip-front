@@ -18,7 +18,9 @@ export const ListHead = styled(ListItem)`
 `;
 
 export const ListData = styled.div`
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const CategoryRow = styled(ListData)`
