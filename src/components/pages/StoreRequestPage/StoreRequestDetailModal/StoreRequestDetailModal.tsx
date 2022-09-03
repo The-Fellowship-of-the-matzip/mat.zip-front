@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { MdDeleteForever, MdEdit } from "react-icons/md";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -52,8 +53,14 @@ function StoreRequestDetailModal({
         </S.DetailContainer>
         {isAuthor && !isRegistered && (
           <S.ButtonContainer>
-            <S.DeleteButton>삭제</S.DeleteButton>
-            <S.CustomButton>수정</S.CustomButton>
+            <S.DeleteButton>
+              <MdDeleteForever size="1rem" />
+              삭제
+            </S.DeleteButton>
+            <S.CustomButton>
+              <MdEdit size="1rem" />
+              수정
+            </S.CustomButton>
           </S.ButtonContainer>
         )}
       </S.ContentContainer>

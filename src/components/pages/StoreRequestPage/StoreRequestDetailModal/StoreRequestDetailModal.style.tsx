@@ -54,6 +54,9 @@ export const CustomButton = styled.button`
   padding: 0.5rem 0.8rem;
   box-shadow: 1px 1px 1px #8d8d8d;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 export const DeleteButton = styled(CustomButton)`
