@@ -10,8 +10,10 @@ declare const categories = {
 } as const;
 
 declare type StoreRequest = {
+  id: string;
   categoryId: keyof typeof categories;
   name: string;
+  author: string;
   isRegistered: boolean;
   isAuthor: boolean;
 };

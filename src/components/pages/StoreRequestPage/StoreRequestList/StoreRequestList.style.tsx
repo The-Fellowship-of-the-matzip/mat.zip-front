@@ -4,6 +4,7 @@ export const Container = styled.ul``;
 
 export const ListItem = styled.li`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   height: 3rem;
@@ -21,16 +22,27 @@ export const ListData = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const CategoryRow = styled(ListData)`
-  width: 30%;
+  gap: 0.5rem;
 `;
 
 export const StoreNameRow = styled(ListData)`
-  width: 50%;
+  width: 60%;
 `;
 
 export const RegisteredRow = styled(ListData)`
   width: 20%;
+`;
+
+export const ShowDetailRow = styled(ListData)`
+  width: 20%;
+`;
+
+export const ShowDetailButton = styled.button`
+  background-color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.white};
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.2rem;
+  box-shadow: 1px 1px 1px #8d8d8d;
+  font-size: 0.8rem;
 `;
