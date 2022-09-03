@@ -73,7 +73,9 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
             <S.LoginLink href={AUTH_LINK}>로그인</S.LoginLink>
           </>
         )}
-        <S.CustomLink to={"/"}>식당 추가 요청하기</S.CustomLink>
+        <S.CustomLink to={PATHNAME.STORE_REQUEST}>
+          식당 추가 요청하기
+        </S.CustomLink>
       </S.Content>
     </S.Container>,
     document.querySelector("#app") as HTMLElement

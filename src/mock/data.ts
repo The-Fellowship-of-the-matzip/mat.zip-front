@@ -223,6 +223,45 @@ export const reviews: Review[] = [
   },
 ];
 
+export const StoreRequests: StoreRequest[] = [
+  {
+    categoryId: 1,
+    name: "식당이름1",
+    isAuthor: false,
+    isRegistered: false,
+  },
+  {
+    categoryId: 2,
+    name: "식당이름2",
+    isAuthor: false,
+    isRegistered: false,
+  },
+  {
+    categoryId: 3,
+    name: "식당이름3",
+    isAuthor: false,
+    isRegistered: false,
+  },
+  {
+    categoryId: 1,
+    name: "식당이름4",
+    isAuthor: false,
+    isRegistered: false,
+  },
+  {
+    categoryId: 2,
+    name: "식당이름5",
+    isAuthor: false,
+    isRegistered: false,
+  },
+  {
+    categoryId: 3,
+    name: "식당이름6",
+    isAuthor: false,
+    isRegistered: true,
+  },
+];
+
 // 실제 서버 category와는 다름 - 실제 서버는 id 속성이 없고, 카페/디저트까지만 존재
 // 실제 서버에서 가져오지 말고 static으로 해도 될 듯
 // TODO: 백엔드와 카테고리 종류 및 id 정하기

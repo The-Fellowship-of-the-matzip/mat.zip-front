@@ -5,6 +5,7 @@ import {
   Login,
   SearchResultPage,
   StoreDetailPage,
+  StoreRequestPage,
 } from "components/pages";
 
 export const PATHNAME = {
@@ -13,6 +14,7 @@ export const PATHNAME = {
   CATEGORY_DETAIL: "/category",
   STORE_DETAIL: "/store-detail",
   SEARCH: "/search",
+  STORE_REQUEST: "store-request",
   WILD_CARD: "*",
 };
 
@@ -27,6 +29,10 @@ const MAIN_ROUTES = {
     element: <StoreDetailPage />,
   },
   SEARCH: { path: PATHNAME.SEARCH, element: <SearchResultPage /> },
+  STORE_REQUEST: {
+    path: PATHNAME.STORE_REQUEST,
+    element: <StoreRequestPage />,
+  },
 };
 
 const SPECIAL_ROUTES = {
