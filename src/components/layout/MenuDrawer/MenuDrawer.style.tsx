@@ -77,6 +77,8 @@ export const LoginLink = styled.a`
   font-size: 1rem;
   font-weight: 600;
 
+  color: ${({ theme }) => theme.black};
+
   &:visited {
     color: ${({ theme }) => theme.black};
   }
