@@ -1,8 +1,8 @@
 {
-  "name": "mat.zip-front",
+  "name": "mat.zip",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://uk960214.github.io/mat.zip-front",
+  "homepage": "https://matzip.today",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
