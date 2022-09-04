@@ -10,8 +10,8 @@ export const ENDPOINTS = {
   STORE_DETAIL: (restaurantId: string) => `/restaurants/${restaurantId}`,
   STORE_LIST: (campusId: CampusId, type?: string) =>
     `/campuses/${campusId}/restaurants${type !== undefined ? type : ""}`,
-  STORE_REQUESTS: (campusId: CampusId, size: number) =>
-    `/campuses/${campusId}/restaurants/requests?size=${size}`,
+  STORE_REQUESTS: (campusId: CampusId) =>
+    `/campuses/${campusId}/restaurants/requests`,
 };
 
 export const NETWORK = {

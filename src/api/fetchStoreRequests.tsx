@@ -14,10 +14,9 @@ interface Params {
 
 const fetchStoreRequests = async ({ pageParam = 0, queryKey }: Params) => {
   const [, { size, campusId }] = queryKey;
-  const { data } = await axiosInstance.get(
-    ENDPOINTS.STORE_REQUESTS(campusId, 15),
-    { params: { page: pageParam, size } }
-  );
+  const { data } = await axiosInstance.get(ENDPOINTS.STORE_REQUESTS(campusId), {
+    params: { page: pageParam, size },
+  });
 
   return { ...data, nextPageParam: pageParam + 1 };
 };

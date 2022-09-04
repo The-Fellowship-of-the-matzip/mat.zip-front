@@ -25,10 +25,14 @@ function StoreRequestPage() {
   const [isSheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["storeRequest", { campusId: 1 }], fetchStoreRequests, {
-      getNextPageParam,
-      retry: NETWORK.RETRY_COUNT,
-    });
+    useInfiniteQuery(
+      ["storeRequest", { campusId: 1, size: 15 }],
+      fetchStoreRequests,
+      {
+        getNextPageParam,
+        retry: NETWORK.RETRY_COUNT,
+      }
+    );
 
   const storeRequests =
     data?.pages.reduce<StoreRequest[]>(
