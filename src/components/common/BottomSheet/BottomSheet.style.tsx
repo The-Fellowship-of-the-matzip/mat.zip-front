@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
-export const Container = styled.section``;
+export const Container = styled.section<{ scrollOffset: number }>`
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: ${({ scrollOffset }) => scrollOffset}px;
+  left: 0;
+`;
 
 export const Backdrop = styled.div`
   width: 100%;

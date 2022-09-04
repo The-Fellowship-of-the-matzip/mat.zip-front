@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import * as S from "components/common/Modal/Modal.style";
@@ -8,8 +8,20 @@ interface Props {
 }
 
 function Modal({ children, closeModal }: PropsWithChildren<Props>) {
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    setScrollOffset(window.scrollY);
+
+    return () => {
+      document.body.style.overflow = "auto";
+      setScrollOffset(0);
+    };
+  }, []);
+
   return ReactDOM.createPortal(
-    <S.Container>
+    <S.Container scrollOffset={scrollOffset}>
       <S.Backdrop onClick={closeModal} />
       <S.Content>
         <S.CloseButton onClick={closeModal}>닫기</S.CloseButton>

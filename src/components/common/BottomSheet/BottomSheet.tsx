@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import * as S from "components/common/BottomSheet/BottomSheet.style";
@@ -10,8 +11,20 @@ type Props = {
 };
 
 function BottomSheet({ title, closeSheet, children }: Props) {
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    setScrollOffset(window.scrollY);
+
+    return () => {
+      document.body.style.overflow = "auto";
+      setScrollOffset(0);
+    };
+  }, []);
+
   return ReactDOM.createPortal(
-    <S.Container>
+    <S.Container scrollOffset={scrollOffset}>
       <S.Backdrop onClick={closeSheet} />
       <S.Content>
         <S.Title>{title}</S.Title>
