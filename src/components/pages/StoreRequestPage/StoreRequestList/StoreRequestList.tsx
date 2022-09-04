@@ -29,7 +29,7 @@ function StoreRequestList({ storeRequests }: Props) {
 
   const RequestListItems = storeRequests.map(
     ({ id, categoryId, name, author, isRegistered, isAuthor }) => (
-      <S.ListItem key={name}>
+      <S.ListItem key={id}>
         <S.StoreNameRow>{sliceStoreName(name)}</S.StoreNameRow>
         <S.RegisteredRow>
           {isRegistered && (
@@ -61,6 +61,7 @@ function StoreRequestList({ storeRequests }: Props) {
         <S.RegisteredRow>등록됨</S.RegisteredRow>
         <S.ShowDetailRow>상세보기</S.ShowDetailRow>
       </S.ListHead>
+
       {RequestListItems}
     </S.Container>
   );
