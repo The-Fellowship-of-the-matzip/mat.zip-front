@@ -24,6 +24,14 @@ export const storeRequestHandler = [
     }
   ),
 
+  rest.post(
+    `${API_BASE_URL}/campuses/:campusId/restaurants/requests`,
+    (req, res, ctx) => {
+      console.log(req);
+      return res(ctx.status(201));
+    }
+  ),
+
   rest.delete(
     `${API_BASE_URL}/campuses/:campusId/restaurants/requests/:requestId`,
     (_, res, ctx) => {

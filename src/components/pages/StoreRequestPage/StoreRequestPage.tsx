@@ -82,7 +82,10 @@ function StoreRequestPage() {
         <ErrorText>가게 정보가 없습니다.</ErrorText>
       )}
       {isSheetOpen && (
-        <StoreRequestBottomSheet closeSheet={() => setSheetOpen(false)} />
+        <StoreRequestBottomSheet
+          closeSheet={() => setSheetOpen(false)}
+          refetchList={refetch}
+        />
       )}
     </S.Container>
   );
