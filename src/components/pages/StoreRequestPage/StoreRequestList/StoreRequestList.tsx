@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 
+import StoreRequestEditBottomSheet from "components/pages/StoreRequestPage/StoreRequestBottomSheet/StoreRequestEditBottomSheet";
 import StoreRequestDetailModal from "components/pages/StoreRequestPage/StoreRequestDetailModal/StoreRequestDetailModal";
 import * as S from "components/pages/StoreRequestPage/StoreRequestList/StoreRequestList.style";
 
@@ -13,6 +14,7 @@ interface Props {
 
 function StoreRequestList({ storeRequests, refetchList }: Props) {
   const [detailOpenId, setDetailOpenId] = useState<string | null>(null);
+  const [editOpenId, setEditOpenId] = useState<string | null>(null);
 
   const handleRequestDetailOpen: (
     id: string
@@ -22,6 +24,15 @@ function StoreRequestList({ storeRequests, refetchList }: Props) {
 
   const handleRequestDetailClose = () => {
     setDetailOpenId(null);
+  };
+
+  const handleEditOpen = (id: string) => () => {
+    setEditOpenId(id);
+    setDetailOpenId(null);
+  };
+
+  const handleRequestEditClose = () => {
+    setEditOpenId(null);
   };
 
   const sliceStoreName = (name: string) => {
@@ -50,8 +61,17 @@ function StoreRequestList({ storeRequests, refetchList }: Props) {
             isRegistered={isRegistered}
             isAuthor={isAuthor}
             author={author}
+            handleEditOpen={handleEditOpen(id)}
             closeModal={handleRequestDetailClose}
             handleAfterRequest={refetchList}
+          />
+        )}
+        {editOpenId === id && (
+          <StoreRequestEditBottomSheet
+            id={id}
+            initValue={{ categoryId: String(categoryId), name }}
+            closeSheet={handleRequestEditClose}
+            refetchList={refetchList}
           />
         )}
       </S.ListItem>

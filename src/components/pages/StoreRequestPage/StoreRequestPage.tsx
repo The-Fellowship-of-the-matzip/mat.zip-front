@@ -16,7 +16,7 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 
-import StoreRequestBottomSheet from "components/pages/StoreRequestPage/StoreRequestBottomSheet/StoreRequestBottomSheet";
+import StoreRequestCreateBottomSheet from "components/pages/StoreRequestPage/StoreRequestBottomSheet/StoreRequestCreateBottomSheet";
 import StoreRequestList from "components/pages/StoreRequestPage/StoreRequestList/StoreRequestList";
 import * as S from "components/pages/StoreRequestPage/StoreRequestPage.style";
 
@@ -82,7 +82,7 @@ function StoreRequestPage() {
         <ErrorText>가게 정보가 없습니다.</ErrorText>
       )}
       {isSheetOpen && (
-        <StoreRequestBottomSheet
+        <StoreRequestCreateBottomSheet
           closeSheet={() => setSheetOpen(false)}
           refetchList={refetch}
         />

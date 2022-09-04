@@ -32,6 +32,7 @@ const categories = {
 } as const;
 
 interface Props extends StoreRequest {
+  handleEditOpen: () => void;
   closeModal: () => void;
   handleAfterRequest: () => void;
 }
@@ -43,6 +44,7 @@ function StoreRequestDetailModal({
   categoryId,
   isRegistered,
   isAuthor,
+  handleEditOpen,
   closeModal,
   handleAfterRequest,
 }: Props) {
@@ -101,7 +103,7 @@ function StoreRequestDetailModal({
               <MdDeleteForever size="1rem" />
               삭제
             </S.DeleteButton>
-            <S.CustomButton>
+            <S.CustomButton onClick={handleEditOpen}>
               <MdEdit size="1rem" />
               수정
             </S.CustomButton>
