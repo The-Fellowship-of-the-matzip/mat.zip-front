@@ -23,4 +23,11 @@ export const storeRequestHandler = [
       return res(ctx.status(200), ctx.json(response));
     }
   ),
+
+  rest.delete(
+    `${API_BASE_URL}/campuses/:campusId/restaurants/requests/:requestId`,
+    (_, res, ctx) => {
+      return res(ctx.status(204));
+    }
+  ),
 ];

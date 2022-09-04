@@ -1,8 +1,18 @@
+import { AxiosError } from "axios";
 import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
+import { useMutation } from "react-query";
+
+import { NETWORK } from "constants/api";
+import { Campus, getCampusId } from "constants/campus";
+import MESSAGES from "constants/messages";
 
 import { campusContext } from "context/CampusContextProvider";
+
+import useLogin from "hooks/useLogin";
+
+import sendStoreRequestDeleteRequest from "api/sendStoreReqeustDeleteRequest";
 
 import Modal from "components/common/Modal/Modal";
 
@@ -21,15 +31,49 @@ const categories = {
   7: "카페/디저트",
 } as const;
 
+interface Props extends StoreRequest {
+  closeModal: () => void;
+  handleAfterRequest: () => void;
+}
+
 function StoreRequestDetailModal({
+  id,
   name,
   author,
   categoryId,
   isRegistered,
   isAuthor,
   closeModal,
-}: Omit<StoreRequest, "id"> & { closeModal: () => void }) {
+  handleAfterRequest,
+}: Props) {
   const campus = useContext(campusContext);
+  const { logout } = useLogin();
+
+  const handleDeleteClick = () => {
+    mutation.mutate();
+  };
+
+  const handleSuccess = () => {
+    closeModal();
+    handleAfterRequest();
+  };
+
+  const handleSubmitError = (error: AxiosError) => {
+    if (error.code === "401") {
+      alert(MESSAGES.TOKEN_EXPIRED);
+      logout();
+    }
+  };
+
+  const mutation = useMutation(
+    sendStoreRequestDeleteRequest(getCampusId(campus as Campus), id),
+    {
+      onSuccess: handleSuccess,
+      onError: handleSubmitError,
+      retry: NETWORK.RETRY_COUNT,
+    }
+  );
+
   return (
     <Modal closeModal={closeModal}>
       <S.ContentContainer>
@@ -53,7 +97,7 @@ function StoreRequestDetailModal({
         </S.DetailContainer>
         {isAuthor && !isRegistered && (
           <S.ButtonContainer>
-            <S.DeleteButton>
+            <S.DeleteButton onClick={handleDeleteClick}>
               <MdDeleteForever size="1rem" />
               삭제
             </S.DeleteButton>

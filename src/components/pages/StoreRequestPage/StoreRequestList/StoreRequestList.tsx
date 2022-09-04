@@ -8,9 +8,10 @@ import { theme } from "style/Theme";
 
 interface Props {
   storeRequests: StoreRequest[];
+  refetchList: () => void;
 }
 
-function StoreRequestList({ storeRequests }: Props) {
+function StoreRequestList({ storeRequests, refetchList }: Props) {
   const [detailOpenId, setDetailOpenId] = useState<string | null>(null);
 
   const handleRequestDetailOpen: (
@@ -43,12 +44,14 @@ function StoreRequestList({ storeRequests }: Props) {
         </S.ShowDetailRow>
         {detailOpenId === id && (
           <StoreRequestDetailModal
+            id={id}
             name={name}
             categoryId={categoryId}
             isRegistered={isRegistered}
             isAuthor={isAuthor}
             author={author}
             closeModal={handleRequestDetailClose}
+            handleAfterRequest={refetchList}
           />
         )}
       </S.ListItem>

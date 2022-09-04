@@ -24,15 +24,22 @@ function StoreRequestPage() {
   const isLoggedIn = useContext(LoginContext);
   const [isSheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
-  const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(
-      ["storeRequest", { campusId: 1, size: 15 }],
-      fetchStoreRequests,
-      {
-        getNextPageParam,
-        retry: NETWORK.RETRY_COUNT,
-      }
-    );
+  const {
+    data,
+    error,
+    isLoading,
+    isError,
+    fetchNextPage,
+    isFetching,
+    refetch,
+  } = useInfiniteQuery(
+    ["storeRequest", { campusId: 1, size: 15 }],
+    fetchStoreRequests,
+    {
+      getNextPageParam,
+      retry: NETWORK.RETRY_COUNT,
+    }
+  );
 
   const storeRequests =
     data?.pages.reduce<StoreRequest[]>(
@@ -66,7 +73,10 @@ function StoreRequestPage() {
       {(isLoading || isFetching) && <Spinner />}
       {storeRequests.length ? (
         <InfiniteScroll handleContentLoad={fetchNextPage} hasMore={true}>
-          <StoreRequestList storeRequests={storeRequests} />
+          <StoreRequestList
+            storeRequests={storeRequests}
+            refetchList={refetch}
+          />
         </InfiniteScroll>
       ) : (
         <ErrorText>가게 정보가 없습니다.</ErrorText>
