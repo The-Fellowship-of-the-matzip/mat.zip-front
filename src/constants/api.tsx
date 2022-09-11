@@ -1,4 +1,5 @@
-export const API_BASE_URL = "https://matzip.link/api";
+export const API_BASE_URL =
+  process.env.NODE_ENV === "production" ? "https://matzip.link/api" : "";
 
 type CampusId = 1 | 2;
 
@@ -10,6 +11,10 @@ export const ENDPOINTS = {
   STORE_DETAIL: (restaurantId: string) => `/restaurants/${restaurantId}`,
   STORE_LIST: (campusId: CampusId, type?: string) =>
     `/campuses/${campusId}/restaurants${type !== undefined ? type : ""}`,
+  UPDATE_REVIEW_ITEM: (restaurantId: string, articleId: string) =>
+    `/restaurants/${restaurantId}/reviews/${articleId}`,
+  DELETE_REVIEW_ITEM: (restaurantId: string, articleId: string) =>
+    `/restaurants/${restaurantId}/reviews/${articleId}`,
 };
 
 export const NETWORK = {
