@@ -17,6 +17,7 @@ export interface Review {
   content: string;
   rating: number;
   menu: string;
+  updatable: boolean;
 }
 
 export const stores: Store[] = [
@@ -165,6 +166,7 @@ export const reviews: Review[] = [
     content: "걍 그럼",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
+    updatable: false,
   },
   {
     id: 2,
@@ -176,6 +178,7 @@ export const reviews: Review[] = [
     content: "정말 맛있어요!!",
     rating: 5,
     menu: "무 닭볶음탕 (중)",
+    updatable: false,
   },
   {
     id: 3,
@@ -187,6 +190,7 @@ export const reviews: Review[] = [
     content: "걍 그럼",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
+    updatable: false,
   },
   {
     id: 4,
@@ -198,6 +202,7 @@ export const reviews: Review[] = [
     content: "정말 맛있어요!!",
     rating: 5,
     menu: "무 닭볶음탕 (중)",
+    updatable: false,
   },
   {
     id: 5,
@@ -209,6 +214,7 @@ export const reviews: Review[] = [
     content: "걍 그럼",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
+    updatable: false,
   },
   {
     id: 6,
@@ -220,6 +226,7 @@ export const reviews: Review[] = [
     content: "정말 맛있어요!!",
     rating: 5,
     menu: "무 닭볶음탕 (중)",
+    updatable: false,
   },
 ];
 

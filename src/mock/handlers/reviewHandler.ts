@@ -1,12 +1,15 @@
 import { rest } from "msw";
 
-import { reviews } from "mock/data";
+import { reviews as reviewsData } from "mock/data";
 
 interface PostReviewReqBody {
   content: string;
   rating: number;
   menu: string;
 }
+interface PutReviewReqBody extends PostReviewReqBody {}
+
+let reviews = reviewsData;
 
 export const reviewHandler = [
   rest.get("/api/restaurants/:restaurantId/reviews", (req, res, ctx) => {
@@ -35,20 +38,22 @@ export const reviewHandler = [
   rest.post<PostReviewReqBody>(
     "/api/restaurants/:restaurantId/reviews",
     (req, res, ctx) => {
-      const token = req.headers.get("Authorization");
+      const { restaurantId } = req.params;
       const { content, rating, menu } = req.body;
+
+      if (!restaurantId || !content || !rating || !menu) {
+        return res(
+          ctx.status(400),
+          ctx.json({ message: "잘못된 요청입니다." })
+        );
+      }
+
+      const token = req.headers.get("Authorization");
 
       if (!token?.split("Bearer ").length) {
         return res(
           ctx.status(400),
           ctx.json({ message: "유효하지 않은 토큰입니다." })
-        );
-      }
-
-      if (!content || !rating || !menu) {
-        return res(
-          ctx.status(400),
-          ctx.json({ message: "잘못된 요청입니다." })
         );
       }
 
@@ -62,8 +67,56 @@ export const reviewHandler = [
         content,
         rating,
         menu,
+        updatable: true,
       });
       return res(ctx.status(201));
+    }
+  ),
+  rest.put<PutReviewReqBody>(
+    "/api/restaurants/:restaurantId/reviews/:reviewId",
+    (req, res, ctx) => {
+      const { restaurantId, reviewId } = req.params;
+      const { content, rating, menu } = req.body;
+
+      if (!restaurantId || !reviewId || !content || !rating || !menu)
+        return res(ctx.status(400), ctx.json({ message: "잘못된 요청" }));
+
+      const isExist = reviews.some((review) => review.id === Number(reviewId));
+      if (!isExist)
+        return res(
+          ctx.status(404),
+          ctx.json({ message: "해당하는 리뷰가 없음" })
+        );
+
+      reviews = reviews.map((review) => {
+        if (review.id === Number(reviewId))
+          return {
+            ...review,
+            content,
+            rating,
+            menu,
+          };
+        return review;
+      });
+    }
+  ),
+  rest.delete(
+    "/api/restaurants/:restaurantId/reviews/:reviewId",
+    (req, res, ctx) => {
+      const { restaurantId, reviewId } = req.params;
+
+      if (!restaurantId || !reviewId)
+        return res(ctx.status(400), ctx.json({ message: "잘못된 요청" }));
+
+      const isExist = reviews.some((review) => review.id === Number(reviewId));
+      if (!isExist)
+        return res(
+          ctx.status(404),
+          ctx.json({ message: "해당하는 리뷰가 없음" })
+        );
+
+      reviews = reviews.filter((review) => review.id !== Number(reviewId));
+      return res(ctx.status(204));
     }
   ),
 ];
