@@ -1,4 +1,4 @@
-export const categories = {
+export const categories: { [key: string]: string } = {
   1: "한식",
   2: "중식/아시안",
   3: "일식",

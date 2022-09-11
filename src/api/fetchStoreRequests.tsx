@@ -2,11 +2,6 @@ import { ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-// type QueryKey = {
-//   size: number,
-//   campusId: 1 | 2;
-// }
-
 interface Params {
   pageParam?: number;
   queryKey: any;
@@ -15,7 +10,7 @@ interface Params {
 interface StoreRequestGetResponse {
   items: {
     id: number;
-    categoryId: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+    categoryId: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
     name: string;
     author: string;
     updatable: boolean;

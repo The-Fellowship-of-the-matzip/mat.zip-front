@@ -226,7 +226,7 @@ export const reviews: Review[] = [
 export const storeRequests: StoreRequest[] = [
   {
     id: "1",
-    categoryId: 1,
+    categoryId: "1",
     name: "식당이름1",
     author: "블링",
     isAuthor: true,
@@ -234,7 +234,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "2",
-    categoryId: 2,
+    categoryId: "2",
     name: "식당이름2",
     author: "후니",
     isAuthor: false,
@@ -242,7 +242,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "3",
-    categoryId: 3,
+    categoryId: "3",
     name: "식당이름3",
     author: "태태",
     isAuthor: false,
@@ -250,7 +250,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "4",
-    categoryId: 4,
+    categoryId: "4",
     name: "식당이름4",
     author: "오리",
     isAuthor: false,
@@ -258,7 +258,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "5",
-    categoryId: 5,
+    categoryId: "5",
     name: "식당이름5식당이름5 식당이름5식당이름5식당이름5 식당이름5식당이름5식당이름5",
     author: "샐리",
     isAuthor: false,
@@ -266,7 +266,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "6",
-    categoryId: 6,
+    categoryId: "6",
     name: "식당이름6",
     author: "오찌",
     isAuthor: false,
@@ -274,7 +274,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "7",
-    categoryId: 1,
+    categoryId: "1",
     name: "식당이름1",
     author: "블링",
     isAuthor: true,
@@ -282,7 +282,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "8",
-    categoryId: 2,
+    categoryId: "2",
     name: "식당이름2",
     author: "후니",
     isAuthor: false,
@@ -290,7 +290,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "9",
-    categoryId: 3,
+    categoryId: "3",
     name: "식당이름3",
     author: "태태",
     isAuthor: false,
@@ -298,7 +298,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "10",
-    categoryId: 4,
+    categoryId: "4",
     name: "식당이름4",
     author: "오리",
     isAuthor: false,
@@ -306,7 +306,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "11",
-    categoryId: 5,
+    categoryId: "5",
     name: "식당이름5식당이름5 식당이름5식당이름5식당이름5 식당이름5식당이름5식당이름5",
     author: "샐리",
     isAuthor: false,
@@ -314,7 +314,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "12",
-    categoryId: 6,
+    categoryId: "6",
     name: "식당이름6",
     author: "오찌",
     isAuthor: false,
@@ -322,7 +322,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "13",
-    categoryId: 1,
+    categoryId: "1",
     name: "식당이름1",
     author: "블링",
     isAuthor: true,
@@ -330,7 +330,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "14",
-    categoryId: 2,
+    categoryId: "2",
     name: "식당이름2",
     author: "후니",
     isAuthor: false,
@@ -338,7 +338,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "15",
-    categoryId: 3,
+    categoryId: "3",
     name: "식당이름3",
     author: "태태",
     isAuthor: false,
@@ -346,7 +346,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "16",
-    categoryId: 4,
+    categoryId: "4",
     name: "식당이름4",
     author: "오리",
     isAuthor: false,
@@ -354,7 +354,7 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "17",
-    categoryId: 5,
+    categoryId: "5",
     name: "식당이름5식당이름5 식당이름5식당이름5식당이름5 식당이름5식당이름5식당이름5",
     author: "샐리",
     isAuthor: false,
@@ -362,27 +362,10 @@ export const storeRequests: StoreRequest[] = [
   },
   {
     id: "18",
-    categoryId: 6,
+    categoryId: "6",
     name: "식당이름6",
     author: "오찌",
     isAuthor: false,
     isRegistered: true,
   },
-];
-
-// 실제 서버 category와는 다름 - 실제 서버는 id 속성이 없고, 카페/디저트까지만 존재
-// 실제 서버에서 가져오지 말고 static으로 해도 될 듯
-// TODO: 백엔드와 카테고리 종류 및 id 정하기
-export const categories = [
-  { id: 1, name: "한식" },
-  { id: 2, name: "중식/아시안" },
-  { id: 3, name: "일식" },
-  { id: 4, name: "양식" },
-  { id: 5, name: "샌드위치/샐러드" },
-  { id: 6, name: "고기" },
-  { id: 8, name: "술/안주" },
-  { id: 7, name: "카페/디저트" },
-  // { id: 6, name: "야식" },
-  // { id: 7, name: "패스트푸드" },
-  // { id: 8, name: "기타" },
 ];

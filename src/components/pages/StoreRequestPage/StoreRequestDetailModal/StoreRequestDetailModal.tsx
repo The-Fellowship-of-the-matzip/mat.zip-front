@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 
 import { NETWORK } from "constants/api";
 import { Campus, getCampusId } from "constants/campus";
+import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -19,17 +20,6 @@ import Modal from "components/common/Modal/Modal";
 import * as S from "components/pages/StoreRequestPage/StoreRequestDetailModal/StoreRequestDetailModal.style";
 
 import { theme } from "style/Theme";
-
-const categories = {
-  1: "한식",
-  2: "중식/아시안",
-  3: "일식",
-  4: "양식",
-  5: "샌드위치/샐러드",
-  6: "고기",
-  8: "술/안주",
-  7: "카페/디저트",
-} as const;
 
 interface Props extends StoreRequest {
   handleEditOpen: () => void;
@@ -62,7 +52,7 @@ function StoreRequestDetailModal({
 
   const handleSubmitError = (error: AxiosError) => {
     if (error.code === "401") {
-      alert(MESSAGES.TOKEN_EXPIRED);
+      alert(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };

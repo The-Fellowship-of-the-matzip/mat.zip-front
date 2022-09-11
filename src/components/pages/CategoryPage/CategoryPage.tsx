@@ -17,8 +17,6 @@ import StoreList from "components/common/StoreList/StoreList";
 import Category from "components/pages/CategoryPage/Category/Category";
 import * as S from "components/pages/CategoryPage/CategoryPage.style";
 
-import { categories } from "mock/data";
-
 function CategoryPage() {
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
@@ -35,7 +33,7 @@ function CategoryPage() {
     <S.CategoryPageContainer>
       <section>
         <SectionHeader>카테고리</SectionHeader>
-        <Category categories={categories} />
+        <Category />
       </section>
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
