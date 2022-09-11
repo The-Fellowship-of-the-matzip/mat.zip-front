@@ -1,4 +1,4 @@
-export const categories: { [key: string]: string } = {
+export const categories: Record<CategoryId, string> = {
   1: "한식",
   2: "중식/아시안",
   3: "일식",

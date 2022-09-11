@@ -75,7 +75,11 @@ function CategoryDetailPage() {
     refetch();
   }, [filter]);
 
-  if (!categoryId || !Number(categoryId) || !(categoryId in categories)) {
+  const isValidCategoryId = (categoryId: string): categoryId is CategoryId => {
+    return categoryId in categories;
+  };
+
+  if (!categoryId || !Number(categoryId) || !isValidCategoryId(categoryId)) {
     window.alert(MESSAGES.WRONG_PATH);
     return <Navigate to={PATHNAME.HOME} />;
   }

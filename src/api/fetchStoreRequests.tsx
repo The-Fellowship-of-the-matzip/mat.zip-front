@@ -10,7 +10,7 @@ interface Params {
 interface StoreRequestGetResponse {
   items: {
     id: number;
-    categoryId: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
+    categoryId: StoreRequest["categoryId"];
     name: string;
     author: string;
     updatable: boolean;
