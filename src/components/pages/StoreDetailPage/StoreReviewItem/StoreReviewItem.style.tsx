@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Image from "components/common/Image/Image";
 
@@ -36,6 +36,7 @@ export const ReviewContentWrapper = styled.div`
 `;
 
 export const Header = styled.header`
+  position: relative;
   width: 100%;
   padding-bottom: 0.25rem;
 
@@ -67,4 +68,41 @@ export const ContentWrapper = styled.div`
 export const RatingPlaceholder = styled.div`
   font-size: 1rem;
   color: ${({ theme }) => theme.secondary};
+`;
+
+export const MeatballButtonContainer = styled.div`
+  padding: 0 0.125rem;
+
+  border-radius: 45%;
+  box-shadow: 0 0 0.125rem ${({ theme }) => theme.secondary};
+`;
+
+export const DropBoxButtonList = styled.ul`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    padding: 0.5rem;
+
+    background-color: ${theme.white};
+
+    & > li:first-of-type {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid ${theme.secondary};
+    }
+  `}
+`;
+
+export const DropBoxButton = styled.button`
+  ${({ theme }) => css`
+    padding: 10px;
+
+    background-color: transparent;
+    border: none;
+    white-space: nowrap;
+
+    &:hover {
+      font-weight: 700;
+    }
+  `}
 `;
