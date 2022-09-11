@@ -39,14 +39,24 @@ function StoreRequestEditBottomSheet({
     </option>
   ));
 
-  const handleSubmit: React.FormEventHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const name = formData.get("name") as string;
-    const categoryId = formData.get("categoryId") as string;
+  const isValidString = (input: unknown): input is string => {
+    return typeof input === "string" && input.length !== 0;
+  };
 
-    if (!name || !categoryId) {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name");
+    const categoryId = formData.get("categoryId");
+
+    if (!isValidString(name) || !isValidString(categoryId)) {
       alert("모든 항목을 작성해주세요!");
+      return;
+    }
+
+    if (name.length > 50) {
+      alert("식당 이름의 최대 길이는 50자입니다.");
       return;
     }
 
@@ -60,7 +70,7 @@ function StoreRequestEditBottomSheet({
 
   const handleSubmitError = (error: AxiosError) => {
     if (error.code === "401") {
-      alert(MESSAGES.TOKEN_EXPIRED);
+      alert(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };

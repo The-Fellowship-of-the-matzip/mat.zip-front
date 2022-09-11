@@ -82,7 +82,7 @@ function ReviewInputBottomSheet({
 
   const handleSubmitError = (error: AxiosError) => {
     if (error.code === "401") {
-      alert(MESSAGES.TOKEN_EXPIRED);
+      alert(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };
