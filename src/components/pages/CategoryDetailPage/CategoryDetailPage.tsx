@@ -29,8 +29,6 @@ import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style
 
 import type { Store } from "mock/data";
 
-// import { categories } from "mock/data";
-
 function CategoryDetailPage() {
   const navigate = useNavigate();
 
