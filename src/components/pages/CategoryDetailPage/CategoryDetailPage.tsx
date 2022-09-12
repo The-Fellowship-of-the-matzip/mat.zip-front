@@ -8,6 +8,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { NETWORK, SIZE, FILTERS } from "constants/api";
 import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
+import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
@@ -27,7 +28,6 @@ import StoreList from "components/common/StoreList/StoreList";
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 import type { Store } from "mock/data";
-import { categories } from "mock/data";
 
 function CategoryDetailPage() {
   const navigate = useNavigate();
@@ -37,10 +37,6 @@ function CategoryDetailPage() {
   const { categoryId } = useParams();
 
   const [filter, setFilter] = useState<string | null>(null);
-
-  const categoryName =
-    categories.find((category) => category.id === Number(categoryId))?.name ||
-    MESSAGES.CATEGORY_FIND_FAILED;
 
   const fetchParams = { size: SIZE.LIST_ITEM, filter, campusId, categoryId };
 
@@ -77,10 +73,17 @@ function CategoryDetailPage() {
     refetch();
   }, [filter]);
 
-  if (!categoryId || !Number(categoryId)) {
+  const isValidCategoryId = (categoryId: string): categoryId is CategoryId => {
+    return categoryId in categories;
+  };
+
+  if (!categoryId || !Number(categoryId) || !isValidCategoryId(categoryId)) {
     window.alert(MESSAGES.WRONG_PATH);
     return <Navigate to={PATHNAME.HOME} />;
   }
+
+  const categoryName = categories[categoryId] || MESSAGES.CATEGORY_FIND_FAILED;
+
   return (
     <S.CategoryDetailPageContainer>
       <SectionHeader

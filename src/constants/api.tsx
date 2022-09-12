@@ -10,6 +10,8 @@ export const ENDPOINTS = {
   STORE_DETAIL: (restaurantId: string) => `/restaurants/${restaurantId}`,
   STORE_LIST: (campusId: CampusId, type?: string) =>
     `/campuses/${campusId}/restaurants${type !== undefined ? type : ""}`,
+  STORE_REQUESTS: (campusId: CampusId) =>
+    `/campuses/${campusId}/restaurants/requests`,
 };
 
 export const NETWORK = {
@@ -27,5 +29,8 @@ export const FILTERS = [
   { order: "spell", text: "가나다 순" },
 ];
 
-export const AUTH_LINK =
-  "https://github.com/login/oauth/authorize?client_id=a51717e6e0bb9e34da8e";
+export const AUTH_LINK = `https://github.com/login/oauth/authorize?client_id=${
+  process.env.NODE_ENV === "production"
+    ? "a51717e6e0bb9e34da8e"
+    : "e060e7a6b636763ab22d"
+}`;

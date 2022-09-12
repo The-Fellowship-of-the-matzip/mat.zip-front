@@ -16,7 +16,7 @@ const MESSAGES = {
   EXCEED_MENU_MAX_LENGTH: `메뉴 이름은 ${INPUT_MAX_LENGTH.MENU}자 이내로 입력해주세요.`,
   EXCEED_REVIEW_CONTENT_MAX_LENGTH: `리뷰는 ${INPUT_MAX_LENGTH.REVIEW_CONTENT}자 이내로 입력해주세요.`,
 
-  TOKEN_EXPIRED: "유효하지 않은 토큰입니다",
+  TOKEN_INVALID: "유효하지 않은 토큰입니다",
 
   WRONG_PATH: "잘못된 접근입니다.",
 };
