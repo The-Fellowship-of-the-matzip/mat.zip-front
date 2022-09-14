@@ -37,7 +37,9 @@ function StoreDetailTitle({
         <p>
           {campus} 캠퍼스 기준 도보 {distance}분
         </p>
-        <S.KakaoLink href={kakaoMapUrl}>카카오 맵으로 열기</S.KakaoLink>
+        <S.KakaoLink href={kakaoMapUrl} target="_blank">
+          카카오 맵으로 열기
+        </S.KakaoLink>
       </S.DescriptionWrapper>
     </S.TitleContainer>
   );
