@@ -1,4 +1,5 @@
-import { useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { NETWORK, SIZE } from "constants/api";
@@ -21,13 +22,17 @@ function CategoryPage() {
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
 
-  const { data, isLoading, isError, error } = useQuery(
+  const { data, isLoading, isError, error, refetch } = useQuery(
     "randomStore",
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
       retry: NETWORK.RETRY_COUNT,
     }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [campusName]);
 
   return (
     <S.CategoryPageContainer>
