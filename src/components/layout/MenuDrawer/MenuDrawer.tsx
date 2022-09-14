@@ -52,6 +52,14 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
     closeMenu();
   }, [location.key]);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return ReactDOM.createPortal(
     <S.Container>
       <S.Backdrop onClick={closeMenu} />
