@@ -11,7 +11,7 @@ export const ENDPOINTS = {
   STORE_LIST: (campusId: CampusId, type?: string) =>
     `/campuses/${campusId}/restaurants${type !== undefined ? type : ""}`,
   STORE_REQUESTS: (campusId: CampusId) =>
-    `/campuses/${campusId}/restaurants/requests`,
+    `/campuses/${campusId}/restaurantDemands`,
 };
 
 export const NETWORK = {
