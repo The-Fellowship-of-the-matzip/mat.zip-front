@@ -10,24 +10,25 @@ import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
 
 import { campusContext } from "context/CampusContextProvider";
+import { LoginContext } from "context/LoginContextProvider";
 
 import useLogin from "hooks/useLogin";
 
-import sendStoreRequestDeleteRequest from "api/sendStoreReqeustDeleteRequest";
+import sendStoreDemandDeleteRequest from "api/sendStoreDemandDeleteRequest";
 
 import Modal from "components/common/Modal/Modal";
 
-import * as S from "components/pages/StoreRequestPage/StoreRequestDetailModal/StoreRequestDetailModal.style";
+import * as S from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal.style";
 
 import { theme } from "style/Theme";
 
-interface Props extends StoreRequest {
+interface Props extends StoreDemand {
   handleEditOpen: () => void;
   closeModal: () => void;
   handleAfterRequest: () => void;
 }
 
-function StoreRequestDetailModal({
+function StoreDemandDetailModal({
   id,
   name,
   author,
@@ -39,6 +40,7 @@ function StoreRequestDetailModal({
   handleAfterRequest,
 }: Props) {
   const campus = useContext(campusContext);
+  const isLoggedIn = useContext(LoginContext);
   const { logout } = useLogin();
 
   const handleDeleteClick = () => {
@@ -58,7 +60,7 @@ function StoreRequestDetailModal({
   };
 
   const mutation = useMutation(
-    sendStoreRequestDeleteRequest(getCampusId(campus as Campus), id),
+    sendStoreDemandDeleteRequest(getCampusId(campus as Campus), id),
     {
       onSuccess: handleSuccess,
       onError: handleSubmitError,
@@ -87,7 +89,7 @@ function StoreRequestDetailModal({
             )}
           </S.DetailContent>
         </S.DetailContainer>
-        {isAuthor && !isRegistered && (
+        {isLoggedIn && isAuthor && !isRegistered && (
           <S.ButtonContainer>
             <S.DeleteButton onClick={handleDeleteClick}>
               <MdDeleteForever size="1rem" />
@@ -104,4 +106,4 @@ function StoreRequestDetailModal({
   );
 }
 
-export default StoreRequestDetailModal;
+export default StoreDemandDetailModal;

@@ -7,7 +7,7 @@ import { storeRequests } from "mock/data";
 const checkToken = (token: string | null) =>
   token?.split("Bearer ").length !== 0;
 
-export const storeRequestHandler = [
+export const storeDemandHandler = [
   rest.get(
     `${API_BASE_URL}/campuses/:campusId/restaurantDemands`,
     (req, res, ctx) => {
@@ -42,7 +42,7 @@ export const storeRequestHandler = [
   ),
 
   rest.put(
-    `${API_BASE_URL}/campuses/:campusId/restaurantDemands/:requestId`,
+    `${API_BASE_URL}/campuses/:campusId/restaurantDemands/:demandId`,
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       if (!checkToken(token)) {
@@ -56,7 +56,7 @@ export const storeRequestHandler = [
   ),
 
   rest.delete(
-    `${API_BASE_URL}/campuses/:campusId/restaurantDemands/:requestId`,
+    `${API_BASE_URL}/campuses/:campusId/restaurantDemands/:demandId`,
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       if (!checkToken(token)) {

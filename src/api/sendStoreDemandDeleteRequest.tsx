@@ -3,7 +3,7 @@ import MESSAGES from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 
-const sendStoreRequestDeleteRequest =
+const sendStoreDemandDeleteRequest =
   (campusId: 1 | 2, storeRequestId: string) => () => {
     const accessToken = window.sessionStorage.getItem("accessToken");
 
@@ -21,4 +21,4 @@ const sendStoreRequestDeleteRequest =
     );
   };
 
-export default sendStoreRequestDeleteRequest;
+export default sendStoreDemandDeleteRequest;

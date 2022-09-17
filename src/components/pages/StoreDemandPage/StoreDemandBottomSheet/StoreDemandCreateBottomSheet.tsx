@@ -11,25 +11,18 @@ import { campusContext } from "context/CampusContextProvider";
 
 import useLogin from "hooks/useLogin";
 
-import sendStoreRequestPutRequest from "api/sendStoreRequestPutRequest";
+import sendStoreDemandPostRequest from "api/sendStoreDemandPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 
-import * as S from "components/pages/StoreRequestPage/StoreRequestBottomSheet/StoreRequestBottomSheet.style";
+import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
 
 interface Props {
-  id: string;
-  initValue: { categoryId: string; name: string };
   closeSheet: () => void;
   refetchList: () => void;
 }
 
-function StoreRequestEditBottomSheet({
-  id,
-  initValue,
-  closeSheet,
-  refetchList,
-}: Props) {
+function StoreDemandCreateBottomSheet({ closeSheet, refetchList }: Props) {
   const { logout } = useLogin();
   const campus = useContext(campusContext);
 
@@ -79,7 +72,7 @@ function StoreRequestEditBottomSheet({
     unknown,
     AxiosError,
     { categoryId: string; name: string }
-  >(sendStoreRequestPutRequest(getCampusId(campus as Campus), id), {
+  >(sendStoreDemandPostRequest(getCampusId(campus as Campus)), {
     onSuccess: handleSuccess,
     onError: handleSubmitError,
     retry: NETWORK.RETRY_COUNT,
@@ -90,22 +83,16 @@ function StoreRequestEditBottomSheet({
       <S.Form onSubmit={handleSubmit}>
         <S.Label>
           카테고리
-          <S.Select name="categoryId" defaultValue={initValue.categoryId}>
-            {categoryOptions}
-          </S.Select>
+          <S.Select name="categoryId">{categoryOptions}</S.Select>
         </S.Label>
         <S.Label>
           맛집 이름
-          <S.NameInput
-            name="name"
-            placeholder="맛집의 이름을 입력해주세요"
-            defaultValue={initValue.name}
-          />
+          <S.NameInput name="name" placeholder="맛집의 이름을 입력해주세요" />
         </S.Label>
-        <S.SubmitButton>요청 수정하기</S.SubmitButton>
+        <S.SubmitButton>요청 보내기</S.SubmitButton>
       </S.Form>
     </BottomSheet>
   );
 }
 
-export default StoreRequestEditBottomSheet;
+export default StoreDemandCreateBottomSheet;
