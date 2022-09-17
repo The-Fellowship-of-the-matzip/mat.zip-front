@@ -7,10 +7,10 @@ interface Params {
   queryKey: any;
 }
 
-interface StoreRequestGetResponse {
+interface StoreDemandGetResponse {
   items: {
     id: number;
-    categoryId: StoreRequest["categoryId"];
+    categoryId: StoreDemand["categoryId"];
     name: string;
     author: string;
     updatable: boolean;
@@ -19,9 +19,9 @@ interface StoreRequestGetResponse {
   hasNext: boolean;
 }
 
-const fetchStoreRequests = async ({ pageParam = 0, queryKey }: Params) => {
+const fetchStoreDemandList = async ({ pageParam = 0, queryKey }: Params) => {
   const [, { size, campusId }] = queryKey;
-  const { data } = await axiosInstance.get<StoreRequestGetResponse>(
+  const { data } = await axiosInstance.get<StoreDemandGetResponse>(
     ENDPOINTS.STORE_REQUESTS(campusId),
     {
       params: { page: pageParam, size },
@@ -41,4 +41,4 @@ const fetchStoreRequests = async ({ pageParam = 0, queryKey }: Params) => {
   return { ...parsedData, nextPageParam: pageParam + 1 };
 };
 
-export default fetchStoreRequests;
+export default fetchStoreDemandList;

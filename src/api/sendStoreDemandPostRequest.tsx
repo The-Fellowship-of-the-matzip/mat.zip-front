@@ -3,9 +3,9 @@ import MESSAGES from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 
-export type StoreRequestShape = Pick<StoreRequest, "categoryId" | "name">;
+export type StoreDemandShape = Pick<StoreDemand, "categoryId" | "name">;
 
-const sendStoreRequestPostRequest =
+const sendStoreDemandPostRequest =
   (campusId: 1 | 2) =>
   (storeRequestData: { categoryId: string; name: string }) => {
     const accessToken = window.sessionStorage.getItem("accessToken");
@@ -25,4 +25,4 @@ const sendStoreRequestPostRequest =
     );
   };
 
-export default sendStoreRequestPostRequest;
+export default sendStoreDemandPostRequest;

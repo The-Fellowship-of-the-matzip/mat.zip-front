@@ -7,9 +7,9 @@ import { storeRequests } from "mock/data";
 const checkToken = (token: string | null) =>
   token?.split("Bearer ").length !== 0;
 
-export const storeRequestHandler = [
+export const storeDemandHandler = [
   rest.get(
-    `${API_BASE_URL}/campuses/:campusId/restaurants/requests`,
+    `${API_BASE_URL}/campuses/:campusId/restaurantDemands`,
     (req, res, ctx) => {
       const page = req.url.searchParams.get("page") || 0;
       const size = req.url.searchParams.get("size");
@@ -28,7 +28,7 @@ export const storeRequestHandler = [
   ),
 
   rest.post(
-    `${API_BASE_URL}/campuses/:campusId/restaurants/requests`,
+    `${API_BASE_URL}/campuses/:campusId/restaurantDemands`,
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       if (!checkToken(token)) {
@@ -42,7 +42,7 @@ export const storeRequestHandler = [
   ),
 
   rest.put(
-    `${API_BASE_URL}/campuses/:campusId/restaurants/requests/:requestId`,
+    `${API_BASE_URL}/campuses/:campusId/restaurantDemands/:demandId`,
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       if (!checkToken(token)) {
@@ -56,7 +56,7 @@ export const storeRequestHandler = [
   ),
 
   rest.delete(
-    `${API_BASE_URL}/campuses/:campusId/restaurants/requests/:requestId`,
+    `${API_BASE_URL}/campuses/:campusId/restaurantDemands/:demandId`,
     (req, res, ctx) => {
       const token = req.headers.get("Authorization");
       if (!checkToken(token)) {

@@ -7,7 +7,7 @@ import { NETWORK } from "constants/api";
 
 import { LoginContext } from "context/LoginContextProvider";
 
-import fetchStoreRequests from "api/fetchStoreRequests";
+import fetchStoreDemandList from "api/fetchStoreDemandList";
 import getNextPageParam from "api/getNextPageParam";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
@@ -16,11 +16,11 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 
-import StoreRequestCreateBottomSheet from "components/pages/StoreRequestPage/StoreRequestBottomSheet/StoreRequestCreateBottomSheet";
-import StoreRequestList from "components/pages/StoreRequestPage/StoreRequestList/StoreRequestList";
-import * as S from "components/pages/StoreRequestPage/StoreRequestPage.style";
+import StoreDemandCreateBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandCreateBottomSheet";
+import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
+import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
 
-function StoreRequestPage() {
+function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
   const [isSheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
@@ -33,8 +33,8 @@ function StoreRequestPage() {
     isFetching,
     refetch,
   } = useInfiniteQuery(
-    ["storeRequest", { campusId: 1, size: 15 }],
-    fetchStoreRequests,
+    ["StoreDemand", { campusId: 1, size: 15 }],
+    fetchStoreDemandList,
     {
       getNextPageParam,
       retry: NETWORK.RETRY_COUNT,
@@ -42,7 +42,7 @@ function StoreRequestPage() {
   );
 
   const storeRequests =
-    data?.pages.reduce<StoreRequest[]>(
+    data?.pages.reduce<StoreDemand[]>(
       (stores, page) => [...stores, ...page.items],
       []
     ) || [];
@@ -73,7 +73,7 @@ function StoreRequestPage() {
       {(isLoading || isFetching) && <Spinner />}
       {storeRequests.length ? (
         <InfiniteScroll handleContentLoad={fetchNextPage} hasMore={true}>
-          <StoreRequestList
+          <StoreDemandList
             storeRequests={storeRequests}
             refetchList={refetch}
           />
@@ -82,7 +82,7 @@ function StoreRequestPage() {
         <ErrorText>가게 정보가 없습니다.</ErrorText>
       )}
       {isSheetOpen && (
-        <StoreRequestCreateBottomSheet
+        <StoreDemandCreateBottomSheet
           closeSheet={() => setSheetOpen(false)}
           refetchList={refetch}
         />
@@ -91,4 +91,4 @@ function StoreRequestPage() {
   );
 }
 
-export default StoreRequestPage;
+export default StoreDemandPage;

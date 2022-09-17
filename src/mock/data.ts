@@ -223,7 +223,7 @@ export const reviews: Review[] = [
   },
 ];
 
-export const storeRequests: StoreRequest[] = [
+export const storeRequests: StoreDemand[] = [
   {
     id: "1",
     categoryId: "1",

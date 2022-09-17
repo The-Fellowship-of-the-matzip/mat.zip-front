@@ -1,7 +1,7 @@
 import { categoryHandler } from "mock/handlers/categoryHandler";
 import { restaurantHandler } from "mock/handlers/restaurantHandler";
 import { reviewHandler } from "mock/handlers/reviewHandler";
-import { storeRequestHandler } from "mock/handlers/storeRequestHandler";
+import { storeDemandHandler } from "mock/handlers/storeDemandHandler";
 import { userHandler } from "mock/handlers/userHandler";
 
 export {
@@ -9,5 +9,5 @@ export {
   categoryHandler,
   restaurantHandler,
   reviewHandler,
-  storeRequestHandler,
+  storeDemandHandler as storeRequestHandler,
 };

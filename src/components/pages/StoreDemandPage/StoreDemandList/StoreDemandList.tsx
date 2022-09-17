@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 
-import StoreRequestEditBottomSheet from "components/pages/StoreRequestPage/StoreRequestBottomSheet/StoreRequestEditBottomSheet";
-import StoreRequestDetailModal from "components/pages/StoreRequestPage/StoreRequestDetailModal/StoreRequestDetailModal";
-import * as S from "components/pages/StoreRequestPage/StoreRequestList/StoreRequestList.style";
+import StoreDemandEditBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandEditBottomSheet";
+import StoreDemandDetailModal from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal";
+import * as S from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList.style";
 
 import { theme } from "style/Theme";
 
 interface Props {
-  storeRequests: StoreRequest[];
+  storeRequests: StoreDemand[];
   refetchList: () => void;
 }
 
-function StoreRequestList({ storeRequests, refetchList }: Props) {
+function StoreDemandList({ storeRequests, refetchList }: Props) {
   const [detailOpenId, setDetailOpenId] = useState<string | null>(null);
   const [editOpenId, setEditOpenId] = useState<string | null>(null);
 
@@ -54,7 +54,7 @@ function StoreRequestList({ storeRequests, refetchList }: Props) {
           </S.ShowDetailButton>
         </S.ShowDetailRow>
         {detailOpenId === id && (
-          <StoreRequestDetailModal
+          <StoreDemandDetailModal
             id={id}
             name={name}
             categoryId={categoryId}
@@ -67,7 +67,7 @@ function StoreRequestList({ storeRequests, refetchList }: Props) {
           />
         )}
         {editOpenId === id && (
-          <StoreRequestEditBottomSheet
+          <StoreDemandEditBottomSheet
             id={id}
             initValue={{ categoryId: String(categoryId), name }}
             closeSheet={handleRequestEditClose}
@@ -90,4 +90,4 @@ function StoreRequestList({ storeRequests, refetchList }: Props) {
   );
 }
 
-export default StoreRequestList;
+export default StoreDemandList;
