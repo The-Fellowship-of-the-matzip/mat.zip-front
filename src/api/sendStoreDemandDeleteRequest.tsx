@@ -1,11 +1,11 @@
-import { ENDPOINTS } from "constants/api";
+import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 import MESSAGES from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 
 const sendStoreDemandDeleteRequest =
   (campusId: 1 | 2, storeRequestId: string) => () => {
-    const accessToken = window.sessionStorage.getItem("accessToken");
+    const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
     if (typeof accessToken !== "string") {
       throw new Error(MESSAGES.TOKEN_INVALID);
