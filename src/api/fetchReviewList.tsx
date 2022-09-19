@@ -27,14 +27,21 @@ type Props = {
 const fetchReviewList = async ({ pageParam = 0, queryKey }: Props) => {
   const [, { restaurantId, size }] = queryKey;
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
+
+  const nonUserFetchOptions = {
+    params: { page: pageParam, size },
+  };
+
+  const userFetchOptions = {
+    ...nonUserFetchOptions,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
   const { data } = await axiosInstance.get<ReviewResponseShape>(
     ENDPOINTS.REVIEWS(restaurantId),
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: { page: pageParam, size },
-    }
+    accessToken === null ? nonUserFetchOptions : userFetchOptions
   );
   return { ...data, nextPageParam: pageParam + 1 };
 };
