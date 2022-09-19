@@ -1,5 +1,7 @@
-export const API_BASE_URL =
-  process.env.NODE_ENV === "production" ? "https://matzip.link/api" : "";
+// export const API_BASE_URL =
+//   process.env.NODE_ENV === "production" ? "https://api.matzip.today/api" : "";
+
+export const API_BASE_URL = "https://api.matzip.today/api";
 
 type CampusId = 1 | 2;
 
@@ -34,3 +36,5 @@ export const FILTERS = [
 
 export const AUTH_LINK =
   "https://github.com/login/oauth/authorize?client_id=a51717e6e0bb9e34da8e";
+
+export const ACCESS_TOKEN = "matzipaccessToken";

@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { ENDPOINTS } from "constants/api";
+import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
@@ -12,14 +12,26 @@ interface SendReviewItemProp {
   menu: string;
 }
 
-const sendReviewItem = async (reviewItem: SendReviewItemProp) => {
-  const accessToken = window.sessionStorage.getItem("accessToken") as string;
+const sendReviewItem = async ({
+  restaurantId,
+  articleId,
+  content,
+  rating,
+  menu,
+}: SendReviewItemProp) => {
+  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
+  if (!accessToken) {
+    window.sessionStorage.removeItem(ACCESS_TOKEN);
+    window.alert("다시 로그인 해주세요");
+    window.location.reload();
+    return;
+  }
   const { data } = await axiosInstance.put<AxiosResponse>(
-    ENDPOINTS.UPDATE_REVIEW_ITEM(reviewItem.restaurantId, reviewItem.articleId),
+    ENDPOINTS.UPDATE_REVIEW_ITEM(restaurantId, articleId),
     {
-      content: reviewItem.content,
-      rating: reviewItem.rating,
-      menu: reviewItem.menu,
+      content: content,
+      rating: rating,
+      menu: menu,
     },
     {
       headers: {
