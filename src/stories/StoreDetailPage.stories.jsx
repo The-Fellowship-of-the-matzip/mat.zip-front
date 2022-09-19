@@ -1,4 +1,4 @@
-import StoreDetailPage from "components/pages/StoreDetailPage";
+import StoreDetailPage from "components/pages/StoreDetailPage/StoreDetailPage";
 
 export default {
   title: "Components/pages/StoreDetailPage/index",

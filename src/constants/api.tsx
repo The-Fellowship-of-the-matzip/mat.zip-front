@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://api.matzip.today/api";
+export const API_BASE_URL = process.env.NODE_ENV === "production" ? "https://api.matzip.today/api" : "";
 
 type CampusId = 1 | 2;
 
@@ -10,6 +10,10 @@ export const ENDPOINTS = {
   STORE_DETAIL: (restaurantId: string) => `/restaurants/${restaurantId}`,
   STORE_LIST: (campusId: CampusId, type?: string) =>
     `/campuses/${campusId}/restaurants${type !== undefined ? type : ""}`,
+  UPDATE_REVIEW_ITEM: (restaurantId: string, articleId: string) =>
+    `/restaurants/${restaurantId}/reviews/${articleId}`,
+  DELETE_REVIEW_ITEM: (restaurantId: string, articleId: string) =>
+    `/restaurants/${restaurantId}/reviews/${articleId}`,
   STORE_REQUESTS: (campusId: CampusId) =>
     `/campuses/${campusId}/restaurantDemands`,
 };
@@ -28,6 +32,8 @@ export const FILTERS = [
   { order: "rating", text: "별점 순" },
   { order: "spell", text: "가나다 순" },
 ];
+
+export const ACCESS_TOKEN = "matzipaccessToken";
 
 export const AUTH_LINK = `https://github.com/login/oauth/authorize?client_id=${
   process.env.NODE_ENV === "production"

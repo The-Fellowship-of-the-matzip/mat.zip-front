@@ -44,7 +44,7 @@ function StoreDetailPage() {
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery(
-    ["reviewDetailStore", { restaurantId, size: SIZE.REVIEW }],
+    ["reviewDetailStore", { restaurantId }],
     fetchReviewList,
     { getNextPageParam }
   );
@@ -53,7 +53,7 @@ function StoreDetailPage() {
     fetchNextPage();
   };
 
-  const onReviewOpenClick = () => {
+  const handleReviewOpenClick = () => {
     if (isLoggedIn) {
       setIsReviewOpen(true);
       return;
@@ -87,19 +87,29 @@ function StoreDetailPage() {
               <ErrorImage errorMessage={error.message} />
             )}
             {reviews.length ? (
-              reviews.map(({ id, author, rating, content, menu }) => (
-                <StoreReviewItem
-                  key={id}
-                  reviewInfo={{ id, author, rating, content, menu }}
-                />
-              ))
+              reviews.map(
+                ({ id, author, rating, content, menu, updatable }) => (
+                  <StoreReviewItem
+                    key={id}
+                    reviewInfo={{
+                      restaurantId,
+                      id,
+                      author,
+                      rating,
+                      content,
+                      menu,
+                      updatable,
+                    }}
+                  />
+                )
+              )
             ) : (
               <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
             )}
           </InfiniteScroll>
         </S.ReviewListWrapper>
       </S.StoreReviewContentWrapper>
-      <S.ReviewPlusButton onClick={onReviewOpenClick}>+</S.ReviewPlusButton>
+      <S.ReviewPlusButton onClick={handleReviewOpenClick}>+</S.ReviewPlusButton>
       {isReviewOpen && (
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}

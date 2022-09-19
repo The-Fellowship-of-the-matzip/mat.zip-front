@@ -1,3 +1,5 @@
+import logoSvg from "asset/logo.svg";
+
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
 
 export default {
@@ -13,9 +15,13 @@ const Template = (args) => <StoreReviewItem {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   reviewInfo: {
-    userThumbnail: "../logo.svg",
+    author: {
+      username: "샐리",
+      profileImage: logoSvg,
+    },
     rating: 4.2,
-    desc: "sldkfjalskjflaksjelijlfjdldsafsdafkwlejrflwkfelkjawfejwpef'vjmlckvmlsjdhfljsldkjalskdjflsjdkflksjdljkajfsfs",
-    menuName: "호랑이 치킨",
+    content:
+      "sldkfjalskjflaksjelijlfjdldsafsdafkwlejrflwkfelkjawfejwpef'vjmlckvmlsjdhfljsldkjalskdjflsjdkflksjdljkajfsfs",
+    menu: "호랑이 치킨",
   },
 };

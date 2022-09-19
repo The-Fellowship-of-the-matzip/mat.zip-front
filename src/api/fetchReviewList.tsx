@@ -3,7 +3,7 @@ import { ENDPOINTS } from "constants/api";
 import axiosInstance from "api/axiosInstance";
 
 export type ReviewShape = {
-  id: number;
+  id: string;
   author: {
     username: string;
     profileImage: string;
@@ -11,6 +11,7 @@ export type ReviewShape = {
   content: string;
   rating: number;
   menu: string;
+  updatable: boolean;
 };
 
 type ReviewResponseShape = {
