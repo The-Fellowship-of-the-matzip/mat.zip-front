@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 
@@ -74,6 +76,22 @@ export const Button = styled.button`
 export const LoginLink = styled.a`
   font-size: 1rem;
   font-weight: 600;
+
+  color: ${({ theme }) => theme.black};
+
+  &:visited {
+    color: ${({ theme }) => theme.black};
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.secondary};
+  }
+`;
+
+export const CustomLink = styled(Link)`
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.black};
 
   &:visited {
     color: ${({ theme }) => theme.black};

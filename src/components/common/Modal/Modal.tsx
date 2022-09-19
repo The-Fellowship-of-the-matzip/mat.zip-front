@@ -1,16 +1,13 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-import * as S from "components/common/BottomSheet/BottomSheet.style";
+import * as S from "components/common/Modal/Modal.style";
 
-type Props = {
-  title: string;
-  children: React.ReactNode;
-  closeSheet: () => void;
-};
+interface Props {
+  closeModal: () => void;
+}
 
-function BottomSheet({ title, closeSheet, children }: Props) {
+function Modal({ children, closeModal }: PropsWithChildren<Props>) {
   const [scrollOffset, setScrollOffset] = useState(0);
 
   useEffect(() => {
@@ -25,14 +22,14 @@ function BottomSheet({ title, closeSheet, children }: Props) {
 
   return ReactDOM.createPortal(
     <S.Container scrollOffset={scrollOffset}>
-      <S.Backdrop onClick={closeSheet} />
+      <S.Backdrop onClick={closeModal} />
       <S.Content>
-        <S.Title>{title}</S.Title>
-        <S.InputWrapper>{children}</S.InputWrapper>
+        <S.CloseButton onClick={closeModal}>닫기</S.CloseButton>
+        {children}
       </S.Content>
     </S.Container>,
     document.querySelector("#app") as HTMLElement
   );
 }
 
-export default BottomSheet;
+export default Modal;

@@ -1,4 +1,5 @@
-import { useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { NETWORK, SIZE } from "constants/api";
@@ -17,13 +18,11 @@ import StoreList from "components/common/StoreList/StoreList";
 import Category from "components/pages/CategoryPage/Category/Category";
 import * as S from "components/pages/CategoryPage/CategoryPage.style";
 
-import { categories } from "mock/data";
-
 function CategoryPage() {
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
 
-  const { data, isLoading, isError, error } = useQuery(
+  const { data, isLoading, isError, error, refetch } = useQuery(
     "randomStore",
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
@@ -31,11 +30,15 @@ function CategoryPage() {
     }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [campusName]);
+
   return (
     <S.CategoryPageContainer>
       <section>
         <SectionHeader>카테고리</SectionHeader>
-        <Category categories={categories} />
+        <Category />
       </section>
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
