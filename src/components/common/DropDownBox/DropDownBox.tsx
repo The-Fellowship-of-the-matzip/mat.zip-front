@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import * as S from "components/common/DropDownBox/DropDownBox.style";
 
 export type DropDownBoxProps = {
-  className?: string;
   children: React.ReactNode;
   onClose: () => void;
   top?: string;
@@ -13,7 +12,6 @@ export type DropDownBoxProps = {
 };
 
 const DropDownBox: React.FC<DropDownBoxProps> = ({
-  className,
   children,
   onClose: handleClose,
   ...positions
@@ -28,11 +26,7 @@ const DropDownBox: React.FC<DropDownBoxProps> = ({
     return () => document.body.removeEventListener("click", handleClose);
   }, []);
 
-  return (
-    <S.DropDownBox className={className} {...positions}>
-      {children}
-    </S.DropDownBox>
-  );
+  return <S.DropDownBox {...positions}>{children}</S.DropDownBox>;
 };
 
 export default DropDownBox;
