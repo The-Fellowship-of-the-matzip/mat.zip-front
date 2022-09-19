@@ -51,7 +51,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   };
 
   useEffect(() => {
-    if (firstRender) {
+    if (firstRender.current) {
       firstRender.current = false;
       return;
     }
