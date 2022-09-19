@@ -17,6 +17,7 @@ const MESSAGES = {
   EXCEED_REVIEW_CONTENT_MAX_LENGTH: `리뷰는 ${INPUT_MAX_LENGTH.REVIEW_CONTENT}자 이내로 입력해주세요.`,
 
   TOKEN_INVALID: "유효하지 않은 토큰입니다",
+  TOKEN_EXPIRED: "토큰이 만료되었습니다",
 
   WRONG_PATH: "잘못된 접근입니다.",
 };
