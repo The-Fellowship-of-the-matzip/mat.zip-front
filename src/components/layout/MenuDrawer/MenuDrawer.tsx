@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useLocation } from "react-router-dom";
 
@@ -21,6 +21,8 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   const campus = useContext(campusContext);
   const otherCampus = getOtherCampus(campus as Campus);
   const setCampus = useContext(setCampusContext);
+
+  const firstRender = useRef(true);
 
   const location = useLocation();
 
@@ -49,6 +51,11 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   };
 
   useEffect(() => {
+    if (firstRender) {
+      firstRender.current = false;
+      return;
+    }
+
     closeMenu();
   }, [location.key]);
 
