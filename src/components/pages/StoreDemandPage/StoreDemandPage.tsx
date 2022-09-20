@@ -4,7 +4,9 @@ import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { NETWORK } from "constants/api";
+import { Campus, getCampusId } from "constants/campus";
 
+import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
 
 import fetchStoreDemandList from "api/fetchStoreDemandList";
@@ -24,6 +26,10 @@ function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
   const [isSheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
+
+  const campus = useContext(campusContext);
+  const campusId = getCampusId(campus as Campus);
+
   const {
     data,
     error,
@@ -33,7 +39,7 @@ function StoreDemandPage() {
     isFetching,
     refetch,
   } = useInfiniteQuery(
-    ["StoreDemand", { campusId: 1, size: 15 }],
+    ["StoreDemand", { campusId: campusId, size: 15 }],
     fetchStoreDemandList,
     {
       getNextPageParam,
