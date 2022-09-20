@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useLocation } from "react-router-dom";
 
 import { AUTH_LINK } from "constants/api";
 import { getOtherCampus } from "constants/campus";
@@ -21,10 +20,6 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
   const campus = useContext(campusContext);
   const otherCampus = getOtherCampus(campus as Campus);
   const setCampus = useContext(setCampusContext);
-
-  const firstRender = useRef(true);
-
-  const location = useLocation();
 
   const { logout } = useLogin();
 
@@ -49,15 +44,6 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
     closeMenu();
     window.alert(MESSAGES.LOGOUT_COMPLETE);
   };
-
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-
-    closeMenu();
-  }, [location.key]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";

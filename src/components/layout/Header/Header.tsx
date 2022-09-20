@@ -1,7 +1,7 @@
 import MenuDrawer from "../MenuDrawer/MenuDrawer";
-import { useContext, useReducer } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
 
@@ -18,14 +18,20 @@ function Header() {
   const isLoggedIn = useContext(LoginContext);
   const campus = useContext(campusContext);
 
-  const [isMenuOpen, setMenuOpen] = useReducer(
-    (isOpen: boolean) => !isOpen,
-    false
-  );
-
-  const handleMenuToggle = () => {
-    setMenuOpen();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
+
+  const location = useLocation();
+
+  const openMenu = () => {
+    setMenuOpen(true);
+  };
+
+  useEffect(() => {
+    closeMenu();
+  }, [location.key]);
 
   return (
     <S.Container>
@@ -37,11 +43,11 @@ function Header() {
           </S.PageName>
         </Link>
         <S.RightWrapper>
-          <S.MenuButton onClick={handleMenuToggle}>
+          <S.MenuButton onClick={openMenu}>
             <GiHamburgerMenu />
           </S.MenuButton>
           {isMenuOpen && (
-            <MenuDrawer closeMenu={handleMenuToggle} isLoggedIn={isLoggedIn} />
+            <MenuDrawer closeMenu={closeMenu} isLoggedIn={isLoggedIn} />
           )}
         </S.RightWrapper>
       </S.TopWrapper>
