@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
-import { NETWORK, SIZE } from "constants/api";
+import { NETWORK } from "constants/api";
 import MESSAGES from "constants/messages";
 
 import { LoginContext } from "context/LoginContextProvider";

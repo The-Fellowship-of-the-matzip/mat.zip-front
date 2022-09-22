@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
@@ -25,11 +25,11 @@ type Props = {
 };
 
 const fetchReviewList = async ({ pageParam = 0, queryKey }: Props) => {
-  const [, { restaurantId, size }] = queryKey;
+  const [, { restaurantId }] = queryKey;
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
 
   const nonUserFetchOptions = {
-    params: { page: pageParam, size },
+    params: { page: pageParam, size: SIZE.REVIEW },
   };
 
   const userFetchOptions = {
