@@ -98,7 +98,7 @@ function ReviewUpdateBottomSheet({
       sendReviewItem({
         restaurantId: defaultReviewItem.restaurantId,
         articleId: defaultReviewItem.id,
-        rating,
+        rating: rating + 1,
         menu,
         content: reviewContent,
       }),
