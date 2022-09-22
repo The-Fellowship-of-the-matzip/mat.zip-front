@@ -21,7 +21,6 @@ export const reviewHandler = [
       const page = req.url.searchParams.get("page");
       const size = req.url.searchParams.get("size");
 
-      console.log(page, size);
       if (!page || !size) {
         // 이거 메세지는 맘대로 넣음
         return res(
