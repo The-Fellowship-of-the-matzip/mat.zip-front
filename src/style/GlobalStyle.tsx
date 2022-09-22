@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
 
   a {
     text-decoration:none;
+    color: ${theme.black}
   }
 
   #app  {
@@ -52,6 +53,10 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
       css`
         min-height: 100vh;
       `}
+  }
+
+  input {
+    color: ${theme.black}
   }
 
   
