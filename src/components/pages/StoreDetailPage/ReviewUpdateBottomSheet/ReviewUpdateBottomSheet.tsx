@@ -38,7 +38,7 @@ function ReviewUpdateBottomSheet({
   defaultReviewItem,
   onSuccess,
 }: Props) {
-  const [rating, setRating] = useState<number>(defaultReviewItem.rating);
+  const [rating, setRating] = useState<number>(defaultReviewItem.rating - 1);
   const [reviewContent, setReviewContent] = useState<string>(
     defaultReviewItem.content
   );
@@ -50,7 +50,7 @@ function ReviewUpdateBottomSheet({
     e.preventDefault();
     mutation.mutate({
       content: reviewContent,
-      rating: rating,
+      rating: rating + 1,
       menu: menu,
     });
     closeSheet();
@@ -98,7 +98,7 @@ function ReviewUpdateBottomSheet({
       sendReviewItem({
         restaurantId: defaultReviewItem.restaurantId,
         articleId: defaultReviewItem.id,
-        rating,
+        rating: rating + 1,
         menu,
         content: reviewContent,
       }),

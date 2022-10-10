@@ -1,6 +1,8 @@
 import { rest } from "msw";
-import { reviews as reviewsData } from "mock/data";
+
 import { API_BASE_URL } from "constants/api";
+
+import { reviews as reviewsData } from "mock/data";
 
 interface PostReviewReqBody {
   content: string;
