@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import repeatComponent from "util/repeatComponent";
 
 import { PATHNAME } from "constants/routes";
 
@@ -40,7 +39,7 @@ function StoreListItem({
           {campusName} 캠퍼스 기준 도보 {distance}분
         </S.ListItemDistance>
         <S.ListItemStars>
-          {repeatComponent(<Star isFilled />, rating)}
+          <Star isFilled /> <S.RatingText>{rating.toFixed(2)}</S.RatingText>
         </S.ListItemStars>
       </S.ListItemTextContainer>
     </S.ListItemContainer>
