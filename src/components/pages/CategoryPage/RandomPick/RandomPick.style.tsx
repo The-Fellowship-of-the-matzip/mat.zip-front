@@ -68,6 +68,17 @@ export const RouletteSlot = styled.div`
 export const ResultWrapper = styled.div`
   width: 100%;
   border-bottom: 0.065rem solid ${({ theme }) => theme.secondary};
+  transform-origin: top;
+  animation: slidein 0.2s ease;
+
+  @keyframes slidein {
+    0% {
+      transform: scale(1, 0);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
 `;
 
 export const ButtonContainer = styled.div`
