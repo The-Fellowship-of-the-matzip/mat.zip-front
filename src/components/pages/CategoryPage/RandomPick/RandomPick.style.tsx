@@ -73,10 +73,10 @@ export const ResultWrapper = styled.div`
 
   @keyframes slidein {
     0% {
-      transform: scale(1, 0);
+      transform: scaleY(0);
     }
     100% {
-      transform: scale(1, 1);
+      transform: scaleY(1);
     }
   }
 `;
