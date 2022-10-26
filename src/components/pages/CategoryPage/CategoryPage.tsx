@@ -17,6 +17,7 @@ import StoreList from "components/common/StoreList/StoreList";
 
 import Category from "components/pages/CategoryPage/Category/Category";
 import * as S from "components/pages/CategoryPage/CategoryPage.style";
+import RandomRoulette from "components/pages/CategoryPage/RandomRoulette/RandomRoulette";
 
 function CategoryPage() {
   const campusName = useContext(campusContext);
@@ -27,6 +28,7 @@ function CategoryPage() {
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
       retry: NETWORK.RETRY_COUNT,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -39,6 +41,10 @@ function CategoryPage() {
       <section>
         <SectionHeader>카테고리</SectionHeader>
         <Category />
+      </section>
+      <section>
+        <SectionHeader>추천 메뉴</SectionHeader>
+        {isLoading ? <Spinner /> : <RandomRoulette campusId={campusId} />}
       </section>
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>

@@ -48,5 +48,13 @@ export const ListItemDistance = styled.p`
 `;
 
 export const ListItemStars = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.5rem;
+`;
+
+export const RatingText = styled.span`
+  font-size: 1.2rem;
+  font-weight: 500;
 `;
