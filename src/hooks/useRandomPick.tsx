@@ -4,8 +4,8 @@ import { createArray, getRandomNumber } from "util/randomUtils";
 import {
   ACTION_TYPES,
   initialState,
-  reducer,
-} from "components/pages/CategoryPage/RandomPick/reducer";
+  randomRouletteStateReducer,
+} from "components/pages/CategoryPage/RandomPick/randomRouletteStateReducer";
 
 import { Store } from "mock/data";
 
@@ -17,7 +17,10 @@ function useRandomPick(stores: Store[]) {
     [stores]
   );
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(
+    randomRouletteStateReducer,
+    initialState
+  );
 
   const setRoulette = () => {
     const rouletteBaseArray = createArray(storeNamesArray, 20);

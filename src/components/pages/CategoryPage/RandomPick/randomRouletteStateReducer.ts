@@ -40,7 +40,7 @@ export const initialState: State = {
   isResultOpen: false,
 };
 
-export const reducer = (state: State, action: Action) => {
+export const randomRouletteStateReducer = (state: State, action: Action) => {
   switch (action.type) {
     case ACTION_TYPES.SET_BOARD: {
       return { ...state, rouletteBoard: action.payload.rouletteBoard };
