@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { NETWORK, SIZE } from "constants/api";
@@ -43,6 +44,10 @@ function RandomRoulette({ campusId }: Props) {
     refetch();
     reset();
   };
+
+  useEffect(() => {
+    resetHard();
+  }, [campusId]);
 
   return (
     <S.Container>
