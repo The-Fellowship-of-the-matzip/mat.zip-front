@@ -10,13 +10,13 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
 
-import * as S from "components/pages/CategoryPage/RandomPick/RandomPick.style";
+import * as S from "components/pages/CategoryPage/RandomRoulette/RandomRoulette.style";
 
 type Props = {
   campusId: 1 | 2;
 };
 
-function RandomPick({ campusId }: Props) {
+function RandomRoulette({ campusId }: Props) {
   const {
     data: stores,
     isLoading,
@@ -89,4 +89,4 @@ function RandomPick({ campusId }: Props) {
   );
 }
 
-export default RandomPick;
+export default RandomRoulette;

@@ -5,7 +5,7 @@ import {
   ACTION_TYPES,
   initialState,
   randomRouletteStateReducer,
-} from "components/pages/CategoryPage/RandomPick/randomRouletteStateReducer";
+} from "components/pages/CategoryPage/RandomRoulette/randomRouletteStateReducer";
 
 import { Store } from "mock/data";
 

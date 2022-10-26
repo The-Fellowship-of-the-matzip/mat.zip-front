@@ -17,7 +17,7 @@ import StoreList from "components/common/StoreList/StoreList";
 
 import Category from "components/pages/CategoryPage/Category/Category";
 import * as S from "components/pages/CategoryPage/CategoryPage.style";
-import RandomPick from "components/pages/CategoryPage/RandomPick/RandomPick";
+import RandomRoulette from "components/pages/CategoryPage/RandomRoulette/RandomRoulette";
 
 function CategoryPage() {
   const campusName = useContext(campusContext);
@@ -44,7 +44,7 @@ function CategoryPage() {
       </section>
       <section>
         <SectionHeader>추천 메뉴</SectionHeader>
-        {isLoading ? <Spinner /> : <RandomPick campusId={campusId} />}
+        {isLoading ? <Spinner /> : <RandomRoulette campusId={campusId} />}
       </section>
       <section>
         <SectionHeader>이런 메뉴는 어떤가요?</SectionHeader>
