@@ -69,9 +69,9 @@ export const ResultWrapper = styled.div`
   width: 100%;
   border-bottom: 0.065rem solid ${({ theme }) => theme.secondary};
   transform-origin: top;
-  animation: slidein 0.2s ease;
+  animation: slide-from-top 0.2s ease;
 
-  @keyframes slidein {
+  @keyframes slide-from-top {
     0% {
       transform: scaleY(0);
     }
