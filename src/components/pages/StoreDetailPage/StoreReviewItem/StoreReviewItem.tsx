@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import repeatComponent from "util/repeatComponent";
 
+import defaultProfileImage from "asset/default-profile.svg";
+
 import deleteReviewItem from "api/deleteReviewItem";
 
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
@@ -62,6 +64,7 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
         <S.UserProfileImage
           src={author.profileImage}
           alt={`${author.username} 유저의 프로필 이미지`}
+          customDefaultImage={defaultProfileImage}
         />
         <S.ReviewContentWrapper>
           <S.Header>
