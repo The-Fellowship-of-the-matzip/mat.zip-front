@@ -13,7 +13,7 @@ function useRandomPick(stores: Store[]) {
   const storeNamesArray = stores?.map((store) => store.name) || [];
 
   const rouletteBaseArray = useMemo(
-    () => (stores !== undefined ? createArray(storeNamesArray, 20) : null),
+    () => (stores !== undefined ? createArray(storeNamesArray, 10) : null),
     [stores]
   );
 
@@ -23,7 +23,7 @@ function useRandomPick(stores: Store[]) {
   );
 
   const setRoulette = () => {
-    const rouletteBaseArray = createArray(storeNamesArray, 20);
+    const rouletteBaseArray = createArray(storeNamesArray, 10);
     dispatch({
       type: ACTION_TYPES.SET_BOARD,
       payload: { rouletteBoard: rouletteBaseArray || [] },
