@@ -25,7 +25,7 @@ export const NETWORK = {
 export const SIZE = {
   REVIEW: 5,
   LIST_ITEM: 10,
-  RANDOM_ITEM: 5,
+  RANDOM_ITEM: 10,
 };
 
 export const FILTERS = [
