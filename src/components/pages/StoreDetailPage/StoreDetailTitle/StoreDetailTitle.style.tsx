@@ -32,5 +32,6 @@ export const RatingWrapper = styled.span`
 `;
 
 export const KakaoLink = styled.a`
+  display: inline-block;
   text-decoration: underline;
 `;
