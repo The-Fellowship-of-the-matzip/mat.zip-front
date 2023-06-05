@@ -16,7 +16,12 @@ interface StoreReviewItemProps {
   reviewInfo: {
     id: string;
     restaurantId: string;
-    author: { username: string; profileImage: string };
+    author: {
+      username: string;
+      profileImage: string;
+      reviewCount: number;
+      averageRating: number;
+    };
     rating: number;
     content: string;
     menu: string;
@@ -65,7 +70,12 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
         />
         <S.ReviewContentWrapper>
           <S.Header>
-            <div>{author.username}</div>
+            <div>
+              <div>{author.username}</div>
+              <S.RatingInformation>
+                후기 {author.reviewCount} 별점평균 {author.averageRating}
+              </S.RatingInformation>
+            </div>
             {reviewInfo.updatable && (
               <>
                 <S.MeatballButtonContainer>

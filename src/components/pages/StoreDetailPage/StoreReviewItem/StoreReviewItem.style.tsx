@@ -5,7 +5,7 @@ import Image from "components/common/Image/Image";
 export const StoreReviewContainer = styled.section`
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 
   width: 100%;
@@ -43,16 +43,13 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  border-bottom: 0.065rem solid ${({ theme }) => theme.secondary};
 `;
 
 export const ReviewBottom = styled.div`
   min-height: 5rem;
-
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
 `;
 
 export const MenuWrapper = styled.div`
@@ -63,6 +60,11 @@ export const MenuWrapper = styled.div`
 export const ContentWrapper = styled.div`
   overflow: hidden;
   word-break: break-all;
+`;
+
+export const RatingInformation = styled.div`
+  margin-top: 4px;
+  font-size: 0.9rem;
 `;
 
 export const RatingPlaceholder = styled.div`

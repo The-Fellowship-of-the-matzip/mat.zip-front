@@ -7,6 +7,8 @@ export type ReviewShape = {
   author: {
     username: string;
     profileImage: string;
+    reviewCount: number;
+    averageRating: number;
   };
   content: string;
   rating: number;
