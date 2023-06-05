@@ -58,3 +58,10 @@ export const RatingText = styled.span`
   font-size: 1.2rem;
   font-weight: 500;
 `;
+
+export const EmptyRatingText = styled.span`
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: black;
+`;

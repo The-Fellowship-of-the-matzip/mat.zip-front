@@ -14,6 +14,7 @@ interface StoreListItemProps {
   name: string;
   distance: number;
   rating: number;
+  reviewCount: number;
 }
 
 function StoreListItem({
@@ -22,6 +23,7 @@ function StoreListItem({
   name,
   distance,
   rating,
+  reviewCount,
 }: StoreListItemProps) {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
@@ -39,7 +41,13 @@ function StoreListItem({
           {campusName} 캠퍼스 기준 도보 {distance}분
         </S.ListItemDistance>
         <S.ListItemStars>
-          <Star isFilled /> <S.RatingText>{rating.toFixed(2)}</S.RatingText>
+          {reviewCount ? (
+            <>
+              <Star isFilled /> <S.RatingText>{rating.toFixed(2)}</S.RatingText>
+            </>
+          ) : (
+            <S.EmptyRatingText>이 맛집을 탐방해 보세요!</S.EmptyRatingText>
+          )}
         </S.ListItemStars>
       </S.ListItemTextContainer>
     </S.ListItemContainer>
