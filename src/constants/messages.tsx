@@ -1,6 +1,5 @@
 import { INPUT_MAX_LENGTH } from "./rules";
-
-import type { Campus } from "constants/campus";
+import type { Campus } from "types/campus";
 
 const MESSAGES = {
   LOGIN_REQUIRED: "로그인 후 사용해주세요",

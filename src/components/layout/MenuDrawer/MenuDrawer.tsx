@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
+import type { Campus } from "types/campus";
 
 import { AUTH_LINK } from "constants/api";
 import { getOtherCampus } from "constants/campus";
-import type { Campus } from "constants/campus";
 import MESSAGES from "constants/messages";
 import { PATHNAME } from "constants/routes";
 

@@ -2,9 +2,10 @@ import { useState, useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import type { Campus } from "types/campus";
 
 import { NETWORK } from "constants/api";
-import { Campus, getCampusId } from "constants/campus";
+import { getCampusId } from "constants/campus";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";

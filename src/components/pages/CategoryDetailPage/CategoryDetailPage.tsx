@@ -4,9 +4,9 @@ import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import type { Campus } from "types/campus";
 
 import { NETWORK, SIZE, FILTERS } from "constants/api";
-import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";

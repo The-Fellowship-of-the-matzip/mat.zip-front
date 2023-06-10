@@ -1,9 +1,10 @@
 import { AxiosError } from "axios";
 import { useContext } from "react";
 import { useMutation } from "react-query";
+import type { Campus } from "types/campus";
 
 import { NETWORK } from "constants/api";
-import { Campus, getCampusId } from "constants/campus";
+import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
 
