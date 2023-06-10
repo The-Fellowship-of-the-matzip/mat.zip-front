@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 
 import { NETWORK } from "constants/api";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
 import useLogin from "hooks/useLogin";

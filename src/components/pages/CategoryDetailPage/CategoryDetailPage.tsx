@@ -9,7 +9,7 @@ import type { Campus } from "types/campus";
 import { NETWORK, SIZE, FILTERS } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";

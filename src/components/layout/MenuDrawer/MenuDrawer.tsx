@@ -5,7 +5,7 @@ import type { Campus } from "types/campus";
 
 import { AUTH_LINK } from "constants/api";
 import { getOtherCampus } from "constants/campus";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext, setCampusContext } from "context/CampusContextProvider";

@@ -8,7 +8,7 @@ import type { Campus } from "types/campus";
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";

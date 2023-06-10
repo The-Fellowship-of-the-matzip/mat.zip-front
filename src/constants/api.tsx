@@ -16,22 +16,22 @@ export const ENDPOINTS = {
     `/restaurants/${restaurantId}/reviews/${articleId}`,
   STORE_REQUESTS: (campusId: CampusId) =>
     `/campuses/${campusId}/restaurantDemands`,
-};
+} as const;
 
 export const NETWORK = {
   RETRY_COUNT: 3,
-};
+} as const;
 
 export const SIZE = {
   REVIEW: 5,
   LIST_ITEM: 10,
   RANDOM_ITEM: 5,
-};
+} as const;
 
 export const FILTERS = [
   { order: "rating", text: "별점 순" },
   { order: "spell", text: "가나다 순" },
-];
+] as const;
 
 export const ACCESS_TOKEN = "matzipaccessToken";
 

@@ -1,7 +1,7 @@
 import { INPUT_MAX_LENGTH } from "./rules";
 import type { Campus } from "types/campus";
 
-const MESSAGES = {
+export const MESSAGES = {
   LOGIN_REQUIRED: "로그인 후 사용해주세요",
   LOGIN_FAIL: "로그인에 실패했습니다. 다시 시도해주세요.",
 
@@ -19,6 +19,4 @@ const MESSAGES = {
   TOKEN_EXPIRED: "토큰이 만료되었습니다",
 
   WRONG_PATH: "잘못된 접근입니다.",
-};
-
-export default MESSAGES;
+} as const;

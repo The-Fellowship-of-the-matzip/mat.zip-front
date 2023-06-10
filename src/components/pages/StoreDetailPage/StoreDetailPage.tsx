@@ -3,7 +3,7 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { NETWORK } from "constants/api";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 
 import { LoginContext } from "context/LoginContextProvider";
 
