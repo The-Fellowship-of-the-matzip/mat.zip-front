@@ -15,7 +15,7 @@ export const ListItem = styled.li`
 
 export const ListHead = styled(ListItem)`
   font-weight: 500;
-  border-bottom: 0.065rem solid ${({ theme }) => theme.secondary};
+  border-bottom: 0.065rem solid ${({ theme }) => theme.color.gray200};
 `;
 
 export const ListData = styled.div`
@@ -38,8 +38,8 @@ export const ShowDetailRow = styled(ListData)`
 `;
 
 export const ShowDetailButton = styled.button`
-  background-color: ${({ theme }) => theme.secondary};
-  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.gray600};
+  color: ${({ theme }) => theme.color.white};
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 0.2rem;

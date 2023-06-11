@@ -45,7 +45,7 @@ function StoreDemandList({ storeRequests, refetchList }: Props) {
         <S.StoreNameRow>{sliceStoreName(name)}</S.StoreNameRow>
         <S.RegisteredRow>
           {isRegistered && (
-            <BsCheckCircleFill color={theme.primary} size="1.5rem" />
+            <BsCheckCircleFill color={theme.color.primary} size="1.5rem" />
           )}
         </S.RegisteredRow>
         <S.ShowDetailRow>

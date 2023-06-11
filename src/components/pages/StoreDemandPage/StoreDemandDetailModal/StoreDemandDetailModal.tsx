@@ -86,7 +86,7 @@ function StoreDemandDetailModal({
           <S.DetailContent>
             <S.DetailLabel>등록됨</S.DetailLabel>
             {isRegistered && (
-              <BsCheckCircleFill color={theme.primary} size="1.5rem" />
+              <BsCheckCircleFill color={theme.color.primary} size="1.5rem" />
             )}
           </S.DetailContent>
         </S.DetailContainer>

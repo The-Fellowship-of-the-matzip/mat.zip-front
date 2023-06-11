@@ -16,7 +16,7 @@ export const StoreName = styled.h1`
 export const Campus = styled.p`
   font-size: 1.1rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.color.gray600};
 `;
 
 export const DetailContainer = styled.div`
@@ -47,8 +47,8 @@ export const ButtonContainer = styled.div`
 `;
 
 export const CustomButton = styled.button`
-  background-color: ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.white};
   border: none;
   border-radius: 0.25rem;
   padding: 0.5rem 0.8rem;
