@@ -5,9 +5,11 @@ import repeatComponent from "util/repeatComponent";
 
 import deleteReviewItem from "api/deleteReviewItem";
 
+import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
 import MeatballButton from "components/common/MeatballButton/MeatballButton";
 import Star from "components/common/Star/Star";
+import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
@@ -71,24 +73,24 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
         <S.ReviewContentWrapper>
           <S.Header>
             <div>
-              <div>{author.username}</div>
-              <S.RatingInformation>
+              <Text css={S.titleTextStyle}>{author.username}</Text>
+              <Text css={S.subTextStyle} size="small">
                 후기 {author.reviewCount} 별점평균 {author.averageRating}
-              </S.RatingInformation>
+              </Text>
             </div>
-            {reviewInfo.updatable && (
+            {!reviewInfo.updatable && (
               <>
-                <S.MeatballButtonContainer>
+                <div>
                   <MeatballButton
                     ariaLabel="수정 삭제 메뉴"
                     onClick={handleMeatballButtonClick}
                   />
-                </S.MeatballButtonContainer>
+                </div>
                 {isDropBoxOpen && (
                   <DropDownBox
                     onClose={handleDropBoxClose}
-                    right="-20px"
-                    top="20px"
+                    right="0"
+                    top="24px"
                   >
                     <S.DropBoxButtonList>
                       <li>
@@ -98,6 +100,9 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
                         >
                           수정
                         </S.DropBoxButton>
+                      </li>
+                      <li>
+                        <Divider />
                       </li>
                       <li>
                         <S.DropBoxButton
@@ -114,9 +119,16 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
             )}
           </S.Header>
           <S.ReviewBottom>
-            <div>{repeatComponent(<Star isFilled />, rating)}</div>
-            <S.ContentWrapper>{content}</S.ContentWrapper>
-            <S.MenuWrapper>{menu}</S.MenuWrapper>
+            <S.RatingWrapper>
+              {repeatComponent(<Star isFilled />, rating)}
+              {repeatComponent(<Star />, 5 - rating)}
+            </S.RatingWrapper>
+            <Text css={S.bodyTextStyle} size="small">
+              {content}
+            </Text>
+            <Text css={S.menuTextStyle} size="small">
+              {menu}
+            </Text>
           </S.ReviewBottom>
         </S.ReviewContentWrapper>
       </S.StoreReviewContainer>

@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
+
+import { PlusIcon } from "asset";
 
 import { LoginContext } from "context/LoginContextProvider";
 
@@ -12,8 +14,11 @@ import fetchReviewList from "api/fetchReviewList";
 import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";
 
+import Button from "components/common/Button/Button";
+import Divider from "components/common/Divider/Divider";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";
+import Heading from "components/common/Heading/Heading";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 
@@ -79,37 +84,48 @@ function StoreDetailPage() {
       />
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
-        <S.ReviewListWrapper>
-          <h2>리뷰</h2>
-          <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
-            {(isLoading || isFetching) && <Spinner />}
-            {isError && error instanceof Error && (
-              <ErrorImage errorMessage={error.message} />
-            )}
-            {reviews.length ? (
-              reviews.map(
-                ({ id, author, rating, content, menu, updatable }) => (
-                  <StoreReviewItem
-                    key={id}
-                    reviewInfo={{
-                      restaurantId,
-                      id,
-                      author,
-                      rating,
-                      content,
-                      menu,
-                      updatable,
-                    }}
-                  />
+        <S.ReviewListContainer>
+          <Heading size="xSmall">리뷰</Heading>
+          <S.ReviewListWrapper>
+            <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
+              {(isLoading || isFetching) && <Spinner />}
+              {isError && error instanceof Error && (
+                <ErrorImage errorMessage={error.message} />
+              )}
+              {reviews.length ? (
+                reviews.map(
+                  ({ id, author, rating, content, menu, updatable }) => (
+                    <Fragment key={id}>
+                      <StoreReviewItem
+                        reviewInfo={{
+                          restaurantId,
+                          id,
+                          author,
+                          rating,
+                          content,
+                          menu,
+                          updatable,
+                        }}
+                      />
+                      <Divider />
+                    </Fragment>
+                  )
                 )
-              )
-            ) : (
-              <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
-            )}
-          </InfiniteScroll>
-        </S.ReviewListWrapper>
+              ) : (
+                <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
+              )}
+            </InfiniteScroll>
+          </S.ReviewListWrapper>
+        </S.ReviewListContainer>
       </S.StoreReviewContentWrapper>
-      <S.ReviewPlusButton onClick={handleReviewOpenClick}>+</S.ReviewPlusButton>
+      <Button
+        css={S.reviewButtonStyle}
+        variant="primary"
+        size="large"
+        onClick={handleReviewOpenClick}
+      >
+        <PlusIcon />
+      </Button>
       {isReviewOpen && (
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}

@@ -2,97 +2,59 @@ import styled, { css } from "styled-components";
 
 import Image from "components/common/Image/Image";
 
-export const StoreReviewContainer = styled.section`
+export const StoreReviewContainer = styled.li`
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  gap: 1rem;
+  gap: ${({ theme }) => theme.spacer.spacing4};
 
   width: 100%;
   height: fit-content;
-  padding: 1rem 1.25rem;
 
-  box-shadow: 0 0 0.15rem ${({ theme }) => theme.black};
   border: none;
   border-radius: 0.25rem;
 `;
 
 export const UserProfileImage = styled(Image)`
-  width: 3rem;
-  height: 3rem;
+  width: 5.6rem;
+  height: 5.6rem;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  box-shadow: 0 0 0.2rem ${({ theme }) => theme.primary};
 `;
 
 export const ReviewContentWrapper = styled.div`
-  width: 80%;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 0.25rem;
 `;
 
 export const Header = styled.header`
   position: relative;
   width: 100%;
-  padding-bottom: 0.25rem;
+  padding-bottom: ${({ theme }) => theme.spacer.spacing1};
 
   display: flex;
-  align-items: center;
   justify-content: space-between;
 `;
 
 export const ReviewBottom = styled.div`
-  min-height: 5rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacer.spacing3}; ;
 `;
 
-export const MenuWrapper = styled.div`
-  color: ${({ theme }) => theme.secondary};
-  align-self: flex-end;
-`;
-
-export const ContentWrapper = styled.div`
-  overflow: hidden;
-  word-break: break-all;
-`;
-
-export const RatingInformation = styled.div`
-  margin-top: 4px;
-  font-size: 0.9rem;
-`;
-
-export const RatingPlaceholder = styled.div`
-  font-size: 1rem;
-  color: ${({ theme }) => theme.secondary};
-`;
-
-export const MeatballButtonContainer = styled.div`
-  padding: 0 0.125rem;
-
-  border-radius: 45%;
-  box-shadow: 0 0 0.125rem ${({ theme }) => theme.secondary};
+export const RatingWrapper = styled.div`
+  display: flex;
 `;
 
 export const DropBoxButtonList = styled.ul`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5rem;
-    padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  padding: 12px 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.small};
 
-    background-color: ${theme.white};
-
-    & > li:first-of-type {
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid ${theme.secondary};
-    }
-  `}
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 export const DropBoxButton = styled.button`
@@ -105,4 +67,24 @@ export const DropBoxButton = styled.button`
   &:hover {
     font-weight: 700;
   }
+`;
+
+export const titleTextStyle = css`
+  font-weight: 600;
+`;
+
+export const subTextStyle = css`
+  color: ${({ theme }) => theme.color.gray600};
+  font-weight: 600;
+`;
+
+export const bodyTextStyle = css`
+  max-width: 16rem;
+  overflow: hidden;
+  word-break: break-all;
+`;
+
+export const menuTextStyle = css`
+  color: ${({ theme }) => theme.color.gray600};
+  align-self: flex-end;
 `;

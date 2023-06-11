@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -6,32 +6,47 @@ export const TitleContainer = styled.div`
   flex-direction: column;
 `;
 
-export const TitleRatingWrapper = styled.div`
-  display: flex;
+export const RatingContainer = styled.div`
   width: 100%;
+  margin-top: ${({ theme }) => theme.spacer.spacing2};
+
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacer.spacing2};
 `;
 
 export const DescriptionWrapper = styled.div`
+  margin-top: ${({ theme }) => theme.spacer.spacing2};
+  width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 2px;
 
-  padding: 1rem 0;
-
-  width: 100%;
+  color: ${({ theme }) => theme.color.gray600};
   word-break: break-all;
-  color: ${({ theme }) => theme.secondary};
 `;
 
-export const RatingWrapper = styled.span`
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin-left: 0.4rem;
+export const RatingWrapper = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacer.spacing1};
 `;
 
 export const KakaoLink = styled.a`
   display: inline-block;
+  color: ${({ theme }) => theme.color.gray600};
+  font-size: 1.4rem;
+  line-height: 2rem;
   text-decoration: underline;
+
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.gray800};
+  }
+`;
+
+export const ratingTextStyle = css`
+  font-weight: 600;
 `;
