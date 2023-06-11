@@ -9,16 +9,17 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
     margin: 0;
   }
 
+  html {
+    font-size: 62.5%;
+  }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      sans-serif;
+    background-color: ${theme.color.whiteBackground};
+    color: ${theme.color.gray800};
+    font-size: 1.6rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${theme.white};
-    color: ${theme.black};
-
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   }
 
   code {
@@ -36,15 +37,17 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
 
   a {
     text-decoration:none;
-    color: ${theme.black}
+    color: ${theme.color.gray800}
   }
 
   #app  {
-    max-width: 37.5rem;
-    min-width: 23.45rem;
+    position: relative;
+
+    max-width: 48rem;
+    min-width: 28rem;
     margin: 0 auto;
 
-    position: relative;
+    background-color: ${theme.color.white};
     
     box-shadow: 0 0 0.315rem rgba(0, 0, 0, 0.25);
 
@@ -53,13 +56,7 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
       css`
         min-height: 100vh;
       `}
-  }
-
-  input {
-    color: ${theme.black}
-  }
-
-  
+  }  
 `;
 
 export default GlobalStyle;
