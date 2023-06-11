@@ -12,6 +12,9 @@ import { campusContext, setCampusContext } from "context/CampusContextProvider";
 
 import useLogin from "hooks/useLogin";
 
+import Button from "components/common/Button/Button";
+import Text from "components/common/Text/Text";
+
 import * as S from "components/layout/MenuDrawer/MenuDrawer.style";
 
 type Props = { closeMenu: () => void; isLoggedIn: boolean };
@@ -59,18 +62,24 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
       <S.Content>
         {isLoggedIn ? (
           <>
-            <S.Title>어서오세요</S.Title>
-            <S.Button onClick={handleCampusChangeRequest}>
+            <Text css={S.titleStyle} size="large">
+              어서오세요
+            </Text>
+            <Button variant="textButton" onClick={handleCampusChangeRequest}>
               캠퍼스 변경하기
-            </S.Button>
-            <S.Button onClick={handleLogout}>로그아웃</S.Button>
+            </Button>
+            <Button variant="textButton" onClick={handleLogout}>
+              로그아웃
+            </Button>
           </>
         ) : (
           <>
-            <S.Title>로그인을 해주세요</S.Title>
-            <S.Button onClick={handleCampusChangeRequest}>
+            <Text css={S.titleStyle} size="large">
+              로그인을 해주세요
+            </Text>
+            <Button variant="textButton" onClick={handleCampusChangeRequest}>
               캠퍼스 변경하기
-            </S.Button>
+            </Button>
             <S.LoginLink href={AUTH_LINK}>로그인</S.LoginLink>
           </>
         )}

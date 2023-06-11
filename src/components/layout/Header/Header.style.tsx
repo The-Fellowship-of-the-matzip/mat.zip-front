@@ -1,20 +1,28 @@
 import styled from "styled-components";
 
 import Image from "components/common/Image/Image";
+import { Text } from "components/common/Text/Text.style";
 
 export const Container = styled.header`
-  min-width: 23.45rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 48rem;
+  width: 100%;
+  min-width: 28rem;
   height: fit-content;
   margin: 0 auto;
+  padding: ${({ theme }) => theme.spacer.spacing3};
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: ${({ theme }) => theme.spacer.spacing4};
 
-  padding: 1rem;
+  background-color: ${({ theme }) => theme.color.primary};
 
-  background-color: ${({ theme }) => theme.primary};
+  z-index: 99;
 `;
 
 export const TopWrapper = styled.div`
@@ -34,12 +42,12 @@ export const PageName = styled.h1`
 `;
 
 export const LogoImage = styled(Image)`
-  width: 7.5rem;
+  width: 12rem;
 `;
 
-export const Campus = styled.span`
-  font-size: 0.8rem;
-  color: ${({ theme }) => theme.black};
+export const Campus = styled(Text).attrs({ as: "span" })`
+  position: relative;
+  top: -2px;
 `;
 
 export const RightWrapper = styled.div`
@@ -50,7 +58,7 @@ export const RightWrapper = styled.div`
 `;
 
 export const Profile = styled.div`
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.whitre};
   border-radius: 50%;
   width: 1.875rem;
   height: 1.875rem;
@@ -60,10 +68,10 @@ export const LoginLink = styled.a`
   text-decoration: none;
   padding-bottom: 0.2rem;
   &:hover {
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.color.white};
   }
   &:active {
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 
@@ -75,18 +83,18 @@ export const SearchToggleButton = styled.button`
   font-size: 1.5rem;
 
   &:focus {
-    color: ${({ theme }) => theme.black};
+    color: ${({ theme }) => theme.color.black};
   }
 `;
 
 export const MenuButton = styled.button`
   background-color: transparent;
   border: none;
-  height: 1.5rem;
+  height: 2.4rem;
 
-  font-size: 1.5rem;
+  font-size: 2.4rem;
 
   &:focus {
-    color: ${({ theme }) => theme.black};
+    color: ${({ theme }) => theme.color.black};
   }
 `;

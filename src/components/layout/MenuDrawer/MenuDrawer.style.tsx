@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   position: fixed;
@@ -10,38 +10,38 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
+
+  z-index: 100;
 `;
 
 export const Backdrop = styled.div`
-  width: 100%;
-  height: 100%;
-
-  background-color: ${({ theme }) => theme.black};
-  opacity: 0.5;
-
   position: absolute;
   top: 0;
   left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export const Content = styled.aside`
-  width: 15rem;
+  width: 24rem;
   height: 100vh;
 
-  padding: 2rem 1rem;
+  padding: ${({ theme }) => theme.spacer.spacing4};
 
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.white};
 
   position: absolute;
   top: 0;
   right: 0;
 
-  box-shadow: -0.315rem 0 0.25rem rgba(0, 0, 0, 0.25);
+  box-shadow: -2px 0px 6px rgba(0, 0, 0, 0.15);
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  gap: ${({ theme }) => theme.spacer.spacing2};
 
   transform-origin: right;
   animation: slidein 0.2s ease;
@@ -56,48 +56,52 @@ export const Content = styled.aside`
   }
 `;
 
-export const Title = styled.h1`
-  font-size: 1.25rem;
-  text-align: center;
-`;
-
-export const Button = styled.button`
-  background-color: transparent;
-  border: none;
-
-  font-size: 1rem;
-  font-weight: 600;
-
-  &:hover {
-    color: ${({ theme }) => theme.secondary};
-  }
-`;
-
 export const LoginLink = styled.a`
-  font-size: 1rem;
+  padding: 14px;
+  font-size: 16px;
   font-weight: 600;
+  text-align: center;
 
-  color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.color.black};
 
-  &:visited {
-    color: ${({ theme }) => theme.black};
-  }
+  border-radius: ${({ theme }) => theme.borderRadius.small};
+  outline: 0 solid ${({ theme }) => theme.color.white};
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: ${({ theme }) => theme.secondary};
+    background-color: ${({ theme }) => theme.color.gray100};
+  }
+
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.color.white};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.color.gray100};
   }
 `;
 
 export const CustomLink = styled(Link)`
-  font-size: 1rem;
+  padding: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: ${({ theme }) => theme.black};
+  text-align: center;
 
-  &:visited {
-    color: ${({ theme }) => theme.black};
-  }
+  color: ${({ theme }) => theme.color.black};
+
+  border-radius: ${({ theme }) => theme.borderRadius.small};
+  outline: 0 solid ${({ theme }) => theme.color.white};
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: ${({ theme }) => theme.secondary};
+    background-color: ${({ theme }) => theme.color.gray100};
   }
+
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.color.white};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.color.gray100};
+  }
+`;
+
+export const titleStyle = css`
+  margin-bottom: ${({ theme }) => theme.spacer.spacing3};
+  font-weight: bold;
+  text-align: center;
 `;
