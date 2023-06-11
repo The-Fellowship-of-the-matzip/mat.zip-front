@@ -10,9 +10,10 @@ export const ErrorImageContainer = styled.div`
   align-items: center;
 `;
 
-export const ErrorImageSrc = styled.img`
-  min-width: 20rem;
-  height: 15rem;
+export const ErrorImage = styled.img`
+  min-width: 24rem;
+  height: 16rem;
+  margin-bottom: ${({ theme }) => theme.spacer.spacing2};
   object-fit: cover;
   object-position: center;
 `;

@@ -1,8 +1,10 @@
+import Input from "../Input/Input";
 import React, { useEffect, useState } from "react";
-import { BsSearch } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import ROUTES, { PATHNAME } from "constants/routes";
+
+import { SearchIcon } from "asset";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
@@ -42,17 +44,17 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
 
   return (
     <S.Container onSubmit={handleSearchButtonClick}>
-      <S.SearchInput
-        type="text"
-        placeholder="검색"
-        value={keyword}
-        onChange={handleSearchInput}
-        min={1}
-        max={30}
-      />
-      <S.Button type="submit">
-        <BsSearch />
-      </S.Button>
+      <S.InputContainer>
+        <SearchIcon />
+        <Input
+          css={S.inputStyle}
+          placeholder="맛집을 검색해 보세요"
+          value={keyword}
+          min={1}
+          max={30}
+          onChange={handleSearchInput}
+        />
+      </S.InputContainer>
     </S.Container>
   );
 }

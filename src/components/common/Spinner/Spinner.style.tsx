@@ -17,7 +17,7 @@ export const SpinDiv = styled.div`
   height: 4rem;
 
   border-radius: 50%;
-  border: 0.5rem solid ${({ theme }) => theme.primary};
+  border: 0.5rem solid ${({ theme }) => theme.color.primary};
   border-right-color: transparent;
   border-left-color: transparent;
   animation: spin 1s ease infinite;

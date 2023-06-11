@@ -1,29 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.form`
+  width: 100%;
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
   display: flex;
+  align-items: center;
 
-  width: 100%;
+  & > svg {
+    position: absolute;
+    left: 16px;
+  }
 `;
 
-export const SearchInput = styled.input`
+export const inputStyle = css`
   width: 100%;
-  padding: 0.5rem 1rem;
-
-  background-color: ${({ theme }) => theme.white};
-  border: none;
-  border-radius: 0.3rem 0 0 0.3rem;
-  box-shadow: 0 0 0.1rem ${({ theme }) => theme.secondary} inset;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-`;
-
-export const Button = styled.button`
-  padding: 0 0.5rem;
-
-  background-color: ${({ theme }) => theme.white};
-  border: none;
-  border-left: 1px solid ${({ theme }) => theme.secondary};
-  border-radius: 0 0.3rem 0.3rem 0;
-  box-shadow: 0 0 0.1rem ${({ theme }) => theme.secondary} inset;
+  padding-left: ${({ theme }) => theme.spacer.spacing6}; ;
 `;

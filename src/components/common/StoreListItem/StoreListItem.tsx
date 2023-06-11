@@ -1,3 +1,4 @@
+import Text from "../Text/Text";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -37,18 +38,22 @@ function StoreListItem({
       <S.ListItemThumbnail src={thumbnailUrl} alt={name} />
       <S.ListItemTextContainer>
         <S.ListItemName>{name}</S.ListItemName>
-        <S.ListItemDistance>
-          {campusName} 캠퍼스 기준 도보 {distance}분
-        </S.ListItemDistance>
         <S.ListItemStars>
           {reviewCount ? (
             <>
-              <Star isFilled /> <S.RatingText>{rating.toFixed(2)}</S.RatingText>
+              <Star isFilled />
+              <Text css={S.ratingTextStyle}>{rating.toFixed(1)}</Text>
             </>
           ) : (
-            <S.EmptyRatingText>이 맛집을 탐방해 보세요!</S.EmptyRatingText>
+            <>
+              <Star />
+              <Text css={S.subTextStyle}>이 맛집을 탐방해 보세요!</Text>
+            </>
           )}
         </S.ListItemStars>
+        <Text size="small" css={S.subTextStyle}>
+          {campusName} 캠퍼스 기준 도보 {distance}분
+        </Text>
       </S.ListItemTextContainer>
     </S.ListItemContainer>
   );

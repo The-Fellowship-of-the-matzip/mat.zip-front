@@ -14,12 +14,14 @@ export const DropDownBox = styled.div<
     z-index: 3;
     white-space: nowrap;
 
-    border: 1px solid ${theme.secondary};
-    border-radius: 0.3rem;
-    background-color: ${theme.white};
+    border: 1px solid ${theme.color.gray200};
+    border-radius: ${theme.borderRadius.small};
+    background-color: ${theme.color.white};
 
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
     transform-origin: top;
     animation: slide-down 0.1s ease;
+
     @keyframes slide-down {
       0% {
         transform: scale(1, 0);

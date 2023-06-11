@@ -1,3 +1,4 @@
+import Heading from "../Heading/Heading";
 import React from "react";
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
@@ -26,10 +27,10 @@ function BottomSheet({ title, closeSheet, children }: Props) {
   return ReactDOM.createPortal(
     <S.Container scrollOffset={scrollOffset}>
       <S.Backdrop onClick={closeSheet} />
-      <S.Content>
-        <S.Title>{title}</S.Title>
-        <S.InputWrapper>{children}</S.InputWrapper>
-      </S.Content>
+      <S.ContentWrapper>
+        <Heading size="xSmall">{title}</Heading>
+        <S.Content>{children}</S.Content>
+      </S.ContentWrapper>
     </S.Container>,
     document.querySelector("#app") as HTMLElement
   );
