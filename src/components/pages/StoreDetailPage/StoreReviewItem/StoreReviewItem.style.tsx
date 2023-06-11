@@ -79,7 +79,7 @@ export const subTextStyle = css`
 `;
 
 export const bodyTextStyle = css`
-  max-width: 16rem;
+  max-height: 16rem;
   overflow: hidden;
   word-break: break-all;
 `;
