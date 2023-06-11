@@ -1,3 +1,6 @@
+import Button from "components/common/Button/Button";
+import Text from "components/common/Text/Text";
+
 import * as S from "components/pages/CategoryPage/CategoryItem/CategoryItem.style";
 
 interface CategoryItemProps {
@@ -14,8 +17,12 @@ function CategoryItem({
 }: CategoryItemProps) {
   return (
     <S.CategoryItemContainer onClick={onClick} {...rest}>
-      <S.CategoryItemButton>{buttonText}</S.CategoryItemButton>
-      <S.CategoryItemDesc>{children}</S.CategoryItemDesc>
+      <Button css={S.buttonStyle} variant="primary">
+        {buttonText}
+      </Button>
+      <Text css={S.textStyle} size="small">
+        {children}
+      </Text>
     </S.CategoryItemContainer>
   );
 }

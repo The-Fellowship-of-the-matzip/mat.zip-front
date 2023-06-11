@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const CategoryPageContainer = styled.div`
-  padding: 1rem;
+  padding: ${({ theme }) => theme.spacer.spacing3};
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.5rem;
+  gap: ${({ theme }) => theme.spacer.spacing6};
 `;

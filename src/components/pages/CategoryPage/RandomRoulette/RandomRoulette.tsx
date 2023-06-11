@@ -7,9 +7,11 @@ import useRandomPick from "hooks/useRandomPick";
 
 import fetchRandomStoreList from "api/fetchRandomStoreList";
 
+import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/CategoryPage/RandomRoulette/RandomRoulette.style";
 
@@ -56,7 +58,7 @@ function RandomRoulette({ campusId }: Props) {
         <ErrorImage errorMessage={error.message} />
       )}
       <S.RecommendBlock>
-        <S.Label>오늘은 </S.Label>
+        <Text size="large">오늘은 </Text>
         <S.Outer>
           <S.Inner runAnimation={triggerAnimation} onAnimationEnd={openResult}>
             {rouletteBoard.map((store, index) => (
@@ -64,19 +66,25 @@ function RandomRoulette({ campusId }: Props) {
             ))}
           </S.Inner>
         </S.Outer>
-        <S.Label>어때요?</S.Label>
+        <Text size="large">어때요?</Text>
       </S.RecommendBlock>
       {!isResultOpen ? (
-        <S.CustomButton
+        <Button
+          variant="primary"
+          size="small"
           onClick={handleRunClick}
           disabled={result !== undefined}
         >
           룰렛 Go!
-        </S.CustomButton>
+        </Button>
       ) : (
         <S.ButtonContainer>
-          <S.CustomButton onClick={reset}>다시 돌리기</S.CustomButton>
-          <S.CustomButton onClick={resetHard}>식당 리셋하기</S.CustomButton>
+          <Button variant="primary" size="small" onClick={reset}>
+            다시 돌리기
+          </Button>
+          <Button variant="primary" size="small" onClick={resetHard}>
+            식당 리셋하기
+          </Button>
         </S.ButtonContainer>
       )}
       {isResultOpen && result !== undefined && (
