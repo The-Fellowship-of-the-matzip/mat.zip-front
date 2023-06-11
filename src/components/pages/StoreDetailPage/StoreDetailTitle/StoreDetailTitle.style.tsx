@@ -50,3 +50,7 @@ export const KakaoLink = styled.a`
 export const ratingTextStyle = css`
   font-weight: 600;
 `;
+
+export const subTextStyle = css`
+  color: ${({ theme }) => theme.color.gray600};
+`;
