@@ -8,7 +8,7 @@ import { INPUT_MAX_LENGTH } from "constants/rules";
 
 import useLogin from "hooks/useLogin";
 
-import sendReviewPostRequest from "api/sendReviewPostRequest";
+import sendReviewPostRequest from "api/review/sendReviewPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 import Button from "components/common/Button/Button";

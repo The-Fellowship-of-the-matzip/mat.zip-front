@@ -10,8 +10,8 @@ import { getCampusId } from "constants/campus";
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
 
-import fetchStoreDemandList from "api/fetchStoreDemandList";
 import getNextPageParam from "api/getNextPageParam";
+import fetchStoreDemandList from "api/store/fetchStoreDemandList";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";

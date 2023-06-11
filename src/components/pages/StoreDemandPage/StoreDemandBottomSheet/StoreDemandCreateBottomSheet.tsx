@@ -12,7 +12,7 @@ import { campusContext } from "context/CampusContextProvider";
 
 import useLogin from "hooks/useLogin";
 
-import sendStoreDemandPostRequest from "api/sendStoreDemandPostRequest";
+import sendStoreDemandPostRequest from "api/store/sendStoreDemandPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 

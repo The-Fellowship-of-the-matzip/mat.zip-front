@@ -5,7 +5,7 @@ import { NETWORK, SIZE } from "constants/api";
 
 import useRandomPick from "hooks/useRandomPick";
 
-import fetchRandomStoreList from "api/fetchRandomStoreList";
+import fetchRandomStoreList from "api/store/fetchRandomStoreList";
 
 import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";

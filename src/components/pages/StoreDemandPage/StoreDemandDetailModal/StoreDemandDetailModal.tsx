@@ -15,7 +15,7 @@ import { LoginContext } from "context/LoginContextProvider";
 
 import useLogin from "hooks/useLogin";
 
-import sendStoreDemandDeleteRequest from "api/sendStoreDemandDeleteRequest";
+import sendStoreDemandDeleteRequest from "api/store/sendStoreDemandDeleteRequest";
 
 import Modal from "components/common/Modal/Modal";
 

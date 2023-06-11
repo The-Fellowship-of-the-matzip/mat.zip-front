@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import repeatComponent from "util/repeatComponent";
 
-import deleteReviewItem from "api/deleteReviewItem";
+import deleteReviewItem from "api/review/deleteReviewItem";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";

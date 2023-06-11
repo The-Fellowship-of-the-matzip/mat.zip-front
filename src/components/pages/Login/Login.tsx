@@ -8,7 +8,7 @@ import { LoginContext } from "context/LoginContextProvider";
 
 import useLogin from "hooks/useLogin";
 
-import sendLoginRequest from "api/sendLoginRequest";
+import sendLoginRequest from "api/login/sendLoginRequest";
 
 import * as S from "components/pages/Login/Login.style";
 

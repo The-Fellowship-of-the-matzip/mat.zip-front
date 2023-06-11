@@ -9,10 +9,10 @@ import { PlusIcon } from "asset";
 
 import { LoginContext } from "context/LoginContextProvider";
 
-import type { ReviewShape } from "api/fetchReviewList";
-import fetchReviewList from "api/fetchReviewList";
-import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";
+import type { ReviewShape } from "api/review/fetchReviewList";
+import fetchReviewList from "api/review/fetchReviewList";
+import fetchStoreDetail from "api/store/fetchStoreDetail";
 
 import Button from "components/common/Button/Button";
 import Divider from "components/common/Divider/Divider";
