@@ -1,3 +1,4 @@
+import Button from "../Button/Button";
 import Input from "../Input/Input";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -45,7 +46,6 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
   return (
     <S.Container onSubmit={handleSearchButtonClick}>
       <S.InputContainer>
-        <SearchIcon />
         <Input
           css={S.inputStyle}
           placeholder="맛집을 검색해 보세요"
@@ -55,6 +55,9 @@ function SearchBar({ closeSearchBar }: SearchBarProp) {
           onChange={handleSearchInput}
         />
       </S.InputContainer>
+      <Button css={S.buttonStyle}>
+        <SearchIcon />
+      </Button>
     </S.Container>
   );
 }
