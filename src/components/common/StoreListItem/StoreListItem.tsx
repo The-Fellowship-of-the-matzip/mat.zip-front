@@ -41,7 +41,7 @@ function StoreListItem({
       <S.ListItemTextContainer>
         <S.ListItemName>{name}</S.ListItemName>
         <S.ListItemStars>
-          {reviewCount ? (
+          {reviewCount !== 0 ? (
             <>
               <Star isFilled />
               <Text css={S.ratingTextStyle}>{rating.toFixed(1)}</Text>
