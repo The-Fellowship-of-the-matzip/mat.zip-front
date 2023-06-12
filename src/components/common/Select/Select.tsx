@@ -24,7 +24,7 @@ function Select({
   ...attributes
 }: SelectProps) {
   return (
-    <>
+    <S.Container>
       {label && (
         <Label id={id} required={required}>
           {label}
@@ -42,7 +42,7 @@ function Select({
       {supportingText && (
         <S.SupportingText isError={isError}>{supportingText}</S.SupportingText>
       )}
-    </>
+    </S.Container>
   );
 }
 

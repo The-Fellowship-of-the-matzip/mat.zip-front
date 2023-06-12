@@ -43,6 +43,12 @@ const getSizeStyling = (size: Required<SelectProps>["$size"]) => {
   return style[size];
 };
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacer.spacing2};
+`;
+
 export const Select = styled.select<Omit<SelectProps, "children">>`
   border-radius: ${({ theme }) => theme.borderRadius.small};
   ${({ isError = false }) => getVariantStyling(isError)}
