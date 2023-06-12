@@ -76,7 +76,7 @@ const getVariantStyling = (variant: Required<ButtonProps>["variant"]) => {
 const getSizeStyling = (size: Required<ButtonProps>["size"]) => {
   const style = {
     small: css`
-      padding: 1.2rem;
+      padding: 0.8rem 1.2rem;
       font-size: 1.4rem;
       font-weight: 500;
     `,
