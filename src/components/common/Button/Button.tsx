@@ -9,17 +9,17 @@ export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   size?: "small" | "medium" | "large";
 }
 
-const Button = ({
+function Button({
   variant = "default",
   size = "medium",
   children,
   ...attributes
-}: ButtonProps) => {
+}: ButtonProps) {
   return (
     <S.Button variant={variant} size={size} {...attributes}>
       {children}
     </S.Button>
   );
-};
+}
 
 export default Button;
