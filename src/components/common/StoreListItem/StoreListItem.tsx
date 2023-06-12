@@ -1,9 +1,8 @@
 import Text from "../Text/Text";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getRandomNumber } from "util/randomUtils";
+import { getRandomEmptyReviewMessage } from "util/randomUtils";
 
-import { EMPTY_REVIEW_MESSAGES } from "constants/reviews";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -49,13 +48,7 @@ function StoreListItem({
           ) : (
             <>
               <Star />
-              <Text css={S.subTextStyle}>
-                {
-                  EMPTY_REVIEW_MESSAGES[
-                    getRandomNumber(EMPTY_REVIEW_MESSAGES.length + 1)
-                  ]
-                }
-              </Text>
+              <Text css={S.subTextStyle}>{getRandomEmptyReviewMessage()}</Text>
             </>
           )}
         </S.ListItemStars>

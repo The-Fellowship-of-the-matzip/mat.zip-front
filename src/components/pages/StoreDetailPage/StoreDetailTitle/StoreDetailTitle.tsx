@@ -1,7 +1,5 @@
 import { useContext } from "react";
-import { getRandomNumber } from "util/randomUtils";
-
-import { EMPTY_REVIEW_MESSAGES } from "constants/reviews";
+import { getRandomEmptyReviewMessage } from "util/randomUtils";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -38,13 +36,7 @@ function StoreDetailTitle({
           {rating > 0 ? (
             <Text css={S.ratingTextStyle}>{rating.toFixed(1)}</Text>
           ) : (
-            <Text css={S.subTextStyle}>
-              {
-                EMPTY_REVIEW_MESSAGES[
-                  getRandomNumber(EMPTY_REVIEW_MESSAGES.length + 1)
-                ]
-              }
-            </Text>
+            <Text css={S.subTextStyle}>{getRandomEmptyReviewMessage()}</Text>
           )}
           {rating > 0 && <Text>({reviewCount})</Text>}
         </S.RatingWrapper>
