@@ -23,9 +23,9 @@ export default {
     placeholder: "Placeholder",
     supportingText: "Supporting text",
     children: [
-      <option>option1</option>,
-      <option>option2</option>,
-      <option>option3</option>,
+      <option key={1}>option1</option>,
+      <option key={2}>option2</option>,
+      <option key={3}>option3</option>,
     ],
   },
   decorators: [
