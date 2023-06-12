@@ -60,6 +60,10 @@ function ReviewUpdateBottomSheet({
     closeSheet();
   };
 
+  const handleRatingInput = (input: number) => {
+    setRating(input);
+  };
+
   const handleMenuInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const {
       target: { value },
@@ -114,7 +118,7 @@ function ReviewUpdateBottomSheet({
       <S.Form onSubmit={handleSubmitRequest}>
         <S.StarRatingWrapper>
           <Label>별점</Label>
-          <StarRating rating={rating} setRating={setRating} />
+          <StarRating rating={rating} handleRatingInput={handleRatingInput} />
         </S.StarRatingWrapper>
         <Input
           label="메뉴 입력"

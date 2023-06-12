@@ -5,17 +5,17 @@ import * as S from "components/common/StarRating/StarRating.style";
 
 type Props = {
   rating: number;
-  setRating: React.Dispatch<React.SetStateAction<number>>;
+  handleRatingInput: (input: number) => void;
 };
 
 const MAX_RATING = 5;
 
-function StarRating({ rating = 0, setRating }: Props) {
+function StarRating({ rating = 0, handleRatingInput }: Props) {
   const [hoverRating, setHoverRating] = useState<null | number>(null);
 
   const handleStarClick: (index: number) => React.MouseEventHandler =
     (index) => () => {
-      setRating(index);
+      handleRatingInput(index);
     };
 
   const handleStarHover = (index: number) => () => {
