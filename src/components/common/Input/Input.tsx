@@ -22,7 +22,7 @@ function Input({
   ...attributes
 }: InputProps) {
   return (
-    <>
+    <S.Container>
       {label && (
         <Label id={id} required={required}>
           {label}
@@ -38,7 +38,7 @@ function Input({
       {supportingText && (
         <S.SupportingText isError={isError}>{supportingText}</S.SupportingText>
       )}
-    </>
+    </S.Container>
   );
 }
 

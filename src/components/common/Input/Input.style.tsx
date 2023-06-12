@@ -43,6 +43,12 @@ const getSizeStyling = (size: Required<InputProps>["$size"]) => {
   return style[size];
 };
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacer.spacing2};
+`;
+
 export const Input = styled.input<InputProps>`
   border-radius: ${({ theme }) => theme.borderRadius.small};
   ${({ isError = false }) => getVariantStyling(isError)}
