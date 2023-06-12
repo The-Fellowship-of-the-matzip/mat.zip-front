@@ -15,6 +15,9 @@ import useLogin from "hooks/useLogin";
 import sendStoreDemandPutRequest from "api/store/sendStoreDemandPutRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
+import Button from "components/common/Button/Button";
+import Input from "components/common/Input/Input";
+import Select from "components/common/Select/Select";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
 
@@ -89,21 +92,24 @@ function StoreDemandEditBottomSheet({
   return (
     <BottomSheet title="식당 추가 요청하기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmit}>
-        <S.Label>
-          카테고리
-          <S.Select name="categoryId" defaultValue={initValue.categoryId}>
-            {categoryOptions}
-          </S.Select>
-        </S.Label>
-        <S.Label>
-          맛집 이름
-          <S.NameInput
-            name="name"
-            placeholder="맛집의 이름을 입력해주세요"
-            defaultValue={initValue.name}
-          />
-        </S.Label>
-        <S.SubmitButton>요청 수정하기</S.SubmitButton>
+        <Select
+          label="카테고리"
+          id="category"
+          name="categoryId"
+          defaultValue={initValue.categoryId}
+          required
+        >
+          {categoryOptions}
+        </Select>
+        <Input
+          label="맛집 이름"
+          id="restaurant-name"
+          name="name"
+          placeholder="맛집의 이름을 입력해주세요"
+          defaultValue={initValue.name}
+          required
+        />
+        <Button variant="primary">요청 수정하기</Button>
       </S.Form>
     </BottomSheet>
   );

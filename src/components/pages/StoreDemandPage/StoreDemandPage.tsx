@@ -13,6 +13,7 @@ import { LoginContext } from "context/LoginContextProvider";
 import getNextPageParam from "api/getNextPageParam";
 import fetchStoreDemandList from "api/store/fetchStoreDemandList";
 
+import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
@@ -63,9 +64,14 @@ function StoreDemandPage() {
   };
   return (
     <S.Container>
-      <S.CreateRequestButton onClick={handleRequestSheetOpen}>
+      <Button
+        css={S.requestButtonStyle}
+        variant="primary"
+        size="small"
+        onClick={handleRequestSheetOpen}
+      >
         요청하기
-      </S.CreateRequestButton>
+      </Button>
       <SectionHeader
         leadingIcon={<MdArrowBackIos />}
         onClick={() => {

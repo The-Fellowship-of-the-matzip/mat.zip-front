@@ -1,7 +1,6 @@
 import { AxiosError } from "axios";
 import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { useMutation } from "react-query";
 import type { Campus } from "types/campus";
 
@@ -17,7 +16,10 @@ import useLogin from "hooks/useLogin";
 
 import sendStoreDemandDeleteRequest from "api/store/sendStoreDemandDeleteRequest";
 
+import Button from "components/common/Button/Button";
+import Heading from "components/common/Heading/Heading";
 import Modal from "components/common/Modal/Modal";
+import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal.style";
 
@@ -72,34 +74,32 @@ function StoreDemandDetailModal({
   return (
     <Modal closeModal={closeModal}>
       <S.ContentContainer>
-        <S.StoreName>{name}</S.StoreName>
-        <S.Campus>{campus}</S.Campus>
+        <S.NameContainer>
+          <Text size="small">{campus}</Text>
+          <Heading size="small">{name}</Heading>
+        </S.NameContainer>
         <S.DetailContainer>
-          <S.DetailContent>
-            <S.DetailLabel>신청자</S.DetailLabel>
-            <S.DetailValue>{author}</S.DetailValue>
-          </S.DetailContent>
-          <S.DetailContent>
-            <S.DetailLabel>카테고리</S.DetailLabel>
-            <S.DetailValue>{categories[categoryId]}</S.DetailValue>
-          </S.DetailContent>
-          <S.DetailContent>
-            <S.DetailLabel>등록됨</S.DetailLabel>
-            {isRegistered && (
-              <BsCheckCircleFill color={theme.color.primary} size="1.5rem" />
-            )}
-          </S.DetailContent>
+          <S.DetailHead>
+            <S.AuthorNameRow>신청자</S.AuthorNameRow>
+            <S.CategoryNameRow>카테고리</S.CategoryNameRow>
+            <S.RegisteredRow>등록됨</S.RegisteredRow>
+          </S.DetailHead>
+          <S.DetailItem>
+            <S.AuthorNameRow>{author}</S.AuthorNameRow>
+            <S.CategoryNameRow>{categories[categoryId]}</S.CategoryNameRow>
+            <S.RegisteredRow>
+              {isRegistered && (
+                <BsCheckCircleFill color={theme.color.primary} size="2rem" />
+              )}
+            </S.RegisteredRow>
+          </S.DetailItem>
         </S.DetailContainer>
         {isLoggedIn && isAuthor && !isRegistered && (
           <S.ButtonContainer>
-            <S.DeleteButton onClick={handleDeleteClick}>
-              <MdDeleteForever size="1rem" />
-              삭제
-            </S.DeleteButton>
-            <S.CustomButton onClick={handleEditOpen}>
-              <MdEdit size="1rem" />
+            <Button onClick={handleDeleteClick}>삭제</Button>
+            <Button variant="primary" onClick={handleEditOpen}>
               수정
-            </S.CustomButton>
+            </Button>
           </S.ButtonContainer>
         )}
       </S.ContentContainer>

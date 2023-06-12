@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 
+import Button from "components/common/Button/Button";
+
 import StoreDemandEditBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandEditBottomSheet";
 import StoreDemandDetailModal from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal";
 import * as S from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList.style";
@@ -45,13 +47,13 @@ function StoreDemandList({ storeRequests, refetchList }: Props) {
         <S.StoreNameRow>{sliceStoreName(name)}</S.StoreNameRow>
         <S.RegisteredRow>
           {isRegistered && (
-            <BsCheckCircleFill color={theme.color.primary} size="1.5rem" />
+            <BsCheckCircleFill color={theme.color.primary} size="2rem" />
           )}
         </S.RegisteredRow>
         <S.ShowDetailRow>
-          <S.ShowDetailButton onClick={handleRequestDetailOpen(id)}>
+          <Button size="small" onClick={handleRequestDetailOpen(id)}>
             상세보기
-          </S.ShowDetailButton>
+          </Button>
         </S.ShowDetailRow>
         {detailOpenId === id && (
           <StoreDemandDetailModal
@@ -77,6 +79,7 @@ function StoreDemandList({ storeRequests, refetchList }: Props) {
       </S.ListItem>
     )
   );
+
   return (
     <S.Container>
       <S.ListHead>
