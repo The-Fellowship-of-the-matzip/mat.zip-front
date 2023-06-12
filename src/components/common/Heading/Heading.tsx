@@ -1,10 +1,11 @@
 import * as S from "./Heading.style";
+import type { HeadingSize } from "types/ui";
 
 import type { CSSProp } from "styled-components";
 
 export interface HeadingProps {
   children: string;
-  size?: "xSmall" | "small" | "medium" | "large" | "xLarge" | "xxLarge";
+  size?: HeadingSize;
   css?: CSSProp;
 }
 

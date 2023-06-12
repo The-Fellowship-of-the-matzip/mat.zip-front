@@ -1,10 +1,11 @@
 import * as S from "./Text.style";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import type { TextSize } from "types/ui";
 
 import type { CSSProp } from "styled-components";
 
 export interface TextProps extends PropsWithChildren<{}> {
-  size?: "xSmall" | "small" | "medium" | "large";
+  size?: TextSize;
   css?: CSSProp;
 }
 
