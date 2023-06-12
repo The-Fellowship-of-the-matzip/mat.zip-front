@@ -78,7 +78,7 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
                 후기 {author.reviewCount} 별점평균 {author.averageRating}
               </Text>
             </div>
-            {!reviewInfo.updatable && (
+            {reviewInfo.updatable && (
               <>
                 <div>
                   <MeatballButton
