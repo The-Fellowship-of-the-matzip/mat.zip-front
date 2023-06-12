@@ -2,7 +2,7 @@ import type { InputProps } from "./Input";
 
 import styled, { css } from "styled-components";
 
-const getVariantStyling = (isError: Required<InputProps>["isError"]) => {
+export const getVariantStyling = (isError: Required<InputProps>["isError"]) => {
   const style = {
     default: css`
       background-color: ${({ theme }) => theme.color.gray100};
@@ -24,7 +24,7 @@ const getVariantStyling = (isError: Required<InputProps>["isError"]) => {
   return isError ? style.error : style.default;
 };
 
-const getSizeStyling = (size: Required<InputProps>["$size"]) => {
+export const getSizeStyling = (size: Required<InputProps>["$size"]) => {
   const style = {
     small: css`
       padding: 0.8rem 1.2rem;
