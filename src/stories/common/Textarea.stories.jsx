@@ -73,7 +73,7 @@ Label.args = {
 
 export const SupportingText = Template.bind({});
 
-export const Error = Template.bind({});
+export const IsError = Template.bind({});
 Error.args = {
   isError: true,
 };
