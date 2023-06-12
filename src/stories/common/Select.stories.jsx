@@ -85,6 +85,6 @@ Label.args = {
 export const SupportingText = Template.bind({});
 
 export const IsError = Template.bind({});
-Error.args = {
+IsError.args = {
   isError: true,
 };
