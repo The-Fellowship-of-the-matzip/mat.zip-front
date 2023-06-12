@@ -26,8 +26,8 @@ function Modal({ children, closeModal }: PropsWithChildren<Props>) {
     <S.Container scrollOffset={scrollOffset}>
       <S.Backdrop onClick={closeModal} />
       <S.Content>
-        <S.CloseButton>
-          <CloseIcon onClick={closeModal} />
+        <S.CloseButton onClick={closeModal}>
+          <CloseIcon />
         </S.CloseButton>
         {children}
       </S.Content>
