@@ -2,28 +2,6 @@ import type { InputProps } from "./Input";
 
 import styled, { css } from "styled-components";
 
-export const getVariantStyling = (isError: Required<InputProps>["isError"]) => {
-  const style = {
-    default: css`
-      background-color: ${({ theme }) => theme.color.gray100};
-      color: ${({ theme }) => theme.color.gray800};
-      border: 1px solid ${({ theme }) => theme.color.gray100};
-    `,
-    error: css`
-      background-color: ${({ theme }) => theme.color.redLight};
-      color: ${({ theme }) => theme.color.gray800};
-      border: 1px solid ${({ theme }) => theme.color.redDark};
-
-      &:focus {
-        border: 1px solid ${({ theme }) => theme.color.redDark};
-        box-shadow: 0 0 0 3px ${({ theme }) => theme.color.redLight1};
-      }
-    `,
-  };
-
-  return isError ? style.error : style.default;
-};
-
 export const getSizeStyling = (size: Required<InputProps>["$size"]) => {
   const style = {
     small: css`
@@ -51,8 +29,24 @@ export const Container = styled.div`
 `;
 
 export const Input = styled.input<InputProps>`
+  background-color: ${({ theme }) => theme.color.gray100};
+  color: ${({ theme }) => theme.color.gray800};
+  border: 1px solid ${({ theme }) => theme.color.gray100};
   border-radius: ${({ theme }) => theme.borderRadius.small};
-  ${({ isError = false }) => getVariantStyling(isError)}
+
+  ${({ isError }) =>
+    isError &&
+    css`
+      background-color: ${({ theme }) => theme.color.redLight};
+      color: ${({ theme }) => theme.color.gray800};
+      border: 1px solid ${({ theme }) => theme.color.redDark};
+
+      &:focus {
+        border: 1px solid ${({ theme }) => theme.color.redDark};
+        box-shadow: 0 0 0 3px ${({ theme }) => theme.color.redLight1};
+      }
+    `}
+
   ${({ $size = "medium" }) => getSizeStyling($size)}
   ${(props) => props.css}
 
