@@ -22,7 +22,7 @@ function Textarea({
   ...attributes
 }: TextareaProps) {
   return (
-    <>
+    <S.Container>
       {label && (
         <Label id={id} required={required}>
           {label}
@@ -36,7 +36,7 @@ function Textarea({
         {...attributes}
       />
       {supportingText && <S.SupportingText>{supportingText}</S.SupportingText>}
-    </>
+    </S.Container>
   );
 }
 

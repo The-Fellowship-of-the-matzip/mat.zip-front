@@ -43,6 +43,12 @@ const getSizeStyling = (size: Required<TextareaProps>["$size"]) => {
   return style[size];
 };
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacer.spacing2};
+`;
+
 export const Textarea = styled.textarea<TextareaProps>`
   min-height: 16rem;
   border-radius: ${({ theme }) => theme.borderRadius.small};
