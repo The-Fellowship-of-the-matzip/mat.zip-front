@@ -46,5 +46,4 @@ export const CloseButton = styled.button`
 
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid ${({ theme }) => theme.secondary};
 `;
