@@ -27,7 +27,7 @@ const getVariantStyling = (isError: Required<TextareaProps>["isError"]) => {
 const getSizeStyling = (size: Required<TextareaProps>["$size"]) => {
   const style = {
     small: css`
-      padding: 1.2rem;
+      padding: 0.8rem 1.2rem;
       font-size: 1.4rem;
     `,
     medium: css`

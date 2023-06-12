@@ -35,7 +35,7 @@ function Textarea({
         required={required}
         {...attributes}
       />
-      {supportingText && <S.SupportingText></S.SupportingText>}
+      {supportingText && <S.SupportingText>{supportingText}</S.SupportingText>}
     </>
   );
 }
