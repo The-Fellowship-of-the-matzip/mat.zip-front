@@ -54,6 +54,7 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
     ${({ env }) =>
       env === "storybook" &&
       css`
+        padding: ${theme.spacer.spacing3};
         min-height: 100vh;
       `}
   }  
