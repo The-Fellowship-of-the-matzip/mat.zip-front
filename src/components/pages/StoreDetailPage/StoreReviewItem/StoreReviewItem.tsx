@@ -74,7 +74,7 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
           <S.Header>
             <div>
               <Text css={S.titleTextStyle}>{author.username}</Text>
-              <Text css={S.subTextStyle} size="small">
+              <Text css={S.subTextStyle} size="sm">
                 후기 {author.reviewCount} 별점평균 {author.averageRating}
               </Text>
             </div>
@@ -123,10 +123,10 @@ function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
               {repeatComponent(<Star isFilled />, rating)}
               {repeatComponent(<Star />, 5 - rating)}
             </S.RatingWrapper>
-            <Text css={S.bodyTextStyle} size="small">
+            <Text css={S.bodyTextStyle} size="sm">
               {content}
             </Text>
-            <Text css={S.menuTextStyle} size="small">
+            <Text css={S.menuTextStyle} size="sm">
               {menu}
             </Text>
           </S.ReviewBottom>

@@ -4,19 +4,19 @@ import styled, { css } from "styled-components";
 
 const getSizeStyling = (size: Required<TextProps>["size"]) => {
   const style = {
-    large: css`
+    lg: css`
       font-size: 1.8rem;
       line-height: 2.8rem;
     `,
-    medium: css`
+    md: css`
       font-size: 1.6rem;
       line-height: 2.4rem;
     `,
-    small: css`
+    sm: css`
       font-size: 1.4rem;
       line-height: 2rem;
     `,
-    xSmall: css`
+    xs: css`
       font-size: 1.2rem;
       line-height: 2rem;
     `,
@@ -26,7 +26,7 @@ const getSizeStyling = (size: Required<TextProps>["size"]) => {
 };
 
 const Text = styled.p<TextProps>`
-  ${({ size = "medium" }) => getSizeStyling(size)}
+  ${({ size = "md" }) => getSizeStyling(size)}
   ${(props) => props.css}
 `;
 

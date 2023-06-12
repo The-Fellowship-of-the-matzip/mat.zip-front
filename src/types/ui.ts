@@ -1,5 +1,5 @@
-type Size = "xSmall" | "small" | "medium" | "large" | "xLarge" | "xxLarge";
+type Size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 
-export type TextSize = Extract<Size, "xSmall" | "small" | "medium" | "large">;
+export type TextSize = Extract<Size, "xs" | "sm" | "md" | "lg">;
 
 export type HeadingSize = Size;

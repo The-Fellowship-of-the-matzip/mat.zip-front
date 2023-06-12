@@ -52,7 +52,7 @@ function StoreListItem({
             </>
           )}
         </S.ListItemStars>
-        <Text size="small" css={S.subTextStyle}>
+        <Text size="sm" css={S.subTextStyle}>
           {campusName} 캠퍼스 기준 도보 {distance}분
         </Text>
       </S.ListItemTextContainer>

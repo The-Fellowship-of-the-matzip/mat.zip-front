@@ -85,7 +85,7 @@ function StoreDetailPage() {
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
         <S.ReviewListContainer>
-          <Heading size="xSmall">리뷰</Heading>
+          <Heading size="xs">리뷰</Heading>
           <S.ReviewListWrapper>
             <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
               {(isLoading || isFetching) && <Spinner />}

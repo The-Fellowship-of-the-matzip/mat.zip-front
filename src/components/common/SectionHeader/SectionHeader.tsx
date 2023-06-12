@@ -14,7 +14,7 @@ function SectionHeader({ children, leadingIcon, onClick }: SectionHeaderProps) {
       {leadingIcon && (
         <S.LeadingButton onClick={onClick}>{leadingIcon}</S.LeadingButton>
       )}
-      <Heading size="xSmall">{children}</Heading>
+      <Heading size="xs">{children}</Heading>
     </S.Header>
   );
 }

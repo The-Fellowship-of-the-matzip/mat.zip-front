@@ -8,7 +8,7 @@ export default {
   argTypes: {
     size: {
       control: { type: "radio" },
-      options: ["xSmall", "small", "medium", "large", "xLarge", "xxLarge"],
+      options: ["xs", "sm", "md", "lg", "xl", "xxl"],
     },
     children: {
       control: { type: "text" },
@@ -18,7 +18,7 @@ export default {
     },
   },
   args: {
-    size: "medium",
+    size: "md",
     children: "Heading",
   },
   decorators: [
@@ -38,27 +38,27 @@ export const Sizes = {
       <>
         <StoryInfoContainer>
           <h6>X Small</h6>
-          <Heading size="xSmall">{children}</Heading>
+          <Heading size="xs">{children}</Heading>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>Small</h6>
-          <Heading size="small">{children}</Heading>
+          <Heading size="sm">{children}</Heading>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>Medium</h6>
-          <Heading size="medium">{children}</Heading>
+          <Heading size="md">{children}</Heading>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>Large</h6>
-          <Heading size="large">{children}</Heading>
+          <Heading size="lg">{children}</Heading>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>X Large</h6>
-          <Heading size="xLarge">{children}</Heading>
+          <Heading size="xl">{children}</Heading>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>XX Large</h6>
-          <Heading size="xxLarge">{children}</Heading>
+          <Heading size="xxl">{children}</Heading>
         </StoryInfoContainer>
       </>
     );
@@ -72,30 +72,30 @@ export const Sizes = {
 
 export const XSmall = Template.bind({});
 XSmall.args = {
-  size: "xSmall",
+  size: "xs",
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  size: "small",
+  size: "sm",
 };
 
 export const Medium = Template.bind({});
 Medium.args = {
-  size: "medium",
+  size: "md",
 };
 
 export const Large = Template.bind({});
 Large.args = {
-  size: "large",
+  size: "lg",
 };
 
 export const XLarge = Template.bind({});
 XLarge.args = {
-  size: "xLarge",
+  size: "xl",
 };
 
 export const XXLarge = Template.bind({});
 XXLarge.args = {
-  size: "xxLarge",
+  size: "xxl",
 };

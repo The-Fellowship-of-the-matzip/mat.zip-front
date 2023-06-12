@@ -58,7 +58,7 @@ function RandomRoulette({ campusId }: Props) {
         <ErrorImage errorMessage={error.message} />
       )}
       <S.RecommendBlock>
-        <Text size="large">오늘은 </Text>
+        <Text size="lg">오늘은 </Text>
         <S.Outer>
           <S.Inner runAnimation={triggerAnimation} onAnimationEnd={openResult}>
             {rouletteBoard.map((store, index) => (
@@ -66,7 +66,7 @@ function RandomRoulette({ campusId }: Props) {
             ))}
           </S.Inner>
         </S.Outer>
-        <Text size="large">어때요?</Text>
+        <Text size="lg">어때요?</Text>
       </S.RecommendBlock>
       {!isResultOpen ? (
         <Button

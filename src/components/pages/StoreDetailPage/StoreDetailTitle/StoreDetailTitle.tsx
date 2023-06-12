@@ -29,7 +29,7 @@ function StoreDetailTitle({
 
   return (
     <S.TitleContainer>
-      <Heading size="small">{name}</Heading>
+      <Heading size="sm">{name}</Heading>
       <S.RatingContainer>
         <Star isFilled={rating > 0} />
         <S.RatingWrapper>
@@ -42,8 +42,8 @@ function StoreDetailTitle({
         </S.RatingWrapper>
       </S.RatingContainer>
       <S.DescriptionWrapper>
-        <Text size="small">{address}</Text>
-        <Text size="small">
+        <Text size="sm">{address}</Text>
+        <Text size="sm">
           {campus} 캠퍼스 기준 도보 {distance}분
         </Text>
         <div>

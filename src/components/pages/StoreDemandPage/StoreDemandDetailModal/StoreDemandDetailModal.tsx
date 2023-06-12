@@ -75,8 +75,8 @@ function StoreDemandDetailModal({
     <Modal closeModal={closeModal}>
       <S.ContentContainer>
         <S.NameContainer>
-          <Text size="small">{campus}</Text>
-          <Heading size="small">{name}</Heading>
+          <Text size="sm">{campus}</Text>
+          <Heading size="sm">{name}</Heading>
         </S.NameContainer>
         <S.DetailContainer>
           <S.DetailHead>

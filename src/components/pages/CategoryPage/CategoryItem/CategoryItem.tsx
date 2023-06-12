@@ -20,7 +20,7 @@ function CategoryItem({
       <Button css={S.buttonStyle} variant="primary">
         {buttonText}
       </Button>
-      <Text css={S.textStyle} size="small">
+      <Text css={S.textStyle} size="sm">
         {children}
       </Text>
     </S.CategoryItemContainer>

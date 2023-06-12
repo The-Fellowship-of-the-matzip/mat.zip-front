@@ -9,7 +9,7 @@ export interface TextProps extends PropsWithChildren<{}> {
   css?: CSSProp;
 }
 
-function Text({ children, size = "medium", css }: TextProps) {
+function Text({ children, size = "md", css }: TextProps) {
   return (
     <S.Text size={size} css={css}>
       {children}

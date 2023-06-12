@@ -10,15 +10,15 @@ export interface HeadingProps {
 }
 
 const HEADING_TAG_BY_SIZE = {
-  xxLarge: "h1",
-  xLarge: "h2",
-  large: "h3",
-  medium: "h4",
-  small: "h5",
-  xSmall: "h6",
+  xxl: "h1",
+  xl: "h2",
+  lg: "h3",
+  md: "h4",
+  sm: "h5",
+  xs: "h6",
 } as const;
 
-function Heading({ size = "medium", children, ...attributes }: HeadingProps) {
+function Heading({ size = "md", children, ...attributes }: HeadingProps) {
   const tag = HEADING_TAG_BY_SIZE[size];
 
   return (

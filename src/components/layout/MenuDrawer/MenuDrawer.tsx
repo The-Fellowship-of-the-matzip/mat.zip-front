@@ -62,7 +62,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
       <S.Content>
         {isLoggedIn ? (
           <>
-            <Text css={S.titleStyle} size="large">
+            <Text css={S.titleStyle} size="lg">
               어서오세요
             </Text>
             <Button variant="textButton" onClick={handleCampusChangeRequest}>
@@ -74,7 +74,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
           </>
         ) : (
           <>
-            <Text css={S.titleStyle} size="large">
+            <Text css={S.titleStyle} size="lg">
               로그인을 해주세요
             </Text>
             <Button variant="textButton" onClick={handleCampusChangeRequest}>

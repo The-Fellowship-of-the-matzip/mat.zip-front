@@ -8,7 +8,7 @@ export default {
   argTypes: {
     size: {
       control: { type: "radio" },
-      options: ["xSmall", "small", "medium", "large"],
+      options: ["xs", "sm", "md", "lg"],
     },
     children: {
       control: { type: "text" },
@@ -18,7 +18,7 @@ export default {
     },
   },
   args: {
-    size: "medium",
+    size: "md",
     children: "Text",
   },
   decorators: [
@@ -38,19 +38,19 @@ export const Sizes = {
       <>
         <StoryInfoContainer>
           <h6>X Small</h6>
-          <Text size="xSmall">{children}</Text>
+          <Text size="xs">{children}</Text>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>Small</h6>
-          <Text size="small">{children}</Text>
+          <Text size="sm">{children}</Text>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>Medium</h6>
-          <Text size="medium">{children}</Text>
+          <Text size="md">{children}</Text>
         </StoryInfoContainer>
         <StoryInfoContainer>
           <h6>Large</h6>
-          <Text size="large">{children}</Text>
+          <Text size="lg">{children}</Text>
         </StoryInfoContainer>
       </>
     );
@@ -64,20 +64,20 @@ export const Sizes = {
 
 export const XSmall = Template.bind({});
 XSmall.args = {
-  size: "xSmall",
+  size: "xs",
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  size: "small",
+  size: "sm",
 };
 
 export const Medium = Template.bind({});
 Medium.args = {
-  size: "medium",
+  size: "md",
 };
 
 export const Large = Template.bind({});
 Large.args = {
-  size: "large",
+  size: "lg",
 };

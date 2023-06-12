@@ -24,7 +24,7 @@ function CampusSelectPage() {
 
   return (
     <S.MainContainer>
-      <Heading size="xSmall">식사할 캠퍼스를 선택해주세요</Heading>
+      <Heading size="xs">식사할 캠퍼스를 선택해주세요</Heading>
       <S.ButtonWrapper>
         <Button
           variant="primary"
