@@ -38,7 +38,7 @@ const getVariantStyling = (variant: Required<ButtonProps>["variant"]) => {
       border: 1px solid ${({ theme }) => theme.color.primary};
 
       &:hover:enabled {
-        background-color: ${({ theme }) => theme.color.primaryLight1};
+        background-color: ${({ theme }) => theme.color.primaryLight3};
         outline: 0 !important;
       }
 
