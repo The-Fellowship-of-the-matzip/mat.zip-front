@@ -35,7 +35,9 @@ function Input({
         required={required}
         {...attributes}
       />
-      {supportingText && <S.SupportingText></S.SupportingText>}
+      {supportingText && (
+        <S.SupportingText isError={isError}>{supportingText}</S.SupportingText>
+      )}
     </>
   );
 }
