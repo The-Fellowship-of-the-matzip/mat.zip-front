@@ -26,7 +26,7 @@ function Modal({ children, closeModal }: PropsWithChildren<Props>) {
     <S.Container scrollOffset={scrollOffset}>
       <S.Backdrop onClick={closeModal} />
       <S.Content>
-        <S.CloseButton onClick={closeModal}>
+        <S.CloseButton onClick={closeModal} aria-label="닫기">
           <CloseIcon />
         </S.CloseButton>
         {children}
