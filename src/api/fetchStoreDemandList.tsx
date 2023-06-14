@@ -1,13 +1,10 @@
+import { FetchParamProp } from "types/apiTypes";
+
 import { ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-interface Params {
-  pageParam?: number;
-  queryKey: any;
-}
-
-interface StoreDemandGetResponse {
+type StoreDemandGetResponse = {
   items: {
     id: number;
     categoryId: StoreDemand["categoryId"];
@@ -17,9 +14,12 @@ interface StoreDemandGetResponse {
     registered: boolean;
   }[];
   hasNext: boolean;
-}
+};
 
-const fetchStoreDemandList = async ({ pageParam = 0, queryKey }: Params) => {
+const fetchStoreDemandList = async ({
+  pageParam = 0,
+  queryKey,
+}: FetchParamProp) => {
   const [, { size, campusId }] = queryKey;
   const { data } = await axiosInstance.get<StoreDemandGetResponse>(
     ENDPOINTS.STORE_REQUESTS(campusId),

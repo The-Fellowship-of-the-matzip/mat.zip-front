@@ -1,3 +1,4 @@
+import { FetchParamProp } from "types/apiTypes";
 import { CampusId, Store } from "types/commonTypes";
 
 import { ENDPOINTS } from "constants/api";
@@ -9,10 +10,6 @@ type CategoryStoreListResponse = {
   restaurants: Store[];
 };
 
-type Props = {
-  pageParam?: number;
-  queryKey: any;
-};
 
 type Params = {
   page?: number;
@@ -37,7 +34,7 @@ const generateParams = (propObject: Params) =>
     {}
   );
 
-const fetchStoreList = async ({ pageParam = 0, queryKey }: Props) => {
+const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProp) => {
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
   const params = generateParams({
     page: pageParam,
