@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { useMutation } from "react-query";
+import { Campus } from "types/commonTypes";
 
 import { NETWORK } from "constants/api";
-import { Campus, getCampusId } from "constants/campus";
+import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
 
@@ -22,7 +23,7 @@ import * as S from "components/pages/StoreDemandPage/StoreDemandDetailModal/Stor
 
 import { theme } from "style/Theme";
 
-interface Props extends StoreDemand {
+interface StoreDemandDetailModalProps extends StoreDemand {
   handleEditOpen: () => void;
   closeModal: () => void;
   handleAfterRequest: () => void;
@@ -38,7 +39,7 @@ function StoreDemandDetailModal({
   handleEditOpen,
   closeModal,
   handleAfterRequest,
-}: Props) {
+}: StoreDemandDetailModalProps) {
   const campus = useContext(campusContext);
   const isLoggedIn = useContext(LoginContext);
   const { logout } = useLogin();

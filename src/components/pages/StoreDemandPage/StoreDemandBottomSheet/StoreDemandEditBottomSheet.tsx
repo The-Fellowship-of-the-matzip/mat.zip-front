@@ -1,9 +1,10 @@
 import { AxiosError } from "axios";
 import { useContext } from "react";
 import { useMutation } from "react-query";
+import { Campus } from "types/commonTypes";
 
 import { NETWORK } from "constants/api";
-import { Campus, getCampusId } from "constants/campus";
+import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
 
@@ -17,7 +18,7 @@ import BottomSheet from "components/common/BottomSheet/BottomSheet";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
 
-interface Props {
+interface StoreDemandEditBottomSheetProps {
   id: string;
   initValue: { categoryId: string; name: string };
   closeSheet: () => void;
@@ -29,7 +30,7 @@ function StoreDemandEditBottomSheet({
   initValue,
   closeSheet,
   refetchList,
-}: Props) {
+}: StoreDemandEditBottomSheetProps) {
   const { logout } = useLogin();
   const campus = useContext(campusContext);
 

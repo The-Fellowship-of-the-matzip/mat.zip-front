@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { ReviewShape } from "types/commonTypes";
 
 import { NETWORK } from "constants/api";
 import MESSAGES from "constants/messages";
 
 import { LoginContext } from "context/LoginContextProvider";
 
-import type { ReviewShape } from "api/fetchReviewList";
 import fetchReviewList from "api/fetchReviewList";
 import fetchStoreDetail from "api/fetchStoreDetail";
 import getNextPageParam from "api/getNextPageParam";

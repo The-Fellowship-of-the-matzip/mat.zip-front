@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation } from "react-query";
+import { ReviewInputShape } from "types/types";
 
 import { NETWORK } from "constants/api";
 import MESSAGES from "constants/messages";
@@ -15,7 +16,7 @@ import StarRating from "components/common/StarRating/StarRating";
 
 import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet.style";
 
-type Props = {
+interface ReviewUpdateBottomSheetProps {
   closeSheet: () => void;
   defaultReviewItem: {
     content: string;
@@ -25,19 +26,13 @@ type Props = {
     id: string;
   };
   onSuccess: () => void;
-};
-
-type ReviewInputShape = {
-  content: string;
-  rating: number;
-  menu: string;
-};
+}
 
 function ReviewUpdateBottomSheet({
   closeSheet,
   defaultReviewItem,
   onSuccess,
-}: Props) {
+}: ReviewUpdateBottomSheetProps) {
   const [rating, setRating] = useState<number>(defaultReviewItem.rating - 1);
   const [reviewContent, setReviewContent] = useState<string>(
     defaultReviewItem.content

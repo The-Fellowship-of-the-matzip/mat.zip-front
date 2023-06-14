@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Store } from "types/commonTypes";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -6,21 +7,11 @@ import Star from "components/common/Star/Star";
 
 import * as S from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle.style";
 
-interface StoreDetailTitleProps {
-  storeInfo: {
-    id: number;
-    name: string;
-    address: string;
-    distance: number;
-    kakaoMapUrl: string;
-    imageUrl: string;
-    rating: number;
-  };
-}
-
 function StoreDetailTitle({
   storeInfo: { name, rating, address, distance, kakaoMapUrl },
-}: StoreDetailTitleProps) {
+}: {
+  storeInfo: Store;
+}) {
   const campus = useContext(campusContext);
 
   return (
