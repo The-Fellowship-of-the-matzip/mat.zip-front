@@ -1,30 +1,15 @@
+import { ReviewShape, FetchParamProp } from "types/apiTypes";
+
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
-
-export type ReviewShape = {
-  id: string;
-  author: {
-    username: string;
-    profileImage: string;
-  };
-  content: string;
-  rating: number;
-  menu: string;
-  updatable: boolean;
-};
 
 type ReviewResponseShape = {
   hasNext: boolean;
   reviews: ReviewShape[];
 };
 
-type Props = {
-  pageParam?: number;
-  queryKey: any;
-};
-
-const fetchReviewList = async ({ pageParam = 0, queryKey }: Props) => {
+const fetchReviewList = async ({ pageParam = 0, queryKey }: FetchParamProp) => {
   const [, { restaurantId }] = queryKey;
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
 
