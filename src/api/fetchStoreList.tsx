@@ -1,4 +1,4 @@
-import { FetchParamProp } from "types/apiTypes";
+import { FetchParamProps } from "types/apiTypes";
 import { CampusId, Store } from "types/commonTypes";
 
 import { ENDPOINTS } from "constants/api";
@@ -12,7 +12,7 @@ type CategoryStoreListResponse = {
 
 type ReduceReturnType = Record<string, any>;
 
-interface generateParamsProp {
+interface generateParamsProps {
   page?: number;
   size?: number;
   filter?: string;
@@ -21,7 +21,7 @@ interface generateParamsProp {
   name?: string;
 }
 
-const generateParams = (propObject: generateParamsProp) =>
+const generateParams = (propObject: generateParamsProps) =>
   Object.entries(propObject).reduce<ReduceReturnType>(
     (params, [key, value]) => {
       if (value) {
@@ -32,7 +32,7 @@ const generateParams = (propObject: generateParamsProp) =>
     {}
   );
 
-const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProp) => {
+const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
   const params = generateParams({
     page: pageParam,

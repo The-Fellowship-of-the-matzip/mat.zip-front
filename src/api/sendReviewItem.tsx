@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-interface SendReviewItemProp {
+interface SendReviewItemProps {
   restaurantId: string;
   articleId: string;
   content: string;
@@ -18,7 +18,7 @@ const sendReviewItem = async ({
   content,
   rating,
   menu,
-}: SendReviewItemProp) => {
+}: SendReviewItemProps) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
   if (!accessToken) {
     window.sessionStorage.removeItem(ACCESS_TOKEN);

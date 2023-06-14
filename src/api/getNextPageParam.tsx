@@ -1,9 +1,9 @@
-interface getNextPageParamProp {
+interface getNextPageParamProps {
   hasNext: boolean;
   nextPageParam?: number;
 }
 
-const getNextPageParam = (lastPage: getNextPageParamProp) => {
+const getNextPageParam = (lastPage: getNextPageParamProps) => {
   if (lastPage.hasNext) {
     return lastPage.nextPageParam;
   }

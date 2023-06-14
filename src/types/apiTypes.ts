@@ -10,7 +10,7 @@ export type ReviewShape = {
   updatable: boolean;
 };
 
-export interface FetchParamProp {
+export interface FetchParamProps {
   pageParam?: number;
   queryKey: any;
 }

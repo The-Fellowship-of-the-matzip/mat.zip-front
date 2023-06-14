@@ -1,4 +1,4 @@
-import { FetchParamProp } from "types/apiTypes";
+import { FetchParamProps } from "types/apiTypes";
 
 import { ENDPOINTS } from "constants/api";
 
@@ -19,7 +19,7 @@ type StoreDemandGetResponse = {
 const fetchStoreDemandList = async ({
   pageParam = 0,
   queryKey,
-}: FetchParamProp) => {
+}: FetchParamProps) => {
   const [, { size, campusId }] = queryKey;
   const { data } = await axiosInstance.get<StoreDemandGetResponse>(
     ENDPOINTS.STORE_REQUESTS(campusId),

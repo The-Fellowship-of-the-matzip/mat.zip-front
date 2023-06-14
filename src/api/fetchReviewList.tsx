@@ -1,4 +1,4 @@
-import { ReviewShape, FetchParamProp } from "types/apiTypes";
+import { ReviewShape, FetchParamProps } from "types/apiTypes";
 
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 
@@ -9,7 +9,10 @@ type ReviewResponseShape = {
   reviews: ReviewShape[];
 };
 
-const fetchReviewList = async ({ pageParam = 0, queryKey }: FetchParamProp) => {
+const fetchReviewList = async ({
+  pageParam = 0,
+  queryKey,
+}: FetchParamProps) => {
   const [, { restaurantId }] = queryKey;
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
 
