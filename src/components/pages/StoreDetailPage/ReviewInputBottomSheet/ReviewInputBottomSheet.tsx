@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { ReviewInputShape } from "types/types";
+import { ReviewInputShape } from "types/commonTypes";
 
 import { NETWORK } from "constants/api";
 import MESSAGES from "constants/messages";

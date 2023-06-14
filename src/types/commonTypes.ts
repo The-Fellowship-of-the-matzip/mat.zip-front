@@ -11,26 +11,26 @@ export interface Store {
   rating: number;
 }
 
-export interface Review {
-  id: number;
-  author: {
-    username: string;
-    profileImage: string;
-  };
-  content: string;
-  rating: number;
-  menu: string;
-  updatable: boolean;
+export interface Author {
+  username: string;
+  profileImage: string;
 }
 
-export type ReviewShape = {
+export interface Review extends ReviewDetailShape {
+  id: number;
+}
+
+export interface ReviewShape extends ReviewDetailShape {
   id: string;
-  author: {
-    username: string;
-    profileImage: string;
-  };
+}
+
+export interface ReviewInputShape {
   content: string;
   rating: number;
   menu: string;
+}
+
+export interface ReviewDetailShape extends ReviewInputShape {
+  author: Author;
   updatable: boolean;
-};
+}
