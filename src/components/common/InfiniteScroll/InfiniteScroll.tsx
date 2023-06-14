@@ -1,13 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useRef } from "react";
 
-type Props = {
+interface InfiniteScrollProps {
   handleContentLoad: () => void;
   hasMore: boolean;
   children: React.ReactNode;
-};
+}
 
-function InfiniteScroll({ handleContentLoad, hasMore, children }: Props) {
+function InfiniteScroll({
+  handleContentLoad,
+  hasMore,
+  children,
+}: InfiniteScrollProps) {
   const endRef = useRef<HTMLDivElement>(null);
 
   const endOfContentObserver = useMemo(
