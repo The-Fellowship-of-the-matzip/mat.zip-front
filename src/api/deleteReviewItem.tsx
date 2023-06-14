@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-interface deleteReviewItemProp {
+interface DeleteReviewItemProp {
   restaurantId: string;
   articleId: string;
 }
@@ -12,7 +12,7 @@ interface deleteReviewItemProp {
 const deleteReviewItem = async ({
   restaurantId,
   articleId,
-}: deleteReviewItemProp) => {
+}: DeleteReviewItemProp) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
   if (!accessToken) {
     window.sessionStorage.removeItem(ACCESS_TOKEN);

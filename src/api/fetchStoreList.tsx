@@ -10,20 +10,18 @@ type CategoryStoreListResponse = {
   restaurants: Store[];
 };
 
+type ReduceReturnType = Record<string, any>;
 
-type Params = {
+interface generateParamsProp {
   page?: number;
   size?: number;
   filter?: string;
-  campusId?: 1 | 2;
   campusId?: CampusId;
   categoryId?: number;
   name?: string;
-};
+}
 
-type ReduceReturnType = Record<string, any>;
-
-const generateParams = (propObject: Params) =>
+const generateParams = (propObject: generateParamsProp) =>
   Object.entries(propObject).reduce<ReduceReturnType>(
     (params, [key, value]) => {
       if (value) {
