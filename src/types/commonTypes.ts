@@ -1,3 +1,5 @@
+export type CampusId = 1 | 2;
+
 export interface Store {
   id: number;
   name: string;

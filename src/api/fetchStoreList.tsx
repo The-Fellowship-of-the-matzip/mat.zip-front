@@ -1,8 +1,8 @@
+import { CampusId, Store } from "types/commonTypes";
+
 import { ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
-
-import { Store } from "mock/data";
 
 type CategoryStoreListResponse = {
   hasNext: boolean;
@@ -19,6 +19,7 @@ type Params = {
   size?: number;
   filter?: string;
   campusId?: 1 | 2;
+  campusId?: CampusId;
   categoryId?: number;
   name?: string;
 };
