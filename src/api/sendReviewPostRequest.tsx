@@ -1,12 +1,8 @@
+import { ReviewInputShape } from "types/commonTypes";
+
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
-
-type ReviewInputShape = {
-  content: string;
-  rating: number;
-  menu: string;
-};
 
 const sendReviewPostRequest =
   (restaurantId: string) => (newReview: ReviewInputShape) => {

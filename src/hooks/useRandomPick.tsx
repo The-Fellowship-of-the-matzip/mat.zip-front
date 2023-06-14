@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useReducer } from "react";
+import { Store } from "types/commonTypes";
 import { createArray, getRandomNumber } from "util/randomUtils";
 
 import {
@@ -6,8 +7,6 @@ import {
   initialState,
   randomRouletteStateReducer,
 } from "components/pages/CategoryPage/RandomRoulette/randomRouletteStateReducer";
-
-import { Store } from "mock/data";
 
 function useRandomPick(stores: Store[]) {
   const storeNamesArray = stores?.map((store) => store.name) || [];

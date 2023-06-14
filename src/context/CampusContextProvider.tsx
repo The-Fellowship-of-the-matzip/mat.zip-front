@@ -1,6 +1,5 @@
 import React from "react";
-
-import { Campus } from "constants/campus";
+import { Campus } from "types/commonTypes";
 
 import useStoredState from "hooks/useStoredState";
 
