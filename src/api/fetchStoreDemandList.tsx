@@ -5,15 +5,17 @@ import { ENDPOINTS } from "constants/api";
 import axiosInstance from "api/axiosInstance";
 
 interface StoreDemandGetResponse {
-  items: {
-    id: number;
-    categoryId: StoreDemand["categoryId"];
-    name: string;
-    author: string;
-    updatable: boolean;
-    registered: boolean;
-  }[];
+  items: StoreItemType[];
   hasNext: boolean;
+}
+
+interface StoreItemType {
+  id: number;
+  categoryId: CategoryId;
+  name: string;
+  author: string;
+  updatable: boolean;
+  registered: boolean;
 }
 
 const fetchStoreDemandList = async ({
