@@ -1,5 +1,5 @@
 import { FetchParamProps } from "types/apiTypes";
-import { CampusId, Store } from "types/commonTypes";
+import { CampusId, Store } from "types/common";
 
 import { ENDPOINTS } from "constants/api";
 

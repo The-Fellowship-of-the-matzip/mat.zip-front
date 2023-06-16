@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Campus, Store } from "types/commonTypes";
+import { Campus, CategoryId, Store } from "types/common";
 
 import { NETWORK, SIZE, FILTERS } from "constants/api";
 import { getCampusId } from "constants/campus";

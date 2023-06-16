@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useContext } from "react";
 import { useMutation } from "react-query";
-import { Campus } from "types/commonTypes";
+import { Campus } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";

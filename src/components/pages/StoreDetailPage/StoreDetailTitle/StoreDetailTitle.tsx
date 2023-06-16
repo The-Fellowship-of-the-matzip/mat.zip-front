@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Store } from "types/commonTypes";
+import { Store } from "types/common";
 
 import { campusContext } from "context/CampusContextProvider";
 

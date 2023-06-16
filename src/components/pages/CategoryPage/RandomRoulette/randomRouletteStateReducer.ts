@@ -1,4 +1,4 @@
-import { Store } from "types/commonTypes";
+import { Store } from "types/common";
 
 export const ACTION_TYPES = {
   SET_BOARD: "SET_BOARD",

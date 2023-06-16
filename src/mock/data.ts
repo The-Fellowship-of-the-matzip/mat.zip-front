@@ -1,4 +1,4 @@
-import { Review, Store } from "types/commonTypes";
+import { Review, Store, StoreDemand } from "types/common";
 
 export const stores: Store[] = [
   {

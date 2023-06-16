@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Campus } from "types/commonTypes";
+import { Campus } from "types/common";
 
 import { AUTH_LINK } from "constants/api";
 import { getOtherCampus } from "constants/campus";

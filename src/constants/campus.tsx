@@ -1,4 +1,4 @@
-import { Campus } from "types/commonTypes";
+import { Campus } from "types/common";
 
 const CAMPUS = {
   JAMSIL: { id: 1, name: "잠실" } as const,

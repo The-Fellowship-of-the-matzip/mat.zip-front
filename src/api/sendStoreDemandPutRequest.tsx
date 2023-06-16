@@ -1,4 +1,4 @@
-import { CampusId } from "types/commonTypes";
+import { CampusId } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 import MESSAGES from "constants/messages";

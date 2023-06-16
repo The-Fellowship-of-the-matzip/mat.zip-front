@@ -1,3 +1,5 @@
+import { CategoryId } from "types/common";
+
 export const categories: Record<CategoryId, string> = {
   1: "한식",
   2: "중식/아시안",

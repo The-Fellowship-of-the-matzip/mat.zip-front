@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer } from "react";
-import { Store } from "types/commonTypes";
+import { Store } from "types/common";
 import { createArray, getRandomNumber } from "util/randomUtils";
 
 import {

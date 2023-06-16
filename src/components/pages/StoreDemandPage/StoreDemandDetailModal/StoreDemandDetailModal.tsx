@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { useMutation } from "react-query";
-import { Campus } from "types/commonTypes";
+import { Campus, StoreDemand } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";

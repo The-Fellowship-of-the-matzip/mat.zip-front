@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { ReviewShape } from "types/commonTypes";
+import { ReviewShape } from "types/common";
 
 import { NETWORK } from "constants/api";
 import MESSAGES from "constants/messages";

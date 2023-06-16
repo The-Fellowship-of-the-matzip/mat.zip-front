@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { ReviewShape } from "types/commonTypes";
+import { ReviewShape } from "types/common";
 import repeatComponent from "util/repeatComponent";
 
 import deleteReviewItem from "api/deleteReviewItem";

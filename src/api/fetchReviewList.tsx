@@ -1,5 +1,5 @@
 import { FetchParamProps } from "types/apiTypes";
-import { ReviewShape } from "types/commonTypes";
+import { ReviewShape } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 

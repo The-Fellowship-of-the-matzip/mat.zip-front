@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { Campus } from "types/commonTypes";
+import { Campus, StoreDemand } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";

@@ -1,4 +1,4 @@
-import { ReviewInputShape } from "types/commonTypes";
+import { ReviewInputShape } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 

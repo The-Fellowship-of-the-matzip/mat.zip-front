@@ -1,4 +1,4 @@
-import { CampusId } from "types/commonTypes";
+import { CampusId } from "types/common/campusTypes";
 
 export const API_BASE_URL = "https://api.matzip.today/api";
 

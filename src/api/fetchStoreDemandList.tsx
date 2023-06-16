@@ -1,4 +1,5 @@
 import { FetchParamProps } from "types/apiTypes";
+import { CategoryId } from "types/common";
 
 import { ENDPOINTS } from "constants/api";
 

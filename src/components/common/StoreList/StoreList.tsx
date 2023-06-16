@@ -1,4 +1,4 @@
-import { Store } from "types/commonTypes";
+import { Store } from "types/common";
 
 import * as S from "components/common/StoreList/StoreList.style";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";

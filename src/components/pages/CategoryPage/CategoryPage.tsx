@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
-import { Campus } from "types/commonTypes";
+import { Campus } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
 import { getCampusId } from "constants/campus";

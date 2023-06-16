@@ -1,4 +1,4 @@
-import { Store } from "types/commonTypes";
+import { Store } from "types/common";
 
 import { ENDPOINTS } from "constants/api";
 
