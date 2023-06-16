@@ -5,8 +5,6 @@ import MESSAGES from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 
-export type StoreDemandShape = Pick<StoreDemand, "categoryId" | "name">;
-
 const sendStoreDemandPostRequest =
   (campusId: CampusId) =>
   (storeRequestData: { categoryId: string; name: string }) => {

@@ -5,10 +5,10 @@ import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-type ReviewResponseShape = {
+interface ReviewResponseShape {
   hasNext: boolean;
   reviews: ReviewShape[];
-};
+}
 
 const fetchReviewList = async ({
   pageParam = 0,

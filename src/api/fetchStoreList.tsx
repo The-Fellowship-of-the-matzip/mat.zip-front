@@ -5,11 +5,6 @@ import { ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-type CategoryStoreListResponse = {
-  hasNext: boolean;
-  restaurants: Store[];
-};
-
 type ReduceReturnType = Record<string, any>;
 
 interface generateParamsProps {
@@ -19,6 +14,11 @@ interface generateParamsProps {
   campusId?: CampusId;
   categoryId?: number;
   name?: string;
+}
+
+interface CategoryStoreListResponse {
+  hasNext: boolean;
+  restaurants: Store[];
 }
 
 const generateParams = (propObject: generateParamsProps) =>

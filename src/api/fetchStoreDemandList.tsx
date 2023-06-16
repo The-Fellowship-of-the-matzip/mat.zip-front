@@ -4,7 +4,7 @@ import { ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-type StoreDemandGetResponse = {
+interface StoreDemandGetResponse {
   items: {
     id: number;
     categoryId: StoreDemand["categoryId"];
@@ -14,7 +14,7 @@ type StoreDemandGetResponse = {
     registered: boolean;
   }[];
   hasNext: boolean;
-};
+}
 
 const fetchStoreDemandList = async ({
   pageParam = 0,
