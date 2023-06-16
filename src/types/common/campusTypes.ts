@@ -1,2 +1,4 @@
-export type CampusId = 1 | 2;
-export type Campus = "잠실" | "선릉";
+import CAMPUS from "constants/campus";
+
+export type CampusId = typeof CAMPUS.JAMSIL.id | typeof CAMPUS.SEOULLEUNG.id;
+export type Campus = typeof CAMPUS.JAMSIL.name | typeof CAMPUS.SEOULLEUNG.name;
