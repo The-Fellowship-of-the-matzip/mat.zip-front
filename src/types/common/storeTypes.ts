@@ -8,6 +8,7 @@ export interface Store {
   kakaoMapUrl: string;
   imageUrl: string;
   rating: number;
+  reviewCount: number;
 }
 
 export interface StoreDemand {
