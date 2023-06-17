@@ -6,15 +6,18 @@ import { Campus } from "types/common";
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 
 import { campusContext } from "context/CampusContextProvider";
 
 import useLogin from "hooks/useLogin";
 
-import sendStoreDemandPostRequest from "api/sendStoreDemandPostRequest";
+import sendStoreDemandPostRequest from "api/store/sendStoreDemandPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
+import Button from "components/common/Button/Button";
+import Input from "components/common/Input/Input";
+import Select from "components/common/Select/Select";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
 
@@ -85,15 +88,17 @@ function StoreDemandCreateBottomSheet({
   return (
     <BottomSheet title="식당 추가 요청하기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmit}>
-        <S.Label>
-          카테고리
-          <S.Select name="categoryId">{categoryOptions}</S.Select>
-        </S.Label>
-        <S.Label>
-          맛집 이름
-          <S.NameInput name="name" placeholder="맛집의 이름을 입력해주세요" />
-        </S.Label>
-        <S.SubmitButton>요청 보내기</S.SubmitButton>
+        <Select label="카테고리" id="category" name="categoryId" required>
+          {categoryOptions}
+        </Select>
+        <Input
+          label="맛집 이름"
+          id="restaurant-name"
+          name="name"
+          placeholder="맛집의 이름을 입력해주세요"
+          required
+        />
+        <Button variant="primary">요청 보내기</Button>
       </S.Form>
     </BottomSheet>
   );

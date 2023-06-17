@@ -2,10 +2,13 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Campus } from "types/common";
 
-import CAMPUS from "constants/campus";
+import { CAMPUS } from "constants/campus";
 import { PATHNAME } from "constants/routes";
 
 import { setCampusContext } from "context/CampusContextProvider";
+
+import Button from "components/common/Button/Button";
+import Heading from "components/common/Heading/Heading";
 
 import * as S from "components/pages/CampusSelectPage/CampusSelectPage.style";
 
@@ -21,14 +24,22 @@ function CampusSelectPage() {
 
   return (
     <S.MainContainer>
-      <S.Title>캠퍼스를 선택해주세요</S.Title>
+      <Heading size="xs">식사할 캠퍼스를 선택해주세요</Heading>
       <S.ButtonWrapper>
-        <S.Button onClick={handleCampusSelect(CAMPUS.JAMSIL.name)}>
+        <Button
+          variant="primary"
+          css={S.buttonStyle}
+          onClick={handleCampusSelect(CAMPUS.JAMSIL.name)}
+        >
           {CAMPUS.JAMSIL.name}
-        </S.Button>
-        <S.Button onClick={handleCampusSelect(CAMPUS.SEOULLEUNG.name)}>
+        </Button>
+        <Button
+          variant="primary"
+          css={S.buttonStyle}
+          onClick={handleCampusSelect(CAMPUS.SEOULLEUNG.name)}
+        >
           {CAMPUS.SEOULLEUNG.name}
-        </S.Button>
+        </Button>
       </S.ButtonWrapper>
     </S.MainContainer>
   );

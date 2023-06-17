@@ -4,11 +4,13 @@ import { useMutation, useQueryClient } from "react-query";
 import { ReviewShape } from "types/common";
 import repeatComponent from "util/repeatComponent";
 
-import deleteReviewItem from "api/deleteReviewItem";
+import deleteReviewItem from "api/review/deleteReviewItem";
 
+import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
 import MeatballButton from "components/common/MeatballButton/MeatballButton";
 import Star from "components/common/Star/Star";
+import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
@@ -56,20 +58,25 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         />
         <S.ReviewContentWrapper>
           <S.Header>
-            <div>{author.username}</div>
+            <div>
+              <Text css={S.titleTextStyle}>{author.username}</Text>
+              <Text css={S.subTextStyle} size="sm">
+                후기 {author.reviewCount} 별점평균 {author.averageRating}
+              </Text>
+            </div>
             {reviewInfo.updatable && (
               <>
-                <S.MeatballButtonContainer>
+                <div>
                   <MeatballButton
                     ariaLabel="수정 삭제 메뉴"
                     onClick={handleMeatballButtonClick}
                   />
-                </S.MeatballButtonContainer>
+                </div>
                 {isDropBoxOpen && (
                   <DropDownBox
                     onClose={handleDropBoxClose}
-                    right="-20px"
-                    top="20px"
+                    right="0"
+                    top="24px"
                   >
                     <S.DropBoxButtonList>
                       <li>
@@ -79,6 +86,9 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
                         >
                           수정
                         </S.DropBoxButton>
+                      </li>
+                      <li>
+                        <Divider />
                       </li>
                       <li>
                         <S.DropBoxButton
@@ -95,9 +105,16 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
             )}
           </S.Header>
           <S.ReviewBottom>
-            <div>{repeatComponent(<Star isFilled />, rating)}</div>
-            <S.ContentWrapper>{content}</S.ContentWrapper>
-            <S.MenuWrapper>{menu}</S.MenuWrapper>
+            <S.RatingWrapper>
+              {repeatComponent(<Star isFilled />, rating)}
+              {repeatComponent(<Star />, 5 - rating)}
+            </S.RatingWrapper>
+            <Text css={S.bodyTextStyle} size="sm">
+              {content}
+            </Text>
+            <Text css={S.menuTextStyle} size="sm">
+              {menu}
+            </Text>
           </S.ReviewBottom>
         </S.ReviewContentWrapper>
       </S.StoreReviewContainer>

@@ -1,60 +1,48 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Image from "components/common/Image/Image";
 
 export const ListItemContainer = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-
   width: 100%;
-  padding: 1.5rem 2rem;
+  background-color: ${({ theme }) => theme.color.white};
 
-  border-top: 0.065rem solid ${({ theme }) => theme.secondary};
-  background-color: ${({ theme }) => theme.white};
+  display: flex;
+  gap: ${({ theme }) => theme.spacer.spacing3};
+
   cursor: pointer;
-
-  &:hover {
-    opacity: 0.9;
-  }
-  &:active {
-    opacity: 1;
-  }
 `;
 
 export const ListItemThumbnail = styled(Image)`
-  width: 4rem;
-  height: 4rem;
+  width: 8.6rem;
+  height: 8.6rem;
 
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.small};
   object-fit: cover;
   object-position: center;
-  box-shadow: 0 0 0.2rem ${({ theme }) => theme.primary};
 `;
 
 export const ListItemTextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: ${({ theme }) => theme.spacer.spacing1};
 `;
 
 export const ListItemName = styled.span`
-  font-size: 1.25rem;
-  font-weight: 700;
-`;
-
-export const ListItemDistance = styled.p`
-  color: ${({ theme }) => theme.secondary};
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  font-weight: bold;
 `;
 
 export const ListItemStars = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
+  gap: ${({ theme }) => theme.spacer.spacing2};
 `;
 
-export const RatingText = styled.span`
-  font-size: 1.2rem;
-  font-weight: 500;
+export const ratingTextStyle = css`
+  font-weight: 600;
+`;
+
+export const subTextStyle = css`
+  color: ${({ theme }) => theme.color.gray600};
 `;

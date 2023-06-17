@@ -1,3 +1,5 @@
+import Heading from "../Heading/Heading";
+
 import * as S from "components/common/SectionHeader/SectionHeader.style";
 
 interface SectionHeaderProps {
@@ -8,12 +10,12 @@ interface SectionHeaderProps {
 
 function SectionHeader({ children, leadingIcon, onClick }: SectionHeaderProps) {
   return (
-    <S.MiniHeader>
+    <S.Header>
       {leadingIcon && (
         <S.LeadingButton onClick={onClick}>{leadingIcon}</S.LeadingButton>
       )}
-      {children}
-    </S.MiniHeader>
+      <Heading size="xs">{children}</Heading>
+    </S.Header>
   );
 }
 

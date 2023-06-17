@@ -16,7 +16,7 @@ export const PATHNAME = {
   SEARCH: "/search",
   STORE_DEMAND: "store-demand",
   WILD_CARD: "*",
-};
+} as const;
 
 const MAIN_ROUTES = {
   HOME: { path: PATHNAME.HOME, element: <CategoryPage /> },
@@ -33,13 +33,13 @@ const MAIN_ROUTES = {
     path: PATHNAME.STORE_DEMAND,
     element: <StoreDemandPage />,
   },
-};
+} as const;
 
 const SPECIAL_ROUTES = {
   LOGIN: { path: PATHNAME.LOGIN, element: <Login /> },
   CAMPUS_SELECT: { path: PATHNAME.WILD_CARD, element: <CampusSelectPage /> },
-};
+} as const;
 
-const ROUTES = { MAIN_ROUTES, SPECIAL_ROUTES };
+const ROUTES = { MAIN_ROUTES, SPECIAL_ROUTES } as const;
 
 export default ROUTES;

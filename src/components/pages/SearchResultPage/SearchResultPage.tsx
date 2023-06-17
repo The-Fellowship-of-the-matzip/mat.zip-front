@@ -11,8 +11,8 @@ import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import fetchStoreList from "api/fetchStoreList";
 import getNextPageParam from "api/getNextPageParam";
+import fetchStoreList from "api/store/fetchStoreList";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";

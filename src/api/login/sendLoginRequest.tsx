@@ -1,5 +1,5 @@
 import { ENDPOINTS } from "constants/api";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 

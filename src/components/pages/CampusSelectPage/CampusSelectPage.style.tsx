@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MainContainer = styled.main`
-  width: 23.45rem;
+  width: 48rem;
   height: 100vh;
   margin: 0 auto;
 
@@ -9,29 +9,26 @@ export const MainContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3.125rem;
+  gap: ${({ theme }) => theme.spacer.spacing6};
 
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.white};
 `;
-
-export const Title = styled.h1``;
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  gap: 1.25rem;
+  gap: ${({ theme }) => theme.spacer.spacing5};
 `;
 
-export const Button = styled.button`
-  width: 8rem;
-  height: 8rem;
+export const buttonStyle = css`
+  width: 12rem;
+  height: 12rem;
 
-  color: ${({ theme }) => theme.white};
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: bold;
 
   border: none;
-  border-radius: 1.25rem;
+  border-radius: ${({ theme }) => theme.borderRadius.medium};
 
-  background-color: ${({ theme }) => theme.primary};
-  box-shadow: 0.065rem 0.065rem 0.2rem ${({ theme }) => theme.primary};
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
 `;

@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StarRating/StarRating.style";
 
-type StarRatingProps = {
+interface StarRatingProps {
   rating: number;
-  setRating: React.Dispatch<React.SetStateAction<number>>;
-};
+  handleRatingInput: (input: number) => void;
+}
 
 const MAX_RATING = 5;
 
-function StarRating({ rating = 0, setRating }: StarRatingProps) {
+function StarRating({ rating = 0, handleRatingInput }: StarRatingProps) {
   const [hoverRating, setHoverRating] = useState<null | number>(null);
 
   const handleStarClick: (index: number) => React.MouseEventHandler =
     (index) => () => {
-      setRating(index);
+      handleRatingInput(index);
     };
 
   const handleStarHover = (index: number) => () => {

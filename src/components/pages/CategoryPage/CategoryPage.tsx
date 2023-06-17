@@ -8,7 +8,7 @@ import { getCampusId } from "constants/campus";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import fetchRandomStoreList from "api/fetchRandomStoreList";
+import fetchRandomStoreList from "api/store/fetchRandomStoreList";
 
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
