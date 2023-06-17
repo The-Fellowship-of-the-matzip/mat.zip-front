@@ -1,5 +1,3 @@
-import { Story } from "@storybook/react";
-
 import MeatballButton from "components/common/MeatballButton/MeatballButton";
 
 export default {

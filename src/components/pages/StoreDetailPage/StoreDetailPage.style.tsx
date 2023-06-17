@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Image from "components/common/Image/Image";
 
@@ -6,52 +6,55 @@ export const StoreDetailPageContainer = styled.section`
   position: relative;
   width: 100%;
   height: fit-content;
+  padding-bottom: ${({ theme }) => theme.spacer.spacing5};
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 3rem;
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 export const StorePreviewImage = styled(Image)`
   width: 100%;
-  height: 15rem;
+  height: 24rem;
 
   object-fit: cover;
   object-position: center;
-  box-shadow: 0 0.065rem 0.1rem ${({ theme }) => theme.secondary};
 `;
 
 export const StoreReviewContentWrapper = styled.article`
-  width: 85%;
-  margin-top: 2rem;
+  width: 100%;
+  margin-top: ${({ theme }) => theme.spacer.spacing4};
+  padding: 0 ${({ theme }) => theme.spacer.spacing3};
 `;
 
-export const ReviewListWrapper = styled.div`
+export const ReviewListContainer = styled.div`
+  margin-top: ${({ theme }) => theme.spacer.spacing6};
+`;
+
+export const ReviewListWrapper = styled.ul`
+  margin-top: ${({ theme }) => theme.spacer.spacing4};
+
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: ${({ theme }) => theme.spacer.spacing3};
 `;
 
-export const ReviewPlusButton = styled.button`
+export const reviewButtonStyle = css`
   position: fixed;
-  font-size: 2rem;
-  right: 10%;
-  bottom: 2rem;
+  right: ${({ theme }) => theme.spacer.spacing4};
+  bottom: ${({ theme }) => theme.spacer.spacing4};
 
-  width: 3rem;
-  height: 3rem;
-  color: ${({ theme }) => theme.white};
-  border: none;
-  background-color: ${({ theme }) => theme.primary};
+  width: 4.8rem;
+  height: 4.8rem;
+
   border-radius: 50%;
+  z-index: 101;
 
-  &:hover {
-    opacity: 0.9;
-  }
-  &:active {
-    opacity: 0.9;
+  & > svg {
+    & path {
+      stroke-width: 2px;
+      stroke: ${({ theme }) => theme.color.white};
+    }
   }
 `;

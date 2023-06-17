@@ -5,6 +5,6 @@ export const MeatballMenuButton = styled.button`
   border: none;
 
   & > svg {
-    fill: ${({ theme }) => theme.secondary};
+    fill: ${({ theme }) => theme.color.gray600};
   }
 `;

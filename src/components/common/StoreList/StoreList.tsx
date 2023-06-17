@@ -1,3 +1,5 @@
+import Divider from "../Divider/Divider";
+import { Fragment } from "react";
 import { Store } from "types/common";
 
 import * as S from "components/common/StoreList/StoreList.style";
@@ -11,14 +13,17 @@ function StoreList({ stores }: StoreListProps) {
   return (
     <S.StoreListContainer>
       {stores?.map((store) => (
-        <StoreListItem
-          id={store.id}
-          key={store.id}
-          thumbnailUrl={store.imageUrl}
-          name={store.name}
-          distance={store.distance}
-          rating={store.rating}
-        />
+        <Fragment key={store.id}>
+          <StoreListItem
+            id={store.id}
+            thumbnailUrl={store.imageUrl}
+            name={store.name}
+            distance={store.distance}
+            rating={store.rating}
+            reviewCount={store.reviewCount}
+          />
+          <Divider />
+        </Fragment>
       ))}
     </S.StoreListContainer>
   );

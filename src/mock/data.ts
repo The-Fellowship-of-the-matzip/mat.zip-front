@@ -11,6 +11,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 34,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 12,
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 5,
   },
   {
     id: 4,
@@ -44,6 +47,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 3,
   },
   {
     id: 5,
@@ -54,7 +58,8 @@ export const stores: Store[] = [
 
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
-    rating: 3,
+    rating: 0,
+    reviewCount: 0,
   },
   {
     id: 6,
@@ -65,7 +70,8 @@ export const stores: Store[] = [
 
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
-    rating: 3,
+    rating: 1.5,
+    reviewCount: 12,
   },
   {
     id: 7,
@@ -76,7 +82,8 @@ export const stores: Store[] = [
 
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
-    rating: 3,
+    rating: 5,
+    reviewCount: 9,
   },
   {
     id: 8,
@@ -88,6 +95,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 0,
   },
   {
     id: 9,
@@ -99,6 +107,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 6,
   },
   {
     id: 10,
@@ -110,6 +119,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 4,
   },
   {
     id: 11,
@@ -121,6 +131,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 3,
   },
   {
     id: 12,
@@ -132,6 +143,7 @@ export const stores: Store[] = [
     distance: 0.5,
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
+    reviewCount: 5,
   },
 ];
 
@@ -142,6 +154,8 @@ export const reviews: Review[] = [
       username: "huni",
       profileImage:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      reviewCount: 3,
+      averageRating: 3.5,
     },
     content: "걍 그럼",
     rating: 3,
@@ -154,6 +168,8 @@ export const reviews: Review[] = [
       username: "ori",
       profileImage:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      reviewCount: 4,
+      averageRating: 2.5,
     },
     content: "정말 맛있어요!!",
     rating: 5,
@@ -166,6 +182,8 @@ export const reviews: Review[] = [
       username: "huni",
       profileImage:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      reviewCount: 1,
+      averageRating: 3.0,
     },
     content: "걍 그럼",
     rating: 3,
@@ -178,6 +196,8 @@ export const reviews: Review[] = [
       username: "ori",
       profileImage:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      reviewCount: 16,
+      averageRating: 4.5,
     },
     content: "정말 맛있어요!!",
     rating: 5,
@@ -190,6 +210,8 @@ export const reviews: Review[] = [
       username: "huni",
       profileImage:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      reviewCount: 4,
+      averageRating: 3.0,
     },
     content: "걍 그럼",
     rating: 3,
@@ -202,6 +224,8 @@ export const reviews: Review[] = [
       username: "ori",
       profileImage:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      reviewCount: 3,
+      averageRating: 3.5,
     },
     content: "정말 맛있어요!!",
     rating: 5,

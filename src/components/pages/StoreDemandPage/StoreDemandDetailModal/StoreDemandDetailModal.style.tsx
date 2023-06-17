@@ -1,64 +1,58 @@
 import styled from "styled-components";
 
 export const ContentContainer = styled.div`
-  padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
 `;
 
-export const StoreName = styled.h1`
-  word-break: keep-all;
-  text-align: center;
+export const NameContainer = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacer.spacing4};
+  display: flex;
+  flex-direction: column;
+
+  & > p {
+    margin-bottom: ${({ theme }) => theme.spacer.spacing1};
+    color: ${({ theme }) => theme.color.primaryDark};
+    font-weight: bold;
+  }
 `;
 
-export const Campus = styled.p`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.secondary};
-`;
+export const DetailContainer = styled.ul``;
 
-export const DetailContainer = styled.div`
+export const DetailItem = styled.li`
   width: 100%;
+  margin: 0 auto;
+  padding: ${({ theme }) => theme.spacer.spacing3};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
+export const DetailHead = styled(DetailItem)`
+  padding-bottom: ${({ theme }) => theme.spacer.spacing3};
+  font-weight: 600;
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray200};
+`;
+
+export const DetailData = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem;
 `;
 
-export const DetailContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+export const AuthorNameRow = styled(DetailData)`
+  width: 40%;
 `;
 
-export const DetailLabel = styled.p`
-  font-size: 1.05rem;
-  font-weight: 500;
+export const CategoryNameRow = styled(DetailData)`
+  width: 40%;
 `;
 
-export const DetailValue = styled.p``;
+export const RegisteredRow = styled(DetailData)`
+  width: 20%;
+`;
 
 export const ButtonContainer = styled.div`
+  margin-top: ${({ theme }) => theme.spacer.spacing4};
   display: flex;
-  gap: 1rem;
-`;
-
-export const CustomButton = styled.button`
-  background-color: ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.white};
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.5rem 0.8rem;
-  box-shadow: 1px 1px 1px #8d8d8d;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-export const DeleteButton = styled(CustomButton)`
-  background-color: #d66363;
+  gap: ${({ theme }) => theme.spacer.spacing1};
 `;

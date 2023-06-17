@@ -2,44 +2,46 @@ import styled from "styled-components";
 
 export const Container = styled.section<{ scrollOffset: number }>`
   position: absolute;
+  top: ${({ scrollOffset }) => scrollOffset}px;
+  left: 0;
+
   width: 100%;
   height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  top: ${({ scrollOffset }) => scrollOffset}px;
-  left: 0;
 `;
 
 export const Backdrop = styled.div`
-  width: 100%;
-  height: 100vh;
-
-  background-color: ${({ theme }) => theme.black};
-  opacity: 0.5;
-
   position: absolute;
   top: 0;
   left: 0;
+
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  cursor: pointer;
 `;
 
-export const Content = styled.div`
+export const ContentWrapper = styled.div`
   position: fixed;
   bottom: 0;
-  max-width: 37.5rem;
+  max-width: 48rem;
   width: 100%;
-  min-height: 6.25rem;
-  padding: 1.5rem;
+
+  padding: ${({ theme }) => theme.spacer.spacing3};
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 
-  border-radius: 0.625rem 0.625rem 0 0;
-  background-color: ${({ theme }) => theme.white};
-  box-shadow: 0 -0.2rem 0.4rem 0 ${({ theme }) => theme.secondary};
+  background-color: ${({ theme }) => theme.color.white};
+
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 `;
 
-export const Title = styled.h1``;
-
-export const InputWrapper = styled.div``;
+export const Content = styled.div`
+  margin-top: ${({ theme }) => theme.spacer.spacing4};
+`;

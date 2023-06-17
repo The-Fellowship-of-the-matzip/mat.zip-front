@@ -1,5 +1,6 @@
 import GlobalStyle from "../src/style/GlobalStyle";
 import { theme } from "../src/style/Theme";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
@@ -16,13 +17,17 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => {
+    const queryClient = new QueryClient();
+
     return (
       <div id="app">
         <ThemeProvider theme={theme}>
           <GlobalStyle env={"storybook"} />
-          <BrowserRouter>
-            <Story {...context} />
-          </BrowserRouter>
+          <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+              <Story {...context} />
+            </BrowserRouter>
+          </QueryClientProvider>
         </ThemeProvider>
       </div>
     );

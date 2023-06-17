@@ -1,6 +1,8 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
+import { CloseIcon } from "asset";
+
 import * as S from "components/common/Modal/Modal.style";
 
 interface ModalProps {
@@ -24,7 +26,9 @@ function Modal({ children, closeModal }: PropsWithChildren<ModalProps>) {
     <S.Container scrollOffset={scrollOffset}>
       <S.Backdrop onClick={closeModal} />
       <S.Content>
-        <S.CloseButton onClick={closeModal}>닫기</S.CloseButton>
+        <S.CloseButton onClick={closeModal} aria-label="닫기">
+          <CloseIcon />
+        </S.CloseButton>
         {children}
       </S.Content>
     </S.Container>,

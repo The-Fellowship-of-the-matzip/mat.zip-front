@@ -4,15 +4,19 @@ import { useMutation } from "react-query";
 import { ReviewInputShape } from "types/common";
 
 import { NETWORK } from "constants/api";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
 import useLogin from "hooks/useLogin";
 
-import sendReviewItem from "api/sendReviewItem";
+import sendReviewItem from "api/review/sendReviewItem";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
+import Button from "components/common/Button/Button";
+import Input from "components/common/Input/Input";
+import Label from "components/common/Label/Label";
 import StarRating from "components/common/StarRating/StarRating";
+import Textarea from "components/common/Textarea/Textarea";
 
 import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet.style";
 
@@ -49,6 +53,10 @@ function ReviewUpdateBottomSheet({
       menu: menu,
     });
     closeSheet();
+  };
+
+  const handleRatingInput = (input: number) => {
+    setRating(input);
   };
 
   const handleMenuInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -103,29 +111,29 @@ function ReviewUpdateBottomSheet({
   return (
     <BottomSheet title="리뷰 남기기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmitRequest}>
-        <S.Label htmlFor="menu-input">메뉴 입력</S.Label>
-        <S.MenuInput
+        <S.StarRatingWrapper>
+          <Label>별점</Label>
+          <StarRating rating={rating} handleRatingInput={handleRatingInput} />
+        </S.StarRatingWrapper>
+        <Input
+          label="메뉴 입력"
           id="menu-input"
           value={menu}
+          placeholder="메뉴를 입력해 주세요"
           onChange={handleMenuInput}
           maxLength={20}
           required
         />
-        <S.Label htmlFor="review">총평</S.Label>
-        <S.ReviewTextArea
+        <Textarea
+          label="총평"
           id="review"
           value={reviewContent}
+          placeholder="이 맛집에 대한 리뷰를 남겨주세요"
           onChange={handleContentInput}
           maxLength={255}
           required
         />
-        <S.BottomWrapper>
-          <S.StarRatingWrapper>
-            <S.Label>별점</S.Label>
-            <StarRating rating={rating} setRating={setRating} />
-          </S.StarRatingWrapper>
-          <S.SubmitButton>제출</S.SubmitButton>
-        </S.BottomWrapper>
+        <Button variant="primary">제출</Button>
       </S.Form>
     </BottomSheet>
   );

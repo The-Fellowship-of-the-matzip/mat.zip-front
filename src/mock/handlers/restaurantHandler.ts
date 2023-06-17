@@ -44,13 +44,13 @@ export const restaurantHandler = [
     }
   ),
   rest.get(`${API_BASE_URL}/restaurants/:restaurantId`, (req, res, ctx) => {
-    const { restaurantId } = req.params; // 안 씀
+    const { restaurantId } = req.params;
 
     if (!restaurantId) {
       return res(ctx.status(400), ctx.json({ message: "잘못된 요청입니다." }));
     }
 
-    return res(ctx.status(200), ctx.json(stores[Number(restaurantId)]));
+    return res(ctx.status(200), ctx.json(stores[Number(restaurantId) - 1]));
   }),
   rest.get(
     `${API_BASE_URL}/campuses/:campusId/restaurants/random`,

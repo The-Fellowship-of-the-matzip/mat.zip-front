@@ -9,13 +9,13 @@ import { Campus, CategoryId, Store } from "types/common";
 import { NETWORK, SIZE, FILTERS } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
-import MESSAGES from "constants/messages";
+import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import fetchStoreList from "api/fetchStoreList";
 import getNextPageParam from "api/getNextPageParam";
+import fetchStoreList from "api/store/fetchStoreList";
 
 import Chip from "components/common/Chip/Chip";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
