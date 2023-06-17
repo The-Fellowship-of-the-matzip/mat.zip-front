@@ -1,6 +1,6 @@
-export const API_BASE_URL = "https://api.matzip.today/api";
+import { CampusId } from "types/common/campusTypes";
 
-type CampusId = 1 | 2;
+export const API_BASE_URL = "https://api.matzip.today/api";
 
 export const ENDPOINTS = {
   LOGIN: "/login",

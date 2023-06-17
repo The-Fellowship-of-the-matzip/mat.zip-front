@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Campus, Store } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
-import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 import { PATHNAME } from "constants/routes";
 
@@ -22,8 +22,6 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/SearchResultPage/SearchResultPage.style";
-
-import type { Store } from "mock/data";
 
 function SearchResultPage() {
   const navigate = useNavigate();

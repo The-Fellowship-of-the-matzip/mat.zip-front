@@ -4,9 +4,9 @@ import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Campus, CategoryId, Store } from "types/common";
 
 import { NETWORK, SIZE, FILTERS } from "constants/api";
-import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import MESSAGES from "constants/messages";
@@ -26,8 +26,6 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
-
-import type { Store } from "mock/data";
 
 function CategoryDetailPage() {
   const navigate = useNavigate();

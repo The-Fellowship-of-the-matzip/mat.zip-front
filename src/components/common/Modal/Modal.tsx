@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 
 import * as S from "components/common/Modal/Modal.style";
 
-interface Props {
+interface ModalProps {
   closeModal: () => void;
 }
 
-function Modal({ children, closeModal }: PropsWithChildren<Props>) {
+function Modal({ children, closeModal }: PropsWithChildren<ModalProps>) {
   const [scrollOffset, setScrollOffset] = useState(0);
 
   useEffect(() => {

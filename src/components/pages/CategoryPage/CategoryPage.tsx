@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
+import { Campus } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
-import type { Campus } from "constants/campus";
 import { getCampusId } from "constants/campus";
 
 import { campusContext } from "context/CampusContextProvider";

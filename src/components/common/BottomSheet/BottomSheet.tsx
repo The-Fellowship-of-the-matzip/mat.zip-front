@@ -4,13 +4,13 @@ import ReactDOM from "react-dom";
 
 import * as S from "components/common/BottomSheet/BottomSheet.style";
 
-type Props = {
+interface BottomSheetProps {
   title: string;
   children: React.ReactNode;
   closeSheet: () => void;
-};
+}
 
-function BottomSheet({ title, closeSheet, children }: Props) {
+function BottomSheet({ title, closeSheet, children }: BottomSheetProps) {
   const [scrollOffset, setScrollOffset] = useState(0);
 
   useEffect(() => {

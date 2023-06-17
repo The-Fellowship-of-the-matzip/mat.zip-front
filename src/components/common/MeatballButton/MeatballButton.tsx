@@ -2,10 +2,10 @@ import { BiDotsHorizontal } from "react-icons/bi";
 
 import * as S from "components/common/MeatballButton/MeatballButton.style";
 
-export type MeatballButtonProps = {
+interface MeatballButtonProps {
   ariaLabel: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-};
+}
 
 const MeatballButton: React.FC<MeatballButtonProps> = ({
   ariaLabel,

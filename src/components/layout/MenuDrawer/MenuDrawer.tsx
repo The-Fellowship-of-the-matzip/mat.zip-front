@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { Campus } from "types/common";
 
 import { AUTH_LINK } from "constants/api";
 import { getOtherCampus } from "constants/campus";
-import type { Campus } from "constants/campus";
 import MESSAGES from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
@@ -14,9 +14,12 @@ import useLogin from "hooks/useLogin";
 
 import * as S from "components/layout/MenuDrawer/MenuDrawer.style";
 
-type Props = { closeMenu: () => void; isLoggedIn: boolean };
+interface MenuDrawerProps {
+  closeMenu: () => void;
+  isLoggedIn: boolean;
+}
 
-function MenuDrawer({ closeMenu, isLoggedIn }: Props) {
+function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
   const campus = useContext(campusContext);
   const otherCampus = getOtherCampus(campus as Campus);
   const setCampus = useContext(setCampusContext);

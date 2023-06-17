@@ -1,7 +1,7 @@
+import { Store } from "types/common";
+
 import * as S from "components/common/StoreList/StoreList.style";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
-
-import type { Store } from "mock/data";
 
 interface StoreListProps {
   stores?: Store[];

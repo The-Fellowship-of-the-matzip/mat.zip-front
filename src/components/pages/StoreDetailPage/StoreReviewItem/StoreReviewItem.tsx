@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { ReviewShape } from "types/common";
 import repeatComponent from "util/repeatComponent";
 
 import deleteReviewItem from "api/deleteReviewItem";
@@ -12,19 +13,9 @@ import Star from "components/common/Star/Star";
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
 
-interface StoreReviewItemProps {
-  reviewInfo: {
-    id: string;
-    restaurantId: string;
-    author: { username: string; profileImage: string };
-    rating: number;
-    content: string;
-    menu: string;
-    updatable: boolean;
-  };
-}
+type ReviewInfo = ReviewShape & { restaurantId: string };
 
-function StoreReviewItem({ reviewInfo }: StoreReviewItemProps) {
+function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
     deleteReviewItem({
       restaurantId: reviewInfo.restaurantId,

@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { Campus } from "types/common";
 
-import CAMPUS, { Campus } from "constants/campus";
+import CAMPUS from "constants/campus";
 import { PATHNAME } from "constants/routes";
 
 import { setCampusContext } from "context/CampusContextProvider";

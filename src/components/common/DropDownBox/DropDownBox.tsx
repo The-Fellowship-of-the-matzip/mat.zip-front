@@ -2,14 +2,14 @@ import { useEffect } from "react";
 
 import * as S from "components/common/DropDownBox/DropDownBox.style";
 
-export type DropDownBoxProps = {
+export interface DropDownBoxProps {
   children: React.ReactNode;
   onClose: () => void;
   top?: string;
   bottom?: string;
   left?: string;
   right?: string;
-};
+}
 
 const DropDownBox: React.FC<DropDownBoxProps> = ({
   children,

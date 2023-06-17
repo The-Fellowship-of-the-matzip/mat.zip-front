@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StarRating/StarRating.style";
 
-type Props = {
+type StarRatingProps = {
   rating: number;
   setRating: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const MAX_RATING = 5;
 
-function StarRating({ rating = 0, setRating }: Props) {
+function StarRating({ rating = 0, setRating }: StarRatingProps) {
   const [hoverRating, setHoverRating] = useState<null | number>(null);
 
   const handleStarClick: (index: number) => React.MouseEventHandler =

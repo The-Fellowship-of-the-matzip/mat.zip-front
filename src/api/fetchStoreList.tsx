@@ -1,31 +1,27 @@
+import { FetchParamProps } from "types/apiTypes";
+import { CampusId, Store } from "types/common";
+
 import { ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-import { Store } from "mock/data";
+type ReduceReturnType = Record<string, any>;
 
-type CategoryStoreListResponse = {
-  hasNext: boolean;
-  restaurants: Store[];
-};
-
-type Props = {
-  pageParam?: number;
-  queryKey: any;
-};
-
-type Params = {
+interface GenerateParamsProps {
   page?: number;
   size?: number;
   filter?: string;
-  campusId?: 1 | 2;
+  campusId?: CampusId;
   categoryId?: number;
   name?: string;
-};
+}
 
-type ReduceReturnType = Record<string, any>;
+interface CategoryStoreListResponse {
+  hasNext: boolean;
+  restaurants: Store[];
+}
 
-const generateParams = (propObject: Params) =>
+const generateParams = (propObject: GenerateParamsProps) =>
   Object.entries(propObject).reduce<ReduceReturnType>(
     (params, [key, value]) => {
       if (value) {
@@ -36,7 +32,7 @@ const generateParams = (propObject: Params) =>
     {}
   );
 
-const fetchStoreList = async ({ pageParam = 0, queryKey }: Props) => {
+const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
   const params = generateParams({
     page: pageParam,

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { StoreDemand } from "types/common";
 
 import StoreDemandEditBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandEditBottomSheet";
 import StoreDemandDetailModal from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal";

@@ -6,11 +6,11 @@ import ROUTES, { PATHNAME } from "constants/routes";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
-interface SearchBarProp {
+interface SearchBarProps {
   closeSearchBar?: () => void;
 }
 
-function SearchBar({ closeSearchBar }: SearchBarProp) {
+function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
 
   const location = useLocation();

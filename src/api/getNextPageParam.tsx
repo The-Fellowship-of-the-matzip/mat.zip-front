@@ -1,6 +1,9 @@
-type PageParams = { hasNext: boolean; nextPageParam?: number };
+interface getNextPageParamProps {
+  hasNext: boolean;
+  nextPageParam?: number;
+}
 
-const getNextPageParam = <T extends PageParams>(lastPage: T) => {
+const getNextPageParam = (lastPage: getNextPageParamProps) => {
   if (lastPage.hasNext) {
     return lastPage.nextPageParam;
   }

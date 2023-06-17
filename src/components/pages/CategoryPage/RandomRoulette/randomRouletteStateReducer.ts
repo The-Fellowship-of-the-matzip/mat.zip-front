@@ -1,4 +1,4 @@
-import type { Store } from "mock/data";
+import { Store } from "types/common";
 
 export const ACTION_TYPES = {
   SET_BOARD: "SET_BOARD",
