@@ -7,7 +7,7 @@ import axiosInstance from "api/axiosInstance";
 
 type ReduceReturnType = Record<string, any>;
 
-interface generateParamsProps {
+interface GenerateParamsProps {
   page?: number;
   size?: number;
   filter?: string;
@@ -21,7 +21,7 @@ interface CategoryStoreListResponse {
   restaurants: Store[];
 }
 
-const generateParams = (propObject: generateParamsProps) =>
+const generateParams = (propObject: GenerateParamsProps) =>
   Object.entries(propObject).reduce<ReduceReturnType>(
     (params, [key, value]) => {
       if (value) {
