@@ -11,7 +11,7 @@ export const Container = styled.div`
   height: 100vh;
   margin: 0 auto;
 
-  z-index: 100;
+  z-index: ${({ theme }) => theme.zIndex.overlay};
 `;
 
 export const Backdrop = styled.div`

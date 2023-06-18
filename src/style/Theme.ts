@@ -39,8 +39,14 @@ const borderRadius = {
   medium: "8px",
 };
 
+const zIndex = {
+  header: 2,
+  overlay: 3,
+};
+
 export const theme = {
   color,
   spacer,
   borderRadius,
+  zIndex,
 };

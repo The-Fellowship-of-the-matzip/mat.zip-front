@@ -22,7 +22,7 @@ export const Container = styled.header`
 
   background-color: ${({ theme }) => theme.color.primary};
 
-  z-index: 99;
+  z-index: ${({ theme }) => theme.zIndex.header};
 `;
 
 export const TopWrapper = styled.div`
