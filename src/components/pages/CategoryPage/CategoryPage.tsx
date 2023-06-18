@@ -43,7 +43,7 @@ function CategoryPage() {
         <Category />
       </section>
       <section>
-        <SectionHeader>추천 메뉴</SectionHeader>
+        <SectionHeader>어디서 먹을지 모르겠나요?</SectionHeader>
         {isLoading ? <Spinner /> : <RandomRoulette campusId={campusId} />}
       </section>
       <section>
