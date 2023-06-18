@@ -11,6 +11,7 @@ import Button from "components/common/Button/Button";
 import Heading from "components/common/Heading/Heading";
 
 import * as S from "components/pages/CampusSelectPage/CampusSelectPage.style";
+import { LogoLight } from "asset";
 
 function CampusSelectPage() {
   const setCampus = useContext(setCampusContext);
@@ -24,7 +25,10 @@ function CampusSelectPage() {
 
   return (
     <S.MainContainer>
-      <Heading size="xs">식사할 캠퍼스를 선택해 주세요</Heading>
+      <S.LogoWrapper>
+        <LogoLight />
+      </S.LogoWrapper>
+      <Heading size="sm">식사할 캠퍼스를 선택해 주세요</Heading>
       <S.ButtonWrapper>
         <Button
           variant="primary"
