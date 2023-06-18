@@ -110,8 +110,7 @@ export const Button = styled.button<ButtonProps>`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.color.gray300};
-    border-color: ${({ theme }) => theme.color.gray300};
+    opacity: 0.5;
   }
 
   ${(props) => props.css}
