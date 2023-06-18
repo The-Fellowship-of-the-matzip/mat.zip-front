@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
 
-import logoImg from "asset/logo.svg";
+import logoImg from "asset/logo-light.svg";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";

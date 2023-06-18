@@ -20,7 +20,7 @@ export const Container = styled.header`
   justify-content: center;
   gap: ${({ theme }) => theme.spacer.spacing4};
 
-  background-color: ${({ theme }) => theme.color.primary};
+  background-color: ${({ theme }) => theme.color.white};
 
   z-index: 99;
 `;
@@ -48,6 +48,7 @@ export const LogoImage = styled(Image)`
 export const Campus = styled(Text).attrs({ as: "span" })`
   position: relative;
   top: -2px;
+  color: ${({ theme }) => theme.color.black};
 `;
 
 export const RightWrapper = styled.div`
