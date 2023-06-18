@@ -1,11 +1,12 @@
-import Button from "components/common/Button/Button";
 import Text from "components/common/Text/Text";
+import { CATEGORY_ICONS } from "constants/categories";
 
 import * as S from "components/pages/CategoryPage/CategoryItem/CategoryItem.style";
+import { Category } from "types/common";
 
 interface CategoryItemProps {
   buttonText: string;
-  children: React.ReactNode;
+  children: Category;
   onClick: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -16,10 +17,8 @@ function CategoryItem({
   ...rest
 }: CategoryItemProps) {
   return (
-    <S.CategoryItemContainer onClick={onClick} {...rest}>
-      <Button css={S.buttonStyle} variant="primary">
-        {buttonText}
-      </Button>
+    <S.CategoryItemContainer onClick={onClick} {...rest} tabIndex={0}>
+      <S.Icon>{CATEGORY_ICONS[children]}</S.Icon>
       <Text css={S.textStyle} size="sm">
         {children}
       </Text>

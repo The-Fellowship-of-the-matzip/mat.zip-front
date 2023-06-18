@@ -3,24 +3,28 @@ import styled, { css } from "styled-components";
 export const CategoryItemContainer = styled.li`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 12px;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacer.spacing3};
 
-  width: fit-content;
+  width: 7.2rem;
+  outline: 0 solid ${({ theme }) => theme.color.white};
+  border-radius: ${({ theme }) => theme.borderRadius.small};
 
   cursor: pointer;
+
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.color.white};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.color.gray100};
+  }
 `;
 
-export const buttonStyle = css`
-  width: 4.8rem;
+export const Icon = styled.div`
   height: 4.8rem;
-
-  text-align: center;
-  border-radius: ${({ theme }) => theme.borderRadius.small};
 `;
 
 export const textStyle = css`
-  font-weight: 600;
+  color: ${({ theme }) => theme.color.black};
+  font-weight: bold;
   text-align: center;
 `;
