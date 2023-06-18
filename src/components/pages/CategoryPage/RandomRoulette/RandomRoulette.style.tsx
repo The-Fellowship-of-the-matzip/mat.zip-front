@@ -33,7 +33,7 @@ export const Inner = styled.div<{ runAnimation: boolean }>`
   ${({ runAnimation }) =>
     runAnimation &&
     css`
-      animation: slider ease-in-out 5s;
+      animation: slider ease-in-out 3.5s;
       transform: translateY(calc(-100% + 3.2rem));
     `}
 
@@ -57,7 +57,7 @@ export const RouletteSlot = styled.div`
   height: 3.2rem;
   font-size: 2.4rem;
   line-height: 3.2rem;
-  font-weight: 600;
+  font-weight: bold;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
