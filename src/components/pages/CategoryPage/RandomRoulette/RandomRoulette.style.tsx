@@ -6,6 +6,10 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   gap: ${({ theme }) => theme.spacer.spacing5};
+
+  & button {
+    padding: 12px;
+  }
 `;
 
 export const RecommendBlock = styled.div`
