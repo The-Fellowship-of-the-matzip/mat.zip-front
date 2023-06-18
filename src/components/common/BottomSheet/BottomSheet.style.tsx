@@ -11,7 +11,7 @@ export const Container = styled.section<{ scrollOffset: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: ${({ theme }) => theme.zIndex.overlay};
 `;
 
 export const Backdrop = styled.div`
