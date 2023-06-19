@@ -21,7 +21,7 @@ export const RecommendBlock = styled.div`
 `;
 
 export const Outer = styled.div`
-  width: calc(100% - 18rem);
+  width: calc(100% - 24rem);
   height: 3rem;
   overflow: hidden;
 `;
@@ -55,8 +55,8 @@ export const Inner = styled.div<{ runAnimation: boolean }>`
 
 export const RouletteSlot = styled.div`
   height: 3.2rem;
-  font-size: 2.4rem;
-  line-height: 3.2rem;
+  font-size: 2rem;
+  line-height: 2.8rem;
   font-weight: bold;
   text-align: center;
   overflow: hidden;
