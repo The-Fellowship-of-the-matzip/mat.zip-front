@@ -40,11 +40,12 @@ export const Header = styled.header`
 export const ReviewBottom = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacer.spacing3}; ;
+  gap: ${({ theme }) => theme.spacer.spacing3};
 `;
 
 export const RatingWrapper = styled.div`
   display: flex;
+  gap: ${({ theme }) => theme.spacer.spacing1};
 `;
 
 export const DropBoxButtonList = styled.ul`

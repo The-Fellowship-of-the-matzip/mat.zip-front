@@ -106,8 +106,8 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           </S.Header>
           <S.ReviewBottom>
             <S.RatingWrapper>
-              {repeatComponent(<Star isFilled />, rating)}
-              {repeatComponent(<Star />, 5 - rating)}
+              {repeatComponent(<Star isFilled isSmall />, rating)}
+              {repeatComponent(<Star isSmall />, 5 - rating)}
             </S.RatingWrapper>
             <Text css={S.bodyTextStyle} size="sm">
               {content}
