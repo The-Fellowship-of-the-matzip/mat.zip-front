@@ -30,6 +30,7 @@ export const DescriptionWrapper = styled.div`
 
 export const RatingWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: ${({ theme }) => theme.spacer.spacing1};
 `;
 
@@ -49,8 +50,14 @@ export const KakaoLink = styled.a`
 
 export const ratingTextStyle = css`
   font-weight: 600;
+  margin-left: ${({ theme }) => theme.spacer.spacing2};
 `;
 
 export const subTextStyle = css`
+  color: ${({ theme }) => theme.color.gray600};
+`;
+
+export const reviewCountStyle = css`
+  font-weight: 600;
   color: ${({ theme }) => theme.color.gray600};
 `;

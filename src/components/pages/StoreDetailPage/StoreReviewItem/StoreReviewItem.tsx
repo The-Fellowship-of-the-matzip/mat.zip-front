@@ -60,9 +60,20 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           <S.Header>
             <div>
               <Text css={S.titleTextStyle}>{author.username}</Text>
-              <Text css={S.subTextStyle} size="sm">
-                후기 {author.reviewCount} 별점평균 {author.averageRating}
-              </Text>
+              <S.UserReviewInfoWrapper>
+                <Text css={S.subTextStyle} size="sm">
+                  후기
+                </Text>
+                <Text css={S.subTextNumberStyle} size="sm">
+                  {author.reviewCount}
+                </Text>
+                <Text css={S.subTextStyle} size="sm">
+                  별점평균
+                </Text>
+                <Text css={S.subTextNumberStyle} size="sm">
+                  {author.averageRating}
+                </Text>
+              </S.UserReviewInfoWrapper>
             </div>
             {reviewInfo.updatable && (
               <>

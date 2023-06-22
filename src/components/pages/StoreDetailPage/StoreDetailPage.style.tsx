@@ -16,7 +16,7 @@ export const StoreDetailPageContainer = styled.section`
 
 export const StorePreviewImage = styled(Image)`
   width: 100%;
-  height: 24rem;
+  height: 30rem;
 
   object-fit: cover;
   object-position: center;

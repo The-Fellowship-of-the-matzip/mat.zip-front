@@ -31,10 +31,15 @@ export const ReviewContentWrapper = styled.div`
 export const Header = styled.header`
   position: relative;
   width: 100%;
-  padding-bottom: ${({ theme }) => theme.spacer.spacing1};
+  margin-bottom: ${({ theme }) => theme.spacer.spacing2};
 
   display: flex;
   justify-content: space-between;
+`;
+
+export const UserReviewInfoWrapper = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacer.spacing1};
 `;
 
 export const ReviewBottom = styled.div`
@@ -77,6 +82,10 @@ export const titleTextStyle = css`
 export const subTextStyle = css`
   color: ${({ theme }) => theme.color.gray600};
   font-weight: 600;
+`;
+
+export const subTextNumberStyle = css`
+  color: ${({ theme }) => theme.color.gray600};
 `;
 
 export const bodyTextStyle = css`

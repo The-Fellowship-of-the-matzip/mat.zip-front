@@ -35,7 +35,11 @@ function StoreDetailTitle({
               <Text css={S.subTextStyle}>{getRandomEmptyReviewMessage()}</Text>
             </>
           )}
-          {rating > 0 && <Text>({reviewCount})</Text>}
+          {rating > 0 && (
+            <Text size="sm" css={S.reviewCountStyle}>
+              ({reviewCount})
+            </Text>
+          )}
         </S.RatingWrapper>
       </S.RatingContainer>
       <S.DescriptionWrapper>
