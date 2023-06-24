@@ -75,6 +75,12 @@ export const DropBoxButton = styled.button`
   }
 `;
 
+export const ReviewImage = styled.img`
+  height: 10rem;
+  object-fit: contain;
+  object-position: left top;
+`;
+
 export const titleTextStyle = css`
   font-weight: 600;
 `;

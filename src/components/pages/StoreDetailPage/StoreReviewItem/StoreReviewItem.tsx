@@ -30,7 +30,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
 
   const queryClient = useQueryClient();
 
-  const { author, rating, content, menu } = reviewInfo;
+  const { author, rating, content, menu, imageUrl } = reviewInfo;
 
   const handleMeatballButtonClick = () => setIsDropBoxOpen((prev) => !prev);
   const handleDropBoxClose = () => setIsDropBoxOpen(false);
@@ -123,6 +123,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
             <Text css={S.bodyTextStyle} size="sm">
               {content}
             </Text>
+            {imageUrl && <S.ReviewImage src={imageUrl} alt="리뷰 이미지" />}
             <Text css={S.menuTextStyle} size="sm">
               {menu}
             </Text>
