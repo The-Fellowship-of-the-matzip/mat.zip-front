@@ -9,6 +9,7 @@ export interface Store {
   imageUrl: string;
   rating: number;
   reviewCount: number;
+  saved: boolean;
 }
 
 export interface StoreDemand {
