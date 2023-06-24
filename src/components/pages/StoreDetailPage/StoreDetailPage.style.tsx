@@ -49,7 +49,7 @@ export const reviewButtonStyle = css`
   height: 4.8rem;
 
   border-radius: 50%;
-  z-index: 101;
+  z-index: ${({ theme }) => theme.zIndex.overlay};
 
   & > svg {
     & path {

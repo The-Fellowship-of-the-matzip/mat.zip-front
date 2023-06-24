@@ -9,6 +9,7 @@ export const Container = styled.section<{ scrollOffset: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: ${({ theme }) => theme.zIndex.overlay};
 `;
 
 export const Backdrop = styled.div`
@@ -36,7 +37,6 @@ export const Content = styled.div`
 
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
-  z-index: 2;
 `;
 
 export const CloseButton = styled.button`
