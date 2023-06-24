@@ -9,9 +9,14 @@ export const MainContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: ${({ theme }) => theme.spacer.spacing6};
+  gap: ${({ theme }) => theme.spacer.spacing7};
 
   background-color: ${({ theme }) => theme.color.white};
+`;
+
+export const LogoWrapper = styled.header`
+  position: absolute;
+  top: ${({ theme }) => theme.spacer.spacing6};
 `;
 
 export const ButtonWrapper = styled.div`
