@@ -5,18 +5,23 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${({ theme }) => theme.spacer.spacing5}; ;
+  gap: ${({ theme }) => theme.spacer.spacing5};
+
+  & button {
+    padding: 12px;
+  }
 `;
 
 export const RecommendBlock = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: ${({ theme }) => theme.spacer.spacing1}; ;
+  gap: 6px;
 `;
 
 export const Outer = styled.div`
-  width: 16rem;
+  width: calc(100% - 24rem);
   height: 3rem;
   overflow: hidden;
 `;
@@ -28,7 +33,7 @@ export const Inner = styled.div<{ runAnimation: boolean }>`
   ${({ runAnimation }) =>
     runAnimation &&
     css`
-      animation: slider ease-in-out 5s;
+      animation: slider ease-in-out 3.5s;
       transform: translateY(calc(-100% + 3.2rem));
     `}
 
@@ -49,11 +54,10 @@ export const Inner = styled.div<{ runAnimation: boolean }>`
 `;
 
 export const RouletteSlot = styled.div`
-  width: 16rem;
   height: 3.2rem;
-  font-size: 2.4rem;
-  line-height: 3.2rem;
-  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  font-weight: bold;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
