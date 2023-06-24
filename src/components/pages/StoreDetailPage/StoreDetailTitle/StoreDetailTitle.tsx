@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Store } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
+import repeatComponent from "util/repeatComponent";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -21,14 +22,24 @@ function StoreDetailTitle({
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
       <S.RatingContainer>
-        <Star isFilled={rating > 0} />
         <S.RatingWrapper>
           {rating > 0 ? (
-            <Text css={S.ratingTextStyle}>{rating.toFixed(1)}</Text>
+            <>
+              {repeatComponent(<Star isFilled />, rating)}
+              {repeatComponent(<Star />, 5 - rating)}
+              <Text css={S.ratingTextStyle}>{rating.toFixed(1)}</Text>
+            </>
           ) : (
-            <Text css={S.subTextStyle}>{getRandomEmptyReviewMessage()}</Text>
+            <>
+              <Star />
+              <Text css={S.subTextStyle}>{getRandomEmptyReviewMessage()}</Text>
+            </>
           )}
-          {rating > 0 && <Text>({reviewCount})</Text>}
+          {rating > 0 && (
+            <Text size="sm" css={S.reviewCountStyle}>
+              ({reviewCount})
+            </Text>
+          )}
         </S.RatingWrapper>
       </S.RatingContainer>
       <S.DescriptionWrapper>

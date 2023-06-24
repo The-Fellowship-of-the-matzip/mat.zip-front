@@ -157,7 +157,8 @@ export const reviews: Review[] = [
       reviewCount: 3,
       averageRating: 3.5,
     },
-    content: "걍 그럼",
+    content:
+      "교촌 레드 너무 맛있어요. 그런데 레드 말고 다른 맛은 잘 모르겠어요, 그런데 레드가 너무 맛있으니까 또 먹으러 가고 싶은 것 같기도 하고 아닌 것 같기도 하고 잘 모르겠네요.",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
     updatable: false,

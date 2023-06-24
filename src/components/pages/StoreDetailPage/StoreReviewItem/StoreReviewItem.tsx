@@ -60,9 +60,20 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           <S.Header>
             <div>
               <Text css={S.titleTextStyle}>{author.username}</Text>
-              <Text css={S.subTextStyle} size="sm">
-                후기 {author.reviewCount} 별점평균 {author.averageRating}
-              </Text>
+              <S.UserReviewInfoWrapper>
+                <Text css={S.subTextStyle} size="sm">
+                  후기
+                </Text>
+                <Text css={S.subTextNumberStyle} size="sm">
+                  {author.reviewCount}
+                </Text>
+                <Text css={S.subTextStyle} size="sm">
+                  별점평균
+                </Text>
+                <Text css={S.subTextNumberStyle} size="sm">
+                  {author.averageRating}
+                </Text>
+              </S.UserReviewInfoWrapper>
             </div>
             {reviewInfo.updatable && (
               <>
@@ -106,8 +117,8 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           </S.Header>
           <S.ReviewBottom>
             <S.RatingWrapper>
-              {repeatComponent(<Star isFilled />, rating)}
-              {repeatComponent(<Star />, 5 - rating)}
+              {repeatComponent(<Star isFilled size="xs" />, rating)}
+              {repeatComponent(<Star size="xs" />, 5 - rating)}
             </S.RatingWrapper>
             <Text css={S.bodyTextStyle} size="sm">
               {content}
