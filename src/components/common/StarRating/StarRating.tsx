@@ -37,7 +37,11 @@ function StarRating({ rating = 0, handleRatingInput }: StarRatingProps) {
             onMouseEnter={handleStarHover(index)}
             onMouseLeave={resetStarHover}
           >
-            {index > (hoverRating ?? rating) ? <Star /> : <Star isFilled />}
+            {index > (hoverRating ?? rating) ? (
+              <Star size="lg" />
+            ) : (
+              <Star size="lg" isFilled />
+            )}
           </S.StarButton>
         );
       })}
