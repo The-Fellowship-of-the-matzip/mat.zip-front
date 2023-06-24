@@ -1,3 +1,5 @@
+import { imageHandler } from "./imageHandler";
+
 import { categoryHandler } from "mock/handlers/categoryHandler";
 import { restaurantHandler } from "mock/handlers/restaurantHandler";
 import { reviewHandler } from "mock/handlers/reviewHandler";
@@ -10,4 +12,5 @@ export {
   restaurantHandler,
   reviewHandler,
   storeDemandHandler as storeRequestHandler,
+  imageHandler,
 };
