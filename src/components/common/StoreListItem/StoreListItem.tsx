@@ -42,12 +42,12 @@ function StoreListItem({
         <S.ListItemStars>
           {reviewCount !== 0 ? (
             <>
-              <Star isFilled />
+              <Star size="sm" isFilled />
               <Text css={S.ratingTextStyle}>{rating.toFixed(1)}</Text>
             </>
           ) : (
             <>
-              <Star />
+              <Star size="sm" />
               <Text css={S.subTextStyle}>{getRandomEmptyReviewMessage()}</Text>
             </>
           )}
