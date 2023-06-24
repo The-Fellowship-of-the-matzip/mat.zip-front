@@ -16,6 +16,7 @@ export const ENDPOINTS = {
     `/restaurants/${restaurantId}/reviews/${articleId}`,
   STORE_REQUESTS: (campusId: CampusId) =>
     `/campuses/${campusId}/restaurantDemands`,
+  IMAGE_UPLOAD: "/images",
 } as const;
 
 export const NETWORK = {

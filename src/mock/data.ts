@@ -161,6 +161,7 @@ export const reviews: Review[] = [
       "교촌 레드 너무 맛있어요. 그런데 레드 말고 다른 맛은 잘 모르겠어요, 그런데 레드가 너무 맛있으니까 또 먹으러 가고 싶은 것 같기도 하고 아닌 것 같기도 하고 잘 모르겠네요.",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
+    imageUrl: null,
     updatable: false,
   },
   {
@@ -174,6 +175,8 @@ export const reviews: Review[] = [
     },
     content: "정말 맛있어요!!",
     rating: 5,
+    imageUrl:
+      "https://ak-d.tripcdn.com/images/1mj2y12000ahpms1c8A29_C_800_600_R5.jpg_.webp?proc=autoorient",
     menu: "무 닭볶음탕 (중)",
     updatable: false,
   },
@@ -189,6 +192,7 @@ export const reviews: Review[] = [
     content: "걍 그럼",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
+    imageUrl: null,
     updatable: false,
   },
   {
@@ -203,6 +207,8 @@ export const reviews: Review[] = [
     content: "정말 맛있어요!!",
     rating: 5,
     menu: "무 닭볶음탕 (중)",
+    imageUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     updatable: false,
   },
   {
@@ -217,6 +223,8 @@ export const reviews: Review[] = [
     content: "걍 그럼",
     rating: 3,
     menu: "무 닭볶음탕 (중)",
+    imageUrl:
+      "https://ak-d.tripcdn.com/images/1mj2y12000ahpms1c8A29_C_800_600_R5.jpg_.webp?proc=autoorient",
     updatable: false,
   },
   {
@@ -231,6 +239,7 @@ export const reviews: Review[] = [
     content: "정말 맛있어요!!",
     rating: 5,
     menu: "무 닭볶음탕 (중)",
+    imageUrl: null,
     updatable: false,
   },
 ];
