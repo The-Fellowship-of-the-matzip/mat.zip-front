@@ -12,8 +12,7 @@ export const useImageUpload = (url: null | string = null) => {
 
     try {
       const image = e.target.files[0];
-      const data = await sendImageUploadPostRequest(image);
-      const imageUrl = data?.imageUrl;
+      const { imageUrl } = await sendImageUploadPostRequest(image);
       setUploadedImageUrl(imageUrl);
     } catch (error) {
       alert("이미지 업로드에 실패했습니다.");
