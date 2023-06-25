@@ -5,12 +5,12 @@ import styled, { css } from "styled-components";
 const getSizeStyling = (size: Required<HeartProps>["size"]) => {
   const style = {
     md: css`
-      width: "24px";
-      height: "24px";
+      width: 24px;
+      height: 24px;
     `,
     sm: css`
-      width: "20px";
-      height: "20px";
+      width: 20px;
+      height: 20px;
     `,
   };
 

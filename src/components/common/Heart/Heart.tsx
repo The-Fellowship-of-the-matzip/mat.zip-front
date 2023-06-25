@@ -9,7 +9,7 @@ export interface HeartProps extends PropsWithChildren<{}> {
   size?: HeartSize;
 }
 
-function Star({ isFilled = false, size = "md" }: HeartProps) {
+function Heart({ isFilled = false, size = "md" }: HeartProps) {
   return (
     <S.Heart
       size={size}
@@ -35,4 +35,4 @@ function Star({ isFilled = false, size = "md" }: HeartProps) {
   );
 }
 
-export default Star;
+export default Heart;
