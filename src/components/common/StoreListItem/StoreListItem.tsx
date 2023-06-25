@@ -32,8 +32,6 @@ function StoreListItem({
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
-  console.log(saved);
-
   return (
     <S.ListItemContainer
       onClick={() => {

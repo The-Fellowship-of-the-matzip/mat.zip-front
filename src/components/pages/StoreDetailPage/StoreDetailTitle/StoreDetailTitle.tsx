@@ -6,13 +6,22 @@ import repeatComponent from "util/repeatComponent";
 import { campusContext } from "context/CampusContextProvider";
 
 import Heading from "components/common/Heading/Heading";
+import Heart from "components/common/Heart/Heart";
 import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle.style";
 
 function StoreDetailTitle({
-  storeInfo: { name, rating, reviewCount, address, distance, kakaoMapUrl },
+  storeInfo: {
+    name,
+    rating,
+    reviewCount,
+    address,
+    distance,
+    kakaoMapUrl,
+    saved,
+  },
 }: {
   storeInfo: Store;
 }) {
@@ -21,6 +30,9 @@ function StoreDetailTitle({
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
+      <S.BookmarkIconWrapper>
+        {saved ? <Heart isFilled /> : <Heart />}
+      </S.BookmarkIconWrapper>
       <S.RatingContainer>
         <S.RatingWrapper>
           {rating > 0 ? (

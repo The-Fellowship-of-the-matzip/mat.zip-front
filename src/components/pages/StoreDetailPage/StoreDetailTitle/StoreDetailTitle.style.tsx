@@ -6,6 +6,11 @@ export const TitleContainer = styled.div`
   flex-direction: column;
 `;
 
+export const BookmarkIconWrapper = styled.div`
+  position: absolute;
+  right: ${({ theme }) => theme.spacer.spacing3}; ;
+`;
+
 export const RatingContainer = styled.div`
   width: 100%;
   margin-top: ${({ theme }) => theme.spacer.spacing2};
