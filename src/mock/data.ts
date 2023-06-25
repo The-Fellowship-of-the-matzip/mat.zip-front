@@ -12,6 +12,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 34,
+    saved: false,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 12,
+    saved: true,
   },
   {
     id: 3,
@@ -36,6 +38,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 5,
+    saved: true,
   },
   {
     id: 4,
@@ -48,6 +51,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 3,
+    saved: false,
   },
   {
     id: 5,
@@ -60,6 +64,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 0,
     reviewCount: 0,
+    saved: false,
   },
   {
     id: 6,
@@ -72,6 +77,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 1.5,
     reviewCount: 12,
+    saved: true,
   },
   {
     id: 7,
@@ -84,6 +90,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 5,
     reviewCount: 9,
+    saved: true,
   },
   {
     id: 8,
@@ -96,6 +103,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 0,
+    saved: true,
   },
   {
     id: 9,
@@ -108,6 +116,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 6,
+    saved: false,
   },
   {
     id: 10,
@@ -120,6 +129,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 4,
+    saved: true,
   },
   {
     id: 11,
@@ -132,6 +142,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 3,
+    saved: false,
   },
   {
     id: 12,
@@ -144,6 +155,7 @@ export const stores: Store[] = [
     kakaoMapUrl: "https://place.map.kakao.com/18283045",
     rating: 3,
     reviewCount: 5,
+    saved: true,
   },
 ];
 
