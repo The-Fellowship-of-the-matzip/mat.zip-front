@@ -7,3 +7,4 @@ export { default as StoreDetailPage } from "components/pages/StoreDetailPage/Sto
 export { default as StoreDemandPage } from "components/pages/StoreDemandPage/StoreDemandPage";
 export { default as MypagePage } from "components/pages/MypagePage/MypagePage";
 export { default as BookmarkListPage } from "components/pages/MypagePage/BookmarkListPage/BookmarkListPage";
+export { default as MyReviewListPage } from "components/pages/MypagePage/MyReviewListPage/MyReviewListPage";

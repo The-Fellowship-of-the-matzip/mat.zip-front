@@ -43,14 +43,10 @@ function MypagePage() {
     }
   );
 
-  const { data: myReviewData } = useQuery(
-    "myReview",
-    () => fetchUserReviewList(),
-    {
-      retry: NETWORK.RETRY_COUNT,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: myReviewData } = useQuery("myReview", fetchUserReviewList, {
+    retry: NETWORK.RETRY_COUNT,
+    refetchOnWindowFocus: false,
+  });
 
   const myReviews = myReviewData?.reviews ?? [];
 

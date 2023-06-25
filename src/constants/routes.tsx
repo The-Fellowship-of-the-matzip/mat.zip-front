@@ -8,6 +8,7 @@ import {
   StoreDemandPage,
   MypagePage,
   BookmarkListPage,
+  MyReviewListPage,
 } from "components/pages";
 
 export const PATHNAME = {
@@ -45,6 +46,10 @@ const MAIN_ROUTES = {
   BOOKMARK_LIST_PAGE: {
     path: PATHNAME.BOOKMARK_LIST_PAGE,
     element: <BookmarkListPage />,
+  },
+  MY_REVIEWS: {
+    path: PATHNAME.MY_REVIEWS,
+    element: <MyReviewListPage />,
   },
 } as const;
 
