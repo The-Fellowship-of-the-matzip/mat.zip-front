@@ -38,3 +38,10 @@ export const EmptyList = styled.div`
   color: ${({ theme }) => theme.color.gray600};
   text-align: center;
 `;
+
+export const ReviewItemWrapper = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacer.spacing3};
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacer.spacing3};
+`;

@@ -19,6 +19,7 @@ export const PATHNAME = {
   STORE_DEMAND: "store-demand",
   MY_PAGE: "/my-page",
   BOOKMARK_LIST_PAGE: "/my-page/bookmark",
+  MY_REVIEWS: "/my-page/reviews",
   WILD_CARD: "*",
 } as const;
 

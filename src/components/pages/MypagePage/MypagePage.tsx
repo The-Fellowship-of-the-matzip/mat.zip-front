@@ -1,3 +1,4 @@
+import MyReviewItem from "./MyReviewItem/MyReviewItem";
 import * as S from "./MypagePage.style";
 import UserProfile from "./UserProfile/UserProfile";
 import { MdArrowBackIos } from "react-icons/md";
@@ -11,6 +12,7 @@ import { RightIcon } from "asset";
 
 import fetchBookmarkList from "api/bookmark/fetchBookmarkList";
 import fetchUserProfile from "api/mypage/fetchUserProfile";
+import fetchUserReviewList from "api/mypage/fetchUserReviewList";
 
 import Divider from "components/common/Divider/Divider";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
@@ -40,6 +42,17 @@ function MypagePage() {
       refetchOnWindowFocus: false,
     }
   );
+
+  const { data: myReviewData } = useQuery(
+    "myReview",
+    () => fetchUserReviewList(),
+    {
+      retry: NETWORK.RETRY_COUNT,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const myReviews = myReviewData?.reviews ?? [];
 
   if (!profileData) return null;
 
@@ -74,6 +87,27 @@ function MypagePage() {
         ) : (
           <S.EmptyList>
             <Text size="sm">저장된 맛집이 없습니다</Text>
+          </S.EmptyList>
+        )}
+      </section>
+      <section>
+        <S.SectionHeaderWrapper>
+          <SectionHeader>나의 리뷰</SectionHeader>
+          <S.ShowAllLink to={PATHNAME.MY_REVIEWS}>
+            <Text size="sm">전체보기</Text>
+            <RightIcon />
+          </S.ShowAllLink>
+        </S.SectionHeaderWrapper>
+        {myReviews.length > 0 ? (
+          myReviews.slice(0, SIZE.MY_PAGE_ITEM).map((review) => (
+            <S.ReviewItemWrapper>
+              <MyReviewItem key={review.id} {...review} />
+              <Divider />
+            </S.ReviewItemWrapper>
+          ))
+        ) : (
+          <S.EmptyList>
+            <Text size="sm">작성한 리뷰가 없습니다</Text>
           </S.EmptyList>
         )}
       </section>
