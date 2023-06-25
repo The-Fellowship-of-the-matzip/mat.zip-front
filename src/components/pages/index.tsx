@@ -5,3 +5,5 @@ export { default as Login } from "components/pages/Login/Login";
 export { default as SearchResultPage } from "components/pages/SearchResultPage/SearchResultPage";
 export { default as StoreDetailPage } from "components/pages/StoreDetailPage/StoreDetailPage";
 export { default as StoreDemandPage } from "components/pages/StoreDemandPage/StoreDemandPage";
+export { default as MypagePage } from "components/pages/MypagePage/MypagePage";
+export { default as BookmarkListPage } from "components/pages/BookmarkListPage/BookmarkListPage";

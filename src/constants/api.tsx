@@ -16,6 +16,9 @@ export const ENDPOINTS = {
     `/restaurants/${restaurantId}/reviews/${articleId}`,
   STORE_REQUESTS: (campusId: CampusId) =>
     `/campuses/${campusId}/restaurantDemands`,
+  USER_PROFILE: "/mypage/profile",
+  USER_REVIEWS: "/mypage/reviews",
+  BOOKMARKS: "/restaurants/bookmarks",
 } as const;
 
 export const NETWORK = {
@@ -26,6 +29,7 @@ export const SIZE = {
   REVIEW: 5,
   LIST_ITEM: 10,
   RANDOM_ITEM: 5,
+  MY_PAGE_ITEM: 3,
 } as const;
 
 export const FILTERS = [
