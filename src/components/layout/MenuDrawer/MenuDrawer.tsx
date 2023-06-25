@@ -74,6 +74,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
             <Button variant="textButton" onClick={handleLogout}>
               로그아웃
             </Button>
+            <S.CustomLink to={PATHNAME.MY_PAGE}>마이페이지</S.CustomLink>
           </>
         ) : (
           <>
