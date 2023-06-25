@@ -5,20 +5,20 @@ import styled, { css } from "styled-components";
 const getSizeStyling = (size: Required<StarProps>["size"]) => {
   const style = {
     lg: css`
-      width: "32px";
-      height: "32px";
+      width: 32px;
+      height: 32px;
     `,
     md: css`
-      width: "24px";
-      height: "24px";
+      width: 24px;
+      height: 24px;
     `,
     sm: css`
-      width: "20px";
-      height: "20px";
+      width: 20px;
+      height: 20px;
     `,
     xs: css`
-      width: "16px";
-      height: "16px";
+      width: 16px;
+      height: 16px;
     `,
   };
 
