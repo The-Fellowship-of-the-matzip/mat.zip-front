@@ -21,6 +21,7 @@ function StoreList({ stores }: StoreListProps) {
             distance={store.distance}
             rating={store.rating}
             reviewCount={store.reviewCount}
+            saved={store.saved}
           />
           <Divider />
         </Fragment>

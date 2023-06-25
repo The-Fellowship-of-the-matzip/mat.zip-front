@@ -1,6 +1,8 @@
+import Heart from "../Heart/Heart";
 import Text from "../Text/Text";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import type { Store } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
 
 import { PATHNAME } from "constants/routes";
@@ -10,13 +12,12 @@ import { campusContext } from "context/CampusContextProvider";
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
 
-interface StoreListItemProps {
-  id: number;
+interface StoreListItemProps
+  extends Pick<
+    Store,
+    "id" | "name" | "distance" | "rating" | "reviewCount" | "saved"
+  > {
   thumbnailUrl: string;
-  name: string;
-  distance: number;
-  rating: number;
-  reviewCount: number;
 }
 
 function StoreListItem({
@@ -26,9 +27,12 @@ function StoreListItem({
   distance,
   rating,
   reviewCount,
+  saved,
 }: StoreListItemProps) {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
+
+  console.log(saved);
 
   return (
     <S.ListItemContainer
@@ -56,6 +60,9 @@ function StoreListItem({
           {campusName} 캠퍼스 기준 도보 {distance}분
         </Text>
       </S.ListItemTextContainer>
+      <S.ListItemBookmark>
+        {saved ? <Heart size="sm" isFilled /> : <Heart size="sm" />}
+      </S.ListItemBookmark>
     </S.ListItemContainer>
   );
 }

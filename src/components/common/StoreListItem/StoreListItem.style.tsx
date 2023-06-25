@@ -22,6 +22,7 @@ export const ListItemThumbnail = styled(Image)`
 `;
 
 export const ListItemTextContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacer.spacing1};
@@ -37,6 +38,10 @@ export const ListItemStars = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacer.spacing2};
+`;
+
+export const ListItemBookmark = styled.div`
+  width: 2rem;
 `;
 
 export const ratingTextStyle = css`
