@@ -1,3 +1,4 @@
+import { FetchParamProps } from "types/apiTypes";
 import type { UserReview } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
@@ -9,14 +10,14 @@ interface UserReviewResponse {
   reviews: UserReview[];
 }
 
-const fetchUserReviewList = async (pageParam = 0) => {
+const fetchUserReviewList = async ({ pageParam = 0 }: FetchParamProps) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
     window.sessionStorage.removeItem(ACCESS_TOKEN);
     window.alert("다시 로그인 해주세요");
     window.location.href = "/";
-    return;
+    throw new Error("엑세스토큰이 유효하지 않습니다");
   }
 
   const { data } = await axiosInstance.get<UserReviewResponse>(
