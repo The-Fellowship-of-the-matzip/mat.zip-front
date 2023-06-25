@@ -9,6 +9,8 @@ import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
+import { useBookmark } from "hooks/useBookmark";
+
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
 
@@ -29,6 +31,7 @@ function StoreListItem({
   reviewCount,
   saved,
 }: StoreListItemProps) {
+  const { bookmark, handleBookmark } = useBookmark(id, saved);
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
@@ -58,8 +61,8 @@ function StoreListItem({
           {campusName} 캠퍼스 기준 도보 {distance}분
         </Text>
       </S.ListItemTextContainer>
-      <S.ListItemBookmark>
-        {saved ? <Heart size="sm" isFilled /> : <Heart size="sm" />}
+      <S.ListItemBookmark onClick={handleBookmark}>
+        {bookmark ? <Heart size="sm" isFilled /> : <Heart size="sm" />}
       </S.ListItemBookmark>
     </S.ListItemContainer>
   );

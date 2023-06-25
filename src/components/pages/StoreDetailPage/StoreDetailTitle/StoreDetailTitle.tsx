@@ -5,6 +5,8 @@ import repeatComponent from "util/repeatComponent";
 
 import { campusContext } from "context/CampusContextProvider";
 
+import { useBookmark } from "hooks/useBookmark";
+
 import Heading from "components/common/Heading/Heading";
 import Heart from "components/common/Heart/Heart";
 import Star from "components/common/Star/Star";
@@ -14,6 +16,7 @@ import * as S from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetai
 
 function StoreDetailTitle({
   storeInfo: {
+    id,
     name,
     rating,
     reviewCount,
@@ -25,13 +28,14 @@ function StoreDetailTitle({
 }: {
   storeInfo: Store;
 }) {
+  const { bookmark, handleBookmark } = useBookmark(id, saved);
   const campus = useContext(campusContext);
 
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
-      <S.BookmarkIconWrapper>
-        {saved ? <Heart isFilled /> : <Heart />}
+      <S.BookmarkIconWrapper onClick={handleBookmark}>
+        {bookmark ? <Heart isFilled /> : <Heart />}
       </S.BookmarkIconWrapper>
       <S.RatingContainer>
         <S.RatingWrapper>
