@@ -6,6 +6,7 @@ import {
   restaurantHandler,
   reviewHandler,
   storeRequestHandler,
+  bookmarkHandler,
 } from "mock/handlers";
 
 export const worker = setupWorker(
@@ -13,5 +14,6 @@ export const worker = setupWorker(
   ...categoryHandler,
   ...restaurantHandler,
   ...reviewHandler,
-  ...storeRequestHandler
+  ...storeRequestHandler,
+  ...bookmarkHandler
 );
