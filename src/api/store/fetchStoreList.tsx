@@ -1,7 +1,7 @@
 import { FetchParamProps } from "types/apiTypes";
 import { CampusId, Store } from "types/common";
 
-import { ENDPOINTS } from "constants/api";
+import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
@@ -33,6 +33,7 @@ const generateParams = (propObject: GenerateParamsProps) =>
   );
 
 const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
+  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
   const params = generateParams({
     page: pageParam,
@@ -43,10 +44,20 @@ const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
     name,
   });
 
+  const nonUserFetchOptions = { params };
+
+  const userFetchOptions = {
+    ...nonUserFetchOptions,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  };
+
   const { data } = await axiosInstance.get<CategoryStoreListResponse>(
     ENDPOINTS.STORE_LIST(campusId, type),
-    { params }
+    accessToken === null ? nonUserFetchOptions : userFetchOptions
   );
+
   return { ...data, nextPageParam: pageParam + 1 };
 };
 
