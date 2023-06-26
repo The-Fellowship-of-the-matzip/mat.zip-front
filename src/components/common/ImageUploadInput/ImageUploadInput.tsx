@@ -17,8 +17,9 @@ function ImageUploadInput({
 }: ImageUploadInputProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const uploadButtonClick = () => {
+  const handleUploadButton = () => {
     if (!inputRef.current) return;
+
     inputRef.current.click();
   };
 
@@ -30,7 +31,7 @@ function ImageUploadInput({
           css={S.buttonStyle}
           type="button"
           className={imageUrl ? "uploaded" : ""}
-          onClick={uploadButtonClick}
+          onClick={handleUploadButton}
         >
           <ImageIcon />
           {!imageUrl && " 이미지를 업로드해 주세요"}
