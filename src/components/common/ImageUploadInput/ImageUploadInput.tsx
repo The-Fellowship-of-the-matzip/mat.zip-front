@@ -3,17 +3,19 @@ import { Label } from "../Label/Label.style";
 import * as S from "./ImageUploadInput.style";
 import { useRef } from "react";
 
-import { ImageIcon } from "asset";
+import { CloseIcon, ImageIcon } from "asset";
 
 interface ImageUploadInputProps {
   label?: string;
   imageUrl: string | null;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemove: () => void;
 }
 function ImageUploadInput({
   label,
   imageUrl,
   onChange,
+  onRemove,
 }: ImageUploadInputProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -28,7 +30,7 @@ function ImageUploadInput({
       {label && <Label id="image-upload">{label}</Label>}
       <S.InputWrapper>
         <Button
-          css={S.buttonStyle}
+          css={S.uploadButtonStyle}
           type="button"
           className={imageUrl ? "uploaded" : ""}
           onClick={handleUploadButton}
@@ -44,7 +46,18 @@ function ImageUploadInput({
           ref={inputRef}
           onChange={onChange}
         />
-        {imageUrl && <S.UploadedImage src={imageUrl} alt="리뷰 이미지" />}
+        {imageUrl && (
+          <S.UploadedImageWrapper>
+            <S.UploadedImage src={imageUrl} alt="리뷰 이미지" />
+            <S.DeleteButton
+              type="button"
+              aria-label="이미지 삭제"
+              onClick={onRemove}
+            >
+              <CloseIcon />
+            </S.DeleteButton>
+          </S.UploadedImageWrapper>
+        )}
       </S.InputWrapper>
     </S.Container>
   );

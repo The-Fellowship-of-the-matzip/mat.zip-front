@@ -17,6 +17,11 @@ export const Input = styled.input`
   display: none;
 `;
 
+export const UploadedImageWrapper = styled.div`
+  position: relative;
+  height: 10rem;
+`;
+
 export const UploadedImage = styled.img`
   width: 10rem;
   height: 10rem;
@@ -24,7 +29,33 @@ export const UploadedImage = styled.img`
   border-radius: ${({ theme }) => theme.borderRadius.small};
 `;
 
-export const buttonStyle = css`
+export const DeleteButton = styled.button`
+  position: absolute;
+  right: 0;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 0;
+  background-color: ${({ theme }) => theme.color.gray800};
+  border: none;
+  border-radius: ${({ theme }) => theme.borderRadius.small};
+  outline: 0;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.black};
+  }
+
+  & svg {
+    width: 12px;
+    height: 12px;
+
+    & > path {
+      stroke: ${({ theme }) => theme.color.white};
+    }
+  }
+`;
+
+export const uploadButtonStyle = css`
   height: 10rem;
 
   display: flex;
@@ -37,6 +68,6 @@ export const buttonStyle = css`
   transition-property: background-color, border, outline !important;
 
   &.uploaded {
-    width: 10rem;
+    display: none;
   }
 `;

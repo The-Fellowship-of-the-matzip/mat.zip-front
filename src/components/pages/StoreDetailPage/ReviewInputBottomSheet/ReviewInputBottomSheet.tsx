@@ -38,7 +38,8 @@ function ReviewInputBottomSheet({
   const [rating, setRating] = useState(DEFAULT_RATING);
   const [reviewContent, setReviewContent] = useState("");
   const [menuInput, setMenuInput] = useState("");
-  const { uploadedImageUrl, changeUploadedImage } = useImageUpload();
+  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
+    useImageUpload();
 
   const { logout } = useLogin();
 
@@ -128,7 +129,8 @@ function ReviewInputBottomSheet({
         <ImageUploadInput
           label="이미지 업로드"
           imageUrl={uploadedImageUrl}
-          onChange={changeUploadedImage}
+          onChange={handleImageUpload}
+          onRemove={handleImageRemoval}
         />
         <Button variant="primary">제출</Button>
       </S.Form>

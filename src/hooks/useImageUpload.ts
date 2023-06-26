@@ -5,9 +5,7 @@ import sendImageUploadPostRequest from "api/image/sendImageUploadPostRequest";
 export const useImageUpload = (url: null | string = null) => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState(url);
 
-  const changeUploadedImage = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
     try {
@@ -19,5 +17,9 @@ export const useImageUpload = (url: null | string = null) => {
     }
   };
 
-  return { uploadedImageUrl, changeUploadedImage };
+  const handleImageRemoval = () => {
+    setUploadedImageUrl(null);
+  };
+
+  return { uploadedImageUrl, handleImageUpload, handleImageRemoval };
 };

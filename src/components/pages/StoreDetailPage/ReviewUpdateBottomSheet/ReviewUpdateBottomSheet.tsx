@@ -45,9 +45,8 @@ function ReviewUpdateBottomSheet({
     defaultReviewItem.content
   );
   const [menu, setMenu] = useState<string>(defaultReviewItem.menu);
-  const { uploadedImageUrl, changeUploadedImage } = useImageUpload(
-    defaultReviewItem.imageUrl
-  );
+  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
+    useImageUpload(defaultReviewItem.imageUrl);
 
   const { logout } = useLogin();
 
@@ -143,7 +142,8 @@ function ReviewUpdateBottomSheet({
         <ImageUploadInput
           label="이미지 업로드"
           imageUrl={uploadedImageUrl}
-          onChange={changeUploadedImage}
+          onChange={handleImageUpload}
+          onRemove={handleImageRemoval}
         />
         <Button variant="primary">제출</Button>
       </S.Form>
