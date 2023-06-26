@@ -10,10 +10,10 @@ import {
 } from "mock/handlers";
 
 export const worker = setupWorker(
+  ...bookmarkHandler,
   ...userHandler,
   ...categoryHandler,
   ...restaurantHandler,
   ...reviewHandler,
-  ...storeRequestHandler,
-  ...bookmarkHandler
+  ...storeRequestHandler
 );
