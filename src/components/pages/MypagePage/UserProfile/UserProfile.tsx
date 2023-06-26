@@ -22,7 +22,7 @@ function UserProfile({ ...information }: UserProfileProps) {
             별점평균
           </Text>
           <Text css={S.subTextNumberStyle} size="sm">
-            {information.ratingAverage}
+            {information.averageRating}
           </Text>
         </S.ReviewInfoWrapper>
       </S.ContentWrapper>
