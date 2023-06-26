@@ -1,9 +1,12 @@
 import * as S from "./MyReviewItem.style";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { UserReview } from "types/common";
 import repeatComponent from "util/repeatComponent";
+
+import { PATHNAME } from "constants/routes";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
 
@@ -23,6 +26,8 @@ function MyReviewItem({
   rating,
   menu,
 }: UserReview) {
+  const navigate = useNavigate();
+
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
     deleteReviewItem({
       restaurantId: String(restaurant.id),
@@ -35,7 +40,11 @@ function MyReviewItem({
 
   const queryClient = useQueryClient();
 
-  const handleMeatballButtonClick = () => setIsDropBoxOpen((prev) => !prev);
+  const handleMeatballButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setIsDropBoxOpen((prev) => !prev);
+  };
+
   const handleDropBoxClose = () => setIsDropBoxOpen(false);
 
   const handleReviewUpdateClick = () => {
@@ -68,7 +77,11 @@ function MyReviewItem({
           alt={`${restaurant.name} 가게 이미지`}
         />
         <S.ReviewContentWrapper>
-          <S.Header>
+          <S.Header
+            onClick={() => {
+              navigate(`${PATHNAME.STORE_DETAIL}/${restaurant.id}`);
+            }}
+          >
             <Text css={S.titleTextStyle}>{restaurant.name}</Text>
             {updatable && (
               <>

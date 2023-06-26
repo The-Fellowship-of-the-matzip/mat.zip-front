@@ -35,6 +35,7 @@ export const Header = styled.header`
 
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 export const UserReviewInfoWrapper = styled.div`
