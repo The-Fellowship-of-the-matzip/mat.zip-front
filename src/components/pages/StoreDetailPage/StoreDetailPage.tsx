@@ -135,7 +135,7 @@ function StoreDetailPage() {
       >
         <PlusIcon />
       </Button>
-      {!isReviewOpen && (
+      {isReviewOpen && (
         <ReviewInputBottomSheet
           closeSheet={() => setIsReviewOpen(false)}
           restaurantId={restaurantId}
