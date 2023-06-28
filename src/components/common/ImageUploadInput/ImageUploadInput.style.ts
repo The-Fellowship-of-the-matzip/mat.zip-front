@@ -65,8 +65,6 @@ export const uploadButtonStyle = css`
 
   font-weight: normal;
 
-  transition-property: background-color, border, outline !important;
-
   &.uploaded {
     display: none;
   }
