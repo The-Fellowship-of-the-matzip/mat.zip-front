@@ -142,6 +142,7 @@ function ReviewUpdateBottomSheet({
         <ImageUploadInput
           label="이미지 업로드"
           imageUrl={uploadedImageUrl}
+          imageAltText="리뷰 이미지"
           onChange={handleImageUpload}
           onRemove={handleImageRemoval}
         />

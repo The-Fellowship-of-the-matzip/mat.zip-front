@@ -8,12 +8,14 @@ import { CloseIcon, ImageIcon } from "asset";
 interface ImageUploadInputProps {
   label?: string;
   imageUrl: string | null;
+  imageAltText: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onRemove: () => void;
 }
 function ImageUploadInput({
   label,
   imageUrl,
+  imageAltText,
   onChange,
   onRemove,
 }: ImageUploadInputProps) {
@@ -48,7 +50,7 @@ function ImageUploadInput({
         />
         {imageUrl && (
           <S.UploadedImageWrapper>
-            <S.UploadedImage src={imageUrl} alt="리뷰 이미지" />
+            <S.UploadedImage src={imageUrl} alt={imageAltText} />
             <S.DeleteButton
               type="button"
               aria-label="이미지 삭제"
