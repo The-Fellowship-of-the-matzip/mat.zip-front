@@ -88,6 +88,7 @@ function BookmarkMapPage() {
           />
           {positions.map((position) => (
             <EventMapMarker
+              key={position.id}
               position={position.latlng}
               isClicked={position.id === selectedMarker?.id}
               onClick={() => handlePinClick(position.id)}
