@@ -1,6 +1,5 @@
-import { imageHandler } from "./imageHandler";
-
 import { categoryHandler } from "mock/handlers/categoryHandler";
+import { imageHandler } from "mock/handlers/imageHandler";
 import { restaurantHandler } from "mock/handlers/restaurantHandler";
 import { reviewHandler } from "mock/handlers/reviewHandler";
 import { storeDemandHandler } from "mock/handlers/storeDemandHandler";
