@@ -30,7 +30,7 @@ function SlideCarousel({
       className="mySwiper"
       slidesPerView={1}
       spaceBetween={spaceBetween}
-      loop={true}
+      loop
       modules={[Pagination, Navigation]}
       onSlideChangeTransitionEnd={handleSlideChange}
     >
