@@ -34,11 +34,13 @@ export const DeleteButton = styled.button`
   right: 0;
   width: 3.6rem;
   height: 3.6rem;
-  border-radius: 0;
   background-color: ${({ theme }) => theme.color.black};
+
   border: none;
+  border-radius: 0;
   border-top-right-radius: ${({ theme }) => theme.borderRadius.small};
   outline: 0;
+
   transition: all 0.2s ease-in;
 
   &:hover {
