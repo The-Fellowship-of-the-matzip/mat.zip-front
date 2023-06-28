@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookmarkStore, Store } from "types/common";
+import type { BookmarkStore, Store } from "types/common";
 
 export interface Position {
   id: number;
@@ -10,7 +10,11 @@ export interface Position {
   addressName: string;
 }
 
-export const useMap = (stores: Store[] | BookmarkStore[]) => {
+export const useMap = (
+  stores: Store[] | BookmarkStore[],
+  centerPosition: Position["latlng"] // 지도의 중심 위치
+) => {
+  const [center, setCenter] = useState<Position["latlng"]>(centerPosition);
   const [positions, setPositions] = useState<Position[]>([]);
 
   const getPosition = (store: Store | BookmarkStore): Promise<Position> => {
@@ -52,5 +56,5 @@ export const useMap = (stores: Store[] | BookmarkStore[]) => {
     getStorePositions();
   }, [stores]);
 
-  return { positions };
+  return { center, positions, setCenter };
 };

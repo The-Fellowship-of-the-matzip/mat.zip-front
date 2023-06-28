@@ -40,7 +40,10 @@ function BookmarkMapPage() {
 
   const bookmarkedStores = data ?? [];
 
-  const { positions } = useMap(bookmarkedStores);
+  const { center, positions, setCenter } = useMap(
+    bookmarkedStores,
+    CAMPUS_AREA_CENTER_POSITION[campusName!]
+  );
   const [selectedMarker, setSelectedMarker] = useState<Position>();
   const { swiperRef, handleSlideToPosition } = useSlideCarousel();
 
@@ -51,6 +54,7 @@ function BookmarkMapPage() {
   const handleStoreChange = (id: number) => {
     const information = positions.find((store) => store.id === id)!;
     setSelectedMarker(information);
+    setCenter(information.latlng);
   };
 
   const handleInformationSlide = (index: number) => {
@@ -75,7 +79,7 @@ function BookmarkMapPage() {
         {isError && error instanceof Error && (
           <ErrorImage errorMessage={error.message} />
         )}
-        <Map center={CAMPUS_AREA_CENTER_POSITION[campusName as Campus]}>
+        <Map center={center} isPanto>
           <MapMarker
             position={CAMPUS_POSITION[campusName as Campus]}
             image={{
@@ -85,6 +89,7 @@ function BookmarkMapPage() {
                 height: 36,
               },
             }}
+            clickable={false}
           />
           {positions.map((position) => (
             <EventMapMarker
