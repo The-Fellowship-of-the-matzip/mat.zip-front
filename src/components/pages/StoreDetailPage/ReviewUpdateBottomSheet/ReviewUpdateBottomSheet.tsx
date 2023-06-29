@@ -140,6 +140,7 @@ function ReviewUpdateBottomSheet({
           required
         />
         <ImageUploadInput
+          id="image-upload"
           label="이미지 업로드"
           imageUrl={uploadedImageUrl}
           imageAltText="리뷰 이미지"

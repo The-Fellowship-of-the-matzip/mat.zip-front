@@ -1,23 +1,23 @@
 import { Button } from "../Button/Button.style";
 import { Label } from "../Label/Label.style";
 import * as S from "./ImageUploadInput.style";
-import { useRef } from "react";
+import { ComponentPropsWithoutRef, useRef } from "react";
 
 import { CloseIcon, ImageIcon } from "asset";
 
-interface ImageUploadInputProps {
+interface ImageUploadInputProps extends ComponentPropsWithoutRef<"input"> {
   label?: string;
   imageUrl: string | null;
   imageAltText: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onRemove: () => void;
 }
 function ImageUploadInput({
+  id,
   label,
   imageUrl,
   imageAltText,
-  onChange,
   onRemove,
+  ...attributes
 }: ImageUploadInputProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -29,7 +29,7 @@ function ImageUploadInput({
 
   return (
     <S.Container>
-      {label && <Label id="image-upload">{label}</Label>}
+      {label && <Label id={id}>{label}</Label>}
       <S.InputWrapper>
         <Button
           css={S.uploadButtonStyle}
@@ -43,10 +43,9 @@ function ImageUploadInput({
         <S.Input
           type="file"
           accept="image/*"
-          id="image-upload"
-          name="image-upload"
+          id={id}
           ref={inputRef}
-          onChange={onChange}
+          {...attributes}
         />
         {imageUrl && (
           <S.UploadedImageWrapper>
