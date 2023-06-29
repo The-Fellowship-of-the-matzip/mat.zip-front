@@ -10,12 +10,18 @@ interface EventMapMarkerProps {
   onMarkerClick: () => void;
 }
 
+const MARKER_SIZE = {
+  CLICKED: 42,
+  NOT_CLICKED: 36,
+} as const;
+
 function EventMapMarker({
   markerPosition, // 마커를 표시할 위치 - 경도, 위도
   isMarkerClicked, // 마커가 클릭 여부
   onMarkerClick, // 마커가 클릭되었을 때 발생할 액션
 }: EventMapMarkerProps) {
   const icon = isMarkerClicked ? ClickedPinIcon : PinIcon;
+  const size = isMarkerClicked ? MARKER_SIZE.CLICKED : MARKER_SIZE.NOT_CLICKED;
 
   return (
     <MapMarker
@@ -24,8 +30,8 @@ function EventMapMarker({
       image={{
         src: icon,
         size: {
-          width: 36,
-          height: 36,
+          width: size,
+          height: size,
         },
       }}
       zIndex={isMarkerClicked ? theme.zIndex.overlay : 1}
