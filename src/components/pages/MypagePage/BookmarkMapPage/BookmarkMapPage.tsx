@@ -72,7 +72,7 @@ function BookmarkMapPage() {
     <>
       <S.HeaderWrapper>
         <LeftIcon onClick={() => navigate(-1)} />
-        <Text css={S.headerStyle}>지도</Text>
+        <Text css={S.headerStyle}>나의 맛집 지도</Text>
       </S.HeaderWrapper>
       <S.MapWrapper>
         {(isLoading || isFetching) && <Spinner />}
