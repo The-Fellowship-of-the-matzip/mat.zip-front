@@ -11,6 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Textarea = styled.textarea<TextareaProps>`
+  max-height: 100%;
   min-height: 16rem;
   background-color: ${({ theme }) => theme.color.gray100};
   color: ${({ theme }) => theme.color.gray800};
