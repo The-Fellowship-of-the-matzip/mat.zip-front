@@ -5,43 +5,43 @@ import sendBookmarkDeleteRequest from "api/bookmark/sendBookmarkDeleteRequest";
 import sendBookmarkPostRequest from "api/bookmark/sendBookmarkPostRequest";
 
 export const useBookmark = (restaurantId: number, liked: boolean) => {
-  const [bookmark, setBookmark] = useState(liked);
+  const [marked, setMarked] = useState(liked);
   const [tmpMark, setTmpMark] = useState(liked);
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      return setBookmark(tmpMark);
+      return setMarked(tmpMark);
     }, 200);
     return () => clearTimeout(debounce);
   }, [tmpMark]);
 
   useEffect(() => {
     const fetchBookmark = async () => {
-      bookmark ? deleteBookmark.mutate() : postBookmark.mutate();
+      marked ? deleteBookmark.mutate() : postBookmark.mutate();
     };
     if (tmpMark !== liked) fetchBookmark();
-  }, [bookmark]);
+  }, [marked]);
 
   const deleteBookmark = useMutation(sendBookmarkDeleteRequest(restaurantId), {
-    onMutate: () => ({ prevBookmark: bookmark }),
+    onMutate: () => ({ prevMarked: marked }),
     onError: (err, _, context) => {
       alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-      setBookmark(context?.prevBookmark!);
+      setMarked(context?.prevMarked!);
     },
   });
 
   const postBookmark = useMutation(sendBookmarkPostRequest(restaurantId), {
-    onMutate: () => ({ prevBookmark: bookmark }),
+    onMutate: () => ({ prevMarked: marked }),
     onError: (err, _, context) => {
       alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-      setBookmark(context?.prevBookmark!);
+      setMarked(context?.prevMarked!);
     },
   });
 
-  const handleBookmark = (event: MouseEvent<HTMLDivElement>) => {
+  const handleMarked = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    setTmpMark((prevMark) => !prevMark);
+    setTmpMark((prevTmpMark) => !prevTmpMark);
   };
 
-  return { bookmark, handleBookmark };
+  return { marked, handleMarked };
 };

@@ -5,7 +5,7 @@ import repeatComponent from "util/repeatComponent";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import { useBookmark } from "hooks/useBookmark";
+import { useBookmark } from "hooks/useMarked";
 
 import Heading from "components/common/Heading/Heading";
 import Heart from "components/common/Heart/Heart";
@@ -28,14 +28,14 @@ function StoreDetailTitle({
 }: {
   storeInfo: Store;
 }) {
-  const { bookmark, handleBookmark } = useBookmark(id, liked);
+  const { marked, handleMarked } = useBookmark(id, liked);
   const campus = useContext(campusContext);
 
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
-      <S.BookmarkIconWrapper onClick={handleBookmark}>
-        {bookmark ? <Heart isFilled /> : <Heart />}
+      <S.BookmarkIconWrapper onClick={handleMarked}>
+        {marked ? <Heart isFilled /> : <Heart />}
       </S.BookmarkIconWrapper>
       <S.RatingContainer>
         <S.RatingWrapper>
