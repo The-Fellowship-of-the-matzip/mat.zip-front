@@ -38,7 +38,7 @@ export const useBookmark = (restaurantId: number, liked: boolean) => {
     },
   });
 
-  const handleMarked = (event: MouseEvent<HTMLDivElement>) => {
+  const handleMarked = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setTmpMark((prevTmpMark) => !prevTmpMark);
   };
