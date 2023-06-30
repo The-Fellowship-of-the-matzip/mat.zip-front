@@ -6,7 +6,7 @@ import {
   SearchResultPage,
   StoreDetailPage,
   StoreDemandPage,
-  MypagePage,
+  MyPage,
   BookmarkListPage,
   MyReviewListPage,
 } from "components/pages";
@@ -41,7 +41,7 @@ const MAIN_ROUTES = {
   },
   MY_PAGE: {
     path: PATHNAME.MY_PAGE,
-    element: <MypagePage />,
+    element: <MyPage />,
   },
   BOOKMARK_LIST_PAGE: {
     path: PATHNAME.BOOKMARK_LIST_PAGE,

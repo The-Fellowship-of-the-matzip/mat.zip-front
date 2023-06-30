@@ -1,5 +1,5 @@
+import * as S from "./MyPage.style";
 import MyReviewItem from "./MyReviewItem/MyReviewItem";
-import * as S from "./MypagePage.style";
 import UserProfile from "./UserProfile/UserProfile";
 import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
@@ -21,7 +21,7 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 import Text from "components/common/Text/Text";
 
-function MypagePage() {
+function MyPage() {
   const navigate = useNavigate();
 
   const {
@@ -111,4 +111,4 @@ function MypagePage() {
   );
 }
 
-export default MypagePage;
+export default MyPage;
