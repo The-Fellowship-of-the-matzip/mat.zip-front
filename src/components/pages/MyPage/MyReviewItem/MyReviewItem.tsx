@@ -61,6 +61,12 @@ function MyReviewItem({
     }
   };
 
+  const handleReviewModalClick = () => {
+    queryClient.invalidateQueries([
+      "reviewDetailStore",
+      { restaurantId: restaurant.id },
+    ]);
+  };
   const reviewInfo = {
     id: String(id),
     restaurantId: String(restaurant.id),
@@ -141,12 +147,7 @@ function MyReviewItem({
         <ReviewUpdateBottomSheet
           closeSheet={() => setIsBottomSheetOpen(false)}
           defaultReviewItem={reviewInfo}
-          onSuccess={() => {
-            queryClient.invalidateQueries([
-              "reviewDetailStore",
-              { restaurantId: restaurant.id },
-            ]);
-          }}
+          onSuccess={handleReviewModalClick}
         />
       )}
     </>
