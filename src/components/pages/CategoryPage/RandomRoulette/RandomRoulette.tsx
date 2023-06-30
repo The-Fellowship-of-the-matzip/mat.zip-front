@@ -96,7 +96,7 @@ function RandomRoulette({ campusId }: Props) {
             distance={result.distance}
             rating={result.rating}
             reviewCount={result.reviewCount}
-            saved={result.saved}
+            liked={result.liked}
           />
         </S.ResultWrapper>
       )}

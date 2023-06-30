@@ -17,7 +17,7 @@ import * as S from "components/common/StoreListItem/StoreListItem.style";
 interface StoreListItemProps
   extends Pick<
     Store,
-    "id" | "name" | "distance" | "rating" | "reviewCount" | "saved"
+    "id" | "name" | "distance" | "rating" | "reviewCount" | "liked"
   > {
   thumbnailUrl: string;
 }
@@ -29,9 +29,9 @@ function StoreListItem({
   distance,
   rating,
   reviewCount,
-  saved,
+  liked,
 }: StoreListItemProps) {
-  const { bookmark, handleBookmark } = useBookmark(id, saved);
+  const { bookmark, handleBookmark } = useBookmark(id, liked);
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 

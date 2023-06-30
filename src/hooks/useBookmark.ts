@@ -4,8 +4,8 @@ import { useMutation } from "react-query";
 import sendBookmarkDeleteRequest from "api/bookmark/sendBookmarkDeleteRequest";
 import sendBookmarkPostRequest from "api/bookmark/sendBookmarkPostRequest";
 
-export const useBookmark = (restaurantId: number, saved: boolean) => {
-  const [bookmark, setBookmark] = useState(saved);
+export const useBookmark = (restaurantId: number, liked: boolean) => {
+  const [bookmark, setBookmark] = useState(liked);
 
   const deleteBookmark = useMutation(sendBookmarkDeleteRequest(restaurantId), {
     onMutate: () => ({ prevBookmark: bookmark }),

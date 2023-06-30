@@ -23,12 +23,12 @@ function StoreDetailTitle({
     address,
     distance,
     kakaoMapUrl,
-    saved,
+    liked,
   },
 }: {
   storeInfo: Store;
 }) {
-  const { bookmark, handleBookmark } = useBookmark(id, saved);
+  const { bookmark, handleBookmark } = useBookmark(id, liked);
   const campus = useContext(campusContext);
 
   return (
