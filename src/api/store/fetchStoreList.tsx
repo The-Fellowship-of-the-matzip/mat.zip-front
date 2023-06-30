@@ -55,7 +55,7 @@ const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
 
   const { data } = await axiosInstance.get<CategoryStoreListResponse>(
     ENDPOINTS.STORE_LIST(campusId, type),
-    accessToken === null ? nonUserFetchOptions : userFetchOptions
+    accessToken ? userFetchOptions : nonUserFetchOptions
   );
 
   return { ...data, nextPageParam: pageParam + 1 };

@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 
 import sendBookmarkDeleteRequest from "api/bookmark/sendBookmarkDeleteRequest";
@@ -6,6 +6,21 @@ import sendBookmarkPostRequest from "api/bookmark/sendBookmarkPostRequest";
 
 export const useBookmark = (restaurantId: number, liked: boolean) => {
   const [bookmark, setBookmark] = useState(liked);
+  const [tmpMark, setTmpMark] = useState(liked);
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      return setBookmark(tmpMark);
+    }, 200);
+    return () => clearTimeout(debounce);
+  }, [tmpMark]);
+
+  useEffect(() => {
+    const fetchBookmark = async () => {
+      bookmark ? deleteBookmark.mutate() : postBookmark.mutate();
+    };
+    if (tmpMark !== liked) fetchBookmark();
+  }, [bookmark]);
 
   const deleteBookmark = useMutation(sendBookmarkDeleteRequest(restaurantId), {
     onMutate: () => ({ prevBookmark: bookmark }),
@@ -23,12 +38,9 @@ export const useBookmark = (restaurantId: number, liked: boolean) => {
     },
   });
 
-  const handleBookmark = async (event: MouseEvent<HTMLDivElement>) => {
+  const handleBookmark = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-
-    bookmark ? deleteBookmark.mutate() : postBookmark.mutate();
-
-    setBookmark((prevBookmark) => !prevBookmark);
+    setTmpMark((prevMark) => !prevMark);
   };
 
   return { bookmark, handleBookmark };
