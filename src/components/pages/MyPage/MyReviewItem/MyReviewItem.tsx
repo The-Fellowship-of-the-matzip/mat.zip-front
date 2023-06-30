@@ -47,12 +47,14 @@ function MyReviewItem({
 
   const handleDropBoxClose = () => setIsDropBoxOpen(false);
 
-  const handleReviewUpdateClick = () => {
+  const handleReviewUpdateClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setIsBottomSheetOpen(true);
     handleDropBoxClose();
   };
 
-  const handleReviewDeleteClick = () => {
+  const handleReviewDeleteClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (window.confirm("정말 삭제하시겠습니까?")) {
       deleteMutation.mutate({
         restaurantId: restaurant.id,
