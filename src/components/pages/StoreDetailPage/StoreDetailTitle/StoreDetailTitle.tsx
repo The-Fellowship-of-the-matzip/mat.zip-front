@@ -3,6 +3,8 @@ import { Store } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
 import repeatComponent from "util/repeatComponent";
 
+import { ACCESS_TOKEN } from "constants/api";
+
 import { campusContext } from "context/CampusContextProvider";
 
 import { useMarked } from "hooks/useMarked";
@@ -31,11 +33,17 @@ function StoreDetailTitle({
   const { marked, handleMarked } = useMarked(id, liked);
   const campus = useContext(campusContext);
 
+  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
+
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
       <S.BookmarkIconWrapper onClick={handleMarked}>
-        {marked ? <Heart isFilled /> : <Heart />}
+        {accessToken && marked ? (
+          <Heart size="sm" isFilled />
+        ) : (
+          <Heart size="sm" />
+        )}
       </S.BookmarkIconWrapper>
       <S.RatingContainer>
         <S.RatingWrapper>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import type { Store } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
 
+import { ACCESS_TOKEN } from "constants/api";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -35,6 +36,8 @@ function StoreListItem({
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
+  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
+
   return (
     <S.ListItemContainer
       onClick={() => {
@@ -62,7 +65,11 @@ function StoreListItem({
         </Text>
       </S.ListItemTextContainer>
       <S.ListItemBookmark onClick={handleMarked}>
-        {marked ? <Heart size="sm" isFilled /> : <Heart size="sm" />}
+        {accessToken && marked ? (
+          <Heart size="sm" isFilled />
+        ) : (
+          <Heart size="sm" />
+        )}
       </S.ListItemBookmark>
     </S.ListItemContainer>
   );
