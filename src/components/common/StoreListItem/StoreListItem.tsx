@@ -9,7 +9,7 @@ import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import { useBookmark } from "hooks/useMarked";
+import { useMarked } from "hooks/useMarked";
 
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
@@ -31,7 +31,7 @@ function StoreListItem({
   reviewCount,
   liked,
 }: StoreListItemProps) {
-  const { marked, handleMarked } = useBookmark(id, liked);
+  const { marked, handleMarked } = useMarked(id, liked);
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 

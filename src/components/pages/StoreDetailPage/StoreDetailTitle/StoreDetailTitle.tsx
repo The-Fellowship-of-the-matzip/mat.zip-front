@@ -5,7 +5,7 @@ import repeatComponent from "util/repeatComponent";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import { useBookmark } from "hooks/useMarked";
+import { useMarked } from "hooks/useMarked";
 
 import Heading from "components/common/Heading/Heading";
 import Heart from "components/common/Heart/Heart";
@@ -28,7 +28,7 @@ function StoreDetailTitle({
 }: {
   storeInfo: Store;
 }) {
-  const { marked, handleMarked } = useBookmark(id, liked);
+  const { marked, handleMarked } = useMarked(id, liked);
   const campus = useContext(campusContext);
 
   return (

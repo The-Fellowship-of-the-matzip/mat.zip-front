@@ -4,7 +4,7 @@ import { useMutation } from "react-query";
 import sendBookmarkDeleteRequest from "api/bookmark/sendBookmarkDeleteRequest";
 import sendBookmarkPostRequest from "api/bookmark/sendBookmarkPostRequest";
 
-export const useBookmark = (restaurantId: number, liked: boolean) => {
+export const useMarked = (restaurantId: number, liked: boolean) => {
   const [marked, setMarked] = useState(liked);
   const [tmpMark, setTmpMark] = useState(liked);
 
