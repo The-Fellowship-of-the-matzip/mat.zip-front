@@ -10,9 +10,16 @@ export interface Position {
   addressName: string;
 }
 
+/**
+ * @param {Store[] | BookmarkStore[]} stores - 지도에 표시할 상점 목록
+ * @param {Position["latlng"]} centerPosition - 지도의 중심 위치를 나타내는 위도와 경도
+ *
+ * @returns {Object} center와 positions을 반환하며, setCenter 메소드를 통해 중심 위치를 업데이트 할 수 있다.
+ */
+
 export const useMap = (
   stores: Store[] | BookmarkStore[],
-  centerPosition: Position["latlng"] // 지도의 중심 위치
+  centerPosition: Position["latlng"]
 ) => {
   const [center, setCenter] = useState<Position["latlng"]>(centerPosition);
   const [positions, setPositions] = useState<Position[]>([]);
