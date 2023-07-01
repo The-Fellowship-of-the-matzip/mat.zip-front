@@ -57,17 +57,11 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const uploadButtonStyle = css`
+export const getUploadButtonStyle = (isUploaded: boolean) => css`
   height: 10rem;
-
-  display: flex;
+  display: ${isUploaded ? "none" : "flex"};
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacer.spacing2};
-
   font-weight: normal;
-
-  &.uploaded {
-    display: none;
-  }
 `;

@@ -32,7 +32,7 @@ function ImageUploadInput({
       {label && <Label id={id}>{label}</Label>}
       <S.InputWrapper>
         <Button
-          css={S.uploadButtonStyle}
+          css={S.getUploadButtonStyle(!!imageUrl)}
           type="button"
           className={imageUrl ? "uploaded" : ""}
           onClick={handleUploadButton}
