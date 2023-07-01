@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { Campus } from "types/campus";
 
 import { AUTH_LINK } from "constants/api";
@@ -26,6 +27,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
   const campus = useContext(campusContext);
   const otherCampus = getOtherCampus(campus as Campus);
   const setCampus = useContext(setCampusContext);
+  const navigate = useNavigate();
 
   const { logout } = useLogin();
 
@@ -49,6 +51,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
     logout();
     closeMenu();
     window.alert(MESSAGES.LOGOUT_COMPLETE);
+    navigate(PATHNAME.HOME);
   };
 
   useEffect(() => {
