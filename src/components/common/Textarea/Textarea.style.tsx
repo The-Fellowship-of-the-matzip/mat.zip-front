@@ -11,12 +11,12 @@ export const Container = styled.div`
 `;
 
 export const Textarea = styled.textarea<TextareaProps>`
-  max-height: 100%;
   min-height: 16rem;
   background-color: ${({ theme }) => theme.color.gray100};
   color: ${({ theme }) => theme.color.gray800};
   border: 1px solid ${({ theme }) => theme.color.gray100};
   border-radius: ${({ theme }) => theme.borderRadius.small};
+  resize: none;
 
   ${({ isError }) =>
     isError &&
