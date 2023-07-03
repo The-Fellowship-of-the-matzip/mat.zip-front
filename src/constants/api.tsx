@@ -16,6 +16,8 @@ export const ENDPOINTS = {
     `/restaurants/${restaurantId}/reviews/${articleId}`,
   STORE_REQUESTS: (campusId: CampusId) =>
     `/campuses/${campusId}/restaurantDemands`,
+  BOOKMARK_STORE: (restaurantId: number) =>
+    `restaurants/${restaurantId}/bookmarks`,
 } as const;
 
 export const NETWORK = {

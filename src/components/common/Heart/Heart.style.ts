@@ -1,13 +1,9 @@
-import { StarProps } from "./Star";
+import { HeartProps } from "./Heart";
 
 import styled, { css } from "styled-components";
 
-const getSizeStyling = (size: Required<StarProps>["size"]) => {
+const getSizeStyling = (size: Required<HeartProps>["size"]) => {
   const style = {
-    lg: css`
-      width: 32px;
-      height: 32px;
-    `,
     md: css`
       width: 24px;
       height: 24px;
@@ -16,15 +12,11 @@ const getSizeStyling = (size: Required<StarProps>["size"]) => {
       width: 20px;
       height: 20px;
     `,
-    xs: css`
-      width: 16px;
-      height: 16px;
-    `,
   };
 
   return style[size];
 };
 
-export const Star = styled.svg<StarProps>`
+export const Heart = styled.svg<HeartProps>`
   ${({ size = "md" }) => getSizeStyling(size)}
 `;
