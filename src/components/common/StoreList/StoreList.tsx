@@ -1,12 +1,12 @@
 import Divider from "../Divider/Divider";
 import { Fragment } from "react";
-import { Store } from "types/common";
+import type { BookmarkStore, Store } from "types/common";
 
 import * as S from "components/common/StoreList/StoreList.style";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
 
 interface StoreListProps {
-  stores?: Store[];
+  stores?: Store[] | BookmarkStore[];
 }
 
 function StoreList({ stores }: StoreListProps) {
@@ -21,6 +21,7 @@ function StoreList({ stores }: StoreListProps) {
             distance={store.distance}
             rating={store.rating}
             reviewCount={store.reviewCount}
+            liked={store.liked}
           />
           <Divider />
         </Fragment>

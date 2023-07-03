@@ -1,10 +1,5 @@
-export interface BookmarkStore {
-  id: number;
-  name: string;
-  imageUrl: string;
-  address: string;
-  rating: number;
-  reviewCount: number;
-  distance: number;
+import { Store } from "./storeTypes";
+
+export interface BookmarkStore extends Omit<Store, "kakaoMapUrl"> {
   saved: boolean;
 }

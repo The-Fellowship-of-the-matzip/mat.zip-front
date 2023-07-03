@@ -77,6 +77,8 @@ export const reviewHandler = [
         content,
         rating,
         menu,
+        imageUrl:
+          "https://ak-d.tripcdn.com/images/1mj2y12000ahpms1c8A29_C_800_600_R5.jpg_.webp?proc=autoorient",
         updatable: true,
       });
       return res(ctx.status(201));

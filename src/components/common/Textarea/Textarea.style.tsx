@@ -16,6 +16,7 @@ export const Textarea = styled.textarea<TextareaProps>`
   color: ${({ theme }) => theme.color.gray800};
   border: 1px solid ${({ theme }) => theme.color.gray100};
   border-radius: ${({ theme }) => theme.borderRadius.small};
+  resize: none;
 
   ${({ isError }) =>
     isError &&

@@ -45,6 +45,7 @@ export const UserReviewInfoWrapper = styled.div`
 export const ReviewBottom = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: ${({ theme }) => theme.spacer.spacing3};
 `;
 
@@ -73,6 +74,11 @@ export const DropBoxButton = styled.button`
   &:hover {
     font-weight: 700;
   }
+`;
+
+export const ReviewImage = styled.img`
+  height: 10rem;
+  border-radius: ${({ theme }) => theme.borderRadius.small};
 `;
 
 export const titleTextStyle = css`

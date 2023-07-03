@@ -94,7 +94,15 @@ function StoreDetailPage() {
               )}
               {reviews.length ? (
                 reviews.map(
-                  ({ id, author, rating, content, menu, updatable }) => (
+                  ({
+                    id,
+                    author,
+                    rating,
+                    content,
+                    menu,
+                    imageUrl,
+                    updatable,
+                  }) => (
                     <Fragment key={id}>
                       <StoreReviewItem
                         reviewInfo={{
@@ -104,6 +112,7 @@ function StoreDetailPage() {
                           rating,
                           content,
                           menu,
+                          imageUrl,
                           updatable,
                         }}
                       />
