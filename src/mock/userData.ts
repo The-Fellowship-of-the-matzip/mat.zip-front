@@ -1,6 +1,5 @@
-import type { BookmarkStore } from "types/common/bookmarkTypes";
-
 import type { UserReview } from "types/common";
+import type { BookmarkStore } from "types/common/bookmarkTypes";
 
 export const userProfile = {
   username: "huni",
@@ -21,7 +20,7 @@ export const bookmarkedStores: BookmarkStore[] = [
     distance: 0.5,
     rating: 3,
     reviewCount: 34,
-    saved: true,
+    liked: true,
   },
   {
     id: 2,
@@ -33,7 +32,7 @@ export const bookmarkedStores: BookmarkStore[] = [
     distance: 0.5,
     rating: 3,
     reviewCount: 12,
-    saved: true,
+    liked: true,
   },
   {
     id: 3,
@@ -45,7 +44,7 @@ export const bookmarkedStores: BookmarkStore[] = [
     distance: 0.5,
     rating: 3,
     reviewCount: 5,
-    saved: true,
+    liked: true,
   },
   {
     id: 4,
@@ -57,7 +56,7 @@ export const bookmarkedStores: BookmarkStore[] = [
     distance: 0.5,
     rating: 3,
     reviewCount: 3,
-    saved: true,
+    liked: true,
   },
 ];
 
