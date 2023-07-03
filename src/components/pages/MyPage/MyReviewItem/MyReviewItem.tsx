@@ -25,6 +25,7 @@ function MyReviewItem({
   content,
   rating,
   menu,
+  imageUrl,
 }: UserReview) {
   const navigate = useNavigate();
 
@@ -69,12 +70,14 @@ function MyReviewItem({
       { restaurantId: restaurant.id },
     ]);
   };
+
   const reviewInfo = {
     id: String(id),
     restaurantId: String(restaurant.id),
     rating,
     content,
     menu,
+    imageUrl,
   };
 
   return (
