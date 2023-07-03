@@ -1,6 +1,7 @@
 import { setupWorker } from "msw";
 
 import {
+  imageHandler,
   bookmarkHandler,
   mypageHandler,
   userHandler,
@@ -12,6 +13,7 @@ import {
 } from "mock/handlers";
 
 export const worker = setupWorker(
+  ...imageHandler,
   ...bookmarkHandler,
   ...mypageHandler,
   ...userHandler,

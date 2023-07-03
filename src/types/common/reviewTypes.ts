@@ -4,6 +4,7 @@ export interface ReviewInputShape {
   content: string;
   rating: number;
   menu: string;
+  imageUrl: string | null;
 }
 
 export interface ReviewDetailShape extends ReviewInputShape {

@@ -1,5 +1,6 @@
 import { bookmarkHandler } from "mock/handlers/bookmarkHandler";
 import { categoryHandler } from "mock/handlers/categoryHandler";
+import { imageHandler } from "mock/handlers/imageHandler";
 import { mypageHandler } from "mock/handlers/mypageHandler";
 import { restaurantHandler } from "mock/handlers/restaurantHandler";
 import { reviewHandler } from "mock/handlers/reviewHandler";
@@ -14,5 +15,6 @@ export {
   restaurantHandler,
   reviewHandler,
   storeDemandHandler as storeRequestHandler,
+  imageHandler,
   bookmarkHandler,
 };

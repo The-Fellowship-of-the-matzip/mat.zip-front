@@ -7,12 +7,14 @@ import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
+import { useImageUpload } from "hooks/useImageUpload";
 import useLogin from "hooks/useLogin";
 
 import sendReviewItem from "api/review/sendReviewItem";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 import Button from "components/common/Button/Button";
+import ImageUploadInput from "components/common/ImageUploadInput/ImageUploadInput";
 import Input from "components/common/Input/Input";
 import Label from "components/common/Label/Label";
 import StarRating from "components/common/StarRating/StarRating";
@@ -28,6 +30,7 @@ interface ReviewUpdateBottomSheetProps {
     menu: string;
     restaurantId: string;
     id: string;
+    imageUrl: string | null;
   };
   onSuccess: () => void;
 }
@@ -42,6 +45,8 @@ function ReviewUpdateBottomSheet({
     defaultReviewItem.content
   );
   const [menu, setMenu] = useState<string>(defaultReviewItem.menu);
+  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
+    useImageUpload(defaultReviewItem.imageUrl);
 
   const { logout } = useLogin();
 
@@ -51,6 +56,7 @@ function ReviewUpdateBottomSheet({
       content: reviewContent,
       rating: rating + 1,
       menu: menu,
+      imageUrl: uploadedImageUrl,
     });
     closeSheet();
   };
@@ -132,6 +138,14 @@ function ReviewUpdateBottomSheet({
           onChange={handleContentInput}
           maxLength={255}
           required
+        />
+        <ImageUploadInput
+          id="image-upload"
+          label="이미지 업로드"
+          imageUrl={uploadedImageUrl}
+          imageAltText="리뷰 이미지"
+          onChange={handleImageUpload}
+          onRemove={handleImageRemoval}
         />
         <Button variant="primary">제출</Button>
       </S.Form>
