@@ -6,6 +6,19 @@ export const TitleContainer = styled.div`
   flex-direction: column;
 `;
 
+export const BookmarkIconWrapper = styled.button`
+  height: auto;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  right: ${({ theme }) => theme.spacer.spacing3};
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+
+  background-color: transparent;
+`;
+
 export const RatingContainer = styled.div`
   width: 100%;
   margin-top: ${({ theme }) => theme.spacer.spacing2};

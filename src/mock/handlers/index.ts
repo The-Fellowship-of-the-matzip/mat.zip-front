@@ -14,4 +14,5 @@ export {
   restaurantHandler,
   reviewHandler,
   storeDemandHandler as storeRequestHandler,
+  bookmarkHandler,
 };

@@ -3,24 +3,48 @@ import { Store } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
 import repeatComponent from "util/repeatComponent";
 
+import { ACCESS_TOKEN } from "constants/api";
+
 import { campusContext } from "context/CampusContextProvider";
 
+import { useMarked } from "hooks/useMarked";
+
 import Heading from "components/common/Heading/Heading";
+import Heart from "components/common/Heart/Heart";
 import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle.style";
 
 function StoreDetailTitle({
-  storeInfo: { name, rating, reviewCount, address, distance, kakaoMapUrl },
+  storeInfo: {
+    id,
+    name,
+    rating,
+    reviewCount,
+    address,
+    distance,
+    kakaoMapUrl,
+    liked,
+  },
 }: {
   storeInfo: Store;
 }) {
+  const { marked, handleMarked } = useMarked(id, liked);
   const campus = useContext(campusContext);
+
+  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
+      <S.BookmarkIconWrapper onClick={handleMarked}>
+        {accessToken && marked ? (
+          <Heart size="sm" isFilled />
+        ) : (
+          <Heart size="sm" />
+        )}
+      </S.BookmarkIconWrapper>
       <S.RatingContainer>
         <S.RatingWrapper>
           {rating > 0 ? (

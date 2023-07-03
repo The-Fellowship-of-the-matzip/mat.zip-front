@@ -19,6 +19,8 @@ export const ENDPOINTS = {
   USER_PROFILE: "/mypage/profile",
   USER_REVIEWS: "/mypage/reviews",
   BOOKMARKS: "/restaurants/bookmarks",
+  BOOKMARK_STORE: (restaurantId: number) =>
+    `restaurants/${restaurantId}/bookmarks`,
 } as const;
 
 export const NETWORK = {
