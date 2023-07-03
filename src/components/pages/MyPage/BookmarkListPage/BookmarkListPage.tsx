@@ -3,11 +3,13 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { NETWORK } from "constants/api";
+import { PATHNAME } from "constants/routes";
 
 import { LeftIcon } from "asset";
 
 import fetchBookmarkList from "api/bookmark/fetchBookmarkList";
 
+import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";
 import Spinner from "components/common/Spinner/Spinner";
@@ -33,7 +35,13 @@ function BookmarkListPage() {
       <S.HeaderWrapper>
         <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 맛집</Text>
-        <Text>지도</Text>
+        <Button
+          css={S.headerButtonStyle}
+          variant="textButton"
+          onClick={() => navigate(PATHNAME.BOOKMARK_MAP_PAGE)}
+        >
+          지도
+        </Button>
       </S.HeaderWrapper>
       {(isLoading || isFetching) && <Spinner />}
       {isError && error instanceof Error && (
