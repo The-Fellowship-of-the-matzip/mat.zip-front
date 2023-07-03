@@ -5,3 +5,6 @@ export { ReactComponent as SearchIcon } from "./search-icon.svg";
 export { ReactComponent as ImageIcon } from "./image-icon.svg";
 export { ReactComponent as RightIcon } from "./right-icon.svg";
 export { ReactComponent as LeftIcon } from "./left-icon.svg";
+export { ReactComponent as PinIcon } from "./pin-icon.svg";
+export { ReactComponent as ClickedPinIcon } from "./clicked-pin-icon.svg";
+export { ReactComponent as CampusPinIcon } from "./campus-pin-icon.svg";

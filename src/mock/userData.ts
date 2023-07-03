@@ -1,3 +1,5 @@
+import type { BookmarkStore } from "types/common/bookmarkTypes";
+
 import type { UserReview } from "types/common";
 
 export const userProfile = {
@@ -8,7 +10,7 @@ export const userProfile = {
   averageRating: 3.0,
 };
 
-export const bookmarkedStores = [
+export const bookmarkedStores: BookmarkStore[] = [
   {
     id: 1,
     name: "냠냠 치킨",

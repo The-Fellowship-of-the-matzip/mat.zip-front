@@ -16,5 +16,4 @@ export {
   reviewHandler,
   storeDemandHandler as storeRequestHandler,
   imageHandler,
-  bookmarkHandler,
 };

@@ -1,4 +1,4 @@
-import { BookmarkStore } from "types/common/bookmarkTypes";
+import type { BookmarkStore } from "types/common/bookmarkTypes";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 

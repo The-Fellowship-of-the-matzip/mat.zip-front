@@ -8,6 +8,7 @@ import {
   StoreDemandPage,
   MyPage,
   BookmarkListPage,
+  BookmarkMapPage,
   MyReviewListPage,
 } from "components/pages";
 
@@ -20,6 +21,7 @@ export const PATHNAME = {
   STORE_DEMAND: "store-demand",
   MY_PAGE: "/my-page",
   BOOKMARK_LIST_PAGE: "/my-page/bookmark",
+  BOOKMARK_MAP_PAGE: "/my-page/bookmark/map",
   MY_REVIEWS: "/my-page/reviews",
   WILD_CARD: "*",
 } as const;
@@ -46,6 +48,10 @@ const MAIN_ROUTES = {
   BOOKMARK_LIST_PAGE: {
     path: PATHNAME.BOOKMARK_LIST_PAGE,
     element: <BookmarkListPage />,
+  },
+  BOOKMARK_MAP_PAGE: {
+    path: PATHNAME.BOOKMARK_MAP_PAGE,
+    element: <BookmarkMapPage />,
   },
   MY_REVIEWS: {
     path: PATHNAME.MY_REVIEWS,
