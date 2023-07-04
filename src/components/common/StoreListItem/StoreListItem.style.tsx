@@ -13,7 +13,9 @@ export const ListItemContainer = styled.li`
 `;
 
 export const ListItemThumbnail = styled(Image)`
+  min-width: 8.6rem;
   width: 8.6rem;
+  min-height: 8.6rem;
   height: 8.6rem;
 
   border-radius: ${({ theme }) => theme.borderRadius.small};
