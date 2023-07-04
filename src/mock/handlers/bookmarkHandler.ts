@@ -12,7 +12,7 @@ export const bookmarkHandler = [
   }),
 
   rest.post(
-    `${API_BASE_URL}/restaurants/:restaurantId/bookmarks`,
+    `${API_BASE_URL}/restaurants/bookmarks/:restaurantId`,
     (req, res, ctx) => {
       const { restaurantId } = req.params;
       bookmark.push(Number(restaurantId));
@@ -22,7 +22,7 @@ export const bookmarkHandler = [
   ),
 
   rest.delete(
-    `${API_BASE_URL}/restaurants/:restaurantId/bookmarks`,
+    `${API_BASE_URL}/restaurants/bookmarks/:restaurantId`,
     (req, res, ctx) => {
       const { restaurantId } = req.params;
       const index = bookmark.findIndex((id) => id === Number(restaurantId));

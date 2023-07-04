@@ -71,7 +71,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
                   별점평균
                 </Text>
                 <Text css={S.subTextNumberStyle} size="sm">
-                  {author.averageRating}
+                  {author.averageRating.toFixed(1)}
                 </Text>
               </S.UserReviewInfoWrapper>
             </div>
