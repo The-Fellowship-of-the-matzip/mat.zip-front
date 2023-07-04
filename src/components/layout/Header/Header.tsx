@@ -29,6 +29,13 @@ function Header() {
     setMenuOpen(true);
   };
 
+  const handleIconClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     closeMenu();
   }, [location.key]);
@@ -36,7 +43,7 @@ function Header() {
   return (
     <S.Container>
       <S.TopWrapper>
-        <Link to={PATHNAME.HOME}>
+        <Link to={PATHNAME.HOME} onClick={handleIconClick}>
           <S.PageName>
             <S.LogoImage src={logoImg} alt="MAT.ZIP logo" />
             {campus && <S.Campus> in {campus}</S.Campus>}
