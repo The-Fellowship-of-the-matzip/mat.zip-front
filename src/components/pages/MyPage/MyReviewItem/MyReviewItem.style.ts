@@ -14,7 +14,9 @@ export const StoreReviewContainer = styled.li`
 `;
 
 export const StoreImage = styled(Image)`
+  min-width: 5.6rem;
   width: 5.6rem;
+  min-height: 5.6rem;
   height: 5.6rem;
   border-radius: 50%;
   object-fit: cover;
