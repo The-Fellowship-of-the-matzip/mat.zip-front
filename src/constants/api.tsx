@@ -21,7 +21,7 @@ export const ENDPOINTS = {
   USER_REVIEWS: "/mypage/reviews",
   BOOKMARKS: "/restaurants/bookmarks",
   BOOKMARK_STORE: (restaurantId: number) =>
-    `restaurants/bookmarks/${restaurantId}`,
+    `bookmarks/restaurants/${restaurantId}`,
 } as const;
 
 export const NETWORK = {
