@@ -24,7 +24,6 @@ const sendImageUploadPostRequest = async (imageFile: File) => {
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "multipart/form-data",
       },
     }
   );

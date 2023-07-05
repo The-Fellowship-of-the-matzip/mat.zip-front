@@ -41,6 +41,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
     }
     setCampus(otherCampus);
     closeMenu();
+    navigate(PATHNAME.HOME);
   };
 
   const handleLogout = () => {
