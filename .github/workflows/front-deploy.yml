@@ -21,7 +21,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 mv ./build s3://matzip-front/ --acl bucket-owner-full-control
+        run: aws s3 mv ./build s3://matzip-front/
 
       - name: Invalidate CloudFront Cache
         uses: chetan/invalidate-cloudfront-action@master
