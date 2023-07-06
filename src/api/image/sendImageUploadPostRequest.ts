@@ -8,7 +8,7 @@ interface ImageUploadResponse {
   imageUrl: string;
 }
 
-const sendImageUploadPostRequest = async (imageFile: File) => {
+const sendImageUploadPostRequest = async (imageFile: FormData) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
