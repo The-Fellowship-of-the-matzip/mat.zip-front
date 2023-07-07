@@ -36,8 +36,6 @@ function StoreListItem({
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
-  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
-
   return (
     <S.ListItemContainer
       onClick={() => {
@@ -65,7 +63,7 @@ function StoreListItem({
         </Text>
       </S.ListItemTextContainer>
       <S.ListItemBookmark onClick={handleMarked}>
-        {accessToken && marked ? (
+        {ACCESS_TOKEN && marked ? (
           <Heart size="sm" isFilled />
         ) : (
           <Heart size="sm" />

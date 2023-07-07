@@ -5,17 +5,15 @@ import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 import axiosInstance from "api/axiosInstance";
 
 const fetchStoreDetail = async (restaurantId: string) => {
-  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
-
   const userFetchOptions = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
     },
   };
 
   const { data } = await axiosInstance.get<Store & { address: string }>(
     ENDPOINTS.STORE_DETAIL(restaurantId),
-    accessToken ? userFetchOptions : undefined
+    ACCESS_TOKEN ? userFetchOptions : undefined
   );
 
   return data;

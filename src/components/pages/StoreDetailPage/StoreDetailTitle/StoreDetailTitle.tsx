@@ -33,13 +33,11 @@ function StoreDetailTitle({
   const { marked, handleMarked } = useMarked(id, liked);
   const campus = useContext(campusContext);
 
-  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
-
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
       <S.BookmarkIconWrapper onClick={handleMarked}>
-        {accessToken && marked ? (
+        {ACCESS_TOKEN && marked ? (
           <Heart size="sm" isFilled />
         ) : (
           <Heart size="sm" />

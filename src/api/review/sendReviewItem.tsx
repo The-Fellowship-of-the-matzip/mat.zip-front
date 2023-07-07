@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { ACCESS_TOKEN, ACCESS_TOKEN_KEY, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
@@ -19,9 +19,8 @@ const sendReviewItem = async ({
   rating,
   menu,
 }: SendReviewItemProps) => {
-  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
-  if (!accessToken) {
-    window.sessionStorage.removeItem(ACCESS_TOKEN);
+  if (!ACCESS_TOKEN) {
+    window.sessionStorage.removeItem(ACCESS_TOKEN_KEY);
     window.alert("다시 로그인 해주세요");
     window.location.reload();
     return;
@@ -35,10 +34,11 @@ const sendReviewItem = async ({
     },
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     }
   );
+
   return data;
 };
 

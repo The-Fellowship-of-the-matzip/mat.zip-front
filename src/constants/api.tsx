@@ -40,7 +40,8 @@ export const FILTERS = [
   { order: "spell", text: "가나다 순" },
 ] as const;
 
-export const ACCESS_TOKEN = "matzipaccessToken";
+export const ACCESS_TOKEN_KEY = "matzipaccessToken";
+export const ACCESS_TOKEN = window.sessionStorage.getItem(ACCESS_TOKEN_KEY);
 
 export const AUTH_LINK = `https://github.com/login/oauth/authorize?client_id=${
   process.env.NODE_ENV === "production"

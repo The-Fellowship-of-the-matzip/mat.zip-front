@@ -15,8 +15,6 @@ const fetchReviewList = async ({
   queryKey,
 }: FetchParamProps) => {
   const [, { restaurantId }] = queryKey;
-  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
-
   const nonUserFetchOptions = {
     params: { page: pageParam, size: SIZE.REVIEW },
   };
@@ -24,14 +22,15 @@ const fetchReviewList = async ({
   const userFetchOptions = {
     ...nonUserFetchOptions,
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
     },
   };
 
   const { data } = await axiosInstance.get<ReviewResponseShape>(
     ENDPOINTS.REVIEWS(restaurantId),
-    accessToken === null ? nonUserFetchOptions : userFetchOptions
+    ACCESS_TOKEN === null ? nonUserFetchOptions : userFetchOptions
   );
+
   return { ...data, nextPageParam: pageParam + 1 };
 };
 

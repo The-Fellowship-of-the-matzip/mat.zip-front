@@ -8,9 +8,7 @@ import axiosInstance from "api/axiosInstance";
 const sendStoreDemandPostRequest =
   (campusId: CampusId) =>
   (storeRequestData: { categoryId: string; name: string }) => {
-    const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
-
-    if (typeof accessToken !== "string") {
+    if (typeof ACCESS_TOKEN !== "string") {
       throw new Error(MESSAGES.TOKEN_INVALID);
     }
 
@@ -19,7 +17,7 @@ const sendStoreDemandPostRequest =
       storeRequestData,
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
         },
       }
     );

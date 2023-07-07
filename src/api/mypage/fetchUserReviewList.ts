@@ -1,7 +1,7 @@
 import { FetchParamProps } from "types/apiTypes";
 import type { UserReview } from "types/common";
 
-import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
+import { ACCESS_TOKEN, ACCESS_TOKEN_KEY, ENDPOINTS, SIZE } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
@@ -11,10 +11,8 @@ interface UserReviewResponse {
 }
 
 const fetchUserReviewList = async ({ pageParam = 0 }: FetchParamProps) => {
-  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
-
-  if (!accessToken) {
-    window.sessionStorage.removeItem(ACCESS_TOKEN);
+  if (!ACCESS_TOKEN) {
+    window.sessionStorage.removeItem(ACCESS_TOKEN_KEY);
     window.alert("다시 로그인 해주세요");
     window.location.href = "/";
     throw new Error("엑세스토큰이 유효하지 않습니다");
@@ -25,7 +23,7 @@ const fetchUserReviewList = async ({ pageParam = 0 }: FetchParamProps) => {
     {
       params: { page: pageParam, size: SIZE.REVIEW },
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     }
   );
