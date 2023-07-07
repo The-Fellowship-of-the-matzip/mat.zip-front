@@ -3,14 +3,12 @@ import { CampusId } from "types/common";
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 import { MESSAGES } from "constants/messages";
 
-import axiosInstance from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 const sendStoreDemandPutRequest =
   (campusId: CampusId, storeRequestId: string) =>
   (storeRequestData: { categoryId: string; name: string }) => {
-    const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
-
-    if (typeof accessToken !== "string") {
+    if (typeof ACCESS_TOKEN !== "string") {
       throw new Error(MESSAGES.TOKEN_INVALID);
     }
 
@@ -19,7 +17,7 @@ const sendStoreDemandPutRequest =
       storeRequestData,
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
         },
       }
     );

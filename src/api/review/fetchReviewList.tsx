@@ -3,7 +3,7 @@ import { ReviewShape } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 
-import axiosInstance from "api/axiosInstance";
+import { authAxiosInstance, axiosInstance } from "api/axiosInstance";
 
 interface ReviewResponseShape {
   hasNext: boolean;
@@ -15,23 +15,18 @@ const fetchReviewList = async ({
   queryKey,
 }: FetchParamProps) => {
   const [, { restaurantId }] = queryKey;
-  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
-
-  const nonUserFetchOptions = {
+  const fetchOptions = {
     params: { page: pageParam, size: SIZE.REVIEW },
   };
 
-  const userFetchOptions = {
-    ...nonUserFetchOptions,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  };
+  const axiosInstanceToUse =
+    ACCESS_TOKEN === null ? axiosInstance : authAxiosInstance;
 
-  const { data } = await axiosInstance.get<ReviewResponseShape>(
+  const { data } = await axiosInstanceToUse.get<ReviewResponseShape>(
     ENDPOINTS.REVIEWS(restaurantId),
-    accessToken === null ? nonUserFetchOptions : userFetchOptions
+    fetchOptions
   );
+
   return { ...data, nextPageParam: pageParam + 1 };
 };
 

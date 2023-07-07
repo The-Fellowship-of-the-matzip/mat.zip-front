@@ -1,7 +1,7 @@
 import { ENDPOINTS } from "constants/api";
 import { MESSAGES } from "constants/messages";
 
-import axiosInstance from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 const sendLoginRequest = async (code: string) => {
   const { status, data } = await axiosInstance.get(ENDPOINTS.LOGIN, {
