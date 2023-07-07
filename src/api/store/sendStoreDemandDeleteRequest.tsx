@@ -3,7 +3,7 @@ import { CampusId } from "types/common";
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 import { MESSAGES } from "constants/messages";
 
-import axiosInstance from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 const sendStoreDemandDeleteRequest =
   (campusId: CampusId, storeRequestId: string) => () => {

@@ -3,7 +3,7 @@ import { CampusId, Store } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
-import axiosInstance from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 type ReduceReturnType = Record<string, any>;
 

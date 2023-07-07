@@ -3,7 +3,7 @@ import { ReviewShape } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
 
-import axiosInstance from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 interface ReviewResponseShape {
   hasNext: boolean;

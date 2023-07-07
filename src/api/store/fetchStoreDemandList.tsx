@@ -3,7 +3,7 @@ import { CategoryId } from "types/common";
 
 import { ENDPOINTS } from "constants/api";
 
-import axiosInstance from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 interface StoreDemandGetResponse {
   items: StoreItemType[];

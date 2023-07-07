@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, API_BASE_URL } from "constants/api";
 
 import { checkAndSetToken, handleAPIError } from "api/utils";
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
 });
 
@@ -18,5 +18,3 @@ export const authAxiosInstance = axios.create({
 });
 
 authAxiosInstance.interceptors.request.use(checkAndSetToken, handleAPIError);
-
-export default axiosInstance;
