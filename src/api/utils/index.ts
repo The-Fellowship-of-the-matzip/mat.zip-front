@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig } from "axios";
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { ACCESS_TOKEN, ACCESS_TOKEN_KEY } from "constants/api";
 
@@ -17,4 +17,10 @@ export const checkAndSetToken = (config: AxiosRequestConfig) => {
   config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
 
   return config;
+};
+
+export const handleAPIError = (error: AxiosError) => {
+  const { data } = error.response as AxiosResponse;
+
+  throw Error(data.message);
 };
