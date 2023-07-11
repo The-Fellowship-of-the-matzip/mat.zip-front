@@ -3,7 +3,7 @@ import type { UserReview } from "types/common";
 
 import { ENDPOINTS, SIZE } from "constants/api";
 
-import { authAxiosInstance } from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 interface UserReviewResponse {
   hasNext: boolean;
@@ -11,9 +11,10 @@ interface UserReviewResponse {
 }
 
 const fetchUserReviewList = async ({ pageParam = 0 }: FetchParamProps) => {
-  const { data } = await authAxiosInstance.get<UserReviewResponse>(
+  const { data } = await axiosInstance.get<UserReviewResponse>(
     ENDPOINTS.USER_REVIEWS,
     {
+      useAuth: true,
       params: { page: pageParam, size: SIZE.REVIEW },
     }
   );

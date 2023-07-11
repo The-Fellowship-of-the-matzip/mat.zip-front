@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { ENDPOINTS } from "constants/api";
 
-import { authAxiosInstance } from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 interface SendReviewItemProps {
   restaurantId: string;
@@ -19,12 +19,15 @@ const sendReviewItem = async ({
   rating,
   menu,
 }: SendReviewItemProps) => {
-  const { data } = await authAxiosInstance.put<AxiosResponse>(
+  const { data } = await axiosInstance.put<AxiosResponse>(
     ENDPOINTS.UPDATE_REVIEW_ITEM(restaurantId, articleId),
     {
       content: content,
       rating: rating,
       menu: menu,
+    },
+    {
+      useAuth: true,
     }
   );
 

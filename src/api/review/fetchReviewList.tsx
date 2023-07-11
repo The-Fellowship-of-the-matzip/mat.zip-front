@@ -1,9 +1,9 @@
 import { FetchParamProps } from "types/apiTypes";
 import { ReviewShape } from "types/common";
 
-import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
+import { ACCESS_TOKEN_KEY, ENDPOINTS, SIZE } from "constants/api";
 
-import { authAxiosInstance, axiosInstance } from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 interface ReviewResponseShape {
   hasNext: boolean;
@@ -15,16 +15,20 @@ const fetchReviewList = async ({
   queryKey,
 }: FetchParamProps) => {
   const [, { restaurantId }] = queryKey;
-  const fetchOptions = {
+  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN_KEY);
+
+  const nonUserFetchOptions = {
     params: { page: pageParam, size: SIZE.REVIEW },
   };
 
-  const axiosInstanceToUse =
-    ACCESS_TOKEN === null ? axiosInstance : authAxiosInstance;
+  const userFetchOptions = {
+    ...nonUserFetchOptions,
+    useAuth: true,
+  };
 
-  const { data } = await axiosInstanceToUse.get<ReviewResponseShape>(
+  const { data } = await axiosInstance.get<ReviewResponseShape>(
     ENDPOINTS.REVIEWS(restaurantId),
-    fetchOptions
+    accessToken ? userFetchOptions : nonUserFetchOptions
   );
 
   return { ...data, nextPageParam: pageParam + 1 };

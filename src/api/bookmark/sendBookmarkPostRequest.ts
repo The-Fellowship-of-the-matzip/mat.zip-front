@@ -1,9 +1,11 @@
 import { ENDPOINTS } from "constants/api";
 
-import { authAxiosInstance } from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 const sendBookmarkPostRequest = (restaurantId: number) => () => {
-  return authAxiosInstance.post(ENDPOINTS.BOOKMARK_STORE(restaurantId));
+  return axiosInstance.post(ENDPOINTS.BOOKMARK_STORE(restaurantId), {
+    useAuth: true,
+  });
 };
 
 export default sendBookmarkPostRequest;

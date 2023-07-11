@@ -2,11 +2,14 @@ import type { BookmarkStore } from "types/common/bookmarkTypes";
 
 import { ENDPOINTS } from "constants/api";
 
-import { authAxiosInstance } from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 const fetchBookmarkList = async () => {
-  const { data } = await authAxiosInstance.get<BookmarkStore[]>(
-    ENDPOINTS.BOOKMARKS
+  const { data } = await axiosInstance.get<BookmarkStore[]>(
+    ENDPOINTS.BOOKMARKS,
+    {
+      useAuth: true,
+    }
   );
 
   return data;

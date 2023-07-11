@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { ENDPOINTS } from "constants/api";
 
-import { authAxiosInstance } from "api/axiosInstance";
+import { axiosInstance } from "api/axiosInstance";
 
 interface DeleteReviewItemProp {
   restaurantId: string;
@@ -13,8 +13,11 @@ const deleteReviewItem = async ({
   restaurantId,
   articleId,
 }: DeleteReviewItemProp) => {
-  const { data } = await authAxiosInstance.delete<AxiosResponse>(
-    ENDPOINTS.DELETE_REVIEW_ITEM(restaurantId, articleId)
+  const { data } = await axiosInstance.delete<AxiosResponse>(
+    ENDPOINTS.DELETE_REVIEW_ITEM(restaurantId, articleId),
+    {
+      useAuth: true,
+    }
   );
 
   return data;

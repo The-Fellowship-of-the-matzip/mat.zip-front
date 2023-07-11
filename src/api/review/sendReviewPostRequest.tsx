@@ -6,7 +6,9 @@ import { axiosInstance } from "api/axiosInstance";
 
 const sendReviewPostRequest =
   (restaurantId: string) => (newReview: ReviewInputShape) => {
-    return axiosInstance.post(ENDPOINTS.REVIEWS(restaurantId), newReview);
+    return axiosInstance.post(ENDPOINTS.REVIEWS(restaurantId), newReview, {
+      useAuth: true,
+    });
   };
 
 export default sendReviewPostRequest;
