@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { ACCESS_TOKEN } from "constants/api";
+import { ACCESS_TOKEN_KEY } from "constants/api";
 
-const hasAccessToken = !!ACCESS_TOKEN;
+const hasAccessToken = !!window.sessionStorage.getItem(ACCESS_TOKEN_KEY);
 
 export const LoginContext = React.createContext<boolean>(false);
 export const SetLoginContext = React.createContext<

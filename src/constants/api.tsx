@@ -41,7 +41,6 @@ export const FILTERS = [
 ] as const;
 
 export const ACCESS_TOKEN_KEY = "matzipaccessToken";
-export const ACCESS_TOKEN = window.sessionStorage.getItem(ACCESS_TOKEN_KEY);
 
 export const AUTH_LINK = `https://github.com/login/oauth/authorize?client_id=${
   process.env.NODE_ENV === "production"

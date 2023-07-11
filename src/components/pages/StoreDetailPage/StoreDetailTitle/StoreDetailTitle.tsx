@@ -3,9 +3,8 @@ import { Store } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
 import repeatComponent from "util/repeatComponent";
 
-import { ACCESS_TOKEN } from "constants/api";
-
 import { campusContext } from "context/CampusContextProvider";
+import { LoginContext } from "context/LoginContextProvider";
 
 import { useMarked } from "hooks/useMarked";
 
@@ -30,14 +29,15 @@ function StoreDetailTitle({
 }: {
   storeInfo: Store;
 }) {
-  const { marked, handleMarked } = useMarked(id, liked);
+  const isLoggedIn = useContext(LoginContext);
   const campus = useContext(campusContext);
+  const { marked, handleMarked } = useMarked(id, liked);
 
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
       <S.BookmarkIconWrapper onClick={handleMarked}>
-        {ACCESS_TOKEN && marked ? (
+        {isLoggedIn && marked ? (
           <Heart size="sm" isFilled />
         ) : (
           <Heart size="sm" />
