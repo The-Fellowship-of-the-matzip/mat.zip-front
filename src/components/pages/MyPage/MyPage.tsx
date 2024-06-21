@@ -5,7 +5,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { NETWORK, SIZE } from "constants/api";
+import { SIZE } from "constants/api";
 import { PATHNAME } from "constants/routes";
 
 import { RightIcon } from "asset";
@@ -20,6 +20,8 @@ import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 import Text from "components/common/Text/Text";
+import { useEffect } from "react";
+import { MESSAGES } from "constants/messages";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -28,25 +30,43 @@ function MyPage() {
     data: profileData,
     isLoading,
     isError,
-    error,
-  } = useQuery("userProfile", () => fetchUserProfile(), {
-    retry: NETWORK.RETRY_COUNT,
+    error: userProfileError,
+  } = useQuery("userProfile", fetchUserProfile, {
     refetchOnWindowFocus: false,
+    retry: 0,
   });
 
-  const { data: bookmarkedStoreData = [] } = useQuery(
+  const { data: bookmarkedStoreData = [], error: bookmarkedStoreError } = useQuery(
     "bookmarkedStore",
-    () => fetchBookmarkList(),
+    fetchBookmarkList,
     {
-      retry: NETWORK.RETRY_COUNT,
       refetchOnWindowFocus: false,
-    }
+      retry: 0,
+    },
   );
 
-  const { data: myReviewData } = useQuery("myReview", fetchUserReviewList, {
-    retry: NETWORK.RETRY_COUNT,
+  const { data: myReviewData, error: userReviewError } = useQuery("myReview", fetchUserReviewList, {
     refetchOnWindowFocus: false,
+    retry: 0,
   });
+
+  useEffect(() => {
+    if (userProfileError instanceof Error && userProfileError.message === MESSAGES.LOGIN_RETRY) {
+      alert(userProfileError.message);
+      return;
+    }
+
+    if (bookmarkedStoreError instanceof Error && bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY) {
+      alert(bookmarkedStoreError.message);
+      return;
+    }
+
+    if (userReviewError instanceof Error && userReviewError.message === MESSAGES.LOGIN_RETRY) {
+      alert(userReviewError.message);
+    }
+
+    window.location.href = PATHNAME.HOME;
+  }, [userProfileError, bookmarkedStoreError, userReviewError]);
 
   const myReviews = myReviewData?.reviews ?? [];
 
@@ -64,9 +84,7 @@ function MyPage() {
       </SectionHeader>
       <section>
         {isLoading && <Spinner />}
-        {isError && error instanceof Error && (
-          <ErrorImage errorMessage={error.message} />
-        )}
+        {isError && userProfileError instanceof Error && <ErrorImage errorMessage={userProfileError.message} />}
         <UserProfile {...profileData} />
       </section>
       <Divider />
