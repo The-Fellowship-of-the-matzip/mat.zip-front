@@ -24,26 +24,29 @@ import SlideCarousel from "components/common/SlideCarousel/SlideCarousel";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
 import Text from "components/common/Text/Text";
+import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
 
 function BookmarkMapPage() {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
-  const { data, isLoading, isFetching, isError, error } = useQuery(
-    "bookmarkStore",
-    () => fetchBookmarkList(),
-    {
-      retry: NETWORK.RETRY_COUNT,
-      refetchOnWindowFocus: false,
+  const { data, isLoading, isFetching, isError, error } = useQuery("bookmarkStore", fetchBookmarkList, {
+    retry: 0,
+    refetchOnWindowFocus: false,
+  });
+
+  useEffect(() => {
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
+      alert(error.message);
     }
-  );
+
+    window.location.href = PATHNAME.HOME;
+  }, [error]);
 
   const bookmarkedStores = data ?? [];
 
-  const { center, positions, setCenter } = useMap(
-    bookmarkedStores,
-    CAMPUS_AREA_CENTER_POSITION[campusName!]
-  );
+  const { center, positions, setCenter } = useMap(bookmarkedStores, CAMPUS_AREA_CENTER_POSITION[campusName!]);
   const [selectedMarker, setSelectedMarker] = useState<Position>();
   const { swiperRef, handleSlideToPosition } = useSlideCarousel();
 
@@ -76,9 +79,7 @@ function BookmarkMapPage() {
       </S.HeaderWrapper>
       <S.MapWrapper>
         {(isLoading || isFetching) && <Spinner />}
-        {isError && error instanceof Error && (
-          <ErrorImage errorMessage={error.message} />
-        )}
+        {isError && error instanceof Error && <ErrorImage errorMessage={error.message} />}
         <Map center={center} isPanto>
           <MapMarker
             position={CAMPUS_POSITION[campusName as Campus]}
@@ -102,16 +103,9 @@ function BookmarkMapPage() {
         </Map>
       </S.MapWrapper>
       <S.StoreListWrapper>
-        <SlideCarousel
-          swiperRef={swiperRef}
-          onSlideChange={handleInformationSlide}
-        >
+        <SlideCarousel swiperRef={swiperRef} onSlideChange={handleInformationSlide}>
           {bookmarkedStores.map((store) => (
-            <StoreListItem
-              key={store.id}
-              {...store}
-              thumbnailUrl={store.imageUrl}
-            />
+            <StoreListItem key={store.id} {...store} thumbnailUrl={store.imageUrl} />
           ))}
         </SlideCarousel>
       </S.StoreListWrapper>
