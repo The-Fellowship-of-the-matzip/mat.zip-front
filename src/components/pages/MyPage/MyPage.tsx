@@ -53,19 +53,20 @@ function MyPage() {
   useEffect(() => {
     if (userProfileError instanceof Error && userProfileError.message === MESSAGES.LOGIN_RETRY) {
       alert(userProfileError.message);
+      window.location.href = PATHNAME.HOME;
       return;
     }
 
     if (bookmarkedStoreError instanceof Error && bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY) {
       alert(bookmarkedStoreError.message);
+      window.location.href = PATHNAME.HOME;
       return;
     }
 
     if (userReviewError instanceof Error && userReviewError.message === MESSAGES.LOGIN_RETRY) {
       alert(userReviewError.message);
+      window.location.href = PATHNAME.HOME;
     }
-
-    window.location.href = PATHNAME.HOME;
   }, [userProfileError, bookmarkedStoreError, userReviewError]);
 
   const myReviews = myReviewData?.reviews ?? [];
