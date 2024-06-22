@@ -32,7 +32,9 @@ function MyReviewListPage() {
   );
 
   const loadMoreReviews = () => {
-    fetchNextPage();
+    if (!isError) {
+      fetchNextPage();
+    }
   };
 
   const reviews =
@@ -44,9 +46,8 @@ function MyReviewListPage() {
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
+      window.location.href = PATHNAME.HOME;
     }
-
-    window.location.href = PATHNAME.HOME;
   }, [error]);
 
   return (
@@ -54,7 +55,6 @@ function MyReviewListPage() {
       <S.HeaderWrapper>
         <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 리뷰</Text>
-        <div></div>
       </S.HeaderWrapper>
       <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}
