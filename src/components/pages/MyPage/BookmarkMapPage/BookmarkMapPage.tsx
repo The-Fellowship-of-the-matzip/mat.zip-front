@@ -39,9 +39,8 @@ function BookmarkMapPage() {
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
+      window.location.href = PATHNAME.HOME;
     }
-
-    window.location.href = PATHNAME.HOME;
   }, [error]);
 
   const bookmarkedStores = data ?? [];
