@@ -1,8 +1,6 @@
 import * as S from "./BookmarkListPage.style";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-
-import { NETWORK } from "constants/api";
 import { PATHNAME } from "constants/routes";
 
 import { LeftIcon } from "asset";
@@ -28,12 +26,13 @@ function BookmarkListPage() {
 
   const bookmarkedStoreData = data ?? [];
 
+  console.log(error);
+
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
+      window.location.href = PATHNAME.HOME;
     }
-
-    window.location.href = PATHNAME.HOME;
   }, [error]);
 
   return (
