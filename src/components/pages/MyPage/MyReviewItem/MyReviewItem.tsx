@@ -17,6 +17,7 @@ import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
+import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 
 function MyReviewItem({
   id,
@@ -28,18 +29,27 @@ function MyReviewItem({
   imageUrl,
 }: UserReview) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
-    deleteReviewItem({
-      restaurantId: String(restaurant.id),
-      articleId: String(id),
-    })
+  const deleteMutation = useMutation<unknown, AxiosError, unknown>(
+    () =>
+      deleteReviewItem({
+        restaurantId: String(restaurant.id),
+        articleId: String(id),
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("myReview");
+      },
+      onError: () => {
+        window.alert("삭제 중 문제가 발생했습니다.");
+      },
+    },
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  const queryClient = useQueryClient();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleMeatballButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -56,12 +66,7 @@ function MyReviewItem({
 
   const handleReviewDeleteClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteMutation.mutate({
-        restaurantId: restaurant.id,
-        id,
-      });
-    }
+    setModalOpen((prev) => !prev);
   };
 
   const handleReviewModalClick = () => {
@@ -134,6 +139,17 @@ function MyReviewItem({
               </>
             )}
           </S.Header>
+          {isModalOpen && (
+            <DeleteReviewModal
+              onCloseModal={() => setModalOpen((prev) => !prev)}
+              onDeleteReview={() =>
+                deleteMutation.mutate({
+                  restaurantId: restaurant.id,
+                  id,
+                })
+              }
+            />
+          )}
           <S.ReviewBottom>
             <S.RatingWrapper>
               {repeatComponent(<Star isFilled size="xs" />, rating)}
