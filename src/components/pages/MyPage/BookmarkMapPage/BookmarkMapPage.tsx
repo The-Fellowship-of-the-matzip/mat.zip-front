@@ -31,21 +31,28 @@ function BookmarkMapPage() {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
-  const { data, isLoading, isFetching, isError, error } = useQuery("bookmarkStore", fetchBookmarkList, {
-    retry: 0,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading, isFetching, isError, error } = useQuery(
+    "bookmarkStore",
+    fetchBookmarkList,
+    {
+      retry: 0,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
-      window.location.href = PATHNAME.HOME;
+      navigate(PATHNAME.HOME);
     }
   }, [error]);
 
   const bookmarkedStores = data ?? [];
 
-  const { center, positions, setCenter } = useMap(bookmarkedStores, CAMPUS_AREA_CENTER_POSITION[campusName!]);
+  const { center, positions, setCenter } = useMap(
+    bookmarkedStores,
+    CAMPUS_AREA_CENTER_POSITION[campusName!],
+  );
   const [selectedMarker, setSelectedMarker] = useState<Position>();
   const { swiperRef, handleSlideToPosition } = useSlideCarousel();
 
@@ -78,7 +85,9 @@ function BookmarkMapPage() {
       </S.HeaderWrapper>
       <S.MapWrapper>
         {(isLoading || isFetching) && <Spinner />}
-        {isError && error instanceof Error && <ErrorImage errorMessage={error.message} />}
+        {isError && error instanceof Error && (
+          <ErrorImage errorMessage={error.message} />
+        )}
         <Map center={center} isPanto>
           <MapMarker
             position={CAMPUS_POSITION[campusName as Campus]}
@@ -102,9 +111,16 @@ function BookmarkMapPage() {
         </Map>
       </S.MapWrapper>
       <S.StoreListWrapper>
-        <SlideCarousel swiperRef={swiperRef} onSlideChange={handleInformationSlide}>
+        <SlideCarousel
+          swiperRef={swiperRef}
+          onSlideChange={handleInformationSlide}
+        >
           {bookmarkedStores.map((store) => (
-            <StoreListItem key={store.id} {...store} thumbnailUrl={store.imageUrl} />
+            <StoreListItem
+              key={store.id}
+              {...store}
+              thumbnailUrl={store.imageUrl}
+            />
           ))}
         </SlideCarousel>
       </S.StoreListWrapper>

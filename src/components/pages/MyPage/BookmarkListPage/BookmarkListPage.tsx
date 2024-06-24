@@ -19,10 +19,14 @@ import { MESSAGES } from "constants/messages";
 function BookmarkListPage() {
   const navigate = useNavigate();
 
-  const { data, isLoading, isFetching, isError, error } = useQuery("bookmarkStore", fetchBookmarkList, {
-    retry: 0,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading, isFetching, isError, error } = useQuery(
+    "bookmarkStore",
+    fetchBookmarkList,
+    {
+      retry: 0,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   const bookmarkedStoreData = data ?? [];
 
@@ -31,7 +35,7 @@ function BookmarkListPage() {
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
-      window.location.href = PATHNAME.HOME;
+      navigate(PATHNAME.HOME);
     }
   }, [error]);
 
@@ -40,7 +44,11 @@ function BookmarkListPage() {
       <S.HeaderWrapper>
         <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 맛집</Text>
-        <Button css={S.headerButtonStyle} variant="textButton" onClick={() => navigate(PATHNAME.BOOKMARK_MAP_PAGE)}>
+        <Button
+          css={S.headerButtonStyle}
+          variant="textButton"
+          onClick={() => navigate(PATHNAME.BOOKMARK_MAP_PAGE)}
+        >
           지도
         </Button>
       </S.HeaderWrapper>

@@ -36,36 +36,46 @@ function MyPage() {
     retry: 0,
   });
 
-  const { data: bookmarkedStoreData = [], error: bookmarkedStoreError } = useQuery(
-    "bookmarkedStore",
-    fetchBookmarkList,
+  const { data: bookmarkedStoreData = [], error: bookmarkedStoreError } =
+    useQuery("bookmarkedStore", fetchBookmarkList, {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    });
+
+  const { data: myReviewData, error: userReviewError } = useQuery(
+    "myReview",
+    fetchUserReviewList,
     {
       refetchOnWindowFocus: false,
       retry: 0,
     },
   );
 
-  const { data: myReviewData, error: userReviewError } = useQuery("myReview", fetchUserReviewList, {
-    refetchOnWindowFocus: false,
-    retry: 0,
-  });
-
   useEffect(() => {
-    if (userProfileError instanceof Error && userProfileError.message === MESSAGES.LOGIN_RETRY) {
+    if (
+      userProfileError instanceof Error &&
+      userProfileError.message === MESSAGES.LOGIN_RETRY
+    ) {
       alert(userProfileError.message);
-      window.location.href = PATHNAME.HOME;
+      navigate(PATHNAME.HOME);
       return;
     }
 
-    if (bookmarkedStoreError instanceof Error && bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY) {
+    if (
+      bookmarkedStoreError instanceof Error &&
+      bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY
+    ) {
       alert(bookmarkedStoreError.message);
-      window.location.href = PATHNAME.HOME;
+      navigate(PATHNAME.HOME);
       return;
     }
 
-    if (userReviewError instanceof Error && userReviewError.message === MESSAGES.LOGIN_RETRY) {
+    if (
+      userReviewError instanceof Error &&
+      userReviewError.message === MESSAGES.LOGIN_RETRY
+    ) {
       alert(userReviewError.message);
-      window.location.href = PATHNAME.HOME;
+      navigate(PATHNAME.HOME);
     }
   }, [userProfileError, bookmarkedStoreError, userReviewError]);
 
@@ -85,7 +95,9 @@ function MyPage() {
       </SectionHeader>
       <section>
         {isLoading && <Spinner />}
-        {isError && userProfileError instanceof Error && <ErrorImage errorMessage={userProfileError.message} />}
+        {isError && userProfileError instanceof Error && (
+          <ErrorImage errorMessage={userProfileError.message} />
+        )}
         <UserProfile {...profileData} />
       </section>
       <Divider />

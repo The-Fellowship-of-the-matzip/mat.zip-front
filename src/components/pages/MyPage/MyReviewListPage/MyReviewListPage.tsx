@@ -22,14 +22,11 @@ import { PATHNAME } from "constants/routes";
 function MyReviewListPage() {
   const navigate = useNavigate();
 
-  const { data, error, isLoading, isError, fetchNextPage, isFetching } = useInfiniteQuery(
-    ["myReviewList"],
-    fetchUserReviewList,
-    {
+  const { data, error, isLoading, isError, fetchNextPage, isFetching } =
+    useInfiniteQuery(["myReviewList"], fetchUserReviewList, {
       getNextPageParam,
       retry: 0,
-    },
-  );
+    });
 
   const loadMoreReviews = () => {
     if (!isError) {
@@ -39,15 +36,18 @@ function MyReviewListPage() {
 
   const reviews =
     data?.pages.reduce<UserReview[]>(
-      (prevReviews, { reviews: currentReviews }) => [...prevReviews, ...currentReviews],
+      (prevReviews, { reviews: currentReviews }) => [
+        ...prevReviews,
+        ...currentReviews,
+      ],
       [],
     ) || [];
 
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
-      window.location.href = PATHNAME.HOME;
     }
+    navigate(PATHNAME.HOME);
   }, [error]);
 
   return (
