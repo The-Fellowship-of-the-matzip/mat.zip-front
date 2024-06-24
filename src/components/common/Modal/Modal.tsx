@@ -6,6 +6,8 @@ import Header from "components/common/Modal/components/Header/Header";
 import Content from "components/common/Modal/components/Content/Content";
 import Footer from "components/common/Modal/components/Footer/Footer";
 
+import usePressESC from "hooks/usePressESC";
+
 import * as S from "components/common/Modal/Modal.style";
 
 interface ModalProps {
@@ -27,6 +29,8 @@ function Modal({
       setScrollOffset(0);
     };
   }, []);
+
+  usePressESC(onCloseModal);
 
   return ReactDOM.createPortal(
     <S.Container scrollOffset={scrollOffset}>
