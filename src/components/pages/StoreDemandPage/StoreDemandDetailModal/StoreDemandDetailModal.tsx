@@ -68,16 +68,22 @@ function StoreDemandDetailModal({
       onSuccess: handleSuccess,
       onError: handleSubmitError,
       retry: NETWORK.RETRY_COUNT,
-    }
+    },
   );
 
   return (
-    <Modal closeModal={closeModal}>
-      <S.ContentContainer>
-        <S.NameContainer>
+    <Modal onCloseModal={closeModal}>
+      <Modal.ModalHeader>
+        <S.TextContainer>
           <Text size="sm">{campus}</Text>
           <Heading size="sm">{name}</Heading>
-        </S.NameContainer>
+        </S.TextContainer>
+        <Modal.CloseButton
+          onCloseModal={closeModal}
+          css={S.CloseButtonStyling}
+        />
+      </Modal.ModalHeader>
+      <Modal.ModalContent>
         <S.DetailContainer>
           <S.DetailHead>
             <S.AuthorNameRow>신청자</S.AuthorNameRow>
@@ -94,15 +100,17 @@ function StoreDemandDetailModal({
             </S.RegisteredRow>
           </S.DetailItem>
         </S.DetailContainer>
+      </Modal.ModalContent>
+      <Modal.ModalFooter css={S.ButtonContainerStyling}>
         {isLoggedIn && isAuthor && !isRegistered && (
-          <S.ButtonContainer>
+          <>
             <Button onClick={handleDeleteClick}>삭제</Button>
             <Button variant="primary" onClick={handleEditOpen}>
               수정
             </Button>
-          </S.ButtonContainer>
+          </>
         )}
-      </S.ContentContainer>
+      </Modal.ModalFooter>
     </Modal>
   );
 }
