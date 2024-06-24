@@ -14,21 +14,32 @@ import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
+import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 
 type ReviewInfo = ReviewShape & { restaurantId: string };
 
 function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
-  const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
-    deleteReviewItem({
-      restaurantId: reviewInfo.restaurantId,
-      articleId: reviewInfo.id,
-    })
+  const queryClient = useQueryClient();
+
+  const deleteMutation = useMutation<unknown, AxiosError, unknown>(
+    () =>
+      deleteReviewItem({
+        restaurantId: reviewInfo.restaurantId,
+        articleId: reviewInfo.id,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("reviewDetailStore");
+      },
+      onError: () => {
+        window.alert("삭제 중 문제가 발생했습니다.");
+      },
+    },
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  const queryClient = useQueryClient();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const { author, rating, content, menu, imageUrl } = reviewInfo;
 
@@ -40,13 +51,11 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
     handleDropBoxClose();
   };
 
-  const handleReviewDeleteClick = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteMutation.mutate({
-        restaurantId: reviewInfo.restaurantId,
-        id: reviewInfo.id,
-      });
-    }
+  const handleReviewDeleteClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.stopPropagation();
+    setModalOpen((prev) => !prev);
   };
 
   return (
@@ -115,6 +124,17 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
               </>
             )}
           </S.Header>
+          {isModalOpen && (
+            <DeleteReviewModal
+              onCloseModal={() => setModalOpen((prev) => !prev)}
+              onDeleteReview={() =>
+                deleteMutation.mutate({
+                  restaurantId: reviewInfo.restaurantId,
+                  id: reviewInfo.id,
+                })
+              }
+            />
+          )}
           <S.ReviewBottom>
             <S.RatingWrapper>
               {repeatComponent(<Star isFilled size="xs" />, rating)}
