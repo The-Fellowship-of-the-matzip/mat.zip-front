@@ -1,13 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
 
 import { AUTH_LINK } from "constants/api";
-import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
-
-import useLogin from "hooks/useLogin";
 
 import Button from "components/common/Button/Button";
 import Text from "components/common/Text/Text";
@@ -17,6 +13,7 @@ import * as S from "components/layout/MenuDrawer/MenuDrawer.style";
 interface MenuDrawerProps {
   onCloseMenu: () => void;
   onOpenCampusSelectModal: () => void;
+  onOpenLogoutModal: () => void;
   isLoggedIn: boolean;
 }
 
@@ -24,25 +21,16 @@ function MenuDrawer({
   isLoggedIn,
   onCloseMenu,
   onOpenCampusSelectModal,
+  onOpenLogoutModal,
 }: MenuDrawerProps) {
-  const navigate = useNavigate();
-
-  const { logout } = useLogin();
-
   const handleCampusChangeRequest = () => {
     onCloseMenu();
     onOpenCampusSelectModal();
   };
 
   const handleLogout = () => {
-    if (!window.confirm(MESSAGES.LOGOUT_CONFIRM)) {
-      return;
-    }
-
-    logout();
     onCloseMenu();
-    window.alert(MESSAGES.LOGOUT_COMPLETE);
-    navigate(PATHNAME.HOME);
+    onOpenLogoutModal();
   };
 
   useEffect(() => {

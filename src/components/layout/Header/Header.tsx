@@ -10,8 +10,10 @@ import logoImg from "asset/logo-light.svg";
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
 
-import CampusSelectModal from "components/layout/MenuDrawer/CampusSelectModal/CampusSelectModal";
+import CampusSelectModal from "components/layout/Header/CampusSelectModal/CampusSelectModal";
 import SearchBar from "components/common/SearchBar/SearchBar";
+
+import LogoutModal from "components/layout/Header/LogoutModal/LogoutModal";
 
 import * as S from "components/layout/Header/Header.style";
 
@@ -21,6 +23,7 @@ function Header() {
 
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -33,6 +36,10 @@ function Header() {
   const openSelectModal = () => setIsSelectModalOpen(true);
 
   const closeSelectModal = () => setIsSelectModalOpen(false);
+
+  const openLogoutModal = () => setIsLogoutModalOpen(true);
+
+  const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
   const location = useLocation();
 
@@ -64,12 +71,14 @@ function Header() {
             <MenuDrawer
               isLoggedIn={isLoggedIn}
               onOpenCampusSelectModal={openSelectModal}
+              onOpenLogoutModal={openLogoutModal}
               onCloseMenu={closeMenu}
             />
           )}
           {isSelectModalOpen && (
             <CampusSelectModal onCloseModal={closeSelectModal} />
           )}
+          {isLogoutModalOpen && <LogoutModal onCloseModal={closeLogoutModal} />}
         </S.RightWrapper>
       </S.TopWrapper>
       <SearchBar />
