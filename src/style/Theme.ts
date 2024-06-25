@@ -42,6 +42,7 @@ const borderRadius = {
 const zIndex = {
   header: 2,
   overlay: 3,
+  toast: 1000,
 };
 
 export const theme = {

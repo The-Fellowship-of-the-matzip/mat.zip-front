@@ -12,6 +12,7 @@ import LoginContextProvider from "context/LoginContextProvider";
 
 import GlobalStyle from "style/GlobalStyle";
 import { theme } from "style/Theme";
+import ToastProvider from "components/common/Toast/provider/ToastProvider";
 
 // if (process.env.NODE_ENV === "development") {
 //   const { worker } = require("./mock/browser");
@@ -19,7 +20,7 @@ import { theme } from "style/Theme";
 // }
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 const queryClient = new QueryClient();
@@ -29,14 +30,16 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <LoginContextProvider>
-          <CampusContextProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </CampusContextProvider>
-        </LoginContextProvider>
+        <ToastProvider>
+          <LoginContextProvider>
+            <CampusContextProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </CampusContextProvider>
+          </LoginContextProvider>
+        </ToastProvider>
       </QueryClientProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
