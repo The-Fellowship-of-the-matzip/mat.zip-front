@@ -1,3 +1,4 @@
+import { ToastStatus } from "components/common/Toast/Toast.type";
 import Toast from "../Toast";
 import {
   ANIMATION_DURATION,
@@ -12,7 +13,9 @@ import {
 } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ToastContext = createContext((_: string) => {});
+export const ToastContext = createContext(
+  (message: string, type?: ToastStatus) => {},
+);
 
 export const useToastContext = () => {
   const value = useContext(ToastContext);
@@ -24,15 +27,17 @@ export const useToastContext = () => {
 
 const ToastProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<ToastStatus>("danger");
   const [isOpenToast, setIsOpenToast] = useState(false);
   const [isRemove, setIsRemove] = useState(true);
 
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  const showToast = useCallback((message: string) => {
+  const showToast = useCallback((message: string, type?: ToastStatus) => {
     setIsRemove(false);
     setIsOpenToast(true);
     setMessage(message);
+    setStatus(type ?? "danger");
 
     if (toastTimer.current) {
       clearTimeout(toastTimer.current);
@@ -52,7 +57,9 @@ const ToastProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
     <ToastContext.Provider value={showToast}>
       {children}
-      {!isRemove && <Toast isOpen={isOpenToast} message={message} />}
+      {!isRemove && (
+        <Toast type={status} isOpen={isOpenToast} message={message} />
+      )}
     </ToastContext.Provider>
   );
 };

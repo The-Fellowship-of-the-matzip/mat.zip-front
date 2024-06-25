@@ -22,6 +22,8 @@ const color = {
   redDark: "#c50000",
   red: "#ea0000",
   redLight: "#fff2f2",
+
+  green: "#69c582",
 };
 
 const spacer = {

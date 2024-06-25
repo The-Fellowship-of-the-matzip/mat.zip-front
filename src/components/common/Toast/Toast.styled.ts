@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { keyframes } from "styled-components";
+import { keyframes, css } from "styled-components";
+import { ToastStatus } from "components/common/Toast/Toast.type";
+import { theme } from "style/Theme";
 
 const fadeIn = keyframes`
   0% {
@@ -19,8 +21,25 @@ const fadeOut = keyframes`
   }
 `;
 
-export const ToastContainer = styled.div<{ $isOpen: boolean }>`
-  background-color: ${({ theme }) => theme.color.red};
+const getBackgroundColor = ($type: ToastStatus) => {
+  switch ($type) {
+    case "active":
+      console.log(theme.color.green);
+      return css`
+        background-color: ${({ theme }) => theme.color.green};
+      `;
+    case "danger":
+      return css`
+        background-color: ${({ theme }) => theme.color.red};
+      `;
+  }
+};
+
+export const ToastContainer = styled.div<{
+  $isOpen: boolean;
+  $type: ToastStatus;
+}>`
+  ${({ $type }) => getBackgroundColor($type)};
   color: ${({ theme }) => theme.color.white};
   width: 48rem;
   height: 5rem;
