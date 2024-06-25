@@ -11,6 +11,7 @@ import useLogin from "hooks/useLogin";
 import sendLoginRequest from "api/login/sendLoginRequest";
 
 import * as S from "components/pages/Login/Login.style";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,13 +21,16 @@ function Login() {
   const code = searchParams.get("code");
 
   const { login } = useLogin();
+  const showToast = useToastContext();
 
   const handleLogin = async () => {
     try {
       const accessToken = await sendLoginRequest(code as string);
       login(accessToken);
-    } catch ({ message }) {
-      alert(message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        showToast(error.message);
+      }
     } finally {
       navigate(PATHNAME.HOME);
     }
