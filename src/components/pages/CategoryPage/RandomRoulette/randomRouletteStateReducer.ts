@@ -26,7 +26,7 @@ type Action =
     }
   | {
       type: typeof ACTION_TYPES.SHOW_RESULT;
-      payload: Pick<State, "result">;
+      payload: Pick<State, "result" | "rouletteBoard">;
     }
   | {
       type: typeof ACTION_TYPES.RESET;
@@ -57,11 +57,12 @@ export const randomRouletteStateReducer = (state: State, action: Action) => {
       };
     }
     case ACTION_TYPES.SHOW_RESULT: {
-      const { result } = action.payload;
+      const { result, rouletteBoard } = action.payload;
 
       return {
         ...state,
         result,
+        rouletteBoard,
         triggerAnimation: false,
         isResultOpen: true,
       };

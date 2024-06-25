@@ -46,11 +46,7 @@ function useRandomPick(campusId: CampusId) {
     const rouletteBoard =
       state.pickedIndex === null
         ? [...rouletteBaseArray]
-        : [
-            rouletteBaseArray[state.pickedIndex],
-            ...rouletteBaseArray,
-            rouletteBaseArray[state.pickedIndex],
-          ];
+        : [...rouletteBaseArray, rouletteBaseArray[state.pickedIndex]];
 
     dispatch({
       type: ACTION_TYPES.SET_BOARD,
@@ -61,12 +57,16 @@ function useRandomPick(campusId: CampusId) {
   };
 
   const showResult = () => {
-    if (!stores || state.pickedIndex === null) return;
+    if (!stores || state.pickedIndex === null || !rouletteBaseArray) return;
+
+    const randomRouletteResult = stores[state.pickedIndex];
+    const randomRouletteResultBoard = [randomRouletteResult.name];
 
     dispatch({
       type: ACTION_TYPES.SHOW_RESULT,
       payload: {
-        result: stores[state.pickedIndex],
+        rouletteBoard: randomRouletteResultBoard,
+        result: randomRouletteResult,
       },
     });
   };
@@ -75,7 +75,6 @@ function useRandomPick(campusId: CampusId) {
     if (!rouletteBaseArray) return;
 
     const rouletteBoard = [
-      rouletteBaseArray[randomNumber],
       ...rouletteBaseArray,
       rouletteBaseArray[randomNumber],
     ];
