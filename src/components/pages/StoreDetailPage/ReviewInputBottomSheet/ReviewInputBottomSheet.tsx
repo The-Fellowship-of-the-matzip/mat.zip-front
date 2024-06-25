@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { ReviewInputShape } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
@@ -21,6 +20,7 @@ import StarRating from "components/common/StarRating/StarRating";
 import Textarea from "components/common/Textarea/Textarea";
 
 import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet.style";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 interface ReviewInputBottomSheetProps {
   closeSheet: () => void;
@@ -42,6 +42,8 @@ function ReviewInputBottomSheet({
     useImageUpload();
 
   const { logout } = useLogin();
+
+  const showToast = useToastContext();
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();
@@ -73,7 +75,7 @@ function ReviewInputBottomSheet({
   };
 
   const handleContentInput: React.ChangeEventHandler<HTMLTextAreaElement> = (
-    e
+    e,
   ) => {
     const {
       target: { value },
@@ -81,7 +83,7 @@ function ReviewInputBottomSheet({
 
     if (value.length > INPUT_MAX_LENGTH.REVIEW_CONTENT) {
       e.preventDefault();
-      alert(MESSAGES.EXCEED_REVIEW_CONTENT_MAX_LENGTH);
+      showToast(MESSAGES.EXCEED_REVIEW_CONTENT_MAX_LENGTH);
       return;
     }
 
@@ -89,15 +91,15 @@ function ReviewInputBottomSheet({
   };
 
   const handleSubmitError = (error: AxiosError) => {
-    if (error.code === "401") {
-      alert(MESSAGES.TOKEN_INVALID);
+    if (error.message === "다시 로그인 해주세요.") {
+      showToast(error.message);
       logout();
     }
   };
 
   const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
     sendReviewPostRequest(restaurantId),
-    { onSuccess, onError: handleSubmitError, retry: NETWORK.RETRY_COUNT }
+    { onSuccess, onError: handleSubmitError, retry: 0 },
   );
 
   return (
