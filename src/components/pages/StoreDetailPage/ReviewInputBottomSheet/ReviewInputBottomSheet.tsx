@@ -67,7 +67,7 @@ function ReviewInputBottomSheet({
 
     if (value.length > INPUT_MAX_LENGTH.MENU) {
       e.preventDefault();
-      alert(MESSAGES.EXCEED_MENU_MAX_LENGTH);
+      showToast(MESSAGES.EXCEED_MENU_MAX_LENGTH);
       return;
     }
 
