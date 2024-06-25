@@ -5,13 +5,36 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import ROUTES, { PATHNAME } from "constants/routes";
 
-import { SearchIcon } from "asset";
+import { SearchIcon, OutwardIcon } from "asset";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
 interface SearchBarProps {
   closeSearchBar?: () => void;
 }
+
+const autoCompleteMockData = [
+  {
+    id: 1,
+    name: "아이템 1",
+  },
+  {
+    id: 2,
+    name: "아이템 2",
+  },
+  {
+    id: 3,
+    name: "아이템 3",
+  },
+  {
+    id: 4,
+    name: "아이템 4",
+  },
+  {
+    id: 5,
+    name: "아이템 5",
+  },
+];
 
 function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
@@ -44,20 +67,30 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   }, [location]);
 
   return (
-    <S.Container onSubmit={handleSearchButtonClick}>
-      <S.InputContainer>
-        <Input
-          css={S.inputStyle}
-          placeholder="맛집을 검색해 보세요"
-          value={keyword}
-          min={1}
-          max={30}
-          onChange={handleSearchInput}
-        />
-      </S.InputContainer>
-      <Button css={S.buttonStyle}>
-        <SearchIcon />
-      </Button>
+    <S.Container>
+      <S.FormContainer onSubmit={handleSearchButtonClick}>
+        <S.InputContainer>
+          <Input
+            css={S.inputStyle}
+            placeholder="맛집을 검색해 보세요"
+            value={keyword}
+            min={1}
+            max={30}
+            onChange={handleSearchInput}
+          />
+        </S.InputContainer>
+        <Button css={S.searchButtonStyle}>
+          <SearchIcon />
+        </Button>
+      </S.FormContainer>
+      <S.DropdownList>
+        {autoCompleteMockData.map((data) => (
+          <Button key={data.id} css={S.dropdownButtonStyle}>
+            <span>{data.name}</span>
+            <OutwardIcon />
+          </Button>
+        ))}
+      </S.DropdownList>
     </S.Container>
   );
 }

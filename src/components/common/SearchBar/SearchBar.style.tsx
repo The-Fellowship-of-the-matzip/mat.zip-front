@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.form`
+export const Container = styled.div`
+  position: relative;
+`;
+
+export const FormContainer = styled.form`
   width: 100%;
   display: flex;
 `;
@@ -17,11 +21,24 @@ export const InputContainer = styled.div`
   }
 `;
 
+export const DropdownList = styled.div`
+  position: absolute;
+  width: 100%;
+
+  background-color: ${({ theme }) => theme.color.white};
+
+  border: 1px solid ${({ theme }) => theme.color.primaryLight2};
+  border-top: 0px;
+  border-radius: ${({ theme }) => theme.borderRadius.small};
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+`;
+
 export const inputStyle = css`
   width: 100%;
-  height: 4.85rem;
+  height: 5rem;
 
-  background-color: ${({ theme }) => theme.color.primaryLight3};
+  background-color: ${({ theme }) => theme.color.primaryLight4};
 
   border: 1px solid ${({ theme }) => theme.color.primaryLight2};
   border-right: 0px;
@@ -30,11 +47,36 @@ export const inputStyle = css`
   border-bottom-right-radius: 0;
 `;
 
-export const buttonStyle = css`
-  width: 4.85rem;
-  height: 4.85rem;
+export const dropdownButtonStyle = css`
+  width: 100%;
+  height: 5rem;
 
-  background-color: ${({ theme }) => theme.color.primaryLight3};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.4rem;
+  background-color: ${({ theme }) => theme.color.white};
+  border: 0;
+
+  font-weight: 500;
+
+  &:hover:enabled {
+    background-color: ${({ theme }) => theme.color.primaryLight4};
+  }
+
+  &:focus {
+    background-color: ${({ theme }) => theme.color.primaryLight4};
+    box-shadow: none;
+    outline: 0;
+  }
+`;
+
+export const searchButtonStyle = css`
+  width: 5rem;
+  height: 5rem;
+
+  background-color: ${({ theme }) => theme.color.primaryLight4};
 
   border: 1px solid ${({ theme }) => theme.color.primaryLight2};
   border-left: 0px;
