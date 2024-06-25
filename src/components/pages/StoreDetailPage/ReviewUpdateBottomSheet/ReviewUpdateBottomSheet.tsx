@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { ReviewInputShape } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
@@ -46,12 +45,13 @@ function ReviewUpdateBottomSheet({
     defaultReviewItem.content,
   );
   const [menu, setMenu] = useState<string>(defaultReviewItem.menu);
-  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
-    useImageUpload(defaultReviewItem.imageUrl);
-
-  const { logout } = useLogin();
 
   const showToast = useToastContext();
+
+  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
+    useImageUpload(showToast, defaultReviewItem.imageUrl);
+
+  const { logout } = useLogin();
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();

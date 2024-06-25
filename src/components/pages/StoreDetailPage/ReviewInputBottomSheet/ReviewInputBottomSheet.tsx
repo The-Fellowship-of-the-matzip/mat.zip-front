@@ -38,12 +38,12 @@ function ReviewInputBottomSheet({
   const [rating, setRating] = useState(DEFAULT_RATING);
   const [reviewContent, setReviewContent] = useState("");
   const [menuInput, setMenuInput] = useState("");
+  const showToast = useToastContext();
+
   const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
-    useImageUpload();
+    useImageUpload(showToast);
 
   const { logout } = useLogin();
-
-  const showToast = useToastContext();
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();
