@@ -20,6 +20,7 @@ import Input from "components/common/Input/Input";
 import Select from "components/common/Select/Select";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 interface StoreDemandCreateBottomSheetProps {
   closeSheet: () => void;
@@ -32,6 +33,7 @@ function StoreDemandCreateBottomSheet({
 }: StoreDemandCreateBottomSheetProps) {
   const { logout } = useLogin();
   const campus = useContext(campusContext);
+  const showToast = useToastContext();
 
   const categoryOptions = Object.entries(categories).map(([id, name]) => (
     <option key={id} value={id}>
@@ -51,12 +53,12 @@ function StoreDemandCreateBottomSheet({
     const categoryId = formData.get("categoryId");
 
     if (!isValidString(name) || !isValidString(categoryId)) {
-      alert("모든 항목을 작성해주세요!");
+      showToast("모든 항목을 작성해주세요!");
       return;
     }
 
     if (name.length > 50) {
-      alert("식당 이름의 최대 길이는 50자입니다.");
+      showToast("식당 이름의 최대 길이는 50자입니다.");
       return;
     }
 
@@ -68,9 +70,9 @@ function StoreDemandCreateBottomSheet({
     refetchList();
   };
 
-  const handleSubmitError = (error: AxiosError) => {
-    if (error.code === "401") {
-      alert(MESSAGES.TOKEN_INVALID);
+  const handleSubmitError = (error: Error) => {
+    if (error.message === MESSAGES.TOKEN_INVALID) {
+      showToast(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };
@@ -82,7 +84,7 @@ function StoreDemandCreateBottomSheet({
   >(sendStoreDemandPostRequest(getCampusId(campus as Campus)), {
     onSuccess: handleSuccess,
     onError: handleSubmitError,
-    retry: NETWORK.RETRY_COUNT,
+    retry: 0,
   });
 
   return (

@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { useMutation } from "react-query";
 import { Campus } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
@@ -20,6 +19,7 @@ import Input from "components/common/Input/Input";
 import Select from "components/common/Select/Select";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 interface StoreDemandEditBottomSheetProps {
   id: string;
@@ -36,6 +36,8 @@ function StoreDemandEditBottomSheet({
 }: StoreDemandEditBottomSheetProps) {
   const { logout } = useLogin();
   const campus = useContext(campusContext);
+
+  const showToast = useToastContext();
 
   const categoryOptions = Object.entries(categories).map(([id, name]) => (
     <option key={id} value={id}>
@@ -55,12 +57,12 @@ function StoreDemandEditBottomSheet({
     const categoryId = formData.get("categoryId");
 
     if (!isValidString(name) || !isValidString(categoryId)) {
-      alert("모든 항목을 작성해주세요!");
+      showToast("모든 항목을 작성해주세요!");
       return;
     }
 
     if (name.length > 50) {
-      alert("식당 이름의 최대 길이는 50자입니다.");
+      showToast("식당 이름의 최대 길이는 50자입니다.");
       return;
     }
 
@@ -72,9 +74,9 @@ function StoreDemandEditBottomSheet({
     refetchList();
   };
 
-  const handleSubmitError = (error: AxiosError) => {
-    if (error.code === "401") {
-      alert(MESSAGES.TOKEN_INVALID);
+  const handleSubmitError = (error: Error) => {
+    if (error.message === MESSAGES.TOKEN_INVALID) {
+      showToast(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };
@@ -86,7 +88,7 @@ function StoreDemandEditBottomSheet({
   >(sendStoreDemandPutRequest(getCampusId(campus as Campus), id), {
     onSuccess: handleSuccess,
     onError: handleSubmitError,
-    retry: NETWORK.RETRY_COUNT,
+    retry: 0,
   });
 
   return (
