@@ -26,6 +26,7 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function CategoryDetailPage() {
   const navigate = useNavigate();
@@ -57,14 +58,14 @@ function CategoryDetailPage() {
 
   const handleClickFilterChip = (index: number) => () => {
     setFilter((prev) =>
-      prev === FILTERS[index].order ? "" : FILTERS[index].order
+      prev === FILTERS[index].order ? "" : FILTERS[index].order,
     );
   };
 
   const categoryStores =
     data?.pages.reduce<Store[]>(
       (stores, page) => [...stores, ...page.restaurants],
-      []
+      [],
     ) || [];
 
   useEffect(() => {
@@ -75,8 +76,10 @@ function CategoryDetailPage() {
     return categoryId in categories;
   };
 
+  const showToast = useToastContext();
+
   if (!categoryId || !Number(categoryId) || !isValidCategoryId(categoryId)) {
-    window.alert(MESSAGES.WRONG_PATH);
+    showToast(MESSAGES.WRONG_PATH);
     return <Navigate to={PATHNAME.HOME} />;
   }
 
