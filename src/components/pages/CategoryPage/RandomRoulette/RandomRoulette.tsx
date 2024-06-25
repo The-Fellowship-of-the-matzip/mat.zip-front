@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { CampusId } from "types/common";
 
+import { ROULETTE_BUTTON_TEXT } from "constants/roulette";
+
 import useRandomPick from "hooks/useRandomPick";
 
 import Button from "components/common/Button/Button";
@@ -18,6 +20,7 @@ type Props = {
 function RandomRoulette({ campusId }: Props) {
   const {
     isLoading,
+    isRefetching,
     isError,
     error,
     state: { rouletteBoard, isResultOpen, result, triggerAnimation },
@@ -53,14 +56,23 @@ function RandomRoulette({ campusId }: Props) {
           variant="primary"
           size="small"
           onClick={handleRunClick}
-          disabled={triggerAnimation}
+          disabled={triggerAnimation || isRefetching}
         >
-          룰렛 Go!
+          {triggerAnimation
+            ? ROULETTE_BUTTON_TEXT.SPINNING
+            : ROULETTE_BUTTON_TEXT.START}
         </Button>
       ) : (
         <S.ButtonContainer>
-          <Button variant="primary" size="small" onClick={refetchAndStartSpin}>
-            다시 돌리기
+          <Button
+            variant="primary"
+            size="small"
+            onClick={refetchAndStartSpin}
+            disabled={isRefetching}
+          >
+            {isRefetching
+              ? ROULETTE_BUTTON_TEXT.REFETCHING
+              : ROULETTE_BUTTON_TEXT.RESTART}
           </Button>
         </S.ButtonContainer>
       )}
