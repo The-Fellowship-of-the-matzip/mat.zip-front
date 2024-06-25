@@ -26,6 +26,7 @@ import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInput
 import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
 import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle";
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
@@ -58,12 +59,14 @@ function StoreDetailPage() {
     fetchNextPage();
   };
 
+  const showToast = useToastContext()
+
   const handleReviewOpenClick = () => {
     if (isLoggedIn) {
       setIsReviewOpen(true);
       return;
     }
-    alert(MESSAGES.LOGIN_REQUIRED);
+    showToast(MESSAGES.LOGIN_REQUIRED);
   };
 
   const reviews =
