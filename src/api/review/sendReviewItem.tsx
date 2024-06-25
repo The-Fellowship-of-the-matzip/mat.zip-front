@@ -21,10 +21,7 @@ const sendReviewItem = async ({
 }: SendReviewItemProps) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
   if (!accessToken) {
-    window.sessionStorage.removeItem(ACCESS_TOKEN);
-    window.alert("다시 로그인 해주세요");
-    window.location.reload();
-    return;
+    throw new Error("다시 로그인 해주세요.");
   }
   const { data } = await axiosInstance.put<AxiosResponse>(
     ENDPOINTS.UPDATE_REVIEW_ITEM(restaurantId, articleId),
@@ -37,7 +34,7 @@ const sendReviewItem = async ({
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }
+    },
   );
   return data;
 };
