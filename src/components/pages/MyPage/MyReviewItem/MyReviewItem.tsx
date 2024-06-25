@@ -18,6 +18,7 @@ import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function MyReviewItem({
   id,
@@ -29,6 +30,7 @@ function MyReviewItem({
   imageUrl,
 }: UserReview) {
   const navigate = useNavigate();
+  const showToast = useToastContext();
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
@@ -41,8 +43,9 @@ function MyReviewItem({
       onSuccess: () => {
         queryClient.invalidateQueries("myReview");
       },
-      onError: () => {
-        window.alert("삭제 중 문제가 발생했습니다.");
+      onError: (error) => {
+        showToast(error.message);
+        window.location.reload();
       },
     },
   );

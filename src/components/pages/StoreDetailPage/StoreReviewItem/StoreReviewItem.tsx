@@ -15,11 +15,14 @@ import Text from "components/common/Text/Text";
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
 import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 type ReviewInfo = ReviewShape & { restaurantId: string };
 
 function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
   const queryClient = useQueryClient();
+
+  const showToast = useToastContext();
 
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
     () =>
@@ -31,8 +34,9 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
       onSuccess: () => {
         queryClient.invalidateQueries("reviewDetailStore");
       },
-      onError: () => {
-        window.alert("삭제 중 문제가 발생했습니다.");
+      onError: (error) => {
+        showToast(error.message);
+        window.location.reload();
       },
     },
   );
