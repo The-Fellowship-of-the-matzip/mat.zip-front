@@ -23,12 +23,15 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreDemandCreateBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandCreateBottomSheet";
 import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
+import { MESSAGES } from "constants/messages";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
   const [isSheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
 
+  const showToast = useToastContext();
   const campus = useContext(campusContext);
   const campusId = getCampusId(campus as Campus);
 
@@ -46,18 +49,18 @@ function StoreDemandPage() {
     {
       getNextPageParam,
       retry: NETWORK.RETRY_COUNT,
-    }
+    },
   );
 
   const storeRequests =
     data?.pages.reduce<StoreDemand[]>(
       (stores, page) => [...stores, ...page.items],
-      []
+      [],
     ) || [];
 
   const handleRequestSheetOpen = () => {
     if (!isLoggedIn) {
-      alert("로그인 후 작성해주세요");
+      showToast(MESSAGES.LOGIN_REQUIRED);
       return;
     }
     setSheetOpen(true);
