@@ -10,6 +10,7 @@ import logoImg from "asset/logo-light.svg";
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
 
+import CampusSelectModal from "components/layout/MenuDrawer/CampusSelectModal/CampusSelectModal";
 import SearchBar from "components/common/SearchBar/SearchBar";
 
 import * as S from "components/layout/Header/Header.style";
@@ -19,15 +20,21 @@ function Header() {
   const campus = useContext(campusContext);
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
-  const location = useLocation();
-
   const openMenu = () => {
     setMenuOpen(true);
   };
+
+  const openSelectModal = () => setIsSelectModalOpen(true);
+
+  const closeSelectModal = () => setIsSelectModalOpen(false);
+
+  const location = useLocation();
 
   const handleIconClick = () => {
     window.scrollTo({
@@ -54,7 +61,14 @@ function Header() {
             <GiHamburgerMenu />
           </S.MenuButton>
           {isMenuOpen && (
-            <MenuDrawer closeMenu={closeMenu} isLoggedIn={isLoggedIn} />
+            <MenuDrawer
+              isLoggedIn={isLoggedIn}
+              onOpenCampusSelectModal={openSelectModal}
+              onCloseMenu={closeMenu}
+            />
+          )}
+          {isSelectModalOpen && (
+            <CampusSelectModal onCloseModal={closeSelectModal} />
           )}
         </S.RightWrapper>
       </S.TopWrapper>
