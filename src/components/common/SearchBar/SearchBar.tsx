@@ -1,7 +1,7 @@
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import ROUTES, { PATHNAME } from "constants/routes";
 
@@ -38,6 +38,7 @@ const autoCompleteMockData = [
 
 function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   return (
     <S.Container>
       <S.FormContainer onSubmit={handleSearchButtonClick}>
-        <S.InputContainer>
+        <S.InputContainer onClick={() => setIsDropdownOpen(true)}>
           <Input
             css={S.inputStyle}
             placeholder="맛집을 검색해 보세요"
@@ -83,14 +84,22 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
           <SearchIcon />
         </Button>
       </S.FormContainer>
-      <S.DropdownList>
-        {autoCompleteMockData.map((data) => (
-          <Button key={data.id} css={S.dropdownButtonStyle}>
-            <span>{data.name}</span>
-            <OutwardIcon />
-          </Button>
-        ))}
-      </S.DropdownList>
+      {isDropdownOpen && (
+        <S.DropdownList>
+          {autoCompleteMockData.map((data) => (
+            <Link to={`${PATHNAME.STORE_DETAIL}/${data.id}`}>
+              <Button
+                key={data.id}
+                css={S.dropdownButtonStyle}
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                <span>{data.name}</span>
+                <OutwardIcon />
+              </Button>
+            </Link>
+          ))}
+        </S.DropdownList>
+      )}
     </S.Container>
   );
 }
