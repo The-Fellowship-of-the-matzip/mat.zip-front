@@ -17,6 +17,7 @@ function useRandomPick(campusId: CampusId) {
   const {
     data: stores,
     isLoading,
+    isRefetching,
     isError,
     error,
     refetch,
@@ -111,6 +112,7 @@ function useRandomPick(campusId: CampusId) {
 
   return {
     isLoading,
+    isRefetching,
     isError,
     error,
     state,
