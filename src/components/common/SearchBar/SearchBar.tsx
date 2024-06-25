@@ -7,6 +7,8 @@ import ROUTES, { PATHNAME } from "constants/routes";
 
 import { SearchIcon, OutwardIcon } from "asset";
 
+import useFocusTrap from "hooks/useFocusTrap";
+
 import * as S from "components/common/SearchBar/SearchBar.style";
 
 interface SearchBarProps {
@@ -40,6 +42,8 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const searchBarRef = useFocusTrap(isDropdownOpen);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -68,7 +72,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   }, [location]);
 
   return (
-    <S.Container>
+    <S.Container ref={searchBarRef}>
       <S.FormContainer onSubmit={handleSearchButtonClick}>
         <S.InputContainer onClick={() => setIsDropdownOpen(true)}>
           <Input
