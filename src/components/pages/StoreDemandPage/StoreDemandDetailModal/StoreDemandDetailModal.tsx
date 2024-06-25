@@ -1,10 +1,8 @@
-import { AxiosError } from "axios";
 import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { useMutation } from "react-query";
 import { Campus, StoreDemand } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
@@ -24,6 +22,7 @@ import Text from "components/common/Text/Text";
 import * as S from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal.style";
 
 import { theme } from "style/Theme";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 interface StoreDemandDetailModalProps extends StoreDemand {
   handleEditOpen: () => void;
@@ -45,6 +44,7 @@ function StoreDemandDetailModal({
   const campus = useContext(campusContext);
   const isLoggedIn = useContext(LoginContext);
   const { logout } = useLogin();
+  const showToast = useToastContext();
 
   const handleDeleteClick = () => {
     mutation.mutate();
@@ -55,9 +55,9 @@ function StoreDemandDetailModal({
     handleAfterRequest();
   };
 
-  const handleSubmitError = (error: AxiosError) => {
-    if (error.code === "401") {
-      alert(MESSAGES.TOKEN_INVALID);
+  const handleSubmitError = (error: Error) => {
+    if (error.message === MESSAGES.TOKEN_INVALID) {
+      showToast(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };
@@ -67,7 +67,7 @@ function StoreDemandDetailModal({
     {
       onSuccess: handleSuccess,
       onError: handleSubmitError,
-      retry: NETWORK.RETRY_COUNT,
+      retry: 0,
     },
   );
 
