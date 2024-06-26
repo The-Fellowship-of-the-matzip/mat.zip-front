@@ -1,11 +1,12 @@
+import AutoComplete from "../AutoComplete/AutoComplete";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import ROUTES, { PATHNAME } from "constants/routes";
 
-import { SearchIcon, OutwardIcon } from "asset";
+import { SearchIcon } from "asset";
 
 import useFocusTrap from "hooks/useFocusTrap";
 
@@ -84,25 +85,15 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
             onChange={handleSearchInput}
           />
         </S.InputContainer>
-        <Button css={S.searchButtonStyle}>
+        <Button css={S.buttonStyle}>
           <SearchIcon />
         </Button>
       </S.FormContainer>
       {isDropdownOpen && (
-        <S.DropdownList>
-          {autoCompleteMockData.map((data) => (
-            <Link to={`${PATHNAME.STORE_DETAIL}/${data.id}`}>
-              <Button
-                key={data.id}
-                css={S.dropdownButtonStyle}
-                onClick={() => setIsDropdownOpen(false)}
-              >
-                <span>{data.name}</span>
-                <OutwardIcon />
-              </Button>
-            </Link>
-          ))}
-        </S.DropdownList>
+        <AutoComplete
+          optionList={autoCompleteMockData}
+          closeAutoComplete={() => setIsDropdownOpen(false)}
+        />
       )}
     </S.Container>
   );
