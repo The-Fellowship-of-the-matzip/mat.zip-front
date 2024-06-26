@@ -22,9 +22,11 @@ import StoreList from "components/common/StoreList/StoreList";
 import Text from "components/common/Text/Text";
 import { useEffect } from "react";
 import { MESSAGES } from "constants/messages";
+import useLogin from "hooks/useLogin";
 
 function MyPage() {
   const navigate = useNavigate();
+  const { logout } = useLogin();
 
   const {
     data: profileData,
@@ -58,6 +60,7 @@ function MyPage() {
     ) {
       alert(userProfileError.message);
       navigate(PATHNAME.HOME);
+      logout();
       return;
     }
 
@@ -66,6 +69,7 @@ function MyPage() {
       bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY
     ) {
       alert(bookmarkedStoreError.message);
+      logout();
       navigate(PATHNAME.HOME);
       return;
     }
@@ -75,6 +79,7 @@ function MyPage() {
       userReviewError.message === MESSAGES.LOGIN_RETRY
     ) {
       alert(userReviewError.message);
+      logout();
       navigate(PATHNAME.HOME);
     }
   }, [userProfileError, bookmarkedStoreError, userReviewError]);
