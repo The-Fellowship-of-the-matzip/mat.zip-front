@@ -3,12 +3,13 @@ import type { BookmarkStore } from "types/common/bookmarkTypes";
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
+import { MESSAGES } from "constants/messages";
 
 const fetchBookmarkList = async () => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
-    throw new Error("다시 로그인 해주세요");
+    throw new Error(MESSAGES.LOGIN_REQUIRED);
   }
 
   const { data } = await axiosInstance.get<BookmarkStore[]>(
