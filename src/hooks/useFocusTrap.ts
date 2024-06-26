@@ -27,17 +27,29 @@ const useFocusTrap = (isOpen: boolean) => {
         : currentIndex + 1;
 
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "Tab") {
+      if (["Tab", "ArrowUp", "ArrowDown"].includes(event.key)) {
         event.preventDefault();
 
         const currentIndex = focusableElements.current.findIndex(
           (el) => el === document.activeElement
         );
-        const nextIndex = event.shiftKey
-          ? moveFocusIndexPrev(currentIndex)
-          : moveFocusIndexNext(currentIndex);
 
-        focusableElements.current[nextIndex].focus();
+        if (event.key === "Tab") {
+          const nextIndex = event.shiftKey
+            ? moveFocusIndexPrev(currentIndex)
+            : moveFocusIndexNext(currentIndex);
+          focusableElements.current[nextIndex].focus();
+        }
+
+        if (event.key === "ArrowUp") {
+          const nextIndex = moveFocusIndexPrev(currentIndex);
+          focusableElements.current[nextIndex].focus();
+        }
+
+        if (event.key === "ArrowDown") {
+          const nextIndex = moveFocusIndexNext(currentIndex);
+          focusableElements.current[nextIndex].focus();
+        }
       }
     };
 
