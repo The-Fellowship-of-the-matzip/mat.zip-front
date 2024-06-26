@@ -21,6 +21,8 @@ import Textarea from "components/common/Textarea/Textarea";
 
 import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet.style";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+import { PATHNAME } from "constants/routes";
+import { useNavigate } from "react-router-dom";
 
 interface ReviewInputBottomSheetProps {
   closeSheet: () => void;
@@ -44,6 +46,7 @@ function ReviewInputBottomSheet({
     useImageUpload(showToast);
 
   const { logout } = useLogin();
+  const navigate = useNavigate();
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();
@@ -91,9 +94,10 @@ function ReviewInputBottomSheet({
   };
 
   const handleSubmitError = (error: AxiosError) => {
-    if (error.message === "다시 로그인 해주세요.") {
+    if (error.message === MESSAGES.LOGIN_REQUIRED) {
       showToast(error.message);
       logout();
+      navigate(PATHNAME.HOME);
     }
   };
 

@@ -20,6 +20,8 @@ import Select from "components/common/Select/Select";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+import { PATHNAME } from "constants/routes";
+import { useNavigate } from "react-router-dom";
 
 interface StoreDemandEditBottomSheetProps {
   id: string;
@@ -38,6 +40,7 @@ function StoreDemandEditBottomSheet({
   const campus = useContext(campusContext);
 
   const showToast = useToastContext();
+  const navigate = useNavigate();
 
   const categoryOptions = Object.entries(categories).map(([id, name]) => (
     <option key={id} value={id}>
@@ -78,6 +81,7 @@ function StoreDemandEditBottomSheet({
     if (error.message === MESSAGES.TOKEN_INVALID) {
       showToast(MESSAGES.TOKEN_INVALID);
       logout();
+      navigate(PATHNAME.HOME);
     }
   };
 

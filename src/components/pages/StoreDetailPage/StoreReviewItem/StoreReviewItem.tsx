@@ -16,6 +16,10 @@ import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpda
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
 import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+import { PATHNAME } from "constants/routes";
+import useLogin from "hooks/useLogin";
+import { useNavigate } from "react-router-dom";
+import { MESSAGES } from "constants/messages";
 
 type ReviewInfo = ReviewShape & { restaurantId: string };
 
@@ -23,6 +27,8 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
   const queryClient = useQueryClient();
 
   const showToast = useToastContext();
+  const { logout } = useLogin();
+  const navigate = useNavigate();
 
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
     () =>
@@ -35,8 +41,11 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         queryClient.invalidateQueries("reviewDetailStore");
       },
       onError: (error) => {
-        showToast(error.message);
-        window.location.reload();
+        if (error.message === MESSAGES.LOGIN_REQUIRED) {
+          showToast(error.message);
+          logout();
+          navigate(PATHNAME.HOME);
+        }
       },
     },
   );

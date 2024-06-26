@@ -21,6 +21,8 @@ import Select from "components/common/Select/Select";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet.style";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+import { useNavigate } from "react-router-dom";
+import { PATHNAME } from "constants/routes";
 
 interface StoreDemandCreateBottomSheetProps {
   closeSheet: () => void;
@@ -34,6 +36,7 @@ function StoreDemandCreateBottomSheet({
   const { logout } = useLogin();
   const campus = useContext(campusContext);
   const showToast = useToastContext();
+  const navigate = useNavigate();
 
   const categoryOptions = Object.entries(categories).map(([id, name]) => (
     <option key={id} value={id}>
@@ -74,6 +77,7 @@ function StoreDemandCreateBottomSheet({
     if (error.message === MESSAGES.TOKEN_INVALID) {
       showToast(MESSAGES.TOKEN_INVALID);
       logout();
+      navigate(PATHNAME.HOME);
     }
   };
 

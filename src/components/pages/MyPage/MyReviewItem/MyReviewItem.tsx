@@ -19,6 +19,8 @@ import Text from "components/common/Text/Text";
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
 import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+import { MESSAGES } from "constants/messages";
+import useLogin from "hooks/useLogin";
 
 function MyReviewItem({
   id,
@@ -32,6 +34,7 @@ function MyReviewItem({
   const navigate = useNavigate();
   const showToast = useToastContext();
   const queryClient = useQueryClient();
+  const { logout } = useLogin();
 
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
     () =>
@@ -44,8 +47,11 @@ function MyReviewItem({
         queryClient.invalidateQueries("myReview");
       },
       onError: (error) => {
-        showToast(error.message);
-        window.location.reload();
+        if (error.message === MESSAGES.LOGIN_REQUIRED) {
+          showToast(error.message);
+          logout();
+          navigate(PATHNAME.HOME);
+        }
       },
     },
   );
