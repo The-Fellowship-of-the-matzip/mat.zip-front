@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { keyframes, css } from "styled-components";
 import { ToastStatus } from "components/common/Toast/Toast.type";
-import { theme } from "style/Theme";
 
 const fadeIn = keyframes`
   0% {
@@ -24,7 +23,6 @@ const fadeOut = keyframes`
 const getBackgroundColor = ($type: ToastStatus) => {
   switch ($type) {
     case "active":
-      console.log(theme.color.green);
       return css`
         background-color: ${({ theme }) => theme.color.green};
       `;
