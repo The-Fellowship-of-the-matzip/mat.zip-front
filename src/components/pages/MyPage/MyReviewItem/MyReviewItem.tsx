@@ -3,24 +3,28 @@ import { AxiosError } from "axios";
 import { MouseEvent, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { UserReview } from "types/common";
+
+import { ReviewInputShape, UserReview } from "types/common";
+
 import repeatComponent from "util/repeatComponent";
 
+import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
+import sendReviewItem from "api/review/sendReviewItem";
+
+import useLogin from "hooks/useLogin";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
 import MeatballButton from "components/common/MeatballButton/MeatballButton";
 import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
-
-import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
-import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
-import { MESSAGES } from "constants/messages";
-import useLogin from "hooks/useLogin";
+
+import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
+import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
 
 function MyReviewItem({
   id,
@@ -36,6 +40,10 @@ function MyReviewItem({
   const queryClient = useQueryClient();
   const { logout } = useLogin();
 
+  const onSuccess = () => {
+    queryClient.invalidateQueries("myReview");
+  };
+
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
     () =>
       deleteReviewItem({
@@ -43,9 +51,7 @@ function MyReviewItem({
         articleId: String(id),
       }),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries("myReview");
-      },
+      onSuccess,
       onError: (error) => {
         if (error.message === MESSAGES.LOGIN_REQUIRED) {
           showToast(error.message);
@@ -78,12 +84,26 @@ function MyReviewItem({
     setModalOpen((prev) => !prev);
   };
 
-  const handleReviewModalClick = () => {
-    queryClient.invalidateQueries([
-      "reviewDetailStore",
-      { restaurantId: restaurant.id },
-    ]);
+  const handleSubmitError = (error: AxiosError) => {
+    if (error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
+      logout();
+      navigate(PATHNAME.HOME);
+    }
   };
+
+  const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
+    ({ content, menu, rating, imageUrl }) =>
+      sendReviewItem({
+        restaurantId: reviewInfo.restaurantId,
+        articleId: reviewInfo.id,
+        rating,
+        menu,
+        content,
+        imageUrl: imageUrl ?? "",
+      }),
+    { onSuccess, onError: handleSubmitError, retry: 0 },
+  );
 
   const reviewInfo = {
     id: String(id),
@@ -174,10 +194,10 @@ function MyReviewItem({
         </S.ReviewContentWrapper>
       </S.StoreReviewContainer>
       {isBottomSheetOpen && (
-        <ReviewUpdateBottomSheet
-          closeSheet={() => setIsBottomSheetOpen(false)}
+        <ReviewBottomSheet
           defaultReviewItem={reviewInfo}
-          onSuccess={handleReviewModalClick}
+          closeSheet={() => setIsBottomSheetOpen(false)}
+          mutate={mutation.mutate}
         />
       )}
     </>

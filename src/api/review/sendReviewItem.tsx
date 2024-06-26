@@ -5,12 +5,13 @@ import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 import axiosInstance from "api/axiosInstance";
 import { MESSAGES } from "constants/messages";
 
-interface SendReviewItemProps {
+export interface SendReviewItemProps {
   restaurantId: string;
   articleId: string;
   content: string;
   rating: number;
   menu: string;
+  imageUrl: string;
 }
 
 const sendReviewItem = async ({
@@ -19,6 +20,7 @@ const sendReviewItem = async ({
   content,
   rating,
   menu,
+  imageUrl,
 }: SendReviewItemProps) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
   if (!accessToken) {
@@ -30,6 +32,7 @@ const sendReviewItem = async ({
       content: content,
       rating: rating,
       menu: menu,
+      imageUrl,
     },
     {
       headers: {

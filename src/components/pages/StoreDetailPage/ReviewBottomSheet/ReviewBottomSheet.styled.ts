@@ -5,7 +5,7 @@ export const Form = styled.form`
 
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacer.spacing3}; ;
+  gap: ${({ theme }) => theme.spacer.spacing3};
 `;
 
 export const StarRatingWrapper = styled.div`

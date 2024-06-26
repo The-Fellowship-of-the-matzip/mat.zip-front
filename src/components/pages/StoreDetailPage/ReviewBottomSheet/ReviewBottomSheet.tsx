@@ -1,15 +1,12 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { UseMutateFunction } from "react-query";
 import { ReviewInputShape } from "types/common";
 
 import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
 import { useImageUpload } from "hooks/useImageUpload";
-import useLogin from "hooks/useLogin";
-
-import sendReviewPostRequest from "api/review/sendReviewPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 import Button from "components/common/Button/Button";
@@ -18,42 +15,54 @@ import Input from "components/common/Input/Input";
 import Label from "components/common/Label/Label";
 import StarRating from "components/common/StarRating/StarRating";
 import Textarea from "components/common/Textarea/Textarea";
-
-import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet.style";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
-import { PATHNAME } from "constants/routes";
-import { useNavigate } from "react-router-dom";
 
-interface ReviewInputBottomSheetProps {
+import * as S from "./ReviewBottomSheet.styled";
+
+interface ReviewBottomSheetProps {
+  defaultReviewItem?: {
+    content: string;
+    rating: number;
+    menu: string;
+    restaurantId: string;
+    id: string;
+    imageUrl: string | null;
+  };
   closeSheet: () => void;
-  restaurantId: string;
-  onSuccess: () => void;
+  mutate: UseMutateFunction<
+    unknown,
+    AxiosError<unknown, any>,
+    ReviewInputShape,
+    unknown
+  >;
 }
 
 const DEFAULT_RATING = 4;
 
-function ReviewInputBottomSheet({
+function ReviewBottomSheet({
+  defaultReviewItem,
   closeSheet,
-  restaurantId,
-  onSuccess,
-}: ReviewInputBottomSheetProps) {
-  const [rating, setRating] = useState(DEFAULT_RATING);
-  const [reviewContent, setReviewContent] = useState("");
-  const [menuInput, setMenuInput] = useState("");
+  mutate,
+}: ReviewBottomSheetProps) {
+  const [rating, setRating] = useState<number>(
+    defaultReviewItem ? defaultReviewItem.rating - 1 : DEFAULT_RATING,
+  );
+  const [reviewContent, setReviewContent] = useState<string>(
+    defaultReviewItem?.content ?? "",
+  );
+  const [menu, setMenu] = useState<string>(defaultReviewItem?.menu ?? "");
+
   const showToast = useToastContext();
 
   const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
-    useImageUpload(showToast);
-
-  const { logout } = useLogin();
-  const navigate = useNavigate();
+    useImageUpload(showToast, defaultReviewItem?.imageUrl);
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();
-    mutation.mutate({
+    mutate({
       content: reviewContent,
       rating: rating + 1,
-      menu: menuInput,
+      menu,
       imageUrl: uploadedImageUrl,
     });
     closeSheet();
@@ -74,7 +83,7 @@ function ReviewInputBottomSheet({
       return;
     }
 
-    setMenuInput(value);
+    setMenu(value);
   };
 
   const handleContentInput: React.ChangeEventHandler<HTMLTextAreaElement> = (
@@ -93,19 +102,6 @@ function ReviewInputBottomSheet({
     setReviewContent(value);
   };
 
-  const handleSubmitError = (error: AxiosError) => {
-    if (error.message === MESSAGES.LOGIN_REQUIRED) {
-      showToast(error.message);
-      logout();
-      navigate(PATHNAME.HOME);
-    }
-  };
-
-  const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
-    sendReviewPostRequest(restaurantId),
-    { onSuccess, onError: handleSubmitError, retry: 0 },
-  );
-
   return (
     <BottomSheet title="리뷰 남기기" closeSheet={closeSheet}>
       <S.Form onSubmit={handleSubmitRequest}>
@@ -116,7 +112,7 @@ function ReviewInputBottomSheet({
         <Input
           label="메뉴"
           id="menu-input"
-          value={menuInput}
+          value={menu}
           placeholder="메뉴를 입력해 주세요"
           onChange={handleMenuInput}
           maxLength={20}
@@ -146,4 +142,4 @@ function ReviewInputBottomSheet({
   );
 }
 
-export default ReviewInputBottomSheet;
+export default ReviewBottomSheet;

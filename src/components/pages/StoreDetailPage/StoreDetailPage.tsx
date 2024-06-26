@@ -1,10 +1,13 @@
 import { Fragment, useContext, useState } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import { ReviewShape } from "types/common";
+import { useInfiniteQuery, useMutation, useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { AxiosError } from "axios";
+
+import { ReviewInputShape, ReviewShape } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
 
 import { PlusIcon } from "asset";
 
@@ -13,6 +16,7 @@ import { LoginContext } from "context/LoginContextProvider";
 import getNextPageParam from "api/getNextPageParam";
 import fetchReviewList from "api/review/fetchReviewList";
 import fetchStoreDetail from "api/store/fetchStoreDetail";
+import sendReviewPostRequest from "api/review/sendReviewPostRequest";
 
 import Button from "components/common/Button/Button";
 import Divider from "components/common/Divider/Divider";
@@ -22,11 +26,13 @@ import Heading from "components/common/Heading/Heading";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 
-import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
 import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle";
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
+
+import useLogin from "hooks/useLogin";
 
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
@@ -38,7 +44,7 @@ function StoreDetailPage() {
     () => fetchStoreDetail(restaurantId as string),
     {
       retry: NETWORK.RETRY_COUNT,
-    }
+    },
   );
 
   const {
@@ -52,14 +58,36 @@ function StoreDetailPage() {
   } = useInfiniteQuery(
     ["reviewDetailStore", { restaurantId }],
     fetchReviewList,
-    { getNextPageParam }
+    { getNextPageParam },
+  );
+
+  const { logout } = useLogin();
+  const navigate = useNavigate();
+
+  const handleSubmitError = (error: AxiosError) => {
+    if (error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
+      logout();
+      navigate(PATHNAME.HOME);
+    }
+  };
+
+  const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
+    sendReviewPostRequest(restaurantId as string),
+    {
+      onSuccess: () => {
+        refetch();
+      },
+      onError: handleSubmitError,
+      retry: 0,
+    },
   );
 
   const loadMoreReviews = () => {
     fetchNextPage();
   };
 
-  const showToast = useToastContext()
+  const showToast = useToastContext();
 
   const handleReviewOpenClick = () => {
     if (isLoggedIn) {
@@ -75,7 +103,7 @@ function StoreDetailPage() {
         ...prevReviews,
         ...currentReviews,
       ],
-      []
+      [],
     ) || [];
 
   if (!restaurantId || !storeData) return null;
@@ -121,7 +149,7 @@ function StoreDetailPage() {
                       />
                       <Divider />
                     </Fragment>
-                  )
+                  ),
                 )
               ) : (
                 <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
@@ -139,12 +167,9 @@ function StoreDetailPage() {
         <PlusIcon />
       </Button>
       {isReviewOpen && (
-        <ReviewInputBottomSheet
+        <ReviewBottomSheet
           closeSheet={() => setIsReviewOpen(false)}
-          restaurantId={restaurantId}
-          onSuccess={() => {
-            refetch();
-          }}
+          mutate={mutation.mutate}
         />
       )}
     </S.StoreDetailPageContainer>
