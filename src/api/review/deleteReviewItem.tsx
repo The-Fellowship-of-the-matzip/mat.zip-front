@@ -16,8 +16,6 @@ const deleteReviewItem = async ({
 }: DeleteReviewItemProp) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
   if (!accessToken) {
-    window.sessionStorage.removeItem(ACCESS_TOKEN);
-
     throw new Error(MESSAGES.LOGIN_REQUIRED);
   }
 
