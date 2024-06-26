@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
+import { MESSAGES } from "constants/messages";
 
 interface ImageUploadResponse {
   imageUrl: string;
@@ -15,7 +16,7 @@ const sendImageUploadPostRequest = async (imageFile: FormData) => {
     window.sessionStorage.removeItem(ACCESS_TOKEN);
     window.location.reload();
 
-    throw new Error("다시 로그인 해주세요.");
+    throw new Error(MESSAGES.LOGIN_REQUIRED);
   }
 
   const response: AxiosResponse<ImageUploadResponse> = await axiosInstance.post(

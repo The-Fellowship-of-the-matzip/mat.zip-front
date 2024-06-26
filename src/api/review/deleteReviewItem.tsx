@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
+import { MESSAGES } from "constants/messages";
 
 interface DeleteReviewItemProp {
   restaurantId: string;
@@ -17,7 +18,7 @@ const deleteReviewItem = async ({
   if (!accessToken) {
     window.sessionStorage.removeItem(ACCESS_TOKEN);
 
-    throw new Error("다시 로그인 해주세요.");
+    throw new Error(MESSAGES.LOGIN_REQUIRED);
   }
 
   const { data } = await axiosInstance.delete<AxiosResponse>(
