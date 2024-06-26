@@ -1,14 +1,8 @@
-import { useState } from "react";
-import { BsCheckCircleFill } from "react-icons/bs";
 import { StoreDemand } from "types/common";
 
-import Button from "components/common/Button/Button";
+import StoreDemandListItem from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandListItem/StoreDemandListItem";
 
-import StoreDemandEditBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandEditBottomSheet";
-import StoreDemandDetailModal from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal";
 import * as S from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList.style";
-
-import { theme } from "style/Theme";
 
 interface Props {
   storeRequests: StoreDemand[];
@@ -16,71 +10,6 @@ interface Props {
 }
 
 function StoreDemandList({ storeRequests, refetchList }: Props) {
-  const [detailOpenId, setDetailOpenId] = useState<string | null>(null);
-  const [editOpenId, setEditOpenId] = useState<string | null>(null);
-
-  const handleRequestDetailOpen: (
-    id: string
-  ) => React.MouseEventHandler<HTMLElement> = (id) => () => {
-    setDetailOpenId(id);
-  };
-
-  const handleRequestDetailClose = () => {
-    setDetailOpenId(null);
-  };
-
-  const handleEditOpen = (id: string) => () => {
-    setEditOpenId(id);
-    setDetailOpenId(null);
-  };
-
-  const handleRequestEditClose = () => {
-    setEditOpenId(null);
-  };
-
-  const sliceStoreName = (name: string) => {
-    return name.length < 15 ? name : `${name.slice(0, 12)}...`;
-  };
-
-  const RequestListItems = storeRequests.map(
-    ({ id, categoryId, name, author, isRegistered, isAuthor }) => (
-      <S.ListItem key={id}>
-        <S.StoreNameRow>{sliceStoreName(name)}</S.StoreNameRow>
-        <S.RegisteredRow>
-          {isRegistered && (
-            <BsCheckCircleFill color={theme.color.primary} size="2rem" />
-          )}
-        </S.RegisteredRow>
-        <S.ShowDetailRow>
-          <Button size="small" onClick={handleRequestDetailOpen(id)}>
-            상세보기
-          </Button>
-        </S.ShowDetailRow>
-        {detailOpenId === id && (
-          <StoreDemandDetailModal
-            id={id}
-            name={name}
-            categoryId={categoryId}
-            isRegistered={isRegistered}
-            isAuthor={isAuthor}
-            author={author}
-            handleEditOpen={handleEditOpen(id)}
-            closeModal={handleRequestDetailClose}
-            handleAfterRequest={refetchList}
-          />
-        )}
-        {editOpenId === id && (
-          <StoreDemandEditBottomSheet
-            id={id}
-            initValue={{ categoryId: String(categoryId), name }}
-            closeSheet={handleRequestEditClose}
-            refetchList={refetchList}
-          />
-        )}
-      </S.ListItem>
-    )
-  );
-
   return (
     <S.Container>
       <S.ListHead>
@@ -88,8 +17,13 @@ function StoreDemandList({ storeRequests, refetchList }: Props) {
         <S.RegisteredRow>등록됨</S.RegisteredRow>
         <S.ShowDetailRow>상세보기</S.ShowDetailRow>
       </S.ListHead>
-
-      {RequestListItems}
+      {storeRequests.map((storeDemand) => (
+        <StoreDemandListItem
+          key={storeDemand.id}
+          storeDemand={storeDemand}
+          refetchList={refetchList}
+        />
+      ))}
     </S.Container>
   );
 }

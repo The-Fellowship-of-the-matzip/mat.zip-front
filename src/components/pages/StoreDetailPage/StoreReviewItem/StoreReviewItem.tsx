@@ -71,6 +71,13 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
     setModalOpen((prev) => !prev);
   };
 
+  const handleReviewModalClick = () => {
+    queryClient.invalidateQueries([
+      "reviewDetailStore",
+      { restaurantId: reviewInfo.restaurantId },
+    ]);
+  };
+
   return (
     <>
       <S.StoreReviewContainer>
@@ -167,12 +174,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         <ReviewUpdateBottomSheet
           closeSheet={() => setIsBottomSheetOpen(false)}
           defaultReviewItem={reviewInfo}
-          onSuccess={() => {
-            queryClient.invalidateQueries([
-              "reviewDetailStore",
-              { restaurantId: reviewInfo.restaurantId },
-            ]);
-          }}
+          onSuccess={handleReviewModalClick}
         />
       )}
     </>
