@@ -8,10 +8,7 @@ const fetchUserProfile = async () => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
-    window.sessionStorage.removeItem(ACCESS_TOKEN);
-    window.alert("다시 로그인 해주세요");
-    window.location.href = "/";
-    return;
+    throw new Error("다시 로그인 해주세요");
   }
 
   const { data } = await axiosInstance.get<UserProfileInformation>(
@@ -20,7 +17,7 @@ const fetchUserProfile = async () => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }
+    },
   );
 
   return data;
