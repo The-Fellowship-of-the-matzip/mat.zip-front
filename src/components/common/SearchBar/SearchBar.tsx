@@ -52,6 +52,8 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const handleKeyword = (keyword: string) => setKeyword(keyword);
+
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
   }) => {
@@ -96,6 +98,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
       {isDropdownOpen && (
         <AutoComplete
           optionList={autoCompleteMockData}
+          onOptionFocus={handleKeyword}
           closeAutoComplete={closeDropdown}
         />
       )}

@@ -8,18 +8,24 @@ import { OutwardIcon } from "asset";
 
 interface AutoCompleteProps {
   optionList: { id: number; name: string }[];
+  onOptionFocus: (option: string) => void;
   closeAutoComplete: () => void;
 }
 
-function AutoComplete({ optionList, closeAutoComplete }: AutoCompleteProps) {
+function AutoComplete({
+  optionList,
+  onOptionFocus,
+  closeAutoComplete,
+}: AutoCompleteProps) {
   return (
     <S.Container>
       {optionList.map((option) => (
-        <Link to={`${PATHNAME.STORE_DETAIL}/${option.id}`}>
+        <Link to={`${PATHNAME.STORE_DETAIL}/${option.id}`} key={option.id}>
           <Button
-            key={option.id}
+            value={option.name}
             css={S.buttonStyle}
             onClick={closeAutoComplete}
+            onFocus={(e) => onOptionFocus(e.target.value)}
           >
             <span>{option.name}</span>
             <OutwardIcon />
