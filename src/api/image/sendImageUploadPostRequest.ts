@@ -14,7 +14,6 @@ const sendImageUploadPostRequest = async (imageFile: FormData) => {
 
   if (!accessToken) {
     window.sessionStorage.removeItem(ACCESS_TOKEN);
-    window.location.reload();
 
     throw new Error(MESSAGES.LOGIN_REQUIRED);
   }
