@@ -83,7 +83,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
       <S.FormContainer onSubmit={handleSearchButtonClick}>
         <S.InputContainer onClick={() => setIsDropdownOpen(true)}>
           <Input
-            css={S.inputStyle}
+            css={S.inputStyle(isDropdownOpen)}
             placeholder="맛집을 검색해 보세요"
             value={keyword}
             min={1}
@@ -91,7 +91,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
             onChange={handleSearchInput}
           />
         </S.InputContainer>
-        <Button css={S.buttonStyle}>
+        <Button css={S.buttonStyle(isDropdownOpen)}>
           <SearchIcon />
         </Button>
       </S.FormContainer>

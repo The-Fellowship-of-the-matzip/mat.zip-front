@@ -21,7 +21,7 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const inputStyle = css`
+export const inputStyle = (isDropdownOpen: boolean) => css`
   width: 100%;
   height: 5rem;
 
@@ -30,11 +30,15 @@ export const inputStyle = css`
   border: 1px solid ${({ theme }) => theme.color.primaryLight2};
   border-right: 0px;
   border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+
+  ${isDropdownOpen &&
+  css`
+    border-bottom-left-radius: 0;
+  `}
 `;
 
-export const buttonStyle = css`
+export const buttonStyle = (isDropdownOpen: boolean) => css`
   width: 5rem;
   height: 5rem;
 
@@ -44,7 +48,11 @@ export const buttonStyle = css`
   border-left: 0px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+
+  ${isDropdownOpen &&
+  css`
+    border-bottom-right-radius: 0;
+  `}
 
   &:hover:enabled {
     background-color: ${({ theme }) => theme.color.primaryLight3};
