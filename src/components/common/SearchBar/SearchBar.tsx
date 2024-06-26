@@ -8,6 +8,7 @@ import ROUTES, { PATHNAME } from "constants/routes";
 
 import { SearchIcon } from "asset";
 
+import useBackdropClick from "hooks/useBackdropClick";
 import useFocusTrap from "hooks/useFocusTrap";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
@@ -43,7 +44,10 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const closeDropdown = () => setIsDropdownOpen(false);
+
   const searchBarRef = useFocusTrap(isDropdownOpen);
+  useBackdropClick(searchBarRef, closeDropdown);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -92,7 +96,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
       {isDropdownOpen && (
         <AutoComplete
           optionList={autoCompleteMockData}
-          closeAutoComplete={() => setIsDropdownOpen(false)}
+          closeAutoComplete={closeDropdown}
         />
       )}
     </S.Container>
