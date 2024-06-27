@@ -1,10 +1,10 @@
-import type { BookmarkStore } from "types/common/bookmarkTypes";
+import { BookmarkStore, BookmarkStoreServerResponse } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-const fetchBookmarkList = async () => {
+const fetchBookmarkList = async (): Promise<BookmarkStore[] | undefined> => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
@@ -14,7 +14,7 @@ const fetchBookmarkList = async () => {
     return;
   }
 
-  const { data } = await axiosInstance.get<BookmarkStore[]>(
+  const { data } = await axiosInstance.get<BookmarkStoreServerResponse[]>(
     ENDPOINTS.BOOKMARKS,
     {
       headers: {
@@ -23,7 +23,14 @@ const fetchBookmarkList = async () => {
     }
   );
 
-  return data;
+  const formattedData: BookmarkStore[] = data.map((bookmarkStore) => {
+    return {
+      ...bookmarkStore,
+      thumbnailUrl: bookmarkStore.imageUrl,
+    };
+  });
+
+  return formattedData;
 };
 
 export default fetchBookmarkList;
