@@ -59,7 +59,7 @@ export const RightWrapper = styled.div`
 `;
 
 export const Profile = styled.div`
-  background-color: ${({ theme }) => theme.color.whitre};
+  background-color: ${({ theme }) => theme.color.white};
   border-radius: 50%;
   width: 1.875rem;
   height: 1.875rem;
