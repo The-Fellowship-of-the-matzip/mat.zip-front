@@ -1,10 +1,10 @@
-import { Store } from "types/common";
+import { Store, StoreServerResponse } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-const fetchStoreDetail = async (restaurantId: string) => {
+const fetchStoreDetail = async (restaurantId: string): Promise<Store> => {
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
 
   const userFetchOptions = {
@@ -13,12 +13,17 @@ const fetchStoreDetail = async (restaurantId: string) => {
     },
   };
 
-  const { data } = await axiosInstance.get<Store & { address: string }>(
+  const { data } = await axiosInstance.get<StoreServerResponse>(
     ENDPOINTS.STORE_DETAIL(restaurantId),
     accessToken ? userFetchOptions : undefined
   );
 
-  return data;
+  const formattedData: Store = {
+    ...data,
+    thumbnailUrl: data.imageUrl,
+  };
+
+  return formattedData;
 };
 
 export default fetchStoreDetail;

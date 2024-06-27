@@ -1,5 +1,9 @@
 import { FetchParamProps } from "types/apiTypes";
-import { CampusId, Store } from "types/common";
+import {
+  CampusId,
+  StoreItemWithHeart,
+  StoreServerResponse,
+} from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
@@ -16,9 +20,15 @@ interface GenerateParamsProps {
   name?: string;
 }
 
-interface CategoryStoreListResponse {
+interface CategoryStoreListServerResponse {
   hasNext: boolean;
-  restaurants: Store[];
+  restaurants: StoreServerResponse[];
+}
+
+interface FetchStoreListResult {
+  hasNext: boolean;
+  nextPageParam: number;
+  restaurants: StoreItemWithHeart[];
 }
 
 const generateParams = (propObject: GenerateParamsProps) =>
@@ -32,7 +42,10 @@ const generateParams = (propObject: GenerateParamsProps) =>
     {}
   );
 
-const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
+const fetchStoreList = async ({
+  pageParam = 0,
+  queryKey,
+}: FetchParamProps): Promise<FetchStoreListResult> => {
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
   const params = generateParams({
@@ -53,12 +66,25 @@ const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
     },
   };
 
-  const { data } = await axiosInstance.get<CategoryStoreListResponse>(
+  const { data } = await axiosInstance.get<CategoryStoreListServerResponse>(
     ENDPOINTS.STORE_LIST(campusId, type),
     accessToken ? userFetchOptions : nonUserFetchOptions
   );
 
-  return { ...data, nextPageParam: pageParam + 1 };
+  const formattedData: StoreItemWithHeart[] = data.restaurants.map(
+    (restaurant) => {
+      return {
+        ...restaurant,
+        thumbnailUrl: restaurant.imageUrl,
+      };
+    }
+  );
+
+  return {
+    restaurants: formattedData,
+    hasNext: data.hasNext,
+    nextPageParam: pageParam + 1,
+  };
 };
 
 export default fetchStoreList;
