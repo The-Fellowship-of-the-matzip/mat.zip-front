@@ -76,11 +76,12 @@ function StoreDetailPage() {
     ) || [];
 
   if (!restaurantId || !storeData) return null;
+
   return (
     <S.StoreDetailPageContainer>
       <S.StorePreviewImage
         alt={`${storeData.name} 가게 이미지`}
-        src={storeData?.imageUrl}
+        src={storeData?.thumbnailUrl}
       />
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
