@@ -1,6 +1,7 @@
 import * as S from "./BookmarkListPage.style";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { StoreItemWithoutHeart } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { PATHNAME } from "constants/routes";
@@ -14,6 +15,7 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
 
 function BookmarkListPage() {
@@ -48,7 +50,10 @@ function BookmarkListPage() {
         <ErrorImage errorMessage={error.message} />
       )}
       {bookmarkedStoreData.length > 0 ? (
-        <StoreList stores={bookmarkedStoreData} />
+        <StoreList<StoreItemWithoutHeart>
+          stores={bookmarkedStoreData}
+          renderListItem={(store) => <StoreListItemWithoutHeart {...store} />}
+        />
       ) : (
         <ErrorText>가게 정보가 없습니다.</ErrorText>
       )}

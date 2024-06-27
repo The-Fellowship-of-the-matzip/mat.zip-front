@@ -4,6 +4,7 @@ import UserProfile from "./UserProfile/UserProfile";
 import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { StoreItemWithoutHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
 import { PATHNAME } from "constants/routes";
@@ -19,6 +20,7 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
 
 function MyPage() {
@@ -79,7 +81,10 @@ function MyPage() {
           </S.ShowAllLink>
         </S.SectionHeaderWrapper>
         {bookmarkedStoreData.length > 0 ? (
-          <StoreList stores={bookmarkedStoreData.slice(0, SIZE.MY_PAGE_ITEM)} />
+          <StoreList<StoreItemWithoutHeart>
+            stores={bookmarkedStoreData}
+            renderListItem={(store) => <StoreListItemWithoutHeart {...store} />}
+          />
         ) : (
           <S.EmptyList>
             <Text size="sm">저장된 맛집이 없습니다</Text>
