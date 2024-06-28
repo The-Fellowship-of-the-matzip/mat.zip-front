@@ -8,6 +8,7 @@ import { Campus, Store } from "types/common";
 import { NETWORK, SIZE } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { PATHNAME } from "constants/routes";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -22,6 +23,7 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 
 import * as S from "components/pages/SearchResultPage/SearchResultPage.style";
+
 
 function SearchResultPage() {
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ function SearchResultPage() {
   };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+    useInfiniteQuery(QUERY_KEY.categoryStore(fetchParams), fetchStoreList, {
       getNextPageParam,
       retry: NETWORK.RETRY_COUNT,
     });

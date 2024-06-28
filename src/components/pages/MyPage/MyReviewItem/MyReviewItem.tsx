@@ -10,6 +10,7 @@ import repeatComponent from "util/repeatComponent";
 
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
+import { QUERY_KEY } from "constants/queryKey";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
 import sendReviewItem from "api/review/sendReviewItem";
@@ -26,6 +27,7 @@ import { useToastContext } from "components/common/Toast/provider/ToastProvider"
 import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
 
+
 function MyReviewItem({
   id,
   restaurant,
@@ -41,7 +43,7 @@ function MyReviewItem({
   const { logout } = useLogin();
 
   const onSuccess = () => {
-    queryClient.invalidateQueries("myReview");
+    queryClient.invalidateQueries(QUERY_KEY.myReview);
   };
 
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(

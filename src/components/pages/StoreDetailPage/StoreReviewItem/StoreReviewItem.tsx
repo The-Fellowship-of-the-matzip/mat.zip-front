@@ -8,6 +8,7 @@ import repeatComponent from "util/repeatComponent";
 
 import { PATHNAME } from "constants/routes";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
 import sendReviewItem from "api/review/sendReviewItem";
@@ -34,6 +35,10 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
   const { logout } = useLogin();
   const navigate = useNavigate();
 
+  const onSuccess = () => {
+    queryClient.invalidateQueries(QUERY_KEY.reviewDetailStore(reviewInfo.restaurantId));
+  }
+
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
     () =>
       deleteReviewItem({
@@ -41,9 +46,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         articleId: reviewInfo.id,
       }),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries("reviewDetailStore");
-      },
+      onSuccess,
       onError: (error) => {
         if (error.message === MESSAGES.LOGIN_REQUIRED) {
           showToast(error.message);
@@ -75,13 +78,6 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
     setModalOpen((prev) => !prev);
   };
 
-  const handleReviewModalClick = () => {
-    queryClient.invalidateQueries([
-      "reviewDetailStore",
-      { restaurantId: reviewInfo.restaurantId },
-    ]);
-  };
-
   const handleSubmitError = (error: AxiosError) => {
     if (error.message === MESSAGES.LOGIN_REQUIRED) {
       showToast(error.message);
@@ -100,7 +96,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         content,
         imageUrl: imageUrl ?? "",
       }),
-    { onSuccess: handleReviewModalClick, onError: handleSubmitError, retry: 0 },
+    { onSuccess, onError: handleSubmitError, retry: 0 },
   );
 
   return (

@@ -10,6 +10,7 @@ import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
@@ -31,6 +32,7 @@ import { useToastContext } from "components/common/Toast/provider/ToastProvider"
 import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import StoreDemandBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet";
 import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
+
 
 function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
@@ -75,7 +77,7 @@ function StoreDemandPage() {
     isFetching,
     refetch,
   } = useInfiniteQuery(
-    ["StoreDemand", { campusId: campusId, size: 15 }],
+    QUERY_KEY.storeDemand({campusId, size : 15}),
     fetchStoreDemandList,
     {
       getNextPageParam,

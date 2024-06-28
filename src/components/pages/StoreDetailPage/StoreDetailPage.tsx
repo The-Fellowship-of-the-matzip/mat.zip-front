@@ -33,6 +33,7 @@ import { useToastContext } from "components/common/Toast/provider/ToastProvider"
 import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
 
 import useLogin from "hooks/useLogin";
+import { QUERY_KEY } from "constants/queryKey";
 
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
@@ -40,7 +41,7 @@ function StoreDetailPage() {
   const isLoggedIn = useContext(LoginContext);
 
   const { data: storeData } = useQuery(
-    "storeDetailInfo",
+    QUERY_KEY.storeDetailInfo,
     () => fetchStoreDetail(restaurantId as string),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -56,7 +57,7 @@ function StoreDetailPage() {
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery(
-    ["reviewDetailStore", { restaurantId }],
+    QUERY_KEY.reviewDetailStore(restaurantId),
     fetchReviewList,
     { getNextPageParam },
   );

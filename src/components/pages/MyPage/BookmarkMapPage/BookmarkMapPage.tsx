@@ -6,8 +6,8 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import type { Campus } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { LeftIcon } from "asset";
 
@@ -25,24 +25,27 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
 import Text from "components/common/Text/Text";
 
+
+
 function BookmarkMapPage() {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
-    "bookmarkStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
-      retry: NETWORK.RETRY_COUNT,
+      retry: 0,
       refetchOnWindowFocus: false,
-    }
+    },
   );
+
 
   const bookmarkedStores = data ?? [];
 
   const { center, positions, setCenter } = useMap(
     bookmarkedStores,
-    CAMPUS_AREA_CENTER_POSITION[campusName!]
+    CAMPUS_AREA_CENTER_POSITION[campusName!],
   );
   const [selectedMarker, setSelectedMarker] = useState<Position>();
   const { swiperRef, handleSlideToPosition } = useSlideCarousel();

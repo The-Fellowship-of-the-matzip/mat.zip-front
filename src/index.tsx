@@ -30,6 +30,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
+        
         <ToastProvider>
           <LoginContextProvider>
             <CampusContextProvider>
