@@ -17,6 +17,8 @@ import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
+import { QUERY_KEY } from "constants/queryKey";
+
 
 function MyReviewItem({
   id,
@@ -65,10 +67,7 @@ function MyReviewItem({
   };
 
   const handleReviewModalClick = () => {
-    queryClient.invalidateQueries([
-      "reviewDetailStore",
-      { restaurantId: restaurant.id },
-    ]);
+    queryClient.invalidateQueries(QUERY_KEY.reviewDetailStore(String(restaurant.id)));
   };
 
   const reviewInfo = {

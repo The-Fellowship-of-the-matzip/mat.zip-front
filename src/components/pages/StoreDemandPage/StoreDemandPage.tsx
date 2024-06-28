@@ -6,6 +6,7 @@ import { Campus, StoreDemand } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
@@ -24,6 +25,7 @@ import StoreDemandCreateBottomSheet from "components/pages/StoreDemandPage/Store
 import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
 
+
 function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
   const [isSheetOpen, setSheetOpen] = useState(false);
@@ -41,7 +43,7 @@ function StoreDemandPage() {
     isFetching,
     refetch,
   } = useInfiniteQuery(
-    ["StoreDemand", { campusId: campusId, size: 15 }],
+    QUERY_KEY.storeDemand({campusId, size : 15}),
     fetchStoreDemandList,
     {
       getNextPageParam,

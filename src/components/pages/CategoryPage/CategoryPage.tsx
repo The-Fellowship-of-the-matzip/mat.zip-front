@@ -5,6 +5,7 @@ import { Campus } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
 import { getCampusId } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -24,12 +25,12 @@ function CategoryPage() {
   const campusId = getCampusId(campusName as Campus);
 
   const { data, isLoading, isError, error, refetch } = useQuery(
-    "randomStore",
+    QUERY_KEY.randomStore,
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
       retry: NETWORK.RETRY_COUNT,
       refetchOnWindowFocus: false,
-    }
+    },
   );
 
   useEffect(() => {

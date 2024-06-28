@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { NETWORK, SIZE } from "constants/api";
+import { QUERY_KEY } from "constants/queryKey";
 
 import useRandomPick from "hooks/useRandomPick";
 
@@ -27,12 +28,12 @@ function RandomRoulette({ campusId }: Props) {
     error,
     refetch,
   } = useQuery(
-    "randomStoreRoulette",
+    QUERY_KEY.randomStoreRoulette,
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
       retry: NETWORK.RETRY_COUNT,
       refetchOnWindowFocus: false,
-    }
+    },
   );
 
   const {
