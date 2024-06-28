@@ -52,7 +52,7 @@ function StoreDetailPage() {
   } = useInfiniteQuery(
     QUERY_KEY.reviewDetailStore(restaurantId),
     fetchReviewList,
-    { getNextPageParam }
+    { getNextPageParam, }
   );
 
   const loadMoreReviews = () => {
@@ -75,7 +75,6 @@ function StoreDetailPage() {
       ],
       []
     ) || [];
-
   if (!restaurantId || !storeData) return null;
   return (
     <S.StoreDetailPageContainer>
@@ -93,7 +92,7 @@ function StoreDetailPage() {
               {isError && error instanceof Error && (
                 <ErrorImage errorMessage={error.message} />
               )}
-              {reviews.length ? (
+              {reviews.length > 0 ? (
                 reviews.map(
                   ({
                     id,

@@ -7,6 +7,7 @@ import { UserReview } from "types/common";
 import repeatComponent from "util/repeatComponent";
 
 import { PATHNAME } from "constants/routes";
+import { QUERY_KEY } from "constants/queryKey";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
 
@@ -17,7 +18,6 @@ import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
 
 import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
-import { QUERY_KEY } from "constants/queryKey";
 
 
 function MyReviewItem({
@@ -31,11 +31,19 @@ function MyReviewItem({
 }: UserReview) {
   const navigate = useNavigate();
 
+  const onSuccess = () => {
+    queryClient.invalidateQueries(QUERY_KEY.myReview)
+    queryClient.invalidateQueries(QUERY_KEY.reviewDetailStore(String(restaurant.id)), { refetchInactive: true });
+  }
+
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
     deleteReviewItem({
       restaurantId: String(restaurant.id),
       articleId: String(id),
     })
+    , {
+      onSuccess
+    }
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
@@ -64,10 +72,6 @@ function MyReviewItem({
         id,
       });
     }
-  };
-
-  const handleReviewModalClick = () => {
-    queryClient.invalidateQueries(QUERY_KEY.reviewDetailStore(String(restaurant.id)));
   };
 
   const reviewInfo = {
@@ -151,7 +155,7 @@ function MyReviewItem({
         <ReviewUpdateBottomSheet
           closeSheet={() => setIsBottomSheetOpen(false)}
           defaultReviewItem={reviewInfo}
-          onSuccess={handleReviewModalClick}
+          onSuccess={onSuccess}
         />
       )}
     </>
