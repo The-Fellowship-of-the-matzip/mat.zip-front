@@ -45,5 +45,5 @@ export const ACCESS_TOKEN = "matzipaccessToken";
 export const AUTH_LINK = `https://github.com/login/oauth/authorize?client_id=${
   process.env.NODE_ENV === "production"
     ? "a51717e6e0bb9e34da8e"
-    : "e060e7a6b636763ab22d"
+    : "Ov23liPLi52MGpOF4IiF"
 }`;
