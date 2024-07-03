@@ -48,8 +48,8 @@ function MyReviewListPage() {
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
+      navigate(PATHNAME.HOME);
     }
-    navigate(PATHNAME.HOME);
   }, [error]);
 
   return (
