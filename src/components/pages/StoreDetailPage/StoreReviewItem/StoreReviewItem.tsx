@@ -137,7 +137,9 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           closeSheet={() => setIsBottomSheetOpen(false)}
           defaultReviewItem={reviewInfo}
           onSuccess={() => {
-            queryClient.invalidateQueries(QUERY_KEY.reviewDetailStore(reviewInfo.restaurantId));
+            queryClient.invalidateQueries(
+              QUERY_KEY.reviewDetailStore(reviewInfo.restaurantId)
+            );
           }}
         />
       )}

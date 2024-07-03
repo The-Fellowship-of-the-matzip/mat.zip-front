@@ -25,8 +25,6 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
 import Text from "components/common/Text/Text";
 
-
-
 function BookmarkMapPage() {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
@@ -37,15 +35,14 @@ function BookmarkMapPage() {
     {
       retry: 0,
       refetchOnWindowFocus: false,
-    },
+    }
   );
-
 
   const bookmarkedStores = data ?? [];
 
   const { center, positions, setCenter } = useMap(
     bookmarkedStores,
-    CAMPUS_AREA_CENTER_POSITION[campusName!],
+    CAMPUS_AREA_CENTER_POSITION[campusName!]
   );
   const [selectedMarker, setSelectedMarker] = useState<Position>();
   const { swiperRef, handleSlideToPosition } = useSlideCarousel();

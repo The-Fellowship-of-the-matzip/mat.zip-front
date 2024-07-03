@@ -25,7 +25,6 @@ import StoreDemandCreateBottomSheet from "components/pages/StoreDemandPage/Store
 import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
 
-
 function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
   const [isSheetOpen, setSheetOpen] = useState(false);
@@ -43,7 +42,7 @@ function StoreDemandPage() {
     isFetching,
     refetch,
   } = useInfiniteQuery(
-    QUERY_KEY.storeDemand({campusId, size : 15}),
+    QUERY_KEY.storeDemand({ campusId, size: 15 }),
     fetchStoreDemandList,
     {
       getNextPageParam,

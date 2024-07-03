@@ -52,7 +52,7 @@ function StoreDetailPage() {
   } = useInfiniteQuery(
     QUERY_KEY.reviewDetailStore(restaurantId),
     fetchReviewList,
-    { getNextPageParam, }
+    { getNextPageParam }
   );
 
   const loadMoreReviews = () => {

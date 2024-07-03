@@ -10,8 +10,8 @@ import { NETWORK, SIZE, FILTERS } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
-import { PATHNAME } from "constants/routes";
 import { QUERY_KEY } from "constants/queryKey";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 

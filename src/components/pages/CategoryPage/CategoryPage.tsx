@@ -30,7 +30,7 @@ function CategoryPage() {
     {
       retry: NETWORK.RETRY_COUNT,
       refetchOnWindowFocus: false,
-    },
+    }
   );
 
   useEffect(() => {

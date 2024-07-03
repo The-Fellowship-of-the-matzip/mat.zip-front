@@ -33,7 +33,7 @@ function RandomRoulette({ campusId }: Props) {
     {
       retry: NETWORK.RETRY_COUNT,
       refetchOnWindowFocus: false,
-    },
+    }
   );
 
   const {

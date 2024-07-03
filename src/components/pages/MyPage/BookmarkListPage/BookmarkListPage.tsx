@@ -2,8 +2,8 @@ import * as S from "./BookmarkListPage.style";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { PATHNAME } from "constants/routes";
 import { QUERY_KEY } from "constants/queryKey";
+import { PATHNAME } from "constants/routes";
 
 import { LeftIcon } from "asset";
 
@@ -16,8 +16,6 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 import Text from "components/common/Text/Text";
 
-
-
 function BookmarkListPage() {
   const navigate = useNavigate();
 
@@ -27,9 +25,8 @@ function BookmarkListPage() {
     {
       retry: 0,
       refetchOnWindowFocus: false,
-    },
+    }
   );
-
 
   const bookmarkedStoreData = data ?? [];
 

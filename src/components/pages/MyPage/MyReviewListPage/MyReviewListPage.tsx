@@ -2,7 +2,6 @@ import MyReviewItem from "../MyReviewItem/MyReviewItem";
 import * as S from "./MyReviewListPage.style";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-
 import { UserReview } from "types/common";
 
 import { QUERY_KEY } from "constants/queryKey";
