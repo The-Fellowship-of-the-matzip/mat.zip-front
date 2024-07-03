@@ -6,8 +6,9 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import type { Campus } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
+import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
 
 import { LeftIcon } from "asset";
 
@@ -24,8 +25,6 @@ import SlideCarousel from "components/common/SlideCarousel/SlideCarousel";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreListItem from "components/common/StoreListItem/StoreListItem";
 import Text from "components/common/Text/Text";
-import { MESSAGES } from "constants/messages";
-import { PATHNAME } from "constants/routes";
 
 function BookmarkMapPage() {
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ function BookmarkMapPage() {
     {
       retry: 0,
       refetchOnWindowFocus: false,
-    },
+    }
   );
 
   useEffect(() => {
@@ -51,7 +50,7 @@ function BookmarkMapPage() {
 
   const { center, positions, setCenter } = useMap(
     bookmarkedStores,
-    CAMPUS_AREA_CENTER_POSITION[campusName!],
+    CAMPUS_AREA_CENTER_POSITION[campusName!]
   );
   const [selectedMarker, setSelectedMarker] = useState<Position>();
   const { swiperRef, handleSlideToPosition } = useSlideCarousel();

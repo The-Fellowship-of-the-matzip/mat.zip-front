@@ -1,14 +1,18 @@
 import * as S from "./MyPage.style";
 import MyReviewItem from "./MyReviewItem/MyReviewItem";
 import UserProfile from "./UserProfile/UserProfile";
+import { useEffect } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 import { SIZE } from "constants/api";
+import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
 import { RightIcon } from "asset";
+
+import useLogin from "hooks/useLogin";
 
 import fetchBookmarkList from "api/bookmark/fetchBookmarkList";
 import fetchUserProfile from "api/mypage/fetchUserProfile";
@@ -20,9 +24,6 @@ import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 import Text from "components/common/Text/Text";
-import { useEffect } from "react";
-import { MESSAGES } from "constants/messages";
-import useLogin from "hooks/useLogin";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function MyPage() {
     {
       refetchOnWindowFocus: false,
       retry: 0,
-    },
+    }
   );
 
   useEffect(() => {

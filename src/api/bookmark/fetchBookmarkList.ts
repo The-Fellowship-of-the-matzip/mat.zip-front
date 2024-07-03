@@ -1,9 +1,9 @@
 import type { BookmarkStore } from "types/common/bookmarkTypes";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
-import { MESSAGES } from "constants/messages";
 
 const fetchBookmarkList = async () => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
@@ -18,7 +18,7 @@ const fetchBookmarkList = async () => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    },
+    }
   );
 
   return data;

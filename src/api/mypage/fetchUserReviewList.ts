@@ -2,9 +2,9 @@ import { FetchParamProps } from "types/apiTypes";
 import type { UserReview } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS, SIZE } from "constants/api";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
-import { MESSAGES } from "constants/messages";
 
 interface UserReviewResponse {
   hasNext: boolean;
@@ -25,7 +25,7 @@ const fetchUserReviewList = async ({ pageParam = 0 }: FetchParamProps) => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    },
+    }
   );
 
   return { ...data, nextPageParam: pageParam + 1 };

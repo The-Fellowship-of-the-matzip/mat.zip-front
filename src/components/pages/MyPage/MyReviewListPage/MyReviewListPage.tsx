@@ -1,8 +1,12 @@
 import MyReviewItem from "../MyReviewItem/MyReviewItem";
 import * as S from "./MyReviewListPage.style";
+import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { UserReview } from "types/common";
+
+import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
 
 import { LeftIcon } from "asset";
 
@@ -15,9 +19,6 @@ import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 import Text from "components/common/Text/Text";
-import { useEffect } from "react";
-import { MESSAGES } from "constants/messages";
-import { PATHNAME } from "constants/routes";
 
 function MyReviewListPage() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function MyReviewListPage() {
         ...prevReviews,
         ...currentReviews,
       ],
-      [],
+      []
     ) || [];
 
   useEffect(() => {
