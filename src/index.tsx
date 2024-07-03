@@ -10,9 +10,10 @@ import App from "App";
 import CampusContextProvider from "context/CampusContextProvider";
 import LoginContextProvider from "context/LoginContextProvider";
 
+import ToastProvider from "components/common/Toast/provider/ToastProvider";
+
 import GlobalStyle from "style/GlobalStyle";
 import { theme } from "style/Theme";
-import ToastProvider from "components/common/Toast/provider/ToastProvider";
 
 // if (process.env.NODE_ENV === "development") {
 //   const { worker } = require("./mock/browser");
@@ -20,7 +21,7 @@ import ToastProvider from "components/common/Toast/provider/ToastProvider";
 // }
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
 
 const queryClient = new QueryClient();
@@ -41,5 +42,5 @@ root.render(
         </ToastProvider>
       </QueryClientProvider>
     </ThemeProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

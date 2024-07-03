@@ -5,13 +5,14 @@ import { Campus } from "types/common";
 import { CAMPUS } from "constants/campus";
 import { PATHNAME } from "constants/routes";
 
+import { LogoLight } from "asset";
+
 import { setCampusContext } from "context/CampusContextProvider";
 
 import Button from "components/common/Button/Button";
 import Heading from "components/common/Heading/Heading";
 
 import * as S from "components/pages/CampusSelectPage/CampusSelectPage.style";
-import { LogoLight } from "asset";
 
 function CampusSelectPage() {
   const setCampus = useContext(setCampusContext);

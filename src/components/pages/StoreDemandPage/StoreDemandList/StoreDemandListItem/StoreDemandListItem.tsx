@@ -1,22 +1,28 @@
+import * as S from "../StoreDemandList.style";
+import { AxiosError } from "axios";
+import { useContext, useState } from "react";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { Campus, StoreDemand } from "types/common";
 
-import * as S from "../StoreDemandList.style";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { theme } from "style/Theme";
-import Button from "components/common/Button/Button";
-import StoreDemandDetailModal from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal";
-import { useMutation } from "react-query";
-import { AxiosError } from "axios";
-import sendStoreDemandPutRequest from "api/store/sendStoreDemandPutRequest";
 import { getCampusId } from "constants/campus";
 import { MESSAGES } from "constants/messages";
-import useLogin from "hooks/useLogin";
-import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 import { PATHNAME } from "constants/routes";
-import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+
 import { campusContext } from "context/CampusContextProvider";
+
+import useLogin from "hooks/useLogin";
+
+import sendStoreDemandPutRequest from "api/store/sendStoreDemandPutRequest";
+
+import Button from "components/common/Button/Button";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
+
 import StoreDemandBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet";
+import StoreDemandDetailModal from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal";
+
+import { theme } from "style/Theme";
 
 interface StoreDemandContentListProps {
   storeDemand: StoreDemand;
@@ -40,7 +46,7 @@ export default function StoreDemandListItem({
   const [editOpenId, setEditOpenId] = useState<string | null>(null);
 
   const handleRequestDetailOpen: (
-    id: string,
+    id: string
   ) => React.MouseEventHandler<HTMLElement> = (id) => () => {
     setDetailOpenId(id);
   };

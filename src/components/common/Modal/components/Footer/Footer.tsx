@@ -1,5 +1,6 @@
-import { CSSProp, CSSProperties } from "styled-components";
 import * as S from "./Footer.styled";
+
+import { CSSProp, CSSProperties } from "styled-components";
 
 export default function Footer({
   children,

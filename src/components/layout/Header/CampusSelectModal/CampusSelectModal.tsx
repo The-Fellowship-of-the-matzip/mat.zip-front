@@ -1,17 +1,17 @@
-import Modal from "components/common/Modal/Modal";
+import * as S from "./CampusSelectModal.styled";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { Campus } from "types/common";
+
+import { getOtherCampus } from "constants/campus";
+import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
+
+import { campusContext, setCampusContext } from "context/CampusContextProvider";
 
 import { Button } from "components/common/Button/Button.style";
 import { Heading } from "components/common/Heading/Heading.style";
-
-import { Campus } from "types/common";
-import { MESSAGES } from "constants/messages";
-import { getOtherCampus } from "constants/campus";
-import { campusContext, setCampusContext } from "context/CampusContextProvider";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { PATHNAME } from "constants/routes";
-
-import * as S from "./CampusSelectModal.styled";
+import Modal from "components/common/Modal/Modal";
 
 interface CampusSelectModalProps {
   onCloseModal: () => void;

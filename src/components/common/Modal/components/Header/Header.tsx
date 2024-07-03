@@ -1,5 +1,6 @@
-import { CSSProp } from "styled-components";
 import * as S from "./Header.styled";
+
+import { CSSProp } from "styled-components";
 
 export default function Header({
   children,

@@ -1,5 +1,6 @@
-import { ToastStatus } from "components/common/Toast/Toast.type";
 import * as S from "./Toast.styled";
+
+import { ToastStatus } from "components/common/Toast/Toast.type";
 
 interface ToastProps {
   message: string;

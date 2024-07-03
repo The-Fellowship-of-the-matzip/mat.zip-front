@@ -1,9 +1,9 @@
 import type { UserProfileInformation } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
-import { MESSAGES } from "constants/messages";
 
 const fetchUserProfile = async () => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
@@ -18,7 +18,7 @@ const fetchUserProfile = async () => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    },
+    }
   );
 
   return data;

@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 
 import sendBookmarkDeleteRequest from "api/bookmark/sendBookmarkDeleteRequest";
 import sendBookmarkPostRequest from "api/bookmark/sendBookmarkPostRequest";
+
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 export const useMarked = (restaurantId: number, liked: boolean) => {

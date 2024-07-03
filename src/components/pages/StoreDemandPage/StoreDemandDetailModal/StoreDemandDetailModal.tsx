@@ -18,11 +18,11 @@ import Button from "components/common/Button/Button";
 import Heading from "components/common/Heading/Heading";
 import Modal from "components/common/Modal/Modal";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal.style";
 
 import { theme } from "style/Theme";
-import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 interface StoreDemandDetailModalProps extends StoreDemand {
   handleEditOpen: () => void;
@@ -68,7 +68,7 @@ function StoreDemandDetailModal({
       onSuccess: handleSuccess,
       onError: handleSubmitError,
       retry: 0,
-    },
+    }
   );
 
   return (

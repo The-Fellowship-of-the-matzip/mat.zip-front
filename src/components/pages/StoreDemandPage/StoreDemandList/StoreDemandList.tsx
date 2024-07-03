@@ -1,8 +1,7 @@
 import { StoreDemand } from "types/common";
 
-import StoreDemandListItem from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandListItem/StoreDemandListItem";
-
 import * as S from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList.style";
+import StoreDemandListItem from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandListItem/StoreDemandListItem";
 
 interface Props {
   storeRequests: StoreDemand[];

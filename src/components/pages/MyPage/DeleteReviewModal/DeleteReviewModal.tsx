@@ -1,9 +1,8 @@
-import Modal from "components/common/Modal/Modal";
+import * as S from "./DeleteReviewModal.styled";
 
 import { Button } from "components/common/Button/Button.style";
 import { Heading } from "components/common/Heading/Heading.style";
-
-import * as S from "./DeleteReviewModal.styled";
+import Modal from "components/common/Modal/Modal";
 
 interface DeleteReviewModalProps {
   onCloseModal: () => void;

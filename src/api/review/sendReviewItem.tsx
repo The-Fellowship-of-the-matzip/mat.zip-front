@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
-import { MESSAGES } from "constants/messages";
 
 export interface SendReviewItemProps {
   restaurantId: string;
@@ -38,7 +38,7 @@ const sendReviewItem = async ({
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    },
+    }
   );
   return data;
 };

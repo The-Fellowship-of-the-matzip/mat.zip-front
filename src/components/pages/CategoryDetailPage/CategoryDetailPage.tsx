@@ -24,9 +24,9 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
-import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function CategoryDetailPage() {
   const navigate = useNavigate();
@@ -58,14 +58,14 @@ function CategoryDetailPage() {
 
   const handleClickFilterChip = (index: number) => () => {
     setFilter((prev) =>
-      prev === FILTERS[index].order ? "" : FILTERS[index].order,
+      prev === FILTERS[index].order ? "" : FILTERS[index].order
     );
   };
 
   const categoryStores =
     data?.pages.reduce<Store[]>(
       (stores, page) => [...stores, ...page.restaurants],
-      [],
+      []
     ) || [];
 
   useEffect(() => {

@@ -4,12 +4,12 @@ import sendImageUploadPostRequest from "api/image/sendImageUploadPostRequest";
 
 export const useImageUpload = <T extends Function>(
   showToast: T,
-  url: null | string = null,
+  url: null | string = null
 ) => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState(url);
 
   const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (!event.target.files) return;
 

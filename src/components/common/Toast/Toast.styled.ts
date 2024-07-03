@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { keyframes, css } from "styled-components";
+
 import { ToastStatus } from "components/common/Toast/Toast.type";
 
 const fadeIn = keyframes`

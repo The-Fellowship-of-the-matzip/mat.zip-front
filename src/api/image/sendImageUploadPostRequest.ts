@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
-import { MESSAGES } from "constants/messages";
 
 interface ImageUploadResponse {
   imageUrl: string;
@@ -25,7 +25,7 @@ const sendImageUploadPostRequest = async (imageFile: FormData) => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    },
+    }
   );
 
   return response.data;

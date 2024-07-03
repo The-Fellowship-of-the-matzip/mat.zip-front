@@ -74,7 +74,7 @@ function MenuDrawer({
         </S.CustomLink>
       </S.Content>
     </S.Container>,
-    document.querySelector("#app") as HTMLElement,
+    document.querySelector("#app") as HTMLElement
   );
 }
 

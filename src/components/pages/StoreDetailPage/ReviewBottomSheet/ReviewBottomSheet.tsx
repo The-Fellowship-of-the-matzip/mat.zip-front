@@ -1,3 +1,4 @@
+import * as S from "./ReviewBottomSheet.styled";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { UseMutateFunction } from "react-query";
@@ -16,8 +17,6 @@ import Label from "components/common/Label/Label";
 import StarRating from "components/common/StarRating/StarRating";
 import Textarea from "components/common/Textarea/Textarea";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
-
-import * as S from "./ReviewBottomSheet.styled";
 
 interface ReviewBottomSheetProps {
   defaultReviewItem?: {
@@ -45,10 +44,10 @@ function ReviewBottomSheet({
   mutate,
 }: ReviewBottomSheetProps) {
   const [rating, setRating] = useState<number>(
-    defaultReviewItem ? defaultReviewItem.rating - 1 : DEFAULT_RATING,
+    defaultReviewItem ? defaultReviewItem.rating - 1 : DEFAULT_RATING
   );
   const [reviewContent, setReviewContent] = useState<string>(
-    defaultReviewItem?.content ?? "",
+    defaultReviewItem?.content ?? ""
   );
   const [menu, setMenu] = useState<string>(defaultReviewItem?.menu ?? "");
 
@@ -87,7 +86,7 @@ function ReviewBottomSheet({
   };
 
   const handleContentInput: React.ChangeEventHandler<HTMLTextAreaElement> = (
-    e,
+    e
   ) => {
     const {
       target: { value },

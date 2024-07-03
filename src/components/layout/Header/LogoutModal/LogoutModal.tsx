@@ -1,14 +1,14 @@
+import * as S from "./LogoutModal.styled";
 import { useNavigate } from "react-router-dom";
-import useLogin from "hooks/useLogin";
-
-import Modal from "components/common/Modal/Modal";
-import Button from "components/common/Button/Button";
-import Heading from "components/common/Heading/Heading";
 
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
-import * as S from "./LogoutModal.styled";
+import useLogin from "hooks/useLogin";
+
+import Button from "components/common/Button/Button";
+import Heading from "components/common/Heading/Heading";
+import Modal from "components/common/Modal/Modal";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 interface LogoutModalProps {

@@ -1,8 +1,10 @@
-import Text from "components/common/Text/Text";
+import { Category } from "types/common";
+
 import { CATEGORY_ICONS } from "constants/categories";
 
+import Text from "components/common/Text/Text";
+
 import * as S from "components/pages/CategoryPage/CategoryItem/CategoryItem.style";
-import { Category } from "types/common";
 
 interface CategoryItemProps {
   buttonText: string;

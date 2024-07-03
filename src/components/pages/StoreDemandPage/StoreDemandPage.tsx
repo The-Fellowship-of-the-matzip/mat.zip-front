@@ -1,9 +1,8 @@
+import { AxiosError } from "axios";
 import { useState, useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
-
 import { Campus, StoreDemand } from "types/common";
 
 import { NETWORK } from "constants/api";
@@ -28,8 +27,8 @@ import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import StoreDemandBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet";
+import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
 
 function StoreDemandPage() {
@@ -80,13 +79,13 @@ function StoreDemandPage() {
     {
       getNextPageParam,
       retry: NETWORK.RETRY_COUNT,
-    },
+    }
   );
 
   const storeRequests =
     data?.pages.reduce<StoreDemand[]>(
       (stores, page) => [...stores, ...page.items],
-      [],
+      []
     ) || [];
 
   const handleRequestSheetOpen = () => {

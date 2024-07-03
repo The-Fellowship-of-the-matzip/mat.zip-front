@@ -1,6 +1,8 @@
-import { CloseIcon } from "asset";
 import * as S from "./CloseButton.styled";
+
 import { CSSProp } from "styled-components";
+
+import { CloseIcon } from "asset";
 
 interface CloseButtonProps {
   onCloseModal: () => void;

@@ -1,4 +1,3 @@
-import { ToastStatus } from "components/common/Toast/Toast.type";
 import Toast from "../Toast";
 import {
   ANIMATION_DURATION,
@@ -12,9 +11,11 @@ import {
   useState,
 } from "react";
 
+import { ToastStatus } from "components/common/Toast/Toast.type";
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ToastContext = createContext(
-  (message: string, type?: ToastStatus) => {},
+  (message: string, type?: ToastStatus) => {}
 );
 
 export const useToastContext = () => {

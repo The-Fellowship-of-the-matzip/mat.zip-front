@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+
 import styled, { CSSProp } from "styled-components";
 
 export const FooterContainer = styled.div<{

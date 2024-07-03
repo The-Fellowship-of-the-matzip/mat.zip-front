@@ -3,18 +3,16 @@ import { AxiosError } from "axios";
 import { MouseEvent, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-
 import { ReviewInputShape, UserReview } from "types/common";
-
 import repeatComponent from "util/repeatComponent";
 
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
+import useLogin from "hooks/useLogin";
+
 import deleteReviewItem from "api/review/deleteReviewItem";
 import sendReviewItem from "api/review/sendReviewItem";
-
-import useLogin from "hooks/useLogin";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
@@ -59,7 +57,7 @@ function MyReviewItem({
           navigate(PATHNAME.HOME);
         }
       },
-    },
+    }
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
@@ -102,7 +100,7 @@ function MyReviewItem({
         content,
         imageUrl: imageUrl ?? "",
       }),
-    { onSuccess, onError: handleSubmitError, retry: 0 },
+    { onSuccess, onError: handleSubmitError, retry: 0 }
   );
 
   const reviewInfo = {

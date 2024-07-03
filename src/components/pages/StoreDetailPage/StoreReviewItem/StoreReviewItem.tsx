@@ -2,17 +2,16 @@ import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-
 import { ReviewInputShape, ReviewShape } from "types/common";
 import repeatComponent from "util/repeatComponent";
 
-import { PATHNAME } from "constants/routes";
 import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
+
+import useLogin from "hooks/useLogin";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
 import sendReviewItem from "api/review/sendReviewItem";
-
-import useLogin from "hooks/useLogin";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
@@ -21,9 +20,9 @@ import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
 import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
 import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
+import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
 
 type ReviewInfo = ReviewShape & { restaurantId: string };
 
@@ -51,7 +50,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           navigate(PATHNAME.HOME);
         }
       },
-    },
+    }
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
@@ -69,7 +68,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
   };
 
   const handleReviewDeleteClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.stopPropagation();
     setModalOpen((prev) => !prev);
@@ -100,7 +99,7 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         content,
         imageUrl: imageUrl ?? "",
       }),
-    { onSuccess: handleReviewModalClick, onError: handleSubmitError, retry: 0 },
+    { onSuccess: handleReviewModalClick, onError: handleSubmitError, retry: 0 }
   );
 
   return (

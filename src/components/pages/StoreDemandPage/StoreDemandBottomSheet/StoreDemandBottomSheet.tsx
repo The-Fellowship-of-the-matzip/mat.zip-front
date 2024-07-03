@@ -1,5 +1,5 @@
-import { UseMutateFunction } from "react-query";
 import { AxiosError } from "axios";
+import { UseMutateFunction } from "react-query";
 
 import { categories } from "constants/categories";
 

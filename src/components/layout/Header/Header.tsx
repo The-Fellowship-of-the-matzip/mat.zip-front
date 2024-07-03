@@ -10,12 +10,11 @@ import logoImg from "asset/logo-light.svg";
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
 
-import CampusSelectModal from "components/layout/Header/CampusSelectModal/CampusSelectModal";
 import SearchBar from "components/common/SearchBar/SearchBar";
 
-import LogoutModal from "components/layout/Header/LogoutModal/LogoutModal";
-
+import CampusSelectModal from "components/layout/Header/CampusSelectModal/CampusSelectModal";
 import * as S from "components/layout/Header/Header.style";
+import LogoutModal from "components/layout/Header/LogoutModal/LogoutModal";
 
 function Header() {
   const isLoggedIn = useContext(LoginContext);
