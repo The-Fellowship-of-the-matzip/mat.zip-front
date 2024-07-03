@@ -31,8 +31,6 @@ function BookmarkListPage() {
 
   const bookmarkedStoreData = data ?? [];
 
-  console.log(error);
-
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
