@@ -5,6 +5,7 @@ import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { UserReview } from "types/common";
 
+import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
@@ -26,7 +27,7 @@ function MyReviewListPage() {
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
     useInfiniteQuery(["myReviewList"], fetchUserReviewList, {
       getNextPageParam,
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
     });
 
   const loadMoreReviews = () => {

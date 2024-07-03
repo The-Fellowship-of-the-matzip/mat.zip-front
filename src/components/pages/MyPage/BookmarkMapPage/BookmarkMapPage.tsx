@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import type { Campus } from "types/common";
 
+import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
@@ -34,7 +35,7 @@ function BookmarkMapPage() {
     "bookmarkStore",
     fetchBookmarkList,
     {
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
       refetchOnWindowFocus: false,
     }
   );

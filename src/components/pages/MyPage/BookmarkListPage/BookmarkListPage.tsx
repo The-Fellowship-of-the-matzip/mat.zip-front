@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
+import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
@@ -24,7 +25,7 @@ function BookmarkListPage() {
     "bookmarkStore",
     fetchBookmarkList,
     {
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
       refetchOnWindowFocus: false,
     }
   );

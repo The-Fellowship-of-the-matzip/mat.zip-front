@@ -6,7 +6,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-import { SIZE } from "constants/api";
+import { NETWORK, SIZE } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
 
@@ -36,13 +36,13 @@ function MyPage() {
     error: userProfileError,
   } = useQuery("userProfile", fetchUserProfile, {
     refetchOnWindowFocus: false,
-    retry: 0,
+    retry: NETWORK.NOT_RETRY_COUNT,
   });
 
   const { data: bookmarkedStoreData = [], error: bookmarkedStoreError } =
     useQuery("bookmarkedStore", fetchBookmarkList, {
       refetchOnWindowFocus: false,
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
     });
 
   const { data: myReviewData, error: userReviewError } = useQuery(
@@ -50,7 +50,7 @@ function MyPage() {
     fetchUserReviewList,
     {
       refetchOnWindowFocus: false,
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
     }
   );
 
