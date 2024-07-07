@@ -1,22 +1,16 @@
 import AutoComplete from "../AutoComplete/AutoComplete";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AutoCompleteOption } from "types/common";
-import { Campus } from "types/common";
 
-import { getCampusId } from "constants/campus";
 import ROUTES, { PATHNAME } from "constants/routes";
 
 import { SearchIcon } from "asset";
 
-import { campusContext } from "context/CampusContextProvider";
-
+import useAutoComplete from "hooks/useAutoComplete";
 import useBackdropClick from "hooks/useBackdropClick";
 import useFocusTrap from "hooks/useFocusTrap";
-
-import fetchAutoCompleteStoreList from "api/store/fetchAutoCompleteStoreList";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
@@ -25,16 +19,12 @@ interface SearchBarProps {
 }
 
 function SearchBar({ closeSearchBar }: SearchBarProps) {
-  const campusName = useContext(campusContext);
-  const campusId = getCampusId(campusName as Campus);
-
   const [keyword, setKeyword] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [autoCompleteList, setAutoCompleteList] = useState<
-    AutoCompleteOption[]
-  >([]);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const closeDropdown = () => setIsDropdownOpen(false);
+
+  const { autoCompleteList, handleAutoCompleteList } = useAutoComplete();
 
   const searchBarRef = useFocusTrap(isDropdownOpen);
   useBackdropClick(searchBarRef, closeDropdown);
@@ -44,11 +34,6 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
 
   const handleKeyword = (keyword: string) => {
     setKeyword(keyword);
-  };
-
-  const handleAutoCompleteList = async (keyword: string) => {
-    const data = await fetchAutoCompleteStoreList(campusId, keyword);
-    setAutoCompleteList(data);
   };
 
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
