@@ -1,15 +1,22 @@
 import AutoComplete from "../AutoComplete/AutoComplete";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AutoCompleteOption } from "types/common";
+import { Campus } from "types/common";
 
+import { getCampusId } from "constants/campus";
 import ROUTES, { PATHNAME } from "constants/routes";
 
 import { SearchIcon } from "asset";
 
+import { campusContext } from "context/CampusContextProvider";
+
 import useBackdropClick from "hooks/useBackdropClick";
 import useFocusTrap from "hooks/useFocusTrap";
+
+import fetchAutoCompleteStoreList from "api/store/fetchAutoCompleteStoreList";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
@@ -17,32 +24,15 @@ interface SearchBarProps {
   closeSearchBar?: () => void;
 }
 
-const autoCompleteMockData = [
-  {
-    id: 1,
-    name: "아이템 1",
-  },
-  {
-    id: 2,
-    name: "아이템 2",
-  },
-  {
-    id: 3,
-    name: "아이템 3",
-  },
-  {
-    id: 4,
-    name: "아이템 4",
-  },
-  {
-    id: 5,
-    name: "아이템 5",
-  },
-];
-
 function SearchBar({ closeSearchBar }: SearchBarProps) {
+  const campusName = useContext(campusContext);
+  const campusId = getCampusId(campusName as Campus);
+
   const [keyword, setKeyword] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [autoCompleteList, setAutoCompleteList] = useState<
+    AutoCompleteOption[]
+  >([]);
 
   const closeDropdown = () => setIsDropdownOpen(false);
 
@@ -52,12 +42,20 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleKeyword = (keyword: string) => setKeyword(keyword);
+  const handleKeyword = (keyword: string) => {
+    setKeyword(keyword);
+  };
+
+  const handleAutoCompleteList = async (keyword: string) => {
+    const data = await fetchAutoCompleteStoreList(campusId, keyword);
+    setAutoCompleteList(data);
+  };
 
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
   }) => {
     setKeyword(value);
+    handleAutoCompleteList(value);
   };
 
   const handleSearchButtonClick: React.FormEventHandler<HTMLFormElement> = (
@@ -97,7 +95,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
       </S.FormContainer>
       {isDropdownOpen && (
         <AutoComplete
-          optionList={autoCompleteMockData}
+          optionList={autoCompleteList}
           onOptionFocus={handleKeyword}
           closeAutoComplete={closeDropdown}
         />

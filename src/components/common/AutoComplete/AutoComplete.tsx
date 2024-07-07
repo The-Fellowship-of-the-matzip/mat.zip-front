@@ -1,13 +1,14 @@
 import Button from "../Button/Button";
 import * as S from "./AutoComplete.style";
 import { Link } from "react-router-dom";
+import { AutoCompleteOption } from "types/common";
 
 import { PATHNAME } from "constants/routes";
 
 import { OutwardIcon } from "asset";
 
 interface AutoCompleteProps {
-  optionList: { id: number; name: string }[];
+  optionList: AutoCompleteOption[];
   onOptionFocus: (option: string) => void;
   closeAutoComplete: () => void;
 }
