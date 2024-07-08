@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 const FOCUSABLE_SELECTORS =
   'button:not([disabled]), input:not([disabled]), select:not([disabled], textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])';
 
-const useFocusTrap = (isOpen: boolean) => {
+const useFocusTrap = (isOpen: boolean, length: number) => {
   const mainRef = useRef<HTMLDivElement>(null);
   const focusableElements = useRef<HTMLElement[]>([]);
 
@@ -27,6 +27,8 @@ const useFocusTrap = (isOpen: boolean) => {
         : currentIndex + 1;
 
     const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.isComposing) return;
+
       if (["Tab", "ArrowUp", "ArrowDown"].includes(event.key)) {
         event.preventDefault();
 
@@ -56,7 +58,7 @@ const useFocusTrap = (isOpen: boolean) => {
     document.addEventListener("keydown", handleKeyPress);
 
     return () => document.removeEventListener("keydown", handleKeyPress);
-  }, [isOpen, mainRef]);
+  }, [isOpen, length]);
 
   return mainRef;
 };

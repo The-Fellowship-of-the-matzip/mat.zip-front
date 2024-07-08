@@ -26,7 +26,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
 
   const { autoCompleteList, handleAutoCompleteList } = useAutoComplete();
 
-  const searchBarRef = useFocusTrap(isDropdownOpen);
+  const searchBarRef = useFocusTrap(isDropdownOpen, autoCompleteList.length);
   useBackdropClick(searchBarRef, closeDropdown);
 
   const location = useLocation();
@@ -78,7 +78,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
           <SearchIcon />
         </Button>
       </S.FormContainer>
-      {isDropdownOpen && (
+      {autoCompleteList.length > 0 && isDropdownOpen && (
         <AutoComplete
           optionList={autoCompleteList}
           onOptionFocus={handleKeyword}
