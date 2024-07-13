@@ -2,7 +2,7 @@ import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
 
 import axiosInstance from "api/axiosInstance";
 
-const sendBookmarkPostRequest = (restaurantId: number) => () => {
+const sendBookmarkPostRequest = (restaurantId: number) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {

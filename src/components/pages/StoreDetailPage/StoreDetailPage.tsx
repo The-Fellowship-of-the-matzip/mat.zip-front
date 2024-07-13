@@ -5,6 +5,7 @@ import { ReviewShape } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { PlusIcon } from "asset";
 
@@ -31,8 +32,8 @@ import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/St
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
 
-  const { data: storeData, isFetching: isStoreFetching } = useQuery(
-    "storeDetailInfo",
+  const { data: storeData } = useQuery(
+    QUERY_KEY.storeDetailInfo,
     () => fetchStoreDetail(restaurantId as string),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -52,7 +53,7 @@ function StoreDetailPage() {
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery(
-    ["reviewDetailStore", { restaurantId }],
+    QUERY_KEY.reviewDetailStore(restaurantId),
     fetchReviewList,
     { getNextPageParam, refetchOnWindowFocus: false }
   );
@@ -77,14 +78,16 @@ function StoreDetailPage() {
       ],
       []
     ) || [];
-
+  
   if (!restaurantId || !storeData) return null;
+  
   if (isStoreFetching) return <StoreDetailSkeleton />;
+
   return (
     <S.StoreDetailPageContainer>
       <S.StorePreviewImage
         alt={`${storeData.name} 가게 이미지`}
-        src={storeData?.imageUrl}
+        src={storeData?.thumbnailUrl}
       />
       <S.StoreReviewContentWrapper>
         <StoreDetailTitle storeInfo={storeData} />
@@ -95,33 +98,32 @@ function StoreDetailPage() {
               {isError && error instanceof Error && (
                 <ErrorImage errorMessage={error.message} />
               )}
-              {reviews.length
-                ? reviews.map(
-                    ({
-                      id,
-                      author,
-                      rating,
-                      content,
-                      menu,
-                      imageUrl,
-                      updatable,
-                    }) => (
-                      <Fragment key={id}>
-                        <StoreReviewItem
-                          reviewInfo={{
-                            restaurantId,
-                            id,
-                            author,
-                            rating,
-                            content,
-                            menu,
-                            imageUrl,
-                            updatable,
-                          }}
-                        />
-                        <Divider />
-                      </Fragment>
-                    )
+              {reviews.length > 0 ? (
+                reviews.map(
+                  ({
+                    id,
+                    author,
+                    rating,
+                    content,
+                    menu,
+                    imageUrl,
+                    updatable,
+                  }) => (
+                    <Fragment key={id}>
+                      <StoreReviewItem
+                        reviewInfo={{
+                          restaurantId,
+                          id,
+                          author,
+                          rating,
+                          content,
+                          menu,
+                          imageUrl,
+                          updatable,
+                        }}
+                      />
+                      <Divider />
+                    </Fragment>
                   )
                 : !isFetching && <ErrorText>작성된 리뷰가 없습니다.</ErrorText>}
               {(isLoading || isFetching) && <Spinner position="static" />}

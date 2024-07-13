@@ -1,5 +1,5 @@
 import type { ReviewInputShape } from "./reviewTypes";
-import type { Store } from "./storeTypes";
+import type { Store, StoreServerResponse } from "./storeTypes";
 
 export interface UserProfileInformation {
   username: string;
@@ -8,9 +8,13 @@ export interface UserProfileInformation {
   averageRating: number;
 }
 
-export interface UserReview extends ReviewInputShape {
+export interface UserReviewServerResponse extends ReviewInputShape {
   id: number;
-  restaurant: Pick<Store, "id" | "name" | "imageUrl">;
+  restaurant: Pick<StoreServerResponse, "id" | "name" | "imageUrl">;
   imageUrl: string | null;
   updatable: boolean;
 }
+
+export type UserReview = Omit<UserReviewServerResponse, "restaurant"> & {
+  restaurant: Pick<Store, "id" | "name" | "thumbnailUrl">;
+};

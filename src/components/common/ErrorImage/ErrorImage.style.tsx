@@ -20,5 +20,5 @@ export const ErrorImage = styled.img`
 
 export const ErrorImageText = styled.p`
   font-size: 1.25rem;
-  color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.color.red};
 `;

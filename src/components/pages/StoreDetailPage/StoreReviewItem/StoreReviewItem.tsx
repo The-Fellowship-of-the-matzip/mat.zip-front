@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from "react-query";
 import { ReviewShape } from "types/common";
 import repeatComponent from "util/repeatComponent";
 
+import { QUERY_KEY } from "constants/queryKey";
+
 import deleteReviewItem from "api/review/deleteReviewItem";
 
 import Divider from "components/common/Divider/Divider";
@@ -135,10 +137,9 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
           closeSheet={() => setIsBottomSheetOpen(false)}
           defaultReviewItem={reviewInfo}
           onSuccess={() => {
-            queryClient.invalidateQueries([
-              "reviewDetailStore",
-              { restaurantId: reviewInfo.restaurantId },
-            ]);
+            queryClient.invalidateQueries(
+              QUERY_KEY.reviewDetailStore(reviewInfo.restaurantId)
+            );
           }}
         />
       )}

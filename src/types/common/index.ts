@@ -5,3 +5,4 @@ export * from "./reviewTypes";
 export * from "./storeTypes";
 export * from "./bookmarkTypes";
 export * from "./mypageTypes";
+export * from "./searchBarTypes";
