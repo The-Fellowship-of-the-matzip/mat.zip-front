@@ -25,21 +25,24 @@ import Spinner from "components/common/Spinner/Spinner";
 
 import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
+import StoreDetailSkeleton from "components/pages/StoreDetailPage/StoreDetailSkeleton/StoreDetailSkeleton";
 import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle";
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
 
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
-  const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const isLoggedIn = useContext(LoginContext);
 
   const { data: storeData } = useQuery(
     QUERY_KEY.storeDetailInfo,
     () => fetchStoreDetail(restaurantId as string),
     {
       retry: NETWORK.RETRY_COUNT,
+      refetchOnWindowFocus: false,
     }
   );
+
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const isLoggedIn = useContext(LoginContext);
 
   const {
     data,
@@ -52,7 +55,7 @@ function StoreDetailPage() {
   } = useInfiniteQuery(
     QUERY_KEY.reviewDetailStore(restaurantId),
     fetchReviewList,
-    { getNextPageParam }
+    { getNextPageParam, refetchOnWindowFocus: false }
   );
 
   const loadMoreReviews = () => {
@@ -75,7 +78,10 @@ function StoreDetailPage() {
       ],
       []
     ) || [];
+  
   if (!restaurantId || !storeData) return null;
+  
+  if (isStoreFetching) return <StoreDetailSkeleton />;
 
   return (
     <S.StoreDetailPageContainer>
@@ -89,7 +95,6 @@ function StoreDetailPage() {
           <Heading size="xs">리뷰</Heading>
           <S.ReviewListWrapper>
             <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
-              {(isLoading || isFetching) && <Spinner />}
               {isError && error instanceof Error && (
                 <ErrorImage errorMessage={error.message} />
               )}
@@ -120,10 +125,8 @@ function StoreDetailPage() {
                       <Divider />
                     </Fragment>
                   )
-                )
-              ) : (
-                <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
-              )}
+                : !isFetching && <ErrorText>작성된 리뷰가 없습니다.</ErrorText>}
+              {(isLoading || isFetching) && <Spinner position="static" />}
             </InfiniteScroll>
           </S.ReviewListWrapper>
         </S.ReviewListContainer>
