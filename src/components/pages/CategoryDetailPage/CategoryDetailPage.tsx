@@ -10,6 +10,7 @@ import { NETWORK, SIZE, FILTERS } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -47,7 +48,7 @@ function CategoryDetailPage() {
     fetchNextPage,
     isFetching,
     refetch,
-  } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+  } = useInfiniteQuery(QUERY_KEY.categoryStore(fetchParams), fetchStoreList, {
     getNextPageParam,
     retry: NETWORK.RETRY_COUNT,
   });

@@ -7,6 +7,7 @@ import { Campus, StoreItemWithHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
 import { getCampusId } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -40,7 +41,7 @@ function SearchResultPage() {
   };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+    useInfiniteQuery(QUERY_KEY.categoryStore(fetchParams), fetchStoreList, {
       getNextPageParam,
       retry: NETWORK.RETRY_COUNT,
     });

@@ -6,8 +6,8 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import type { Campus } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { LeftIcon } from "asset";
 
@@ -30,10 +30,10 @@ function BookmarkMapPage() {
   const campusName = useContext(campusContext);
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
-    "bookmarkStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
-      retry: NETWORK.RETRY_COUNT,
+      retry: 0,
       refetchOnWindowFocus: false,
     }
   );

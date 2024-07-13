@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { StoreItemWithoutHeart } from "types/common";
 
-import { NETWORK } from "constants/api";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { LeftIcon } from "asset";
@@ -22,10 +22,10 @@ function BookmarkListPage() {
   const navigate = useNavigate();
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
-    "bookmarkStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
-      retry: NETWORK.RETRY_COUNT,
+      retry: 0,
       refetchOnWindowFocus: false,
     }
   );

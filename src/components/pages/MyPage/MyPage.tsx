@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { StoreItemWithoutHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { RightIcon } from "asset";
@@ -31,13 +32,13 @@ function MyPage() {
     isLoading,
     isError,
     error,
-  } = useQuery("userProfile", () => fetchUserProfile(), {
+  } = useQuery(QUERY_KEY.userProfile, () => fetchUserProfile(), {
     retry: NETWORK.RETRY_COUNT,
     refetchOnWindowFocus: false,
   });
 
   const { data: bookmarkedStoreData = [] } = useQuery(
-    "bookmarkedStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -45,10 +46,14 @@ function MyPage() {
     }
   );
 
-  const { data: myReviewData } = useQuery("myReview", fetchUserReviewList, {
-    retry: NETWORK.RETRY_COUNT,
-    refetchOnWindowFocus: false,
-  });
+  const { data: myReviewData } = useQuery(
+    QUERY_KEY.myReview,
+    fetchUserReviewList,
+    {
+      retry: NETWORK.RETRY_COUNT,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const myReviews = myReviewData?.reviews ?? [];
 

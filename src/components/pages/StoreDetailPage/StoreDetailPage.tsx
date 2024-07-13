@@ -5,6 +5,7 @@ import { ReviewShape } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { PlusIcon } from "asset";
 
@@ -33,7 +34,7 @@ function StoreDetailPage() {
   const isLoggedIn = useContext(LoginContext);
 
   const { data: storeData } = useQuery(
-    "storeDetailInfo",
+    QUERY_KEY.storeDetailInfo,
     () => fetchStoreDetail(restaurantId as string),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -49,7 +50,7 @@ function StoreDetailPage() {
     fetchNextPage,
     isFetching,
   } = useInfiniteQuery(
-    ["reviewDetailStore", { restaurantId }],
+    QUERY_KEY.reviewDetailStore(restaurantId),
     fetchReviewList,
     { getNextPageParam }
   );
@@ -74,7 +75,6 @@ function StoreDetailPage() {
       ],
       []
     ) || [];
-
   if (!restaurantId || !storeData) return null;
 
   return (
@@ -93,7 +93,7 @@ function StoreDetailPage() {
               {isError && error instanceof Error && (
                 <ErrorImage errorMessage={error.message} />
               )}
-              {reviews.length ? (
+              {reviews.length > 0 ? (
                 reviews.map(
                   ({
                     id,

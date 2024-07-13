@@ -4,6 +4,8 @@ import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { UserReview } from "types/common";
 
+import { QUERY_KEY } from "constants/queryKey";
+
 import { LeftIcon } from "asset";
 
 import getNextPageParam from "api/getNextPageParam";
@@ -20,7 +22,7 @@ function MyReviewListPage() {
   const navigate = useNavigate();
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["myReviewList"], fetchUserReviewList, {
+    useInfiniteQuery(QUERY_KEY.myReviewList, fetchUserReviewList, {
       getNextPageParam,
     });
 
