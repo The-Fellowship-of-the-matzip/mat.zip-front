@@ -2,8 +2,11 @@ import * as S from "./MyPage.style";
 import MyReviewItem from "./MyReviewItem/MyReviewItem";
 import UserProfile from "./UserProfile/UserProfile";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { StoreItemWithoutHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { RightIcon } from "asset";
@@ -17,6 +20,7 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
 
 function MyPage() {
@@ -25,13 +29,13 @@ function MyPage() {
     isLoading,
     isError,
     error,
-  } = useQuery("userProfile", () => fetchUserProfile(), {
+  } = useQuery(QUERY_KEY.userProfile, () => fetchUserProfile(), {
     retry: NETWORK.RETRY_COUNT,
     refetchOnWindowFocus: false,
   });
 
   const { data: bookmarkedStoreData = [] } = useQuery(
-    "bookmarkedStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -39,10 +43,14 @@ function MyPage() {
     }
   );
 
-  const { data: myReviewData } = useQuery("myReview", fetchUserReviewList, {
-    retry: NETWORK.RETRY_COUNT,
-    refetchOnWindowFocus: false,
-  });
+  const { data: myReviewData } = useQuery(
+    QUERY_KEY.myReview,
+    fetchUserReviewList,
+    {
+      retry: NETWORK.RETRY_COUNT,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const myReviews = myReviewData?.reviews ?? [];
 
@@ -68,7 +76,10 @@ function MyPage() {
           </S.ShowAllLink>
         </S.SectionHeaderWrapper>
         {bookmarkedStoreData.length > 0 ? (
-          <StoreList stores={bookmarkedStoreData.slice(0, SIZE.MY_PAGE_ITEM)} />
+          <StoreList<StoreItemWithoutHeart>
+            stores={bookmarkedStoreData}
+            renderListItem={(store) => <StoreListItemWithoutHeart {...store} />}
+          />
         ) : (
           <S.EmptyList>
             <Text size="sm">저장된 맛집이 없습니다</Text>

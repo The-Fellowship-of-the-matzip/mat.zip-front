@@ -3,6 +3,10 @@ import * as S from "./MyReviewListPage.style";
 import { useInfiniteQuery } from "react-query";
 import { UserReview } from "types/common";
 
+import { QUERY_KEY } from "constants/queryKey";
+
+import { LeftIcon } from "asset";
+
 import getNextPageParam from "api/getNextPageParam";
 import fetchUserReviewList from "api/mypage/fetchUserReviewList";
 
@@ -15,7 +19,7 @@ import Text from "components/common/Text/Text";
 
 function MyReviewListPage() {
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["myReviewList"], fetchUserReviewList, {
+    useInfiniteQuery(QUERY_KEY.myReviewList, fetchUserReviewList, {
       getNextPageParam,
     });
 

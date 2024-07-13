@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useInfiniteQuery } from "react-query";
-import { Navigate, useParams } from "react-router-dom";
-import { Campus, CategoryId, Store } from "types/common";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Campus, CategoryId, StoreItemWithHeart } from "types/common";
 
 import { NETWORK, SIZE, FILTERS } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -23,6 +24,7 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithHeart from "components/common/StoreListItem/StoreListItemWithHeart";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
@@ -43,7 +45,7 @@ function CategoryDetailPage() {
     fetchNextPage,
     isFetching,
     refetch,
-  } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+  } = useInfiniteQuery(QUERY_KEY.categoryStore(fetchParams), fetchStoreList, {
     getNextPageParam,
     retry: NETWORK.RETRY_COUNT,
   });
@@ -59,7 +61,7 @@ function CategoryDetailPage() {
   };
 
   const categoryStores =
-    data?.pages.reduce<Store[]>(
+    data?.pages.reduce<StoreItemWithHeart[]>(
       (stores, page) => [...stores, ...page.restaurants],
       []
     ) || [];
@@ -99,7 +101,10 @@ function CategoryDetailPage() {
           <ErrorImage errorMessage={error.message} />
         )}
         {categoryStores.length ? (
-          <StoreList stores={categoryStores} />
+          <StoreList<StoreItemWithHeart>
+            stores={categoryStores}
+            renderListItem={(store) => <StoreListItemWithHeart {...store} />}
+          />
         ) : (
           <ErrorText>가게 정보가 없습니다.</ErrorText>
         )}

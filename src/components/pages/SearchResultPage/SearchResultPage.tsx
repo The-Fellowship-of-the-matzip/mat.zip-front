@@ -3,10 +3,11 @@ import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Campus, Store } from "types/common";
+import { Campus, StoreItemWithHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
 import { getCampusId } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -20,6 +21,7 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithHeart from "components/common/StoreListItem/StoreListItemWithHeart";
 
 import * as S from "components/pages/SearchResultPage/SearchResultPage.style";
 
@@ -39,7 +41,7 @@ function SearchResultPage() {
   };
 
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+    useInfiniteQuery(QUERY_KEY.categoryStore(fetchParams), fetchStoreList, {
       getNextPageParam,
       retry: NETWORK.RETRY_COUNT,
     });
@@ -49,7 +51,7 @@ function SearchResultPage() {
   };
 
   const searchResults =
-    data?.pages.reduce<Store[]>(
+    data?.pages.reduce<StoreItemWithHeart[]>(
       (stores, page) => [...stores, ...page.restaurants],
       []
     ) || [];
@@ -63,7 +65,10 @@ function SearchResultPage() {
           <ErrorImage errorMessage={error.message} />
         )}
         {searchResults.length ? (
-          <StoreList stores={searchResults} />
+          <StoreList<StoreItemWithHeart>
+            stores={searchResults}
+            renderListItem={(store) => <StoreListItemWithHeart {...store} />}
+          />
         ) : (
           <ErrorText>검색 결과가 없습니다.</ErrorText>
         )}

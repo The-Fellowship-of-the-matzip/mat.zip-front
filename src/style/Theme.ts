@@ -1,3 +1,5 @@
+import { DefaultTheme } from "styled-components";
+
 const color = {
   white: "white",
   whiteBackground: "#f8f8fa",
@@ -16,6 +18,7 @@ const color = {
   primaryLight1: "#ffc774",
   primaryLight2: "#ffe5be",
   primaryLight3: "#fff4e4",
+  primaryLight4: "#fff8ed",
 
   yellow: "#ffd600",
 
@@ -44,7 +47,12 @@ const zIndex = {
   overlay: 3,
 };
 
-export const theme = {
+export type ColorTypes = typeof color;
+export type SpacerTypes = typeof spacer;
+export type BorderRadiusType = typeof borderRadius;
+export type ZIndexType = typeof zIndex;
+
+export const theme: DefaultTheme = {
   color,
   spacer,
   borderRadius,

@@ -5,8 +5,8 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useQuery } from "react-query";
 import type { Campus } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -19,17 +19,17 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import EventMapMarker from "components/common/EventMapMarker/EventMapMarker";
 import SlideCarousel from "components/common/SlideCarousel/SlideCarousel";
 import Spinner from "components/common/Spinner/Spinner";
-import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
 
 function BookmarkMapPage() {
   const campusName = useContext(campusContext);
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
-    "bookmarkStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
-      retry: NETWORK.RETRY_COUNT,
+      retry: 0,
       refetchOnWindowFocus: false,
     }
   );
@@ -102,11 +102,7 @@ function BookmarkMapPage() {
           onSlideChange={handleInformationSlide}
         >
           {bookmarkedStores.map((store) => (
-            <StoreListItem
-              key={store.id}
-              {...store}
-              thumbnailUrl={store.imageUrl}
-            />
+            <StoreListItemWithoutHeart {...store} />
           ))}
         </SlideCarousel>
       </S.StoreListWrapper>

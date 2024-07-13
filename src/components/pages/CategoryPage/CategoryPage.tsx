@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
-import { Campus } from "types/common";
+import { Campus, StoreItemWithHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
 import { getCampusId } from "constants/campus";
+import { QUERY_KEY } from "constants/queryKey";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -14,6 +15,7 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithHeart from "components/common/StoreListItem/StoreListItemWithHeart";
 
 import Category from "components/pages/CategoryPage/Category/Category";
 import * as S from "components/pages/CategoryPage/CategoryPage.style";
@@ -24,7 +26,7 @@ function CategoryPage() {
   const campusId = getCampusId(campusName as Campus);
 
   const { data, isLoading, isError, error, refetch } = useQuery(
-    "randomStore",
+    QUERY_KEY.randomStore,
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -52,7 +54,10 @@ function CategoryPage() {
         {isError && error instanceof Error && (
           <ErrorImage errorMessage={error.message} />
         )}
-        <StoreList stores={data} />
+        <StoreList<StoreItemWithHeart>
+          stores={data ?? []}
+          renderListItem={(store) => <StoreListItemWithHeart {...store} />}
+        />
       </section>
     </S.CategoryPageContainer>
   );
