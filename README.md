@@ -93,4 +93,37 @@
       </a>
     </td>
   </tr>
+    <tr>
+        <td align="center" width="150px">
+          <a href="https://github.com/jinyoung234" target="_blank">
+            <img src="https://avatars.githubusercontent.com/u/87177577?s=400&u=106fbe2f3c642e95257da653560726e1fdc08372&v=4" alt="지니 프로필" />
+          </a>
+        </td>
+        <td align="center" width="150px">
+          <a href="https://github.com/anttiey" target="_blank">
+            <img src="https://avatars.githubusercontent.com/u/61104776?v=4" alt="파슬리 프로필" />
+          </a>
+        </td>
+        <td align="center" width="150px">
+          <a href="https://github.com/hwinkr" target="_blank">
+            <img src="https://avatars.githubusercontent.com/u/68489467?v=4" alt="해리 프로필" />
+          </a>
+        </td>
+    </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/jinyoung234" target="_blank">
+        지니
+      </a>
+    </td>
+     <td align="center">
+      <a href="https://github.com/anttiey" target="_blank">
+        파슬리
+      </a>
+    </td> <td align="center">
+      <a href="https://github.com/hwinkr" target="_blank">
+       해리
+      </a>
+    </td>
+  </tr>
 </table>
