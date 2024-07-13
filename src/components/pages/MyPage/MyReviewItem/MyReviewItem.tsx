@@ -3,16 +3,19 @@ import { AxiosError } from "axios";
 import { MouseEvent, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import { ReviewInputShape, UserReview } from "types/common";
-import repeatComponent from "util/repeatComponent";
 
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import useLogin from "hooks/useLogin";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
 import sendReviewItem from "api/review/sendReviewItem";
+
+import repeatComponent from "util/repeatComponent";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
@@ -39,7 +42,11 @@ function MyReviewItem({
   const { logout } = useLogin();
 
   const onSuccess = () => {
-    queryClient.invalidateQueries("myReview");
+    queryClient.invalidateQueries(QUERY_KEY.myReview);
+    queryClient.invalidateQueries(
+      QUERY_KEY.reviewDetailStore(String(restaurant.id)),
+      { refetchInactive: true }
+    );
   };
 
   const deleteMutation = useMutation<unknown, AxiosError, unknown>(
@@ -116,7 +123,7 @@ function MyReviewItem({
     <>
       <S.StoreReviewContainer>
         <S.StoreImage
-          src={restaurant.imageUrl}
+          src={restaurant.thumbnailUrl}
           alt={`${restaurant.name} 가게 이미지`}
         />
         <S.ReviewContentWrapper>

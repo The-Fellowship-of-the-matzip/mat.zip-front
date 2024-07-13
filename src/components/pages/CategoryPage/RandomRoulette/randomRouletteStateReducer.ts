@@ -1,4 +1,4 @@
-import { Store } from "types/common";
+import { StoreItemWithHeart } from "types/common";
 
 export const ACTION_TYPES = {
   SET_BOARD: "SET_BOARD",
@@ -11,7 +11,7 @@ type State = {
   triggerAnimation: boolean;
   rouletteBoard: string[];
   pickedIndex: number | null;
-  result: Store | undefined;
+  result: StoreItemWithHeart | undefined;
   isResultOpen: boolean;
 };
 
@@ -22,14 +22,14 @@ type Action =
     }
   | {
       type: typeof ACTION_TYPES.SPIN;
-      payload: Pick<State, "pickedIndex" | "result" | "rouletteBoard">;
+      payload: Pick<State, "pickedIndex" | "rouletteBoard">;
     }
   | {
       type: typeof ACTION_TYPES.SHOW_RESULT;
+      payload: Pick<State, "result" | "rouletteBoard">;
     }
   | {
       type: typeof ACTION_TYPES.RESET;
-      payload: Pick<State, "rouletteBoard">;
     };
 
 export const initialState: State = {
@@ -46,21 +46,31 @@ export const randomRouletteStateReducer = (state: State, action: Action) => {
       return { ...state, rouletteBoard: action.payload.rouletteBoard };
     }
     case ACTION_TYPES.SPIN: {
-      const { pickedIndex, result, rouletteBoard } = action.payload;
+      const { pickedIndex, rouletteBoard } = action.payload;
 
       return {
         ...state,
-        pickedIndex,
-        result,
         rouletteBoard,
+        pickedIndex,
         triggerAnimation: true,
+        isResultOpen: false,
       };
     }
     case ACTION_TYPES.SHOW_RESULT: {
-      return { ...state, isResultOpen: true };
+      const { result, rouletteBoard } = action.payload;
+
+      return {
+        ...state,
+        result,
+        rouletteBoard,
+        triggerAnimation: false,
+        isResultOpen: true,
+      };
     }
     case ACTION_TYPES.RESET: {
-      return { ...initialState, rouletteBoard: action.payload.rouletteBoard };
+      return {
+        ...initialState,
+      };
     }
 
     default:

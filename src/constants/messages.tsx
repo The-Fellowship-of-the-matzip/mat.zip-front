@@ -4,6 +4,7 @@ import { Campus } from "types/campus";
 export const MESSAGES = {
   LOGIN_REQUIRED: "로그인 후 사용해주세요",
   LOGIN_FAIL: "로그인에 실패했습니다. 다시 시도해주세요.",
+  LOGIN_RETRY: "다시 로그인 해주세요.",
 
   LOGOUT_CONFIRM: "로그아웃 하시겠습니까?",
   LOGOUT_COMPLETE: "로그아웃 하였습니다.",

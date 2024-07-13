@@ -1,3 +1,4 @@
+import AutoComplete from "../AutoComplete/AutoComplete";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import React, { useEffect, useState } from "react";
@@ -6,6 +7,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ROUTES, { PATHNAME } from "constants/routes";
 
 import { SearchIcon } from "asset";
+
+import useAutoComplete from "hooks/useAutoComplete";
+import useBackdropClick from "hooks/useBackdropClick";
+import useFocusTrap from "hooks/useFocusTrap";
 
 import * as S from "components/common/SearchBar/SearchBar.style";
 
@@ -16,13 +21,27 @@ interface SearchBarProps {
 function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [keyword, setKeyword] = useState("");
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const closeDropdown = () => setIsDropdownOpen(false);
+
+  const { autoCompleteList, handleImmediateKeyword, handleDebouncedKeyword } =
+    useAutoComplete(keyword);
+
+  const searchBarRef = useFocusTrap(isDropdownOpen, autoCompleteList.length);
+  useBackdropClick(searchBarRef, closeDropdown);
+
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handleKeyword = (keyword: string) => {
+    setKeyword(keyword);
+  };
 
   const handleSearchInput: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
   }) => {
     setKeyword(value);
+    handleDebouncedKeyword(value);
   };
 
   const handleSearchButtonClick: React.FormEventHandler<HTMLFormElement> = (
@@ -32,9 +51,8 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
 
     if (!keyword) return;
     navigate(`${PATHNAME.SEARCH}?name=${keyword}`);
-    if (closeSearchBar !== undefined) {
-      closeSearchBar();
-    }
+    if (closeSearchBar !== undefined) closeSearchBar();
+    closeDropdown();
   };
 
   useEffect(() => {
@@ -44,20 +62,30 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   }, [location]);
 
   return (
-    <S.Container onSubmit={handleSearchButtonClick}>
-      <S.InputContainer>
-        <Input
-          css={S.inputStyle}
-          placeholder="맛집을 검색해 보세요"
-          value={keyword}
-          min={1}
-          max={30}
-          onChange={handleSearchInput}
+    <S.Container ref={searchBarRef}>
+      <S.FormContainer onSubmit={handleSearchButtonClick}>
+        <S.InputContainer onClick={() => setIsDropdownOpen(true)}>
+          <Input
+            css={S.inputStyle(isDropdownOpen)}
+            placeholder="맛집을 검색해 보세요"
+            value={keyword}
+            min={1}
+            max={30}
+            onClick={() => handleImmediateKeyword(keyword)}
+            onChange={handleSearchInput}
+          />
+        </S.InputContainer>
+        <Button css={S.buttonStyle(isDropdownOpen)}>
+          <SearchIcon />
+        </Button>
+      </S.FormContainer>
+      {isDropdownOpen && autoCompleteList.length > 0 && (
+        <AutoComplete
+          optionList={autoCompleteList}
+          onOptionFocus={handleKeyword}
+          closeAutoComplete={closeDropdown}
         />
-      </S.InputContainer>
-      <Button css={S.buttonStyle}>
-        <SearchIcon />
-      </Button>
+      )}
     </S.Container>
   );
 }

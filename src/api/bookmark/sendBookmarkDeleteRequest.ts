@@ -3,7 +3,7 @@ import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 
-const sendBookmarkDeleteRequest = (restaurantId: number) => () => {
+const sendBookmarkDeleteRequest = (restaurantId: number) => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {

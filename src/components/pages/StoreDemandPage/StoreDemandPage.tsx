@@ -1,13 +1,14 @@
 import { AxiosError } from "axios";
 import { useState, useContext } from "react";
-import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import { Campus, StoreDemand } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
@@ -74,7 +75,7 @@ function StoreDemandPage() {
     isFetching,
     refetch,
   } = useInfiniteQuery(
-    ["StoreDemand", { campusId: campusId, size: 15 }],
+    QUERY_KEY.storeDemand({ campusId, size: 15 }),
     fetchStoreDemandList,
     {
       getNextPageParam,
@@ -105,14 +106,7 @@ function StoreDemandPage() {
       >
         요청하기
       </Button>
-      <SectionHeader
-        leadingIcon={<MdArrowBackIos />}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        식당 추가 요청 게시판
-      </SectionHeader>
+      <SectionHeader>식당 추가 요청 게시판</SectionHeader>
       {isError && error instanceof Error && (
         <ErrorImage errorMessage={error.message} />
       )}

@@ -12,7 +12,7 @@ const StoryInfoContainer = styled.div`
   gap: 12px;
 
   & > h6 {
-    color: ${({ theme }) => theme.color.gray5};
+    color: ${({ theme }) => theme.color.gray500};
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;

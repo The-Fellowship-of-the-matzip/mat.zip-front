@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useMutation } from "react-query";
 
 import sendBookmarkDeleteRequest from "api/bookmark/sendBookmarkDeleteRequest";
@@ -6,13 +6,12 @@ import sendBookmarkPostRequest from "api/bookmark/sendBookmarkPostRequest";
 
 import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-export const useMarked = (restaurantId: number, liked: boolean) => {
+export const useMarked = (liked: boolean) => {
   const [marked, setMarked] = useState(liked);
-  const debounceRef = useRef<null | ReturnType<typeof setTimeout>>(null);
 
   const showToast = useToastContext();
 
-  const deleteBookmark = useMutation(sendBookmarkDeleteRequest(restaurantId), {
+  const deleteBookmark = useMutation(sendBookmarkDeleteRequest, {
     onMutate: () => ({ prevMarked: marked }),
     onError: (error: Error, _, context) => {
       showToast("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
@@ -20,7 +19,7 @@ export const useMarked = (restaurantId: number, liked: boolean) => {
     },
   });
 
-  const postBookmark = useMutation(sendBookmarkPostRequest(restaurantId), {
+  const postBookmark = useMutation(sendBookmarkPostRequest, {
     onMutate: () => ({ prevMarked: marked }),
     onError: (error: Error, _, context) => {
       showToast("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
@@ -28,14 +27,15 @@ export const useMarked = (restaurantId: number, liked: boolean) => {
     },
   });
 
-  const handleMarked = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleMarked = (
+    event: MouseEvent<HTMLButtonElement>,
+    restaurantId: number
+  ) => {
     event.stopPropagation();
 
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      marked ? deleteBookmark.mutate() : postBookmark.mutate();
-    }, 300);
-
+    marked
+      ? deleteBookmark.mutate(restaurantId)
+      : postBookmark.mutate(restaurantId);
     setMarked((prevMarked) => !prevMarked);
   };
 
