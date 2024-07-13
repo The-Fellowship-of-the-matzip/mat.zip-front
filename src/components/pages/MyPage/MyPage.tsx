@@ -1,15 +1,20 @@
 import * as S from "./MyPage.style";
 import MyReviewItem from "./MyReviewItem/MyReviewItem";
 import UserProfile from "./UserProfile/UserProfile";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import { StoreItemWithoutHeart } from "types/common";
 
 import { NETWORK, SIZE } from "constants/api";
+import { MESSAGES } from "constants/messages";
 import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { RightIcon } from "asset";
+
+import useLogin from "hooks/useLogin";
 
 import fetchBookmarkList from "api/bookmark/fetchBookmarkList";
 import fetchUserProfile from "api/mypage/fetchUserProfile";
@@ -24,33 +29,64 @@ import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreLi
 import Text from "components/common/Text/Text";
 
 function MyPage() {
+  const navigate = useNavigate();
+  const { logout } = useLogin();
+
   const {
     data: profileData,
     isLoading,
     isError,
-    error,
-  } = useQuery(QUERY_KEY.userProfile, () => fetchUserProfile(), {
-    retry: NETWORK.RETRY_COUNT,
+    error: userProfileError,
+  } = useQuery(QUERY_KEY.userProfile, fetchUserProfile, {
     refetchOnWindowFocus: false,
+    retry: NETWORK.NOT_RETRY_COUNT,
   });
 
-  const { data: bookmarkedStoreData = [] } = useQuery(
-    QUERY_KEY.bookmarkStore,
-    () => fetchBookmarkList(),
-    {
-      retry: NETWORK.RETRY_COUNT,
+  const { data: bookmarkedStoreData = [], error: bookmarkedStoreError } =
+    useQuery(QUERY_KEY.bookmarkStore, () => fetchBookmarkList(), {
       refetchOnWindowFocus: false,
+      retry: NETWORK.NOT_RETRY_COUNT,
+    });
+
+  const { data: myReviewData, error: userReviewError } = useQuery(
+    "myReview",
+    fetchUserReviewList,
+    {
+      refetchOnWindowFocus: false,
+      retry: NETWORK.NOT_RETRY_COUNT,
     }
   );
 
-  const { data: myReviewData } = useQuery(
-    QUERY_KEY.myReview,
-    fetchUserReviewList,
-    {
-      retry: NETWORK.RETRY_COUNT,
-      refetchOnWindowFocus: false,
+  useEffect(() => {
+    if (
+      userProfileError instanceof Error &&
+      userProfileError.message === MESSAGES.LOGIN_RETRY
+    ) {
+      alert(userProfileError.message);
+      navigate(PATHNAME.HOME);
+      logout();
+      return;
     }
-  );
+
+    if (
+      bookmarkedStoreError instanceof Error &&
+      bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY
+    ) {
+      alert(bookmarkedStoreError.message);
+      logout();
+      navigate(PATHNAME.HOME);
+      return;
+    }
+
+    if (
+      userReviewError instanceof Error &&
+      userReviewError.message === MESSAGES.LOGIN_RETRY
+    ) {
+      alert(userReviewError.message);
+      logout();
+      navigate(PATHNAME.HOME);
+    }
+  }, [userProfileError, bookmarkedStoreError, userReviewError]);
 
   const myReviews = myReviewData?.reviews ?? [];
 
@@ -61,8 +97,8 @@ function MyPage() {
       <SectionHeader>마이페이지</SectionHeader>
       <section>
         {isLoading && <Spinner />}
-        {isError && error instanceof Error && (
-          <ErrorImage errorMessage={error.message} />
+        {isError && userProfileError instanceof Error && (
+          <ErrorImage errorMessage={userProfileError.message} />
         )}
         <UserProfile {...profileData} />
       </section>

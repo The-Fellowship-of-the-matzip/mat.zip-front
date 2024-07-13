@@ -1,8 +1,12 @@
 import * as S from "./BookmarkListPage.style";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import { StoreItemWithoutHeart } from "types/common";
 
+import { NETWORK } from "constants/api";
+import { MESSAGES } from "constants/messages";
 import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
@@ -21,14 +25,21 @@ function BookmarkListPage() {
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
     QUERY_KEY.bookmarkStore,
-    () => fetchBookmarkList(),
+    fetchBookmarkList,
     {
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
       refetchOnWindowFocus: false,
     }
   );
 
   const bookmarkedStoreData = data ?? [];
+
+  useEffect(() => {
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
+      alert(error.message);
+      navigate(PATHNAME.HOME);
+    }
+  }, [error]);
 
   return (
     <S.Container>

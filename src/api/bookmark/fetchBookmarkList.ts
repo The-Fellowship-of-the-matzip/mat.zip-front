@@ -1,6 +1,7 @@
 import { BookmarkStore, BookmarkStoreServerResponse } from "types/common";
 
 import { ACCESS_TOKEN, ENDPOINTS } from "constants/api";
+import { MESSAGES } from "constants/messages";
 
 import axiosInstance from "api/axiosInstance";
 
@@ -8,10 +9,7 @@ const fetchBookmarkList = async (): Promise<BookmarkStore[] | undefined> => {
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
-    window.sessionStorage.removeItem(ACCESS_TOKEN);
-    window.alert("다시 로그인 해주세요");
-    window.location.href = "/";
-    return;
+    throw new Error(MESSAGES.LOGIN_RETRY);
   }
 
   const { data } = await axiosInstance.get<BookmarkStoreServerResponse[]>(

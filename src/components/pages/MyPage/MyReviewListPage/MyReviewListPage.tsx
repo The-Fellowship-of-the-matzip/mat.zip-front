@@ -1,11 +1,15 @@
 import MyReviewItem from "../MyReviewItem/MyReviewItem";
 import * as S from "./MyReviewListPage.style";
+import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+
 import { UserReview } from "types/common";
 
+import { NETWORK } from "constants/api";
+import { MESSAGES } from "constants/messages";
 import { QUERY_KEY } from "constants/queryKey";
-
-import { LeftIcon } from "asset";
+import { PATHNAME } from "constants/routes";
 
 import getNextPageParam from "api/getNextPageParam";
 import fetchUserReviewList from "api/mypage/fetchUserReviewList";
@@ -21,10 +25,13 @@ function MyReviewListPage() {
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
     useInfiniteQuery(QUERY_KEY.myReviewList, fetchUserReviewList, {
       getNextPageParam,
+      retry: NETWORK.NOT_RETRY_COUNT,
     });
 
   const loadMoreReviews = () => {
-    fetchNextPage();
+    if (!isError) {
+      fetchNextPage();
+    }
   };
 
   const reviews =
@@ -36,6 +43,15 @@ function MyReviewListPage() {
       []
     ) || [];
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
+      alert(error.message);
+      navigate(PATHNAME.HOME);
+    }
+  }, [error]);
+
   return (
     <S.Container>
       <S.HeaderWrapper>
@@ -43,10 +59,9 @@ function MyReviewListPage() {
       </S.HeaderWrapper>
       <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}
-        {isError && error instanceof Error && (
+        {isError && error instanceof Error ? (
           <ErrorImage errorMessage={error.message} />
-        )}
-        {reviews.length ? (
+        ) : reviews.length > 0 ? (
           reviews.map((review) => (
             <S.ReviewItemWrapper key={review.id}>
               <MyReviewItem {...review} />

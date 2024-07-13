@@ -3,10 +3,15 @@ import * as S from "./BookmarkMapPage.style";
 import { useContext, useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+
 import type { Campus } from "types/common";
 
+import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
+import { MESSAGES } from "constants/messages";
 import { QUERY_KEY } from "constants/queryKey";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -29,10 +34,19 @@ function BookmarkMapPage() {
     QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
-      retry: 0,
+      retry: NETWORK.NOT_RETRY_COUNT,
       refetchOnWindowFocus: false,
     }
   );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
+      alert(error.message);
+      navigate(PATHNAME.HOME);
+    }
+  }, [error]);
 
   const bookmarkedStores = data ?? [];
 

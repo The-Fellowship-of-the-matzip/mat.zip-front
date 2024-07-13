@@ -28,6 +28,7 @@ export const ENDPOINTS = {
 
 export const NETWORK = {
   RETRY_COUNT: 3,
+  NOT_RETRY_COUNT: 0,
 } as const;
 
 export const SIZE = {
