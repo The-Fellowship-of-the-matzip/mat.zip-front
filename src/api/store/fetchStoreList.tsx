@@ -35,10 +35,12 @@ const generateParams = (propObject: GenerateParamsProps) =>
 const fetchStoreList = async ({ pageParam = 0, queryKey }: FetchParamProps) => {
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
+
+  const formattedFilterOption = filter === "basic" ? null : filter;
   const params = generateParams({
     page: pageParam,
     size,
-    filter,
+    filter: formattedFilterOption,
     campusId,
     categoryId,
     name,
