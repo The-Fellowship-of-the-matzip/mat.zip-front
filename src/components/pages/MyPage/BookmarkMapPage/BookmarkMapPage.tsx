@@ -22,7 +22,7 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import EventMapMarker from "components/common/EventMapMarker/EventMapMarker";
 import SlideCarousel from "components/common/SlideCarousel/SlideCarousel";
 import Spinner from "components/common/Spinner/Spinner";
-import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
 
 function BookmarkMapPage() {
@@ -107,11 +107,7 @@ function BookmarkMapPage() {
           onSlideChange={handleInformationSlide}
         >
           {bookmarkedStores.map((store) => (
-            <StoreListItem
-              key={store.id}
-              {...store}
-              thumbnailUrl={store.imageUrl}
-            />
+            <StoreListItemWithoutHeart {...store} />
           ))}
         </SlideCarousel>
       </S.StoreListWrapper>

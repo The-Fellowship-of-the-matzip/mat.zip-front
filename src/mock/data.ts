@@ -1,6 +1,6 @@
-import { Review, Store, StoreDemand } from "types/common";
+import { Review, Store, StoreDemand, StoreServerResponse } from "types/common";
 
-export const stores: Store[] = [
+export const stores: StoreServerResponse[] = [
   {
     id: 1,
     name: "냠냠 치킨",

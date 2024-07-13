@@ -84,7 +84,7 @@ function MyReviewItem({
     <>
       <S.StoreReviewContainer>
         <S.StoreImage
-          src={restaurant.imageUrl}
+          src={restaurant.thumbnailUrl}
           alt={`${restaurant.name} 가게 이미지`}
         />
         <S.ReviewContentWrapper>
