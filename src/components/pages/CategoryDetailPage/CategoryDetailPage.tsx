@@ -1,22 +1,32 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { MdArrowBackIos } from "react-icons/md";
+import { TbArrowsUpDown } from "react-icons/tb";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Campus, CategoryId, Store } from "types/common";
 
-import { NETWORK, SIZE, FILTERS } from "constants/api";
+import {
+  NETWORK,
+  SIZE,
+  FilterOption,
+  STORE_FILTER_OPTIONS,
+  entries,
+} from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
+
+import { Check } from "asset";
 
 import { campusContext } from "context/CampusContextProvider";
 
 import getNextPageParam from "api/getNextPageParam";
 import fetchStoreList from "api/store/fetchStoreList";
 
+import BottomSheet from "components/common/BottomSheet/BottomSheet";
+import Button from "components/common/Button/Button";
 import Chip from "components/common/Chip/Chip";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import ErrorText from "components/common/ErrorText/ErrorText";
@@ -24,17 +34,23 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 function CategoryDetailPage() {
   const navigate = useNavigate();
 
+  const [isFilteringBottomSheetOpen, setIsFilteringBottomSheetOpen] =
+    useState(false);
+  const openSheet = () => setIsFilteringBottomSheetOpen(true);
+  const closeSheet = () => setIsFilteringBottomSheetOpen(false);
+
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
   const { categoryId } = useParams();
 
-  const [filter, setFilter] = useState<string | null>(null);
+  const [filter, setFilter] = useState<FilterOption>("basic");
 
   const fetchParams = { size: SIZE.LIST_ITEM, filter, campusId, categoryId };
 
@@ -49,17 +65,19 @@ function CategoryDetailPage() {
   } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
     getNextPageParam,
     retry: NETWORK.RETRY_COUNT,
+    refetchOnWindowFocus: false,
   });
 
   const loadMoreStores = () => {
     fetchNextPage();
   };
 
-  const handleClickFilterChip = (index: number) => () => {
-    setFilter((prev) =>
-      prev === FILTERS[index].order ? "" : FILTERS[index].order
-    );
+  const handleClickFilterOption = (option: FilterOption) => {
+    if (filter === option) return;
+    setFilter(option);
   };
+
+  const currentOption = STORE_FILTER_OPTIONS[filter];
 
   const categoryStores =
     data?.pages.reduce<Store[]>(
@@ -93,15 +111,12 @@ function CategoryDetailPage() {
         {categoryName || "%ERROR%"}
       </SectionHeader>
       <S.ChipContainer>
-        {FILTERS.map((chip, index) => (
-          <Chip
-            key={chip.order}
-            isSelected={filter === chip.order}
-            onClick={handleClickFilterChip(index)}
-          >
-            {chip.text}
-          </Chip>
-        ))}
+        <Chip onClick={openSheet}>
+          <S.ChipContent>
+            <TbArrowsUpDown />
+            {currentOption}
+          </S.ChipContent>
+        </Chip>
       </S.ChipContainer>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}
@@ -114,6 +129,39 @@ function CategoryDetailPage() {
           <ErrorText>가게 정보가 없습니다.</ErrorText>
         )}
       </InfiniteScroll>
+      {isFilteringBottomSheetOpen && (
+        <BottomSheet
+          title="정렬"
+          closeSheet={closeSheet}
+          cssProps={{
+            heading: {
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "1.8rem",
+              lineHeight: "2.4rem",
+              fontWeight: "400",
+            },
+          }}
+        >
+          <S.FilterOptionContainer>
+            {entries(STORE_FILTER_OPTIONS).map(([key, value]) => {
+              return (
+                <S.FilterOption
+                  onClick={() => {
+                    handleClickFilterOption(key);
+                    closeSheet();
+                  }}
+                  key={key}
+                >
+                  <Text>{value}</Text>
+                  {filter === key && <Check />}
+                </S.FilterOption>
+              );
+            })}
+            <Button variant="primary">닫기</Button>
+          </S.FilterOptionContainer>
+        </BottomSheet>
+      )}
     </S.CategoryDetailPageContainer>
   );
 }
