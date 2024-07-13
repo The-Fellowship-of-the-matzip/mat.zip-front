@@ -20,6 +20,7 @@ import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import Spinner from "components/common/Spinner/Spinner";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function MyReviewListPage() {
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
@@ -45,9 +46,11 @@ function MyReviewListPage() {
 
   const navigate = useNavigate();
 
+  const showToast = useToastContext();
+
   useEffect(() => {
-    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
-      alert(error.message);
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
       navigate(PATHNAME.HOME);
     }
   }, [error]);

@@ -26,6 +26,7 @@ import SlideCarousel from "components/common/SlideCarousel/SlideCarousel";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function BookmarkMapPage() {
   const campusName = useContext(campusContext);
@@ -41,9 +42,11 @@ function BookmarkMapPage() {
 
   const navigate = useNavigate();
 
+  const showToast = useToastContext();
+
   useEffect(() => {
-    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
-      alert(error.message);
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
       navigate(PATHNAME.HOME);
     }
   }, [error]);

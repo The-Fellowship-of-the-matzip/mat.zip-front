@@ -58,6 +58,7 @@ function MyReviewItem({
     {
       onSuccess,
       onError: (error) => {
+        console.log(error.message);
         if (error.message === MESSAGES.LOGIN_REQUIRED) {
           showToast(error.message);
           logout();

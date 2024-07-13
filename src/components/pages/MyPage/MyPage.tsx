@@ -27,6 +27,7 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -57,22 +58,24 @@ function MyPage() {
     }
   );
 
+  const showToast = useToastContext();
+
   useEffect(() => {
     if (
       userProfileError instanceof Error &&
-      userProfileError.message === MESSAGES.LOGIN_RETRY
+      userProfileError.message === MESSAGES.LOGIN_REQUIRED
     ) {
-      alert(userProfileError.message);
-      navigate(PATHNAME.HOME);
+      showToast(userProfileError.message);
       logout();
+      navigate(PATHNAME.HOME);
       return;
     }
 
     if (
       bookmarkedStoreError instanceof Error &&
-      bookmarkedStoreError.message === MESSAGES.LOGIN_RETRY
+      bookmarkedStoreError.message === MESSAGES.LOGIN_REQUIRED
     ) {
-      alert(bookmarkedStoreError.message);
+      showToast(bookmarkedStoreError.message);
       logout();
       navigate(PATHNAME.HOME);
       return;
@@ -80,9 +83,9 @@ function MyPage() {
 
     if (
       userReviewError instanceof Error &&
-      userReviewError.message === MESSAGES.LOGIN_RETRY
+      userReviewError.message === MESSAGES.LOGIN_REQUIRED
     ) {
-      alert(userReviewError.message);
+      showToast(userReviewError.message);
       logout();
       navigate(PATHNAME.HOME);
     }

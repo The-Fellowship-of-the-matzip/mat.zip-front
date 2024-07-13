@@ -19,6 +19,7 @@ import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
 import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 function BookmarkListPage() {
   const navigate = useNavigate();
@@ -34,9 +35,11 @@ function BookmarkListPage() {
 
   const bookmarkedStoreData = data ?? [];
 
+  const showToast = useToastContext();
+
   useEffect(() => {
-    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
-      alert(error.message);
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
       navigate(PATHNAME.HOME);
     }
   }, [error]);
