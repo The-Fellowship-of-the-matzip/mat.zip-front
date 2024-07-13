@@ -48,10 +48,12 @@ const fetchStoreList = async ({
 }: FetchParamProps): Promise<FetchStoreListResult> => {
   const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
   const [, { size, filter, campusId, categoryId, name, type }] = queryKey;
+
+  const formattedFilterOption = filter === "basic" ? null : filter;
   const params = generateParams({
     page: pageParam,
     size,
-    filter,
+    filter: formattedFilterOption,
     campusId,
     categoryId,
     name,

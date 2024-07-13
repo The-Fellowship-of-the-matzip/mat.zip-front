@@ -15,7 +15,7 @@ const color = {
 
   primaryDark: "#f19203",
   primary: "#ffa927",
-  primaryLight1: "#ffc774",
+  primaryLight1: "#fff8ed",
   primaryLight2: "#ffe5be",
   primaryLight3: "#fff4e4",
   primaryLight4: "#fff8ed",

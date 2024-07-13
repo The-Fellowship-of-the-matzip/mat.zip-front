@@ -11,3 +11,4 @@ export { ReactComponent as OutwardIcon } from "./outward-icon.svg";
 export { ReactComponent as PinIcon } from "./pin-icon.svg";
 export { ReactComponent as ClickedPinIcon } from "./clicked-pin-icon.svg";
 export { ReactComponent as CampusPinIcon } from "./campus-pin-icon.svg";
+export { ReactComponent as Check } from "./check.svg";
