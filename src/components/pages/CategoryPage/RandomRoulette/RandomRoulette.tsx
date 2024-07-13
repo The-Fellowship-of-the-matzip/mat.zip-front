@@ -1,12 +1,9 @@
 import { useEffect } from "react";
-import { useQuery } from "react-query";
+import { CampusId } from "types/common";
 
-import { NETWORK, SIZE } from "constants/api";
-import { QUERY_KEY } from "constants/queryKey";
+import { ROULETTE_BUTTON_TEXT } from "constants/roulette";
 
 import useRandomPick from "hooks/useRandomPick";
-
-import fetchRandomStoreList from "api/store/fetchRandomStoreList";
 
 import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
@@ -17,36 +14,21 @@ import Text from "components/common/Text/Text";
 import * as S from "components/pages/CategoryPage/RandomRoulette/RandomRoulette.style";
 
 type Props = {
-  campusId: 1 | 2;
+  campusId: CampusId;
 };
 
 function RandomRoulette({ campusId }: Props) {
   const {
-    data: stores,
     isLoading,
+    isRefetching,
     isError,
     error,
-    refetch,
-  } = useQuery(
-    QUERY_KEY.randomStoreRoulette,
-    () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
-    {
-      retry: NETWORK.RETRY_COUNT,
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  const {
     state: { rouletteBoard, isResultOpen, result, triggerAnimation },
     handleRunClick,
-    openResult,
-    reset,
-  } = useRandomPick(stores || []);
-
-  const resetHard = () => {
-    refetch();
-    reset();
-  };
+    showResult,
+    resetHard,
+    refetchAndStartSpin,
+  } = useRandomPick(campusId);
 
   useEffect(() => {
     resetHard();
@@ -61,7 +43,7 @@ function RandomRoulette({ campusId }: Props) {
       <S.RecommendBlock>
         <Text size="lg">오늘은 </Text>
         <S.Outer>
-          <S.Inner runAnimation={triggerAnimation} onAnimationEnd={openResult}>
+          <S.Inner runAnimation={triggerAnimation} onAnimationEnd={showResult}>
             {rouletteBoard.map((store, index) => (
               <S.RouletteSlot key={store + index}>{store}</S.RouletteSlot>
             ))}
@@ -74,17 +56,23 @@ function RandomRoulette({ campusId }: Props) {
           variant="primary"
           size="small"
           onClick={handleRunClick}
-          disabled={result !== undefined}
+          disabled={triggerAnimation || isRefetching}
         >
-          룰렛 Go!
+          {triggerAnimation
+            ? ROULETTE_BUTTON_TEXT.SPINNING
+            : ROULETTE_BUTTON_TEXT.START}
         </Button>
       ) : (
         <S.ButtonContainer>
-          <Button variant="primary" size="small" onClick={reset}>
-            다시 돌리기
-          </Button>
-          <Button variant="primary" size="small" onClick={resetHard}>
-            식당 리셋하기
+          <Button
+            variant="primary"
+            size="small"
+            onClick={refetchAndStartSpin}
+            disabled={isRefetching}
+          >
+            {isRefetching
+              ? ROULETTE_BUTTON_TEXT.REFETCHING
+              : ROULETTE_BUTTON_TEXT.RESTART}
           </Button>
         </S.ButtonContainer>
       )}
