@@ -68,8 +68,8 @@ export const BackButton = styled.button`
   height: 3rem;
 
   & > svg {
-    width: 20px;
-    height: 20px;
+    width: 2rem;
+    height: 2rem;
   }
 `;
 
