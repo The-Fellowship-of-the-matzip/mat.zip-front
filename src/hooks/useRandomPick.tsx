@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer } from "react";
-import { Store } from "types/common";
+import { StoreItemWithHeart } from "types/common";
 import { createArray, getRandomNumber } from "util/randomUtils";
 
 import {
@@ -8,7 +8,7 @@ import {
   randomRouletteStateReducer,
 } from "components/pages/CategoryPage/RandomRoulette/randomRouletteStateReducer";
 
-function useRandomPick(stores: Store[]) {
+function useRandomPick(stores: StoreItemWithHeart[]) {
   const storeNamesArray = stores?.map((store) => store.name) || [];
 
   const rouletteBaseArray = useMemo(
@@ -29,7 +29,7 @@ function useRandomPick(stores: Store[]) {
     });
   };
 
-  const startSpin = (stores: Store[], randomNumber: number) => {
+  const startSpin = (stores: StoreItemWithHeart[], randomNumber: number) => {
     if (stores === undefined) return;
     dispatch({
       type: ACTION_TYPES.SPIN,

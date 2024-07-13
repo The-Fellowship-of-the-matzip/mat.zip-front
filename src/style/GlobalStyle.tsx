@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
 
     max-width: 48rem;
     min-width: 28rem;
+    min-height: 100vh;
     margin: 0 auto;
 
     background-color: ${theme.color.white};

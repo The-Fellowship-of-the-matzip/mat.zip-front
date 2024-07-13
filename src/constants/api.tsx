@@ -6,6 +6,8 @@ export const ENDPOINTS = {
   LOGIN: "/login",
   RANDOM_STORES: (campusId: CampusId, size: number) =>
     `/campuses/${campusId}/restaurants/random?size=${size}`,
+  AUTO_COMPLETE_STORES: (campusId: CampusId, keyword: string) =>
+    `/campuses/${campusId}/restaurants/search/autocomplete?namePrefix=${keyword}`,
   REVIEWS: (restaurantId: string) => `/restaurants/${restaurantId}/reviews`,
   STORE_DETAIL: (restaurantId: string) => `/restaurants/${restaurantId}`,
   STORE_LIST: (campusId: CampusId, type?: string) =>
@@ -39,7 +41,19 @@ export const SIZE = {
 export const FILTERS = [
   { order: "rating", text: "별점 순" },
   { order: "spell", text: "가나다 순" },
+  { order: "distance", text: "거리 순" },
+  { order: "bookmark", text: "좋아요 순" },
 ] as const;
+
+export const STORE_FILTER_OPTIONS = {
+  basic: "기본 순",
+  rating: "별점 순",
+  spell: "가나다 순",
+  distance: "거리 순",
+  bookmark: "좋아요 순",
+} as const;
+
+export type FilterOption = keyof typeof STORE_FILTER_OPTIONS;
 
 export const ACCESS_TOKEN = "matzipaccessToken";
 
@@ -48,3 +62,10 @@ export const AUTH_LINK = `https://github.com/login/oauth/authorize?client_id=${
     ? "a51717e6e0bb9e34da8e"
     : "e060e7a6b636763ab22d"
 }`;
+
+type Entries<T extends object> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
+export const entries = <T extends object>(obj: T): Entries<T> =>
+  Object.entries(obj) as any;

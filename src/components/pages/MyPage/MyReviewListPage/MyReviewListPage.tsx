@@ -3,13 +3,13 @@ import * as S from "./MyReviewListPage.style";
 import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import { UserReview } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
-
-import { LeftIcon } from "asset";
 
 import getNextPageParam from "api/getNextPageParam";
 import fetchUserReviewList from "api/mypage/fetchUserReviewList";
@@ -22,10 +22,8 @@ import Spinner from "components/common/Spinner/Spinner";
 import Text from "components/common/Text/Text";
 
 function MyReviewListPage() {
-  const navigate = useNavigate();
-
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
-    useInfiniteQuery(["myReviewList"], fetchUserReviewList, {
+    useInfiniteQuery(QUERY_KEY.myReviewList, fetchUserReviewList, {
       getNextPageParam,
       retry: NETWORK.NOT_RETRY_COUNT,
     });
@@ -45,6 +43,8 @@ function MyReviewListPage() {
       []
     ) || [];
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
       alert(error.message);
@@ -55,7 +55,6 @@ function MyReviewListPage() {
   return (
     <S.Container>
       <S.HeaderWrapper>
-        <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 리뷰</Text>
       </S.HeaderWrapper>
       <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>

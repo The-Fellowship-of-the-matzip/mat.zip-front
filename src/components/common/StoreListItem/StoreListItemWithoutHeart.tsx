@@ -1,42 +1,26 @@
-import Heart from "../Heart/Heart";
 import Text from "../Text/Text";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import type { Store } from "types/common";
+import type { BookmarkStore } from "types/common";
 import { getRandomEmptyReviewMessage } from "util/randomUtils";
 
-import { ACCESS_TOKEN } from "constants/api";
 import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
-import { useMarked } from "hooks/useMarked";
-
 import Star from "components/common/Star/Star";
 import * as S from "components/common/StoreListItem/StoreListItem.style";
 
-interface StoreListItemProps
-  extends Pick<
-    Store,
-    "id" | "name" | "distance" | "rating" | "reviewCount" | "liked"
-  > {
-  thumbnailUrl: string;
-}
-
-function StoreListItem({
+function StoreListItemWithoutHeart({
   id,
-  thumbnailUrl,
   name,
   distance,
   rating,
   reviewCount,
-  liked,
-}: StoreListItemProps) {
-  const { marked, handleMarked } = useMarked(id, liked);
+  thumbnailUrl,
+}: Omit<BookmarkStore, "address">) {
   const navigate = useNavigate();
   const campusName = useContext(campusContext);
-
-  const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   return (
     <S.ListItemContainer
@@ -64,15 +48,8 @@ function StoreListItem({
           {campusName} 캠퍼스 기준 도보 {distance}분
         </Text>
       </S.ListItemTextContainer>
-      <S.ListItemBookmark onClick={handleMarked}>
-        {accessToken && marked ? (
-          <Heart size="sm" isFilled />
-        ) : (
-          <Heart size="sm" />
-        )}
-      </S.ListItemBookmark>
     </S.ListItemContainer>
   );
 }
 
-export default StoreListItem;
+export default StoreListItemWithoutHeart;
