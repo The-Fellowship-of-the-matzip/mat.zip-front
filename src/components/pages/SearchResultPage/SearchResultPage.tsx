@@ -58,14 +58,7 @@ function SearchResultPage() {
 
   return (
     <S.SearchResultPageContainer>
-      <SectionHeader
-        leadingIcon={<MdArrowBackIos />}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        {`' ${name} ' 검색결과입니다.`}
-      </SectionHeader>
+      <SectionHeader>{`' ${name} ' 검색결과입니다.`}</SectionHeader>
       <InfiniteScroll handleContentLoad={loadMoreStores} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}
         {isError && error instanceof Error && (

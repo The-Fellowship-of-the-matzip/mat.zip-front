@@ -1,7 +1,6 @@
 import MyReviewItem from "../MyReviewItem/MyReviewItem";
 import * as S from "./MyReviewListPage.style";
 import { useInfiniteQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { UserReview } from "types/common";
 
 import { QUERY_KEY } from "constants/queryKey";
@@ -19,8 +18,6 @@ import Spinner from "components/common/Spinner/Spinner";
 import Text from "components/common/Text/Text";
 
 function MyReviewListPage() {
-  const navigate = useNavigate();
-
   const { data, error, isLoading, isError, fetchNextPage, isFetching } =
     useInfiniteQuery(QUERY_KEY.myReviewList, fetchUserReviewList, {
       getNextPageParam,
@@ -42,9 +39,7 @@ function MyReviewListPage() {
   return (
     <S.Container>
       <S.HeaderWrapper>
-        <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 리뷰</Text>
-        <div></div>
       </S.HeaderWrapper>
       <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
         {(isLoading || isFetching) && <Spinner />}

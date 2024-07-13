@@ -3,13 +3,10 @@ import * as S from "./BookmarkMapPage.style";
 import { useContext, useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import type { Campus } from "types/common";
 
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
 import { QUERY_KEY } from "constants/queryKey";
-
-import { LeftIcon } from "asset";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -26,7 +23,6 @@ import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreLi
 import Text from "components/common/Text/Text";
 
 function BookmarkMapPage() {
-  const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
@@ -71,7 +67,6 @@ function BookmarkMapPage() {
   return (
     <>
       <S.HeaderWrapper>
-        <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 맛집 지도</Text>
       </S.HeaderWrapper>
       <S.MapWrapper>

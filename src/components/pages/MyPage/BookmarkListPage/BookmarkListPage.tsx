@@ -6,8 +6,6 @@ import { StoreItemWithoutHeart } from "types/common";
 import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
-import { LeftIcon } from "asset";
-
 import fetchBookmarkList from "api/bookmark/fetchBookmarkList";
 
 import Button from "components/common/Button/Button";
@@ -35,7 +33,7 @@ function BookmarkListPage() {
   return (
     <S.Container>
       <S.HeaderWrapper>
-        <LeftIcon onClick={() => navigate(-1)} />
+        <div></div>
         <Text css={S.headerStyle}>나의 맛집</Text>
         <Button
           css={S.headerButtonStyle}

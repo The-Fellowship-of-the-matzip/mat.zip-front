@@ -73,14 +73,7 @@ function StoreDemandPage() {
       >
         요청하기
       </Button>
-      <SectionHeader
-        leadingIcon={<MdArrowBackIos />}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        식당 추가 요청 게시판
-      </SectionHeader>
+      <SectionHeader>식당 추가 요청 게시판</SectionHeader>
       {isError && error instanceof Error && (
         <ErrorImage errorMessage={error.message} />
       )}
