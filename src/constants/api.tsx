@@ -6,6 +6,8 @@ export const ENDPOINTS = {
   LOGIN: "/login",
   RANDOM_STORES: (campusId: CampusId, size: number) =>
     `/campuses/${campusId}/restaurants/random?size=${size}`,
+  AUTO_COMPLETE_STORES: (campusId: CampusId, keyword: string) =>
+    `/campuses/${campusId}/restaurants/search/autocomplete?namePrefix=${keyword}`,
   REVIEWS: (restaurantId: string) => `/restaurants/${restaurantId}/reviews`,
   STORE_DETAIL: (restaurantId: string) => `/restaurants/${restaurantId}`,
   STORE_LIST: (campusId: CampusId, type?: string) =>

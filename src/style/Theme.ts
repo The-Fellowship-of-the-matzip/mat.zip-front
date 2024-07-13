@@ -18,6 +18,7 @@ const color = {
   primaryLight1: "#ffc774",
   primaryLight2: "#ffe5be",
   primaryLight3: "#fff4e4",
+  primaryLight4: "#fff8ed",
 
   yellow: "#ffd600",
 
