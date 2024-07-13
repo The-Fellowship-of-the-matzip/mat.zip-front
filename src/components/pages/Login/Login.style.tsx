@@ -11,5 +11,5 @@ export const MainContainer = styled.main`
   align-items: center;
   gap: 3.125rem;
 
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.color.white};
 `;

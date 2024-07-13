@@ -43,7 +43,7 @@ export const Input = styled.input<InputProps>`
 
       &:focus {
         border: 1px solid ${({ theme }) => theme.color.redDark};
-        box-shadow: 0 0 0 3px ${({ theme }) => theme.color.redLight1};
+        box-shadow: 0 0 0 3px ${({ theme }) => theme.color.redLight};
       }
     `}
 

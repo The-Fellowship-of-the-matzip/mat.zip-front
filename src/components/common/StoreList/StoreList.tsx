@@ -1,28 +1,22 @@
 import Divider from "../Divider/Divider";
 import { Fragment } from "react";
-import type { BookmarkStore, Store } from "types/common";
 
 import * as S from "components/common/StoreList/StoreList.style";
-import StoreListItem from "components/common/StoreListItem/StoreListItem";
 
-interface StoreListProps {
-  stores?: Store[] | BookmarkStore[];
+interface StoreListProps<T extends { id: string | number }> {
+  stores: T[];
+  renderListItem: (store: T) => JSX.Element;
 }
 
-function StoreList({ stores }: StoreListProps) {
+function StoreList<T extends { id: string | number }>({
+  stores,
+  renderListItem,
+}: StoreListProps<T>) {
   return (
     <S.StoreListContainer>
       {stores?.map((store) => (
         <Fragment key={store.id}>
-          <StoreListItem
-            id={store.id}
-            thumbnailUrl={store.imageUrl}
-            name={store.name}
-            distance={store.distance}
-            rating={store.rating}
-            reviewCount={store.reviewCount}
-            liked={store.liked}
-          />
+          {renderListItem(store)}
           <Divider />
         </Fragment>
       ))}

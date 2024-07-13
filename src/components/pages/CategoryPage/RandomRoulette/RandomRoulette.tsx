@@ -8,7 +8,7 @@ import useRandomPick from "hooks/useRandomPick";
 import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import Spinner from "components/common/Spinner/Spinner";
-import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import StoreListItemWithHeart from "components/common/StoreListItem/StoreListItemWithHeart";
 import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/CategoryPage/RandomRoulette/RandomRoulette.style";
@@ -78,15 +78,7 @@ function RandomRoulette({ campusId }: Props) {
       )}
       {isResultOpen && result !== undefined && (
         <S.ResultWrapper>
-          <StoreListItem
-            id={result.id}
-            thumbnailUrl={result.imageUrl}
-            name={result.name}
-            distance={result.distance}
-            rating={result.rating}
-            reviewCount={result.reviewCount}
-            liked={result.liked}
-          />
+          <StoreListItemWithHeart {...result} />
         </S.ResultWrapper>
       )}
     </S.Container>

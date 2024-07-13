@@ -1,4 +1,4 @@
-import { Store } from "types/common";
+import { StoreItemWithHeart } from "types/common";
 
 export const ACTION_TYPES = {
   SET_BOARD: "SET_BOARD",
@@ -11,7 +11,7 @@ type State = {
   triggerAnimation: boolean;
   rouletteBoard: string[];
   pickedIndex: number | null;
-  result: Store | undefined;
+  result: StoreItemWithHeart | undefined;
   isResultOpen: boolean;
 };
 
