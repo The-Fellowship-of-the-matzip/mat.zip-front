@@ -30,7 +30,7 @@ function StoreDetailTitle({
 }: {
   storeInfo: Store;
 }) {
-  const { marked, handleMarked } = useMarked(id, liked);
+  const { marked, handleMarked } = useMarked(liked);
   const campus = useContext(campusContext);
 
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
@@ -38,7 +38,7 @@ function StoreDetailTitle({
   return (
     <S.TitleContainer>
       <Heading size="sm">{name}</Heading>
-      <S.BookmarkIconWrapper onClick={handleMarked}>
+      <S.BookmarkIconWrapper onClick={(event) => handleMarked(event, id)}>
         {accessToken && marked ? (
           <Heart size="sm" isFilled />
         ) : (

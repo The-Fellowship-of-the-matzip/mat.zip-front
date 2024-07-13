@@ -1,5 +1,10 @@
-import { Store } from "./storeTypes";
+import { StoreServerResponse } from "./storeTypes";
 
-export interface BookmarkStore extends Omit<Store, "kakaoMapUrl"> {
-  liked: boolean;
-}
+export type BookmarkStoreServerResponse = Omit<
+  StoreServerResponse,
+  "kakaoMapUrl" | "liked"
+>;
+
+export type BookmarkStore = Omit<BookmarkStoreServerResponse, "imageUrl"> & {
+  thumbnailUrl: string;
+};

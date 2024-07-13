@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: white;
 `;
 

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 import { NETWORK, SIZE } from "constants/api";
+import { QUERY_KEY } from "constants/queryKey";
 
 import useRandomPick from "hooks/useRandomPick";
 
@@ -10,7 +11,7 @@ import fetchRandomStoreList from "api/store/fetchRandomStoreList";
 import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import Spinner from "components/common/Spinner/Spinner";
-import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import StoreListItemWithHeart from "components/common/StoreListItem/StoreListItemWithHeart";
 import Text from "components/common/Text/Text";
 
 import * as S from "components/pages/CategoryPage/RandomRoulette/RandomRoulette.style";
@@ -27,7 +28,7 @@ function RandomRoulette({ campusId }: Props) {
     error,
     refetch,
   } = useQuery(
-    "randomStoreRoulette",
+    QUERY_KEY.randomStoreRoulette,
     () => fetchRandomStoreList(campusId, SIZE.RANDOM_ITEM),
     {
       retry: NETWORK.RETRY_COUNT,
@@ -89,15 +90,7 @@ function RandomRoulette({ campusId }: Props) {
       )}
       {isResultOpen && result !== undefined && (
         <S.ResultWrapper>
-          <StoreListItem
-            id={result.id}
-            thumbnailUrl={result.imageUrl}
-            name={result.name}
-            distance={result.distance}
-            rating={result.rating}
-            reviewCount={result.reviewCount}
-            liked={result.liked}
-          />
+          <StoreListItemWithHeart {...result} />
         </S.ResultWrapper>
       )}
     </S.Container>

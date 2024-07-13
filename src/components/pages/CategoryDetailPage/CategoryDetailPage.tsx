@@ -4,7 +4,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { TbArrowsUpDown } from "react-icons/tb";
 import { useInfiniteQuery } from "react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Campus, CategoryId, Store } from "types/common";
+import { Campus, CategoryId, StoreItemWithHeart } from "types/common";
 
 import {
   NETWORK,
@@ -16,6 +16,7 @@ import {
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
 import { Check } from "asset";
@@ -62,7 +63,7 @@ function CategoryDetailPage() {
     fetchNextPage,
     isFetching,
     refetch,
-  } = useInfiniteQuery(["categoryStore", fetchParams], fetchStoreList, {
+  } = useInfiniteQuery(QUERY_KEY.categoryStore(fetchParams), fetchStoreList, {
     getNextPageParam,
     retry: NETWORK.RETRY_COUNT,
     refetchOnWindowFocus: false,
@@ -80,7 +81,7 @@ function CategoryDetailPage() {
   const currentOption = STORE_FILTER_OPTIONS[filter];
 
   const categoryStores =
-    data?.pages.reduce<Store[]>(
+    data?.pages.reduce<StoreItemWithHeart[]>(
       (stores, page) => [...stores, ...page.restaurants],
       []
     ) || [];
@@ -102,14 +103,7 @@ function CategoryDetailPage() {
 
   return (
     <S.CategoryDetailPageContainer>
-      <SectionHeader
-        leadingIcon={<MdArrowBackIos />}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        {categoryName || "%ERROR%"}
-      </SectionHeader>
+      <SectionHeader>{categoryName || "%ERROR%"}</SectionHeader>
       <S.ChipContainer>
         <Chip onClick={openSheet}>
           <S.ChipContent>
@@ -124,7 +118,10 @@ function CategoryDetailPage() {
           <ErrorImage errorMessage={error.message} />
         )}
         {categoryStores.length ? (
-          <StoreList stores={categoryStores} />
+          <StoreList<StoreItemWithHeart>
+            stores={categoryStores}
+            renderListItem={(store) => <StoreListItemWithHeart {...store} />}
+          />
         ) : (
           <ErrorText>가게 정보가 없습니다.</ErrorText>
         )}
