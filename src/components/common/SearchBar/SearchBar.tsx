@@ -24,7 +24,8 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const closeDropdown = () => setIsDropdownOpen(false);
 
-  const { autoCompleteList, handleAutoCompleteList } = useAutoComplete();
+  const { autoCompleteList, handleImmediateKeyword, handleDebouncedKeyword } =
+    useAutoComplete(keyword);
 
   const searchBarRef = useFocusTrap(isDropdownOpen, autoCompleteList.length);
   useBackdropClick(searchBarRef, closeDropdown);
@@ -40,7 +41,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
     target: { value },
   }) => {
     setKeyword(value);
-    handleAutoCompleteList(value);
+    handleDebouncedKeyword(value);
   };
 
   const handleSearchButtonClick: React.FormEventHandler<HTMLFormElement> = (
@@ -50,9 +51,8 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
 
     if (!keyword) return;
     navigate(`${PATHNAME.SEARCH}?name=${keyword}`);
-    if (closeSearchBar !== undefined) {
-      closeSearchBar();
-    }
+    if (closeSearchBar !== undefined) closeSearchBar();
+    closeDropdown();
   };
 
   useEffect(() => {
@@ -71,6 +71,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
             value={keyword}
             min={1}
             max={30}
+            onClick={() => handleImmediateKeyword(keyword)}
             onChange={handleSearchInput}
           />
         </S.InputContainer>
@@ -78,7 +79,7 @@ function SearchBar({ closeSearchBar }: SearchBarProps) {
           <SearchIcon />
         </Button>
       </S.FormContainer>
-      {autoCompleteList.length > 0 && isDropdownOpen && (
+      {isDropdownOpen && autoCompleteList.length > 0 && (
         <AutoComplete
           optionList={autoCompleteList}
           onOptionFocus={handleKeyword}
