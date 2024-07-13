@@ -39,7 +39,7 @@
 
 ### FE
 
-블링(@uk960214), 태태(@nan-noo), 샐리(@liswktjs), 루루(@hafnium1923), 애슐리(@ashleysyheo)
+블링(@uk960214), 태태(@nan-noo), 샐리(@liswktjs), 루루(@hafnium1923), 애슐리(@ashleysyheo), 지니(@jinyoung234), 파슬리(@anttiey), 해리(@hwinkr)
 
 <table>
   <tr>
@@ -93,6 +93,8 @@
       </a>
     </td>
   </tr>
+</table>
+<table>
     <tr>
         <td align="center" width="150px">
           <a href="https://github.com/jinyoung234" target="_blank">
