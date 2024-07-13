@@ -4,12 +4,14 @@ import { useContext, useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import type { Campus } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { CAMPUS_AREA_CENTER_POSITION, CAMPUS_POSITION } from "constants/campus";
-
-import { LeftIcon } from "asset";
+import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 
@@ -22,21 +24,29 @@ import ErrorImage from "components/common/ErrorImage/ErrorImage";
 import EventMapMarker from "components/common/EventMapMarker/EventMapMarker";
 import SlideCarousel from "components/common/SlideCarousel/SlideCarousel";
 import Spinner from "components/common/Spinner/Spinner";
-import StoreListItem from "components/common/StoreListItem/StoreListItem";
+import StoreListItemWithoutHeart from "components/common/StoreListItem/\bStoreListItemWithoutHeart";
 import Text from "components/common/Text/Text";
 
 function BookmarkMapPage() {
-  const navigate = useNavigate();
   const campusName = useContext(campusContext);
 
   const { data, isLoading, isFetching, isError, error } = useQuery(
-    "bookmarkStore",
+    QUERY_KEY.bookmarkStore,
     () => fetchBookmarkList(),
     {
-      retry: NETWORK.RETRY_COUNT,
+      retry: NETWORK.NOT_RETRY_COUNT,
       refetchOnWindowFocus: false,
     }
   );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error instanceof Error && error.message === MESSAGES.LOGIN_RETRY) {
+      alert(error.message);
+      navigate(PATHNAME.HOME);
+    }
+  }, [error]);
 
   const bookmarkedStores = data ?? [];
 
@@ -71,7 +81,6 @@ function BookmarkMapPage() {
   return (
     <>
       <S.HeaderWrapper>
-        <LeftIcon onClick={() => navigate(-1)} />
         <Text css={S.headerStyle}>나의 맛집 지도</Text>
       </S.HeaderWrapper>
       <S.MapWrapper>
@@ -107,11 +116,7 @@ function BookmarkMapPage() {
           onSlideChange={handleInformationSlide}
         >
           {bookmarkedStores.map((store) => (
-            <StoreListItem
-              key={store.id}
-              {...store}
-              thumbnailUrl={store.imageUrl}
-            />
+            <StoreListItemWithoutHeart {...store} />
           ))}
         </SlideCarousel>
       </S.StoreListWrapper>

@@ -3,20 +3,29 @@ import { AxiosError } from "axios";
 import { MouseEvent, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { UserReview } from "types/common";
-import repeatComponent from "util/repeatComponent";
 
+import { ReviewInputShape, UserReview } from "types/common";
+
+import { MESSAGES } from "constants/messages";
+import { QUERY_KEY } from "constants/queryKey";
 import { PATHNAME } from "constants/routes";
 
+import useLogin from "hooks/useLogin";
+
 import deleteReviewItem from "api/review/deleteReviewItem";
+import sendReviewItem from "api/review/sendReviewItem";
+
+import repeatComponent from "util/repeatComponent";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
 import MeatballButton from "components/common/MeatballButton/MeatballButton";
 import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
+import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
+import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
 
 function MyReviewItem({
   id,
@@ -28,18 +37,39 @@ function MyReviewItem({
   imageUrl,
 }: UserReview) {
   const navigate = useNavigate();
+  const showToast = useToastContext();
+  const queryClient = useQueryClient();
+  const { logout } = useLogin();
 
-  const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
-    deleteReviewItem({
-      restaurantId: String(restaurant.id),
-      articleId: String(id),
-    })
+  const onSuccess = () => {
+    queryClient.invalidateQueries(QUERY_KEY.myReview);
+    queryClient.invalidateQueries(
+      QUERY_KEY.reviewDetailStore(String(restaurant.id)),
+      { refetchInactive: true }
+    );
+  };
+
+  const deleteMutation = useMutation<unknown, AxiosError, unknown>(
+    () =>
+      deleteReviewItem({
+        restaurantId: String(restaurant.id),
+        articleId: String(id),
+      }),
+    {
+      onSuccess,
+      onError: (error) => {
+        if (error.message === MESSAGES.LOGIN_REQUIRED) {
+          showToast(error.message);
+          logout();
+          navigate(PATHNAME.HOME);
+        }
+      },
+    }
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  const queryClient = useQueryClient();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleMeatballButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -56,20 +86,29 @@ function MyReviewItem({
 
   const handleReviewDeleteClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteMutation.mutate({
-        restaurantId: restaurant.id,
-        id,
-      });
+    setModalOpen((prev) => !prev);
+  };
+
+  const handleSubmitError = (error: AxiosError) => {
+    if (error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
+      logout();
+      navigate(PATHNAME.HOME);
     }
   };
 
-  const handleReviewModalClick = () => {
-    queryClient.invalidateQueries([
-      "reviewDetailStore",
-      { restaurantId: restaurant.id },
-    ]);
-  };
+  const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
+    ({ content, menu, rating, imageUrl }) =>
+      sendReviewItem({
+        restaurantId: reviewInfo.restaurantId,
+        articleId: reviewInfo.id,
+        rating,
+        menu,
+        content,
+        imageUrl: imageUrl ?? "",
+      }),
+    { onSuccess, onError: handleSubmitError, retry: 0 }
+  );
 
   const reviewInfo = {
     id: String(id),
@@ -84,7 +123,7 @@ function MyReviewItem({
     <>
       <S.StoreReviewContainer>
         <S.StoreImage
-          src={restaurant.imageUrl}
+          src={restaurant.thumbnailUrl}
           alt={`${restaurant.name} 가게 이미지`}
         />
         <S.ReviewContentWrapper>
@@ -134,6 +173,17 @@ function MyReviewItem({
               </>
             )}
           </S.Header>
+          {isModalOpen && (
+            <DeleteReviewModal
+              onCloseModal={() => setModalOpen((prev) => !prev)}
+              onDeleteReview={() =>
+                deleteMutation.mutate({
+                  restaurantId: restaurant.id,
+                  id,
+                })
+              }
+            />
+          )}
           <S.ReviewBottom>
             <S.RatingWrapper>
               {repeatComponent(<Star isFilled size="xs" />, rating)}
@@ -149,10 +199,10 @@ function MyReviewItem({
         </S.ReviewContentWrapper>
       </S.StoreReviewContainer>
       {isBottomSheetOpen && (
-        <ReviewUpdateBottomSheet
-          closeSheet={() => setIsBottomSheetOpen(false)}
+        <ReviewBottomSheet
           defaultReviewItem={reviewInfo}
-          onSuccess={handleReviewModalClick}
+          closeSheet={() => setIsBottomSheetOpen(false)}
+          mutate={mutation.mutate}
         />
       )}
     </>

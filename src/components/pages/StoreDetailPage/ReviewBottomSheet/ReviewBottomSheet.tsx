@@ -1,16 +1,13 @@
+import * as S from "./ReviewBottomSheet.styled";
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { UseMutateFunction } from "react-query";
 import { ReviewInputShape } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { MESSAGES } from "constants/messages";
 import { INPUT_MAX_LENGTH } from "constants/rules";
 
 import { useImageUpload } from "hooks/useImageUpload";
-import useLogin from "hooks/useLogin";
-
-import sendReviewPostRequest from "api/review/sendReviewPostRequest";
 
 import BottomSheet from "components/common/BottomSheet/BottomSheet";
 import Button from "components/common/Button/Button";
@@ -19,36 +16,52 @@ import Input from "components/common/Input/Input";
 import Label from "components/common/Label/Label";
 import StarRating from "components/common/StarRating/StarRating";
 import Textarea from "components/common/Textarea/Textarea";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-import * as S from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet.style";
-
-interface ReviewInputBottomSheetProps {
+interface ReviewBottomSheetProps {
+  defaultReviewItem?: {
+    content: string;
+    rating: number;
+    menu: string;
+    restaurantId: string;
+    id: string;
+    imageUrl: string | null;
+  };
   closeSheet: () => void;
-  restaurantId: string;
-  onSuccess: () => void;
+  mutate: UseMutateFunction<
+    unknown,
+    AxiosError<unknown, any>,
+    ReviewInputShape,
+    unknown
+  >;
 }
 
 const DEFAULT_RATING = 4;
 
-function ReviewInputBottomSheet({
+function ReviewBottomSheet({
+  defaultReviewItem,
   closeSheet,
-  restaurantId,
-  onSuccess,
-}: ReviewInputBottomSheetProps) {
-  const [rating, setRating] = useState(DEFAULT_RATING);
-  const [reviewContent, setReviewContent] = useState("");
-  const [menuInput, setMenuInput] = useState("");
-  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
-    useImageUpload();
+  mutate,
+}: ReviewBottomSheetProps) {
+  const [rating, setRating] = useState<number>(
+    defaultReviewItem ? defaultReviewItem.rating - 1 : DEFAULT_RATING
+  );
+  const [reviewContent, setReviewContent] = useState<string>(
+    defaultReviewItem?.content ?? ""
+  );
+  const [menu, setMenu] = useState<string>(defaultReviewItem?.menu ?? "");
 
-  const { logout } = useLogin();
+  const showToast = useToastContext();
+
+  const { uploadedImageUrl, handleImageUpload, handleImageRemoval } =
+    useImageUpload(showToast, defaultReviewItem?.imageUrl);
 
   const handleSubmitRequest: React.FormEventHandler = (e) => {
     e.preventDefault();
-    mutation.mutate({
+    mutate({
       content: reviewContent,
       rating: rating + 1,
-      menu: menuInput,
+      menu,
       imageUrl: uploadedImageUrl,
     });
     closeSheet();
@@ -65,11 +78,11 @@ function ReviewInputBottomSheet({
 
     if (value.length > INPUT_MAX_LENGTH.MENU) {
       e.preventDefault();
-      alert(MESSAGES.EXCEED_MENU_MAX_LENGTH);
+      showToast(MESSAGES.EXCEED_MENU_MAX_LENGTH);
       return;
     }
 
-    setMenuInput(value);
+    setMenu(value);
   };
 
   const handleContentInput: React.ChangeEventHandler<HTMLTextAreaElement> = (
@@ -81,24 +94,12 @@ function ReviewInputBottomSheet({
 
     if (value.length > INPUT_MAX_LENGTH.REVIEW_CONTENT) {
       e.preventDefault();
-      alert(MESSAGES.EXCEED_REVIEW_CONTENT_MAX_LENGTH);
+      showToast(MESSAGES.EXCEED_REVIEW_CONTENT_MAX_LENGTH);
       return;
     }
 
     setReviewContent(value);
   };
-
-  const handleSubmitError = (error: AxiosError) => {
-    if (error.code === "401") {
-      alert(MESSAGES.TOKEN_INVALID);
-      logout();
-    }
-  };
-
-  const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
-    sendReviewPostRequest(restaurantId),
-    { onSuccess, onError: handleSubmitError, retry: NETWORK.RETRY_COUNT }
-  );
 
   return (
     <BottomSheet title="리뷰 남기기" closeSheet={closeSheet}>
@@ -110,7 +111,7 @@ function ReviewInputBottomSheet({
         <Input
           label="메뉴"
           id="menu-input"
-          value={menuInput}
+          value={menu}
           placeholder="메뉴를 입력해 주세요"
           onChange={handleMenuInput}
           maxLength={20}
@@ -140,4 +141,4 @@ function ReviewInputBottomSheet({
   );
 }
 
-export default ReviewInputBottomSheet;
+export default ReviewBottomSheet;

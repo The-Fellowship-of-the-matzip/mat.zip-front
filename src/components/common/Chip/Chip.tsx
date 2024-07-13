@@ -1,7 +1,9 @@
+import React from "react";
+
 import * as S from "components/common/Chip/Chip.style";
 
 export interface ChipProps {
-  children: string;
+  children: React.ReactNode;
   isSelected?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }

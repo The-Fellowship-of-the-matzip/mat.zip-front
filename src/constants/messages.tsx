@@ -4,12 +4,13 @@ import { Campus } from "types/campus";
 export const MESSAGES = {
   LOGIN_REQUIRED: "로그인 후 사용해주세요",
   LOGIN_FAIL: "로그인에 실패했습니다. 다시 시도해주세요.",
+  LOGIN_RETRY: "다시 로그인 해주세요.",
 
   LOGOUT_CONFIRM: "로그아웃 하시겠습니까?",
   LOGOUT_COMPLETE: "로그아웃 하였습니다.",
 
   CAMPUS_CHANGE_CONFIRM: (currentCampus: Campus, otherCampus: Campus) =>
-    `현재 선택된 캠퍼스는 ${currentCampus}입니다. ${otherCampus} 캠퍼스로 변경하시겠습니까?`,
+    `현재 ${currentCampus}에 있네요! ${otherCampus}로 갈까요?`,
   CATEGORY_FIND_FAILED: "카테고리 이름을 불러오지 못했습니다.",
 
   EXCEED_MENU_MAX_LENGTH: `메뉴 이름은 ${INPUT_MAX_LENGTH.MENU}자 이내로 입력해주세요.`,

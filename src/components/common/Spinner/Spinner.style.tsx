@@ -1,15 +1,27 @@
-import styled from "styled-components";
+import { SpinnerPosition } from "./Spinner";
 
-export const SpinnerContainer = styled.div`
+import styled, { css } from "styled-components";
+
+export const SpinnerContainer = styled.div<{ $position: SpinnerPosition }>`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${({ $position }) =>
+    $position === "static" &&
+    css`
+      padding: 2rem 0;
+    `}
+
+  ${({ $position }) =>
+    $position === "fixed" &&
+    css`
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    `}
 `;
 
 export const SpinDiv = styled.div`
