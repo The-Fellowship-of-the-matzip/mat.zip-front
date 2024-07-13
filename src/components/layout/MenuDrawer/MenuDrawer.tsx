@@ -1,17 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useNavigate } from "react-router-dom";
-import { Campus } from "types/campus";
 
 import { AUTH_LINK } from "constants/api";
-import { getOtherCampus } from "constants/campus";
-import { MESSAGES } from "constants/messages";
 import { PATHNAME } from "constants/routes";
-
-import { campusContext, setCampusContext } from "context/CampusContextProvider";
-
-import useLogin from "hooks/useLogin";
 
 import Button from "components/common/Button/Button";
 import Text from "components/common/Text/Text";
@@ -19,40 +11,26 @@ import Text from "components/common/Text/Text";
 import * as S from "components/layout/MenuDrawer/MenuDrawer.style";
 
 interface MenuDrawerProps {
-  closeMenu: () => void;
+  onCloseMenu: () => void;
+  onOpenCampusSelectModal: () => void;
+  onOpenLogoutModal: () => void;
   isLoggedIn: boolean;
 }
 
-function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
-  const campus = useContext(campusContext);
-  const otherCampus = getOtherCampus(campus as Campus);
-  const setCampus = useContext(setCampusContext);
-  const navigate = useNavigate();
-
-  const { logout } = useLogin();
-
+function MenuDrawer({
+  isLoggedIn,
+  onCloseMenu,
+  onOpenCampusSelectModal,
+  onOpenLogoutModal,
+}: MenuDrawerProps) {
   const handleCampusChangeRequest = () => {
-    if (
-      !window.confirm(
-        MESSAGES.CAMPUS_CHANGE_CONFIRM(campus as Campus, otherCampus)
-      )
-    ) {
-      return;
-    }
-    setCampus(otherCampus);
-    closeMenu();
-    navigate(PATHNAME.HOME);
+    onCloseMenu();
+    onOpenCampusSelectModal();
   };
 
   const handleLogout = () => {
-    if (!window.confirm(MESSAGES.LOGOUT_CONFIRM)) {
-      return;
-    }
-
-    logout();
-    closeMenu();
-    window.alert(MESSAGES.LOGOUT_COMPLETE);
-    navigate(PATHNAME.HOME);
+    onCloseMenu();
+    onOpenLogoutModal();
   };
 
   useEffect(() => {
@@ -65,7 +43,7 @@ function MenuDrawer({ closeMenu, isLoggedIn }: MenuDrawerProps) {
 
   return ReactDOM.createPortal(
     <S.Container>
-      <S.Backdrop onClick={closeMenu} />
+      <S.Backdrop onClick={onCloseMenu} />
       <S.Content>
         {isLoggedIn ? (
           <>

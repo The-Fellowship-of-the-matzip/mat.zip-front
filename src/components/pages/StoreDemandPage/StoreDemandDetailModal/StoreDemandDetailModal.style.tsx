@@ -1,12 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const NameContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacer.spacing4};
+export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -51,7 +45,13 @@ export const RegisteredRow = styled(DetailData)`
   width: 20%;
 `;
 
-export const ButtonContainer = styled.div`
+export const CloseButtonStyling = css`
+  position: absolute;
+  top: ${({ theme }) => theme.spacer.spacing3};
+  right: ${({ theme }) => theme.spacer.spacing3};
+`;
+
+export const ButtonContainerStyling = css`
   margin-top: ${({ theme }) => theme.spacer.spacing4};
   display: flex;
   gap: ${({ theme }) => theme.spacer.spacing1};

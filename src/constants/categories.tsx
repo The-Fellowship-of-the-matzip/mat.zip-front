@@ -1,3 +1,5 @@
+import type { Category } from "types/common";
+
 import {
   AlcoholCategoryIcon,
   CafeCategoryIcon,
@@ -8,7 +10,6 @@ import {
   SaladCategoryIcon,
   WesternCategoryIcon,
 } from "asset/categoryIcons";
-import type { Category } from "types/common";
 
 export const categories = {
   1: "한식",

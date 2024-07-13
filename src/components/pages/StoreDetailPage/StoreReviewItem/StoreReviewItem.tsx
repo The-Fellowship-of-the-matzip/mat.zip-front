@@ -1,36 +1,63 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { ReviewShape } from "types/common";
-import repeatComponent from "util/repeatComponent";
+import { useNavigate } from "react-router-dom";
 
-import { QUERY_KEY } from "constants/queryKey";
+import { ReviewInputShape, ReviewShape } from "types/common";
+
+import { MESSAGES } from "constants/messages";
+import { PATHNAME } from "constants/routes";
+
+import useLogin from "hooks/useLogin";
 
 import deleteReviewItem from "api/review/deleteReviewItem";
+import sendReviewItem from "api/review/sendReviewItem";
+
+import repeatComponent from "util/repeatComponent";
 
 import Divider from "components/common/Divider/Divider";
 import DropDownBox from "components/common/DropDownBox/DropDownBox";
 import MeatballButton from "components/common/MeatballButton/MeatballButton";
 import Star from "components/common/Star/Star";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-import ReviewUpdateBottomSheet from "components/pages/StoreDetailPage/ReviewUpdateBottomSheet/ReviewUpdateBottomSheet";
+import DeleteReviewModal from "components/pages/MyPage/DeleteReviewModal/DeleteReviewModal";
+import ReviewBottomSheet from "components/pages/StoreDetailPage/ReviewBottomSheet/ReviewBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem.style";
 
 type ReviewInfo = ReviewShape & { restaurantId: string };
 
 function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
-  const deleteMutation = useMutation<unknown, AxiosError, unknown>(() =>
-    deleteReviewItem({
-      restaurantId: reviewInfo.restaurantId,
-      articleId: reviewInfo.id,
-    })
+  const queryClient = useQueryClient();
+
+  const showToast = useToastContext();
+  const { logout } = useLogin();
+  const navigate = useNavigate();
+
+  const deleteMutation = useMutation<unknown, AxiosError, unknown>(
+    () =>
+      deleteReviewItem({
+        restaurantId: reviewInfo.restaurantId,
+        articleId: reviewInfo.id,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("reviewDetailStore");
+      },
+      onError: (error) => {
+        if (error.message === MESSAGES.LOGIN_REQUIRED) {
+          showToast(error.message);
+          logout();
+          navigate(PATHNAME.HOME);
+        }
+      },
+    }
   );
 
   const [isDropBoxOpen, setIsDropBoxOpen] = useState(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  const queryClient = useQueryClient();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const { author, rating, content, menu, imageUrl } = reviewInfo;
 
@@ -42,14 +69,40 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
     handleDropBoxClose();
   };
 
-  const handleReviewDeleteClick = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteMutation.mutate({
-        restaurantId: reviewInfo.restaurantId,
-        id: reviewInfo.id,
-      });
+  const handleReviewDeleteClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
+    setModalOpen((prev) => !prev);
+  };
+
+  const handleReviewModalClick = () => {
+    queryClient.invalidateQueries([
+      "reviewDetailStore",
+      { restaurantId: reviewInfo.restaurantId },
+    ]);
+  };
+
+  const handleSubmitError = (error: AxiosError) => {
+    if (error.message === MESSAGES.LOGIN_REQUIRED) {
+      showToast(error.message);
+      logout();
+      navigate(PATHNAME.HOME);
     }
   };
+
+  const mutation = useMutation<unknown, AxiosError, ReviewInputShape>(
+    ({ content, rating, menu, imageUrl }: ReviewInputShape) =>
+      sendReviewItem({
+        restaurantId: reviewInfo.restaurantId,
+        articleId: reviewInfo.id,
+        rating,
+        menu,
+        content,
+        imageUrl: imageUrl ?? "",
+      }),
+    { onSuccess: handleReviewModalClick, onError: handleSubmitError, retry: 0 }
+  );
 
   return (
     <>
@@ -117,6 +170,17 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
               </>
             )}
           </S.Header>
+          {isModalOpen && (
+            <DeleteReviewModal
+              onCloseModal={() => setModalOpen((prev) => !prev)}
+              onDeleteReview={() =>
+                deleteMutation.mutate({
+                  restaurantId: reviewInfo.restaurantId,
+                  id: reviewInfo.id,
+                })
+              }
+            />
+          )}
           <S.ReviewBottom>
             <S.RatingWrapper>
               {repeatComponent(<Star isFilled size="xs" />, rating)}
@@ -133,14 +197,10 @@ function StoreReviewItem({ reviewInfo }: { reviewInfo: ReviewInfo }) {
         </S.ReviewContentWrapper>
       </S.StoreReviewContainer>
       {isBottomSheetOpen && (
-        <ReviewUpdateBottomSheet
-          closeSheet={() => setIsBottomSheetOpen(false)}
+        <ReviewBottomSheet
           defaultReviewItem={reviewInfo}
-          onSuccess={() => {
-            queryClient.invalidateQueries(
-              QUERY_KEY.reviewDetailStore(reviewInfo.restaurantId)
-            );
-          }}
+          closeSheet={() => setIsBottomSheetOpen(false)}
+          mutate={mutation.mutate}
         />
       )}
     </>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { MdArrowBackIos } from "react-icons/md";
 import { TbArrowsUpDown } from "react-icons/tb";
 import { useInfiniteQuery } from "react-query";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+
 import { Campus, CategoryId, StoreItemWithHeart } from "types/common";
 
 import {
@@ -35,13 +35,13 @@ import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
 import StoreList from "components/common/StoreList/StoreList";
+import StoreListItemWithHeart from "components/common/StoreListItem/StoreListItemWithHeart";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 function CategoryDetailPage() {
-  const navigate = useNavigate();
-
   const [isFilteringBottomSheetOpen, setIsFilteringBottomSheetOpen] =
     useState(false);
   const openSheet = () => setIsFilteringBottomSheetOpen(true);
@@ -94,8 +94,10 @@ function CategoryDetailPage() {
     return categoryId in categories;
   };
 
+  const showToast = useToastContext();
+
   if (!categoryId || !Number(categoryId) || !isValidCategoryId(categoryId)) {
-    window.alert(MESSAGES.WRONG_PATH);
+    showToast(MESSAGES.WRONG_PATH);
     return <Navigate to={PATHNAME.HOME} />;
   }
 

@@ -1,18 +1,24 @@
+import { AxiosError } from "axios";
 import { useState, useContext } from "react";
-import { MdArrowBackIos } from "react-icons/md";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import { Campus, StoreDemand } from "types/common";
 
 import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
+import { MESSAGES } from "constants/messages";
 import { QUERY_KEY } from "constants/queryKey";
+import { PATHNAME } from "constants/routes";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
 
+import useLogin from "hooks/useLogin";
+
 import getNextPageParam from "api/getNextPageParam";
 import fetchStoreDemandList from "api/store/fetchStoreDemandList";
+import sendStoreDemandPostRequest from "api/store/sendStoreDemandPostRequest";
 
 import Button from "components/common/Button/Button";
 import ErrorImage from "components/common/ErrorImage/ErrorImage";
@@ -20,18 +26,45 @@ import ErrorText from "components/common/ErrorText/ErrorText";
 import InfiniteScroll from "components/common/InfiniteScroll/InfiniteScroll";
 import SectionHeader from "components/common/SectionHeader/SectionHeader";
 import Spinner from "components/common/Spinner/Spinner";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
-import StoreDemandCreateBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandCreateBottomSheet";
+import StoreDemandBottomSheet from "components/pages/StoreDemandPage/StoreDemandBottomSheet/StoreDemandBottomSheet";
 import StoreDemandList from "components/pages/StoreDemandPage/StoreDemandList/StoreDemandList";
 import * as S from "components/pages/StoreDemandPage/StoreDemandPage.style";
 
 function StoreDemandPage() {
   const isLoggedIn = useContext(LoginContext);
+  const { logout } = useLogin();
+
   const [isSheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
 
+  const showToast = useToastContext();
   const campus = useContext(campusContext);
   const campusId = getCampusId(campus as Campus);
+
+  const handleSuccess = () => {
+    setSheetOpen(false);
+    refetch();
+  };
+
+  const handleSubmitError = (error: Error) => {
+    if (error.message === MESSAGES.TOKEN_INVALID) {
+      showToast(MESSAGES.TOKEN_INVALID);
+      logout();
+      navigate(PATHNAME.HOME);
+    }
+  };
+
+  const mutation = useMutation<
+    unknown,
+    AxiosError,
+    { categoryId: string; name: string }
+  >(sendStoreDemandPostRequest(getCampusId(campus as Campus)), {
+    onSuccess: handleSuccess,
+    onError: handleSubmitError,
+    retry: 0,
+  });
 
   const {
     data,
@@ -58,7 +91,7 @@ function StoreDemandPage() {
 
   const handleRequestSheetOpen = () => {
     if (!isLoggedIn) {
-      alert("로그인 후 작성해주세요");
+      showToast(MESSAGES.LOGIN_REQUIRED);
       return;
     }
     setSheetOpen(true);
@@ -89,9 +122,9 @@ function StoreDemandPage() {
         <ErrorText>가게 정보가 없습니다.</ErrorText>
       )}
       {isSheetOpen && (
-        <StoreDemandCreateBottomSheet
+        <StoreDemandBottomSheet
           closeSheet={() => setSheetOpen(false)}
-          refetchList={refetch}
+          mutate={mutation.mutate}
         />
       )}
     </S.Container>

@@ -1,10 +1,8 @@
-import { AxiosError } from "axios";
 import { useContext } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { useMutation } from "react-query";
 import { Campus, StoreDemand } from "types/common";
 
-import { NETWORK } from "constants/api";
 import { getCampusId } from "constants/campus";
 import { categories } from "constants/categories";
 import { MESSAGES } from "constants/messages";
@@ -20,6 +18,7 @@ import Button from "components/common/Button/Button";
 import Heading from "components/common/Heading/Heading";
 import Modal from "components/common/Modal/Modal";
 import Text from "components/common/Text/Text";
+import { useToastContext } from "components/common/Toast/provider/ToastProvider";
 
 import * as S from "components/pages/StoreDemandPage/StoreDemandDetailModal/StoreDemandDetailModal.style";
 
@@ -45,6 +44,7 @@ function StoreDemandDetailModal({
   const campus = useContext(campusContext);
   const isLoggedIn = useContext(LoginContext);
   const { logout } = useLogin();
+  const showToast = useToastContext();
 
   const handleDeleteClick = () => {
     mutation.mutate();
@@ -55,9 +55,9 @@ function StoreDemandDetailModal({
     handleAfterRequest();
   };
 
-  const handleSubmitError = (error: AxiosError) => {
-    if (error.code === "401") {
-      alert(MESSAGES.TOKEN_INVALID);
+  const handleSubmitError = (error: Error) => {
+    if (error.message === MESSAGES.TOKEN_INVALID) {
+      showToast(MESSAGES.TOKEN_INVALID);
       logout();
     }
   };
@@ -67,17 +67,23 @@ function StoreDemandDetailModal({
     {
       onSuccess: handleSuccess,
       onError: handleSubmitError,
-      retry: NETWORK.RETRY_COUNT,
+      retry: 0,
     }
   );
 
   return (
-    <Modal closeModal={closeModal}>
-      <S.ContentContainer>
-        <S.NameContainer>
+    <Modal onCloseModal={closeModal}>
+      <Modal.ModalHeader>
+        <S.TextContainer>
           <Text size="sm">{campus}</Text>
           <Heading size="sm">{name}</Heading>
-        </S.NameContainer>
+        </S.TextContainer>
+        <Modal.CloseButton
+          onCloseModal={closeModal}
+          css={S.CloseButtonStyling}
+        />
+      </Modal.ModalHeader>
+      <Modal.ModalContent>
         <S.DetailContainer>
           <S.DetailHead>
             <S.AuthorNameRow>신청자</S.AuthorNameRow>
@@ -94,15 +100,17 @@ function StoreDemandDetailModal({
             </S.RegisteredRow>
           </S.DetailItem>
         </S.DetailContainer>
+      </Modal.ModalContent>
+      <Modal.ModalFooter css={S.ButtonContainerStyling}>
         {isLoggedIn && isAuthor && !isRegistered && (
-          <S.ButtonContainer>
+          <>
             <Button onClick={handleDeleteClick}>삭제</Button>
             <Button variant="primary" onClick={handleEditOpen}>
               수정
             </Button>
-          </S.ButtonContainer>
+          </>
         )}
-      </S.ContentContainer>
+      </Modal.ModalFooter>
     </Modal>
   );
 }

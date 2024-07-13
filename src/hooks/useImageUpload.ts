@@ -2,7 +2,10 @@ import { useState } from "react";
 
 import sendImageUploadPostRequest from "api/image/sendImageUploadPostRequest";
 
-export const useImageUpload = (url: null | string = null) => {
+export const useImageUpload = <T extends Function>(
+  showToast: T,
+  url: null | string = null
+) => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState(url);
 
   const handleImageUpload = async (
@@ -18,7 +21,7 @@ export const useImageUpload = (url: null | string = null) => {
       const { imageUrl } = await sendImageUploadPostRequest(formData);
       setUploadedImageUrl(imageUrl);
     } catch (error) {
-      alert("이미지 업로드에 실패했습니다. 다시 시도해 주세요.");
+      showToast("이미지 업로드에 실패했습니다. 다시 시도해 주세요.");
     }
 
     event.target.value = "";

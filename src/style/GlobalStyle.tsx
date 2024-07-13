@@ -59,6 +59,12 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
         min-height: 100vh;
       `}
   }  
+
+  #root  {
+    position: relative;
+    width: 48rem;
+    margin: 0 auto;
+  }  
 `;
 
 export default GlobalStyle;

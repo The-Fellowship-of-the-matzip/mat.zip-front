@@ -25,6 +25,8 @@ const color = {
   redDark: "#c50000",
   red: "#ea0000",
   redLight: "#fff2f2",
+
+  green: "#69c582",
 };
 
 const spacer = {
@@ -45,6 +47,7 @@ const borderRadius = {
 const zIndex = {
   header: 2,
   overlay: 3,
+  toast: 1000,
 };
 
 export type ColorTypes = typeof color;

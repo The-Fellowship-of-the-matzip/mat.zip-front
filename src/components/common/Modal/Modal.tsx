@@ -1,15 +1,22 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-import { CloseIcon } from "asset";
+import usePressESC from "hooks/usePressESC";
 
 import * as S from "components/common/Modal/Modal.style";
+import CloseButton from "components/common/Modal/components/CloseButton/CloseButton";
+import Content from "components/common/Modal/components/Content/Content";
+import Footer from "components/common/Modal/components/Footer/Footer";
+import Header from "components/common/Modal/components/Header/Header";
 
 interface ModalProps {
-  closeModal: () => void;
+  onCloseModal: () => void;
 }
 
-function Modal({ children, closeModal }: PropsWithChildren<ModalProps>) {
+function Modal({
+  children,
+  onCloseModal,
+}: React.PropsWithChildren<ModalProps>) {
   const [scrollOffset, setScrollOffset] = useState(0);
 
   useEffect(() => {
@@ -22,18 +29,20 @@ function Modal({ children, closeModal }: PropsWithChildren<ModalProps>) {
     };
   }, []);
 
+  usePressESC(onCloseModal);
+
   return ReactDOM.createPortal(
     <S.Container scrollOffset={scrollOffset}>
-      <S.Backdrop onClick={closeModal} />
-      <S.Content>
-        <S.CloseButton onClick={closeModal} aria-label="닫기">
-          <CloseIcon />
-        </S.CloseButton>
-        {children}
-      </S.Content>
+      <S.Backdrop onClick={onCloseModal} />
+      <S.Content>{children}</S.Content>
     </S.Container>,
     document.querySelector("#app") as HTMLElement
   );
 }
 
 export default Modal;
+
+Modal.ModalHeader = Header;
+Modal.ModalContent = Content;
+Modal.ModalFooter = Footer;
+Modal.CloseButton = CloseButton;

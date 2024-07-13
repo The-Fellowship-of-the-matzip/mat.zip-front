@@ -10,6 +10,8 @@ import App from "App";
 import CampusContextProvider from "context/CampusContextProvider";
 import LoginContextProvider from "context/LoginContextProvider";
 
+import ToastProvider from "components/common/Toast/provider/ToastProvider";
+
 import GlobalStyle from "style/GlobalStyle";
 import { theme } from "style/Theme";
 
@@ -29,13 +31,15 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <LoginContextProvider>
-          <CampusContextProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </CampusContextProvider>
-        </LoginContextProvider>
+        <ToastProvider>
+          <LoginContextProvider>
+            <CampusContextProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </CampusContextProvider>
+          </LoginContextProvider>
+        </ToastProvider>
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>

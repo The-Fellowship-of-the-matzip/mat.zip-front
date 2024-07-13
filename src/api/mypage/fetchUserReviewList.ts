@@ -23,7 +23,7 @@ const fetchUserReviewList = async ({
   const accessToken = window.sessionStorage.getItem(ACCESS_TOKEN);
 
   if (!accessToken) {
-    throw new Error(MESSAGES.LOGIN_RETRY);
+    throw new Error(MESSAGES.LOGIN_REQUIRED);
   }
 
   const { data } = await axiosInstance.get<UserReviewResponse>(
