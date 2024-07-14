@@ -40,7 +40,8 @@ export const ToastContainer = styled.div<{
 }>`
   ${({ $type }) => getBackgroundColor($type)};
   color: ${({ theme }) => theme.color.white};
-  width: 48rem;
+  width: 100%;
+  max-width: 48rem;
   height: 5rem;
   position: fixed;
   top: 0;

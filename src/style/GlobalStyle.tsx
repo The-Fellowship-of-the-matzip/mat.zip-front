@@ -62,7 +62,8 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
 
   #root  {
     position: relative;
-    width: 48rem;
+    max-width: 48rem;
+    min-width: 28rem;
     margin: 0 auto;
   }  
 `;
