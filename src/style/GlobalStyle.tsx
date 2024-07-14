@@ -32,7 +32,12 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
   }
 
   button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
     cursor: pointer;
+    outline: inherit;
   }
 
   a {
@@ -62,7 +67,8 @@ const GlobalStyle = createGlobalStyle<{ env?: string }>`
 
   #root  {
     position: relative;
-    width: 48rem;
+    max-width: 48rem;
+    min-width: 28rem;
     margin: 0 auto;
   }  
 `;
